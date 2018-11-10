@@ -21,11 +21,11 @@ public class Fight {
 
     @ManyToOne
     @JoinColumn(name="PLAYER_ONE_ID")
-    private Player playerOne;
+    private User playerOne;
 
     @ManyToOne
     @JoinColumn(name="PLAYER_TWO_ID")
-    private Player playerTwo;
+    private User playerTwo;
 
     @Enumerated(EnumType.STRING)
     @Column(name="FIGHT_STATUS")

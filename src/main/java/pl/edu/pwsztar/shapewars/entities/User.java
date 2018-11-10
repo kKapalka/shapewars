@@ -2,17 +2,15 @@ package pl.edu.pwsztar.shapewars.entities;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="USER")
+@Table(name="USERS")
 public class User {
 
     @Id
@@ -31,5 +29,27 @@ public class User {
 
     @Column(name="VERIFIED")
     private boolean verified;
+
+    @Column(name="LEVEL")
+    private Long level;
+
+    @Column(name="XP_POINTS")
+    private Long experiencePoints;
+
+    @ManyToMany
+    @JoinTable(name = "USER_FIGHTER",
+            joinColumns = @JoinColumn(name = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "FIGHTER_ID")
+    )
+    private List<Fighter> fighterList;
+
+    @ManyToMany
+    @JoinTable(name = "USER_FIGHTER_CURRENT",
+            joinColumns = @JoinColumn(name = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "FIGHTER_ID")
+    )
+    private List<Fighter> currentFighters;
+
+
 
 }

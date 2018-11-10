@@ -35,7 +35,13 @@ public class Fighter {
     @Column(name="HITPOINTS")
     private Long hitPoints;
 
-    @Column(name="DAMAGE")
-    private Long damage;
+    @Column(name="STRENGTH")
+    private Long strength;
+
+    @Column(name="SPEED")
+    private Long speed;
+
+    @Column(name="ARMOR")
+    private Long armor;
 
 }

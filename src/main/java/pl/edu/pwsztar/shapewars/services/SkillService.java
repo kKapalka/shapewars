@@ -5,7 +5,11 @@ import org.springframework.stereotype.Service;
 import pl.edu.pwsztar.shapewars.entities.Skill;
 import pl.edu.pwsztar.shapewars.entities.dto.FighterDto;
 import pl.edu.pwsztar.shapewars.entities.dto.SkillDto;
+import pl.edu.pwsztar.shapewars.entities.enums.SkillEffect;
+import pl.edu.pwsztar.shapewars.entities.enums.TargetType;
+import pl.edu.pwsztar.shapewars.entities.enums.ValueModifierType;
 import pl.edu.pwsztar.shapewars.repositories.SkillRepository;
+import pl.edu.pwsztar.shapewars.utilities.TooltipCreator;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -19,20 +23,31 @@ public class SkillService {
     @Autowired
     private SkillRepository skillRepository;
 
-    public void save(SkillDto skillDto){
-        Skill skill= Skill.builder().name(skillDto.getName())
-                .tooltip(skillDto.getTooltip()).build();
-        if(skillDto.getId() != null){
-            skill.setID(skillDto.getId());
+    public SkillDto save(SkillDto skillDto){
+        Skill skill = updateSkill(skillDto);
+        return SkillDto.fromEntity(skillRepository.save(skill));
+    }
+
+    public Skill updateSkill(SkillDto dto){
+        Skill skill = new Skill();
+        if(dto.getId()!=null){
+            skill=skillRepository.getOne(dto.getId());
         }
-        skillRepository.save(skill);
+        skill.setName(dto.getName());
+        skill.setTooltip(TooltipCreator.createTooltip(dto));
+        skill.setCost(dto.getCost());
+        skill.setSkillEffect(SkillEffect.valueOf(dto.getSkillEffect()));
+        skill.setTargetType(TargetType.valueOf(dto.getTargetType()));
+        skill.setMinValue(dto.getMinValue());
+        skill.setMaxValue(dto.getMaxValue());
+        skill.setAccuracy(dto.getAccuracy());
+        skill.setValueModifierType(ValueModifierType.valueOf(dto.getValueModifierType()));
+        return skill;
     }
+
     public List<SkillDto> getFighterSkills(FighterDto fighterDto){
-        return skillRepository.findAllById(fighterDto.getShapeSkillsetIDs()).stream().map(SkillDto::fromEntity
+        return skillRepository.findAllById(fighterDto.getShapeSkillIDSet()).stream().map(SkillDto::fromEntity
         ).collect(Collectors.toList());
-    }
-    public SkillDto getFighterSpecialSkill(FighterDto fighterDto){
-        return SkillDto.fromEntity(skillRepository.findById(fighterDto.getShapeSpecialSkillID()).orElseThrow(EntityNotFoundException::new));
     }
 
 }

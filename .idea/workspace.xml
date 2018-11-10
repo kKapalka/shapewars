@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fde0f3e8-80d9-49d9-93f4-65397f6f6cc8" name="Default Changelist" comment="" />
+    <list default="true" id="fde0f3e8-80d9-49d9-93f4-65397f6f6cc8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Fight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Fight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Fighter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Fighter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Shape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Skill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Skill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/FighterDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/FighterDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/MessageDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/MessageDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/PlayerDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/PlayerDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillService.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -26,17 +43,6 @@
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="shape-wars@localhost" type="feb32156:DbDataSourceImpl" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="shape-wars@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="shape-wars@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="shape-wars: database" type="6d9b600a:PostgresImplModel$Database" />
       </path>
     </expand>
     <select />
@@ -91,13 +97,24 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="-86899931">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.19" value="1" />
+          <entry key="project.open.time.21" value="1" />
+          <entry key="project.open.time.3" value="1" />
+          <entry key="project.opened" value="3" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Fight.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
+            <state relative-caret-position="238">
               <caret line="19" column="20" selection-start-line="16" selection-start-column="4" selection-end-line="19" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -109,18 +126,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/FightLog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="25" column="25" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+            <state relative-caret-position="-14">
+              <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/f11f336e-5052-45c0-83a4-a83d7effbd70/console.sql">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
@@ -131,36 +143,60 @@
               <OriginalElement>f11f336e-5052-45c0-83a4-a83d7effbd70</OriginalElement>
               <nodes>
                 <node x="529.9452380952382" y="776.5">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter</node>
-                <node x="97.3952380952382" y="710.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fightlog</node>
-                <node x="265.6250000000001" y="466.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter</node>
+                <node x="97.39523809523814" y="710.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fightlog</node>
+                <node x="265.625" y="466.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter</node>
                 <node x="312.4303571428572" y="146.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape</node>
                 <node x="53.0" y="499.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fight</node>
-                <node x="859.0940476190477" y="0.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.message</node>
+                <node x="859.0940476190476" y="0.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.message</node>
                 <node x="148.27023809523814" y="212.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player</node>
-                <node x="362.9452380952382" y="776.5">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter_current</node>
-                <node x="671.0940476190477" y="521.5">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape_skill</node>
+                <node x="362.94523809523815" y="776.5">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter_current</node>
+                <node x="671.0940476190476" y="521.5">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape_skill</node>
                 <node x="322.77023809523814" y="0.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill</node>
               </nodes>
               <notes />
               <edges>
                 <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape">
-                  <point x="-5.6843418860808015E-14" y="-92.0" />
+                  <point x="0.0" y="-92.0" />
                   <point x="340.125" y="446.0" />
                   <point x="359.1803571428572" y="446.0" />
                   <point x="-46.75" y="125.0" />
                 </edge>
                 <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape_skill" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill">
                   <point x="33.5" y="-36.5" />
-                  <point x="771.5940476190477" y="121.0" />
-                  <point x="454.4369047619049" y="121.0" />
-                  <point x="52.666666666666686" y="48.0" />
+                  <point x="771.5940476190476" y="121.0" />
+                  <point x="454.43690476190477" y="121.0" />
+                  <point x="52.66666666666663" y="48.0" />
+                </edge>
+                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter_current" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter">
+                  <point x="-36.75" y="-36.5" />
+                  <point x="399.69523809523815" y="690.0" />
+                  <point x="369.925" y="690.0" />
+                  <point x="29.80000000000001" y="92.0" />
+                </edge>
+                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter">
+                  <point x="-35.25" y="-36.5" />
+                  <point x="565.1952380952382" y="680.0" />
+                  <point x="399.725" y="680.0" />
+                  <point x="59.60000000000002" y="92.0" />
+                </edge>
+                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fightlog" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fight">
+                  <point x="-42.19999999999993" y="-103.0" />
+                  <point x="160.6952380952382" y="690.0" />
+                  <point x="146.0" y="690.0" />
+                  <point x="0.0" y="59.0" />
+                </edge>
+                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player">
+                  <point x="35.25" y="-36.5" />
+                  <point x="635.6952380952382" y="426.0" />
+                  <point x="270.77023809523814" y="426.0" />
+                  <point x="52.5" y="59.0" />
                 </edge>
                 <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fightlog" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill">
                   <point x="-84.39999999999998" y="-103.0" />
-                  <point x="118.49523809523822" y="690.0" />
+                  <point x="118.49523809523816" y="690.0" />
                   <point x="42.5" y="690.0" />
                   <point x="42.5" y="121.0" />
-                  <point x="349.1035714285715" y="121.0" />
+                  <point x="349.10357142857146" y="121.0" />
                   <point x="-52.666666666666686" y="48.0" />
                 </edge>
                 <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fight" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player">
@@ -171,38 +207,14 @@
                 </edge>
                 <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape_skill" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape">
                   <point x="-33.5" y="-36.5" />
-                  <point x="704.5940476190477" y="416.0" />
+                  <point x="704.5940476190476" y="416.0" />
                   <point x="452.6803571428572" y="416.0" />
                   <point x="46.75" y="125.0" />
                 </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter_current" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter">
-                  <point x="-36.75" y="-36.5" />
-                  <point x="399.6952380952382" y="690.0" />
-                  <point x="369.92500000000007" y="690.0" />
-                  <point x="29.80000000000001" y="92.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter">
-                  <point x="-35.25" y="-36.5" />
-                  <point x="565.1952380952382" y="680.0" />
-                  <point x="399.725" y="680.0" />
-                  <point x="59.599999999999966" y="92.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fightlog" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fight">
-                  <point x="-42.200000000000045" y="-103.0" />
-                  <point x="160.69523809523815" y="690.0" />
-                  <point x="146.0" y="690.0" />
-                  <point x="0.0" y="59.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player">
-                  <point x="35.25" y="-36.5" />
-                  <point x="635.6952380952382" y="426.0" />
-                  <point x="270.77023809523814" y="426.0" />
-                  <point x="52.5" y="59.0" />
-                </edge>
                 <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fightlog" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter">
                   <point x="0.0" y="-103.0" />
-                  <point x="202.8952380952382" y="670.0" />
-                  <point x="280.5250000000001" y="670.0" />
+                  <point x="202.89523809523814" y="670.0" />
+                  <point x="280.525" y="670.0" />
                   <point x="-59.60000000000002" y="92.0" />
                 </edge>
                 <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill">
@@ -213,13 +225,15 @@
                 </edge>
                 <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter_current" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player">
                   <point x="36.75" y="-36.5" />
-                  <point x="473.1952380952382" y="436.0" />
+                  <point x="473.19523809523815" y="436.0" />
                   <point x="235.77023809523814" y="436.0" />
                   <point x="17.5" y="59.0" />
                 </edge>
               </edges>
-              <settings layout="Hierarchic Group" zoom="1.3027777777777783" x="229.92537313432828" y="603.5415778251598" />
-              <SelectedNodes />
+              <settings layout="Hierarchic Group" zoom="0.9" x="480.1111111111111" y="717.4444444444445" />
+              <SelectedNodes>
+                <node>f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill</node>
+              </SelectedNodes>
               <Categories>
                 <Category>Key columns</Category>
                 <Category>Columns</Category>
@@ -231,7 +245,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Message.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
+            <state relative-caret-position="136">
               <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -243,7 +257,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
+            <state relative-caret-position="425">
               <caret line="30" column="15" selection-start-line="30" selection-start-column="15" selection-end-line="30" selection-end-column="15" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -255,8 +269,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="24" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="340">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
             </state>
           </provider>
         </entry>
@@ -264,8 +278,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Shape.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="884">
-              <caret line="52" column="16" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="16" />
+            <state relative-caret-position="833">
+              <caret line="54" column="16" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -276,8 +290,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Skill.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+            <state relative-caret-position="272">
+              <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -285,7 +299,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Fighter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
+            <state relative-caret-position="561">
               <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -311,6 +325,9 @@
     <replaceStrings>
       <replace>edu</replace>
     </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
     <option name="myGradleHomes">
@@ -542,7 +559,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="6165395622506" />
+        <entry key="$PROJECT_DIR$" value="6165642549026" />
         <entry key="$PROJECT_DIR$/.gradle" value="0" />
         <entry key="$PROJECT_DIR$/build.gradle" value="1900411555" />
         <entry key="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" value="2007532874" />
@@ -732,13 +749,13 @@
     <option name="width" value="1346" />
     <option name="height" value="688" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -779,33 +796,6 @@
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="shapewars" type="462c0819:PsiDirectoryNode" />
-              <item name="annotations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="shapewars" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="shapewars" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="shapewars" type="462c0819:PsiDirectoryNode" />
               <item name="entities" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -816,63 +806,13 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="shapewars" type="462c0819:PsiDirectoryNode" />
               <item name="entities" type="462c0819:PsiDirectoryNode" />
-              <item name="dto" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="shapewars" type="462c0819:PsiDirectoryNode" />
-              <item name="exceptions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="shapewars" type="462c0819:PsiDirectoryNode" />
-              <item name="repositories" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="shapewars" type="462c0819:PsiDirectoryNode" />
-              <item name="validation" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="enums" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -883,8 +823,8 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541571708116" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541869584917" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.annotationProcessors" />
@@ -927,34 +867,38 @@
       <updated>1541348857292</updated>
       <workItem from="1541348864981" duration="3917000" />
       <workItem from="1541570186563" duration="2113000" />
+      <workItem from="1541868470577" duration="465000" />
+      <workItem from="1541869017364" duration="78000" />
+      <workItem from="1541869135836" duration="662000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6030000" />
+    <option name="totallyTimeSpent" value="7235000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24659607" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Designer" order="2" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info id="Capture Tool" order="6" />
-      <window_info id="Web" order="7" side_tool="true" />
+      <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="1" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="UI Designer" order="3" />
+      <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Web" order="6" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="7" visible="true" weight="0.2193646" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.29836065" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5763994" visible="true" weight="0.29836065" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Build" order="7" weight="0.32851985" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.40819672" />
       <window_info anchor="bottom" id="Spring" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.4236006" side_tool="true" weight="0.29836065" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32851985" />
       <window_info anchor="bottom" id="Java Enterprise" order="12" />
       <window_info anchor="bottom" id="Database Changes" order="13" />
@@ -966,7 +910,7 @@
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Maven Projects" order="5" />
       <window_info anchor="right" id="Gradle" order="6" />
-      <window_info anchor="right" id="Database" order="7" visible="true" weight="0.32980332" />
+      <window_info anchor="right" id="Database" order="7" visible="true" weight="0.11875945" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Theme Preview" order="9" />
       <window_info anchor="right" id="Bean Validation" order="10" />
@@ -1035,9 +979,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1153,9 +1094,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="50" column="32" selection-start-line="50" selection-start-column="32" selection-end-line="50" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1189,9 +1127,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="18" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1199,9 +1134,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1216,18 +1148,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
-          <folding>
-            <element signature="e#2#24#0" expanded="true" />
-            <element signature="e#2#23#0" expanded="true" />
-            <element signature="e#2#25#0" expanded="true" />
-            <element signature="e#2#25#0" expanded="true" />
-            <element signature="e#2#23#0" expanded="true" />
-            <element signature="e#2#22#0" expanded="true" />
-            <element signature="e#2#19#0" expanded="true" />
-            <element signature="e#2#24#0" expanded="true" />
-            <element signature="e#2#31#0" expanded="true" />
-            <element signature="e#2#23#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1245,9 +1165,12 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/f11f336e-5052-45c0-83a4-a83d7effbd70/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Fight.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
+        <state relative-caret-position="238">
           <caret line="19" column="20" selection-start-line="16" selection-start-column="4" selection-end-line="19" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1255,29 +1178,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Skill.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/FightLog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="25" column="25" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/f11f336e-5052-45c0-83a4-a83d7effbd70/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Message.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
+        <state relative-caret-position="136">
           <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1287,28 +1190,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="30" column="15" selection-start-line="30" selection-start-column="15" selection-end-line="30" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Fighter.java">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
-          <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Shape.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="52" column="16" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="16" />
+          <caret line="30" column="15" selection-start-line="30" selection-start-column="15" selection-end-line="30" selection-end-column="15" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1317,8 +1200,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="340">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Shape.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="54" column="16" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Skill.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Fighter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/FightLog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-14">
+          <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1329,36 +1249,60 @@
           <OriginalElement>f11f336e-5052-45c0-83a4-a83d7effbd70</OriginalElement>
           <nodes>
             <node x="529.9452380952382" y="776.5">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter</node>
-            <node x="97.3952380952382" y="710.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fightlog</node>
-            <node x="265.6250000000001" y="466.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter</node>
+            <node x="97.39523809523814" y="710.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fightlog</node>
+            <node x="265.625" y="466.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter</node>
             <node x="312.4303571428572" y="146.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape</node>
             <node x="53.0" y="499.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fight</node>
-            <node x="859.0940476190477" y="0.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.message</node>
+            <node x="859.0940476190476" y="0.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.message</node>
             <node x="148.27023809523814" y="212.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player</node>
-            <node x="362.9452380952382" y="776.5">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter_current</node>
-            <node x="671.0940476190477" y="521.5">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape_skill</node>
+            <node x="362.94523809523815" y="776.5">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter_current</node>
+            <node x="671.0940476190476" y="521.5">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape_skill</node>
             <node x="322.77023809523814" y="0.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill</node>
           </nodes>
           <notes />
           <edges>
             <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape">
-              <point x="-5.6843418860808015E-14" y="-92.0" />
+              <point x="0.0" y="-92.0" />
               <point x="340.125" y="446.0" />
               <point x="359.1803571428572" y="446.0" />
               <point x="-46.75" y="125.0" />
             </edge>
             <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape_skill" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill">
               <point x="33.5" y="-36.5" />
-              <point x="771.5940476190477" y="121.0" />
-              <point x="454.4369047619049" y="121.0" />
-              <point x="52.666666666666686" y="48.0" />
+              <point x="771.5940476190476" y="121.0" />
+              <point x="454.43690476190477" y="121.0" />
+              <point x="52.66666666666663" y="48.0" />
+            </edge>
+            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter_current" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter">
+              <point x="-36.75" y="-36.5" />
+              <point x="399.69523809523815" y="690.0" />
+              <point x="369.925" y="690.0" />
+              <point x="29.80000000000001" y="92.0" />
+            </edge>
+            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter">
+              <point x="-35.25" y="-36.5" />
+              <point x="565.1952380952382" y="680.0" />
+              <point x="399.725" y="680.0" />
+              <point x="59.60000000000002" y="92.0" />
+            </edge>
+            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fightlog" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fight">
+              <point x="-42.19999999999993" y="-103.0" />
+              <point x="160.6952380952382" y="690.0" />
+              <point x="146.0" y="690.0" />
+              <point x="0.0" y="59.0" />
+            </edge>
+            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player">
+              <point x="35.25" y="-36.5" />
+              <point x="635.6952380952382" y="426.0" />
+              <point x="270.77023809523814" y="426.0" />
+              <point x="52.5" y="59.0" />
             </edge>
             <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fightlog" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill">
               <point x="-84.39999999999998" y="-103.0" />
-              <point x="118.49523809523822" y="690.0" />
+              <point x="118.49523809523816" y="690.0" />
               <point x="42.5" y="690.0" />
               <point x="42.5" y="121.0" />
-              <point x="349.1035714285715" y="121.0" />
+              <point x="349.10357142857146" y="121.0" />
               <point x="-52.666666666666686" y="48.0" />
             </edge>
             <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fight" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player">
@@ -1369,38 +1313,14 @@
             </edge>
             <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape_skill" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape">
               <point x="-33.5" y="-36.5" />
-              <point x="704.5940476190477" y="416.0" />
+              <point x="704.5940476190476" y="416.0" />
               <point x="452.6803571428572" y="416.0" />
               <point x="46.75" y="125.0" />
             </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter_current" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter">
-              <point x="-36.75" y="-36.5" />
-              <point x="399.6952380952382" y="690.0" />
-              <point x="369.92500000000007" y="690.0" />
-              <point x="29.80000000000001" y="92.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter">
-              <point x="-35.25" y="-36.5" />
-              <point x="565.1952380952382" y="680.0" />
-              <point x="399.725" y="680.0" />
-              <point x="59.599999999999966" y="92.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fightlog" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fight">
-              <point x="-42.200000000000045" y="-103.0" />
-              <point x="160.69523809523815" y="690.0" />
-              <point x="146.0" y="690.0" />
-              <point x="0.0" y="59.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player">
-              <point x="35.25" y="-36.5" />
-              <point x="635.6952380952382" y="426.0" />
-              <point x="270.77023809523814" y="426.0" />
-              <point x="52.5" y="59.0" />
-            </edge>
             <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fightlog" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter">
               <point x="0.0" y="-103.0" />
-              <point x="202.8952380952382" y="670.0" />
-              <point x="280.5250000000001" y="670.0" />
+              <point x="202.89523809523814" y="670.0" />
+              <point x="280.525" y="670.0" />
               <point x="-59.60000000000002" y="92.0" />
             </edge>
             <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill">
@@ -1411,13 +1331,15 @@
             </edge>
             <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter_current" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player">
               <point x="36.75" y="-36.5" />
-              <point x="473.1952380952382" y="436.0" />
+              <point x="473.19523809523815" y="436.0" />
               <point x="235.77023809523814" y="436.0" />
               <point x="17.5" y="59.0" />
             </edge>
           </edges>
-          <settings layout="Hierarchic Group" zoom="1.3027777777777783" x="229.92537313432828" y="603.5415778251598" />
-          <SelectedNodes />
+          <settings layout="Hierarchic Group" zoom="0.9" x="480.1111111111111" y="717.4444444444445" />
+          <SelectedNodes>
+            <node>f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill</node>
+          </SelectedNodes>
           <Categories>
             <Category>Key columns</Category>
             <Category>Columns</Category>

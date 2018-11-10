@@ -17,10 +17,9 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class UserDto {
 
+    private Long id;
     private String login;
-
     private String password;
-
     private String matchingPassword;
     @ValidEmail
     @NotNull

@@ -27,15 +27,14 @@ public class Shape {
     )
     private List<Skill> skillSet;
 
-    @ManyToOne
-    @JoinColumn(name="SPECIAL_ABILITY")
-    private Skill specialAbility;
-
     @Column(name="BASELINE_HP")
     private Long baselineHp;
 
-    @Column(name="BASELINE_DMG")
-    private Long baselineDamage;
+    @Column(name="BASELINE_STR")
+    private Long baselineStrength;
+
+    @Column(name="BASELINE_ARM")
+    private Long baselineArmor;
 
     @Column(name="BASELINE_SPEED")
     private Long baselineSpeed;
@@ -46,10 +45,16 @@ public class Shape {
     @Column(name="HP_MAX_GROWTH")
     private Long HPMaxGrowth;
 
-    @Column(name="DMG_MIN_GROWTH")
-    private Long DMGMinGrowth;
+    @Column(name="STR_MIN_GROWTH")
+    private Long STRMinGrowth;
 
-    @Column(name="DMG_MAX_GROWTH")
-    private Long DMGMaxGrowth;
+    @Column(name="STR_MAX_GROWTH")
+    private Long STRMaxGrowth;
+
+    @Column(name="ARM_MIN_GROWTH")
+    private Long ARMMinGrowth;
+
+    @Column(name="ARM_MAX_GROWTH")
+    private Long ARMMaxGrowth;
 
 }
