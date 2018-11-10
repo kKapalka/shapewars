@@ -1,13 +1,12 @@
 package pl.edu.pwsztar.shapewars.entities;
 
 import lombok.Data;
-import lombok.Generated;
-import lombok.NoArgsConstructor;
-import pl.edu.pwsztar.shapewars.entities.enums.SkillEffect;
+import pl.edu.pwsztar.shapewars.entities.enums.SkillStatusEffect;
 import pl.edu.pwsztar.shapewars.entities.enums.TargetType;
 import pl.edu.pwsztar.shapewars.entities.enums.ValueModifierType;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -27,26 +26,9 @@ public class Skill {
     @Column(name="COST")
     private Long cost;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="EFFECT")
-    private SkillEffect skillEffect;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name="TARGET_TYPE")
-    private TargetType targetType;
-
-    @Column(name="MIN_VALUE")
-    private Double minValue;
-
-    @Column(name="MAX_VALUE")
-    private Double maxValue;
-
-    @Column(name="ACCURACY")
-    private Double accuracy;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name="VALUE_MODIFIER_TYPE")
-    private ValueModifierType valueModifierType;
+    @OneToMany
+    @JoinColumn(name="SKILL_EFFECT_BUNDLE_ID")
+    private List<SkillEffectBundle> skillEffectBundles;
 
     public Skill(){
 

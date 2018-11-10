@@ -1,6 +1,6 @@
 package pl.edu.pwsztar.shapewars.entities.enums;
 
-public enum SkillEffect {
+public enum SkillStatusEffect {
     DEAL_DAMAGE,
     RESTORE_HEALTH,
     SPEED_PLUS,

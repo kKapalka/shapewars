@@ -5,13 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.edu.pwsztar.shapewars.entities.Skill;
 import pl.edu.pwsztar.shapewars.entities.dto.FighterDto;
 import pl.edu.pwsztar.shapewars.entities.dto.SkillDto;
-import pl.edu.pwsztar.shapewars.entities.enums.SkillEffect;
-import pl.edu.pwsztar.shapewars.entities.enums.TargetType;
-import pl.edu.pwsztar.shapewars.entities.enums.ValueModifierType;
 import pl.edu.pwsztar.shapewars.repositories.SkillRepository;
-import pl.edu.pwsztar.shapewars.utilities.TooltipCreator;
 
-import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,14 +29,14 @@ public class SkillService {
             skill=skillRepository.getOne(dto.getId());
         }
         skill.setName(dto.getName());
-        skill.setTooltip(TooltipCreator.createTooltip(dto));
-        skill.setCost(dto.getCost());
-        skill.setSkillEffect(SkillEffect.valueOf(dto.getSkillEffect()));
-        skill.setTargetType(TargetType.valueOf(dto.getTargetType()));
-        skill.setMinValue(dto.getMinValue());
-        skill.setMaxValue(dto.getMaxValue());
-        skill.setAccuracy(dto.getAccuracy());
-        skill.setValueModifierType(ValueModifierType.valueOf(dto.getValueModifierType()));
+//        skill.setTooltip(TooltipCreator.createTooltip(dto));
+//        skill.setCost(dto.getCost());
+//        skill.setSkillStatusEffect(SkillStatusEffect.valueOf(dto.getSkillEffect()));
+//        skill.setTargetType(TargetType.valueOf(dto.getTargetType()));
+//        skill.setMinValue(dto.getMinValue());
+//        skill.setMaxValue(dto.getMaxValue());
+//        skill.setAccuracy(dto.getAccuracy());
+//        skill.setValueModifierType(ValueModifierType.valueOf(dto.getValueModifierType()));
         return skill;
     }
 

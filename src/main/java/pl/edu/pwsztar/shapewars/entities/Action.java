@@ -6,16 +6,17 @@ import lombok.Generated;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
 @Entity
-@Table(name="FIGHTLOG")
-public class FightLog {
+@Table(name="ACTION")
+public class Action {
 
     @Id
     @Generated
-    @Column(name="FIGHT_LOG_ID")
+    @Column(name="ACTION")
     private Long ID;
 
     @ManyToOne
@@ -30,15 +31,12 @@ public class FightLog {
     private Fighter activeFighter;
 
     @ManyToOne
-    @JoinColumn(name="TARGET_ID")
-    private Fighter target;
-
-    @ManyToOne
     @JoinColumn(name="SKILL_ID")
     private Skill skill;
 
-    @Column(name="SKILL_RESULT")
-    private Double skillResult;
+    @OneToMany
+    @JoinColumn(name="TARGET_STATUS_ID")
+    private List<TargetStatus> targetStatuses;
 
     @ManyToOne
     @JoinColumn(name="NEXT_ACTIVE_FIGHTER_ID")
