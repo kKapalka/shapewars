@@ -18,6 +18,9 @@ public class SkillService {
     @Autowired
     private SkillRepository skillRepository;
 
+    @Autowired
+    private SkillEffectBundleService skillEffectBundleService;
+
     public SkillDto save(SkillDto skillDto){
         Skill skill = updateSkill(skillDto);
         return SkillDto.fromEntity(skillRepository.save(skill));
@@ -29,14 +32,9 @@ public class SkillService {
             skill=skillRepository.getOne(dto.getId());
         }
         skill.setName(dto.getName());
-//        skill.setTooltip(TooltipCreator.createTooltip(dto));
-//        skill.setCost(dto.getCost());
-//        skill.setSkillStatusEffect(SkillStatusEffect.valueOf(dto.getSkillEffect()));
-//        skill.setTargetType(TargetType.valueOf(dto.getTargetType()));
-//        skill.setMinValue(dto.getMinValue());
-//        skill.setMaxValue(dto.getMaxValue());
-//        skill.setAccuracy(dto.getAccuracy());
-//        skill.setValueModifierType(ValueModifierType.valueOf(dto.getValueModifierType()));
+        skill.setCost(dto.getCost());
+        skill.setTooltip("AAA");
+        skill.setSkillEffectBundles(skillEffectBundleService.createSkillEffectBundles(dto.getSkillEffectBundles()));
         return skill;
     }
 

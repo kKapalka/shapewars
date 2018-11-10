@@ -2,48 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fde0f3e8-80d9-49d9-93f4-65397f6f6cc8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/SkillEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/SkillEffectBundle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/SkillEffectResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/TargetStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f11f336e-5052-45c0-83a4-a83d7effbd70.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f11f336e-5052-45c0-83a4-a83d7effbd70.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f11f336e-5052-45c0-83a4-a83d7effbd70/storage_v2/_src_/database/shape-wars.NwHiKA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f11f336e-5052-45c0-83a4-a83d7effbd70/storage_v2/_src_/database/shape-wars.NwHiKA/schema/public.abK9xQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillEffectBundleDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillEffectDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/SkillEffectBundleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/SkillEffectRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillEffectBundleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillEffectService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/ClassifiedEffectsList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/config/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Fight$FightBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Fight$FightBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Fight.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Fight.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/FightLog$FightLogBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/FightLog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Fighter$FighterBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Fighter$FighterBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Fighter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Fighter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Player$PlayerBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Shape$ShapeBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Shape$ShapeBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Shape.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Shape.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Skill$SkillBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Skill.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Skill.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/User$UserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/User$UserBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/FighterDto$FighterDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/FighterDto$FighterDtoBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/FighterDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/FighterDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/MessageDto$MessageDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/MessageDto$MessageDtoBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/MessageDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/MessageDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/PlayerDto$PlayerDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/PlayerDto$PlayerDtoBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/PlayerDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/PlayerDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/SkillDto$SkillDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/SkillDto$SkillDtoBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/SkillDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/SkillDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/UserDto$UserDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/UserDto$UserDtoBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/UserDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/UserDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/repositories/PlayerRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/services/SkillService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/services/SkillService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/FightLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Player.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Skill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Skill.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/enums/SkillEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/enums/SkillStatusEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/PlayerRepository.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/SkillEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/SkillEvaluator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/TooltipCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/TooltipCreator.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -96,15 +64,6 @@
         <item name="shape-wars: database" type="6d9b600a:PostgresImplModel$Database" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="shape-wars@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="shape-wars: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
     </expand>
     <select />
@@ -172,24 +131,24 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="DATABASE/f11f336e-5052-45c0-83a4-a83d7effbd70" value="1" />
-          <entry key="java" value="19" />
+          <entry key="java" value="29" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="19" />
+          <entry key="JAVA" value="29" />
           <entry key="UML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="12" />
-          <entry key="java" value="464" />
+          <entry key="java" value="1600" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="464" />
+          <entry key="JAVA" value="1600" />
           <entry key="PLAIN_TEXT" value="12" />
         </counts>
       </usages-collector>
@@ -198,230 +157,115 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="uml://DATABASE/f11f336e-5052-45c0-83a4-a83d7effbd70">
-          <provider selected="true" editor-type-id="UmlEditorProvider">
-            <state>
-              <ID>DATABASE</ID>
-              <OriginalElement>f11f336e-5052-45c0-83a4-a83d7effbd70</OriginalElement>
-              <nodes>
-                <node x="200.0" y="409.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill</node>
-                <node x="434.6701388888888" y="854.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect</node>
-                <node x="1299.625" y="0.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player</node>
-                <node x="762.1284722222221" y="55.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.users</node>
-                <node x="1020.875" y="676.5">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.user_fighter</node>
-                <node x="763.125" y="398.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.message</node>
-                <node x="22.0" y="676.5">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape_skill</node>
-                <node x="1378.125" y="168.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter_current</node>
-                <node x="1217.125" y="168.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter</node>
-                <node x="594.125" y="354.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter</node>
-                <node x="859.875" y="676.5">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.user_fighter_current</node>
-                <node x="176.0" y="676.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect_bundle</node>
-                <node x="388.125" y="409.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fight</node>
-                <node x="0.0" y="1207.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.keyword</node>
-                <node x="315.125" y="1066.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect_result</node>
-                <node x="402.0" y="632.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.action</node>
-                <node x="259.56597222222206" y="0.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape</node>
-                <node x="239.6701388888888" y="898.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.target_status</node>
-              </nodes>
-              <notes />
-              <edges>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape">
-                  <point x="0.0" y="-114.0" />
-                  <point x="668.625" y="314.0" />
-                  <point x="397.56597222222206" y="314.0" />
-                  <point x="46.0" y="147.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.message" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.users">
-                  <point x="-48.0" y="-70.0" />
-                  <point x="811.125" y="334.0" />
-                  <point x="834.2118055555554" y="334.0" />
-                  <point x="-14.416666666666629" y="92.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape_skill" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill">
-                  <point x="33.5" y="-36.5" />
-                  <point x="122.5" y="612.0" />
-                  <point x="226.33333333333337" y="612.0" />
-                  <point x="-52.66666666666666" y="59.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.user_fighter" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.users">
-                  <point x="35.25" y="-36.5" />
-                  <point x="1126.625" y="314.0" />
-                  <point x="920.7118055555553" y="314.0" />
-                  <point x="72.08333333333326" y="92.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.action" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fight">
-                  <point x="-26.375" y="-81.0" />
-                  <point x="0.0" y="59.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect_result" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.target_status">
-                  <point x="-50.0" y="-48.0" />
-                  <point x="365.125" y="1041.0" />
-                  <point x="327.1701388888888" y="1041.0" />
-                  <point x="0.0" y="37.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect_bundle">
-                  <point x="0.0" y="-81.0" />
-                  <point x="551.6701388888888" y="814.0" />
-                  <point x="279.0" y="814.0" />
-                  <point x="0.0" y="37.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.user_fighter_current" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.users">
-                  <point x="35.25" y="-36.5" />
-                  <point x="965.625" y="324.0" />
-                  <point x="891.8784722222221" y="324.0" />
-                  <point x="43.25" y="92.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player">
-                  <point x="0.0" y="-36.5" />
-                  <point x="1287.625" y="143.0" />
-                  <point x="1334.625" y="143.0" />
-                  <point x="-35.0" y="59.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.action" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill">
-                  <point x="-79.125" y="-81.0" />
-                  <point x="428.375" y="612.0" />
-                  <point x="331.66666666666663" y="612.0" />
-                  <point x="52.66666666666663" y="59.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect_result" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect">
-                  <point x="50.0" y="-48.0" />
-                  <point x="465.125" y="1041.0" />
-                  <point x="551.6701388888888" y="1041.0" />
-                  <point x="0.0" y="81.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.user_fighter" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter">
-                  <point x="-35.25" y="-36.5" />
-                  <point x="1056.125" y="602.0" />
-                  <point x="728.225" y="602.0" />
-                  <point x="59.60000000000002" y="114.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.user_fighter_current" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter">
-                  <point x="-35.25" y="-36.5" />
-                  <point x="895.125" y="612.0" />
-                  <point x="698.425" y="612.0" />
-                  <point x="29.799999999999955" y="114.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape_skill" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape">
-                  <point x="-33.5" y="-36.5" />
-                  <point x="55.5" y="334.0" />
-                  <point x="305.56597222222206" y="334.0" />
-                  <point x="-46.0" y="147.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fight" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.users">
-                  <point x="-46.5" y="-59.0" />
-                  <point x="434.625" y="324.0" />
-                  <point x="776.5451388888887" y="324.0" />
-                  <point x="-72.08333333333337" y="92.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.target_status" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter">
-                  <point x="43.75" y="-37.0" />
-                  <point x="370.9201388888888" y="834.0" />
-                  <point x="668.625" y="834.0" />
-                  <point x="0.0" y="114.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.target_status" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.action">
-                  <point x="-43.75" y="-37.0" />
-                  <point x="283.4201388888888" y="824.0" />
-                  <point x="507.5" y="824.0" />
-                  <point x="0.0" y="81.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.action" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter">
-                  <point x="26.375" y="-81.0" />
-                  <point x="533.875" y="602.0" />
-                  <point x="609.025" y="602.0" />
-                  <point x="-59.60000000000002" y="114.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect_bundle" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill">
-                  <point x="0.0" y="-37.0" />
-                  <point x="0.0" y="59.0" />
-                </edge>
-                <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter_current" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player">
-                  <point x="0.0" y="-36.5" />
-                  <point x="1451.625" y="143.0" />
-                  <point x="1404.625" y="143.0" />
-                  <point x="35.0" y="59.0" />
-                </edge>
-              </edges>
-              <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="703.690174039159" y="900.8571428571427" />
-              <SelectedNodes>
-                <node>f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.keyword</node>
-              </SelectedNodes>
-              <Categories>
-                <Category>Key columns</Category>
-                <Category>Columns</Category>
-              </Categories>
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Skill.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="17" column="20" lean-forward="true" selection-start-line="10" selection-end-line="17" selection-end-column="20" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/FighterDto.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillDto.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+            <state relative-caret-position="306">
+              <caret line="24" column="111" selection-start-line="24" selection-start-column="111" selection-end-line="24" selection-end-column="111" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillEffectBundleDto.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillEffectDto.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="173">
+              <caret line="15" column="37" lean-forward="true" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/SkillEffect.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="35" column="47" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="47" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/MessageDto.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/UserDto.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/ShapeDto.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-144">
-              <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/SkillEvaluator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/TooltipCreator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="47" lean-forward="true" selection-start-line="17" selection-start-column="47" selection-end-line="17" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="60" selection-start-line="7" selection-start-column="60" selection-end-line="7" selection-end-column="60" />
+            <state relative-caret-position="289">
+              <caret line="35" column="32" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/PlayerDto.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillEffectBundleService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="224">
+              <caret line="28" column="9" lean-forward="true" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/SkillEffectBundleRepository.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+              <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/SkillEffectRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillEffectService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="173">
+              <caret line="23" column="11" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="11" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -813,9 +657,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/ShapeWarsApplication.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/exceptions/EmailExistsException.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/ColorType.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Message.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/User.java" />
@@ -857,8 +698,15 @@
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/SkillEffectResult.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Action.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/TargetStatus.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillDto.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/ClassifiedEffectsList.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/TooltipCreator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillEffectDto.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillEffectBundleDto.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillDto.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/SkillEffectBundleRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/SkillEffectRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillEffectService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillEffectBundleService.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillService.java" />
       </list>
     </option>
@@ -960,6 +808,15 @@
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="shapewars" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="shapewars" type="462c0819:PsiDirectoryNode" />
               <item name="utilities" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -977,7 +834,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541877024966" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541881199799" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -1023,15 +880,16 @@
       <workItem from="1541570186563" duration="2113000" />
       <workItem from="1541868470577" duration="465000" />
       <workItem from="1541869017364" duration="78000" />
-      <workItem from="1541869135836" duration="2633000" />
+      <workItem from="1541869135836" duration="5152000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9206000" />
+    <option name="totallyTimeSpent" value="11725000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="1" />
@@ -1040,7 +898,7 @@
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Web" order="6" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="7" visible="true" weight="0.2193646" />
+      <window_info active="true" content_ui="combo" id="Project" order="7" visible="true" weight="0.2193646" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3295082" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5763994" visible="true" weight="0.30327868" />
@@ -1063,7 +921,7 @@
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Maven Projects" order="5" />
       <window_info anchor="right" id="Gradle" order="6" />
-      <window_info active="true" anchor="right" id="Database" order="7" visible="true" weight="0.28366113" />
+      <window_info anchor="right" id="Database" order="7" visible="true" weight="0.1709531" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Theme Preview" order="9" />
       <window_info anchor="right" id="Bean Validation" order="10" />
@@ -1076,55 +934,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/MessageRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/PlayerRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/ShapeRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/SkillRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/UserRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/exceptions/EmailExistsException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/ShapeWarsApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/validation/EmailValidator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-44">
@@ -1319,16 +1128,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/SkillEffect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="20" lean-forward="true" selection-start-line="9" selection-end-line="17" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/SkillEffectResult.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="278">
@@ -1356,20 +1155,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Skill.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17">
-          <caret line="17" column="20" lean-forward="true" selection-start-line="10" selection-end-line="17" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
         </state>
       </provider>
     </entry>
@@ -1415,17 +1200,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/TooltipCreator.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="47" lean-forward="true" selection-start-line="17" selection-start-column="47" selection-end-line="17" selection-end-column="47" />
+        <state relative-caret-position="335">
+          <caret line="34" column="5" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="34" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/MessageDto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="60" selection-start-line="7" selection-start-column="60" selection-end-line="7" selection-end-column="60" />
+        <state relative-caret-position="102">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1435,21 +1223,18 @@
           <ID>DATABASE</ID>
           <OriginalElement>f11f336e-5052-45c0-83a4-a83d7effbd70</OriginalElement>
           <nodes>
-            <node x="200.0" y="409.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill</node>
             <node x="434.6701388888888" y="854.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect</node>
-            <node x="1299.625" y="0.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player</node>
             <node x="762.1284722222221" y="55.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.users</node>
             <node x="1020.875" y="676.5">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.user_fighter</node>
             <node x="763.125" y="398.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.message</node>
             <node x="22.0" y="676.5">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape_skill</node>
-            <node x="1378.125" y="168.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter_current</node>
-            <node x="1217.125" y="168.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter</node>
+            <node x="315.125" y="1066.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect_result</node>
             <node x="594.125" y="354.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter</node>
             <node x="859.875" y="676.5">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.user_fighter_current</node>
             <node x="176.0" y="676.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect_bundle</node>
             <node x="388.125" y="409.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fight</node>
-            <node x="0.0" y="1207.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.keyword</node>
-            <node x="315.125" y="1066.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect_result</node>
+            <node x="729.9999999999995" y="780.3333333333336">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.keyword</node>
+            <node x="200.0" y="409.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill</node>
             <node x="402.0" y="632.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.action</node>
             <node x="259.56597222222206" y="0.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape</node>
             <node x="239.6701388888888" y="898.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.target_status</node>
@@ -1501,12 +1286,6 @@
               <point x="965.625" y="324.0" />
               <point x="891.8784722222221" y="324.0" />
               <point x="43.25" y="92.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player">
-              <point x="0.0" y="-36.5" />
-              <point x="1287.625" y="143.0" />
-              <point x="1334.625" y="143.0" />
-              <point x="-35.0" y="59.0" />
             </edge>
             <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.action" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill">
               <point x="-79.125" y="-81.0" />
@@ -1566,14 +1345,8 @@
               <point x="0.0" y="-37.0" />
               <point x="0.0" y="59.0" />
             </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player_fighter_current" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.player">
-              <point x="0.0" y="-36.5" />
-              <point x="1451.625" y="143.0" />
-              <point x="1404.625" y="143.0" />
-              <point x="35.0" y="59.0" />
-            </edge>
           </edges>
-          <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="703.690174039159" y="900.8571428571427" />
+          <settings layout="Hierarchic Group" zoom="0.30000000000000016" x="522.7377930867783" y="622.9999999999995" />
           <SelectedNodes>
             <node>f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.keyword</node>
           </SelectedNodes>
@@ -1584,20 +1357,117 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Player.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/ClassifiedEffectsList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="34" column="5" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="34" selection-end-column="5" />
+        <state relative-caret-position="173">
+          <caret line="30" column="6" lean-forward="true" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/MessageDto.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/TooltipCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Skill.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="17" column="20" lean-forward="true" selection-start-line="10" selection-end-line="17" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/SkillEffect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="35" column="47" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillEffectDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="15" column="37" lean-forward="true" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillEffectBundleDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="24" column="111" selection-start-line="24" selection-start-column="111" selection-end-line="24" selection-end-column="111" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/SkillEffectBundleRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/SkillEffectRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillEffectService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="23" column="11" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillEffectBundleService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="28" column="9" lean-forward="true" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="35" column="32" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
