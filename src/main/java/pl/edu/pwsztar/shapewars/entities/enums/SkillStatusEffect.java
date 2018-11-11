@@ -3,11 +3,11 @@ package pl.edu.pwsztar.shapewars.entities.enums;
 public enum SkillStatusEffect {
     DEAL_DAMAGE,
     RESTORE_HEALTH,
-    SPEED_PLUS,
-    SPEED_MINUS,
+    INCREASE_SPEED,
+    REDUCE_SPEED,
     STUN,
-    STRENGTH_PLUS,
-    STRENGTH_MINUS,
-    ARMOR_PLUS,
-    ARMOR_MINUS
+    INCREASE_STRENGTH,
+    REDUCE_STRENGTH,
+    INCREASE_ARMOR,
+    REDUCE_ARMOR
 }

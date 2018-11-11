@@ -43,13 +43,6 @@ public class User {
     )
     private List<Fighter> fighterList;
 
-    @ManyToMany
-    @JoinTable(name = "USER_FIGHTER_CURRENT",
-            joinColumns = @JoinColumn(name = "USER_ID"),
-            inverseJoinColumns = @JoinColumn(name = "FIGHTER_ID")
-    )
-    private List<Fighter> currentFighters;
-
 
 
 }

@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Generated;
 import pl.edu.pwsztar.shapewars.entities.enums.ColorType;
+import pl.edu.pwsztar.shapewars.entities.enums.FighterSlot;
 
 import javax.persistence.*;
 
@@ -43,5 +44,9 @@ public class Fighter {
 
     @Column(name="ARMOR")
     private Long armor;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="SLOT")
+    private FighterSlot slot;
 
 }

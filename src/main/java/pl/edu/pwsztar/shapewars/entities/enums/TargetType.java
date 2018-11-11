@@ -1,12 +1,12 @@
 package pl.edu.pwsztar.shapewars.entities.enums;
 
 public enum TargetType {
-    SELF,
-    SINGLE_TARGET_ENEMY,
-    SINGLE_TARGET_ALLY,
+    THIS_UNIT,
+    TARGET_ENEMY,
+    TARGET_ALLY,
     RANDOM_ENEMY,
     RANDOM_ALLY,
-    ALL_ENEMY,
-    ALL_ALLY,
-    ALL
+    ALL_ENEMY_UNITS,
+    ALL_ALLIED_UNITS,
+    ALL_UNITS
 }

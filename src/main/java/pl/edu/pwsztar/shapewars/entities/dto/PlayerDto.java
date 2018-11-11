@@ -16,14 +16,12 @@ public class PlayerDto {
     private int level;
     private int xpPoints;
     private List<Long> allFighterIDList;
-    private List<Long> currentFighterIDs;
 
     public static PlayerDto fromEntity(User user){
         return PlayerDto.builder()
                 .id(user.getID())
                 .level(user.getLevel().intValue())
                 .allFighterIDList(user.getFighterList().stream().map(Fighter::getID).collect(Collectors.toList()))
-                .currentFighterIDs(user.getCurrentFighters().stream().map(Fighter::getID).collect(Collectors.toList()))
                 .build();
     }
 }

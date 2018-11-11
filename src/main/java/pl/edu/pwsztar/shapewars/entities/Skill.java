@@ -22,7 +22,7 @@ public class Skill {
     @Column(name="NAME")
     private String name;
 
-    @Column(name="TOOLTIP")
+    @Column(name="TOOLTIP", columnDefinition="TEXT")
     private String tooltip;
 
     @Column(name="COST")

@@ -3,134 +3,83 @@ package pl.edu.pwsztar.shapewars.utilities;
 import pl.edu.pwsztar.shapewars.entities.Skill;
 import pl.edu.pwsztar.shapewars.entities.SkillEffect;
 import pl.edu.pwsztar.shapewars.entities.SkillEffectBundle;
-import pl.edu.pwsztar.shapewars.entities.dto.SkillDto;
 import pl.edu.pwsztar.shapewars.entities.enums.SkillStatusEffect;
 import pl.edu.pwsztar.shapewars.entities.enums.TargetType;
 import pl.edu.pwsztar.shapewars.entities.enums.ValueModifierType;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TooltipCreator {
 
     private static String prefix;
-    private static String pending;
-    private static String suffix;
     public static String createTooltip(Skill skill){
-        return String.join(".\n",skill.getSkillEffectBundles().stream()
+        String tooltip = String.join("\n",skill.getSkillEffectBundles().stream()
                 .map(TooltipCreator::processBundle).toArray(String[]::new))
                 + "\nCost: "+skill.getCost();
-
-//        SkillStatusEffect skillStatusEffect = SkillStatusEffect.valueOf(dto.getSkillEffect());
-//        TargetType targetType = TargetType.valueOf(dto.getTargetType());
-//        if(THREE_TURN_EFFECTS.contains(skillStatusEffect)) {
-//            return evaluateThreeTurnStatusEffects(skillStatusEffect, targetType, dto) + getOtherInfo(dto);
-//        }else if(HITPOINT_EFFECTS.contains(skillStatusEffect)) {
-//            return evaluateHitPointChangeEffects(skillStatusEffect,targetType,dto) + getOtherInfo(dto);
-//        }else if(TURN_BASED_EFFECTS.contains(skillStatusEffect)){
-//            return evaluateTurnBasedEffects(skillStatusEffect,targetType,dto) + getOtherInfo(dto);
-//        }
+        return tooltip;
     }
+
     private static String processBundle(SkillEffectBundle bundle){
-        System.out.println(bundle.getSkillEffects().stream().collect(Collectors.groupingBy(SkillEffect::getSkillStatusEffect)));
-        return "aa";
+        Map<SkillStatusEffect, List<SkillEffect>> stringSkillEffectMap = bundle.getSkillEffects().
+                stream().collect(Collectors.groupingBy(SkillEffect::getSkillStatusEffect));
+        List<String> processedBundleTooltip=new ArrayList<>();
+        stringSkillEffectMap.forEach((key,value)->processedBundleTooltip.add(processGroup(key,value)));
+        return String.join(". ",processedBundleTooltip) + " ("+bundle.getAccuracy()+"% chance to hit).";
     }
-//    private static String evaluateThreeTurnStatusEffects(SkillStatusEffect skillStatusEffect, TargetType targetType, SkillDto dto) {
-//        if (targetType == TargetType.SINGLE_TARGET_ENEMY) {
-//            pending += " target enemy's ";
-//        } else if (targetType == TargetType.SINGLE_TARGET_ALLY) {
-//            pending += " target ally's ";
-//        } else if (targetType == TargetType.SELF) {
-//            pending += " your own ";
-//        } else if (targetType == TargetType.RANDOM_ALLY) {
-//            pending += " random ally's ";
-//        } else if (targetType == TargetType.RANDOM_ENEMY) {
-//            pending += " random enemy's ";
-//        } else if (targetType == TargetType.ALL_ALLY) {
-//            pending += " all allied units' ";
-//        } else if (targetType == TargetType.ALL_ENEMY) {
-//            pending += " all enemy units' ";
-//        } else if (targetType == TargetType.ALL) {
-//            pending += " all units' ";
-//        }
-//        pending += dto.getSkillEffect().replaceAll("_.*", "").toLowerCase();
-//        suffix += " by " + dto.getMinValue() + "-" + dto.getMaxValue() + " for three turns.";
-//
-//        if (HARMFUL.contains(skillStatusEffect)) {
-//            prefix += "Reduce";
-//        } else if (BENEFICIAL.contains(skillStatusEffect)) {
-//            prefix += "Increase";
-//        }
-//        return prefix+pending+suffix;
-//    }
-//    private static String getOtherInfo(SkillDto dto){
-//        return "\nChance to hit: "+dto.getAccuracy()+"%.\nEnergy cost: "+dto.getCost()+".";
-//    }
-//
-//    private static String evaluateHitPointChangeEffects(SkillStatusEffect skillStatusEffect, TargetType targetType, SkillDto dto){
-//        ValueModifierType valueModifierType = ValueModifierType.valueOf(dto.getValueModifierType());
-//        if(skillStatusEffect == SkillStatusEffect.DEAL_DAMAGE){
-//            prefix+="Deal";
-//            suffix+="damage to";
-//        } else if(skillStatusEffect == SkillStatusEffect.RESTORE_HEALTH){
-//            prefix+="Restore";
-//            suffix+="health to";
-//        }
-//        if(valueModifierType!=ValueModifierType.FLAT_VALUE){
-//            prefix+=" "+dto.getMinValue()+"% - "+dto.getMaxValue()+"% of";
-//            if(valueModifierType==ValueModifierType.STR_BASED){
-//                prefix+=" strength as ";
-//            } else if(valueModifierType==ValueModifierType.TARGET_CURRENT_HP_BASED){
-//                prefix+=" target's current health as ";
-//            } else if(valueModifierType==ValueModifierType.SELF_CURRENT_HP_BASED){
-//                prefix+=" your current health as ";
-//            }
-//        } else{
-//            prefix+=" "+dto.getMinValue()+" - "+dto.getMaxValue();
-//        }
-//        if (targetType == TargetType.SINGLE_TARGET_ENEMY) {
-//            suffix += " a target enemy.";
-//        } else if (targetType == TargetType.SINGLE_TARGET_ALLY) {
-//            suffix += " a target ally.";
-//        } else if (targetType == TargetType.SELF) {
-//            suffix += " yourself.";
-//        } else if (targetType == TargetType.RANDOM_ALLY) {
-//            suffix += " a random ally.";
-//        } else if (targetType == TargetType.RANDOM_ENEMY) {
-//            suffix += " a random enemy.";
-//        } else if (targetType == TargetType.ALL_ALLY) {
-//            suffix += " all allied units.";
-//        } else if (targetType == TargetType.ALL_ENEMY) {
-//            suffix += " all enemy units.";
-//        } else if (targetType == TargetType.ALL) {
-//            suffix += " all units.";
-//        }
-//        return prefix+pending+suffix;
-//    }
-//
-//    private static String evaluateTurnBasedEffects(SkillStatusEffect skillStatusEffect, TargetType targetType, SkillDto dto){
-//        if(skillStatusEffect == SkillStatusEffect.STUN){
-//            prefix+="Apply stun to";
-//        }
-//        if (targetType == TargetType.SINGLE_TARGET_ENEMY) {
-//            prefix += " a target enemy ";
-//        } else if (targetType == TargetType.SINGLE_TARGET_ALLY) {
-//            prefix += " a target ally ";
-//        } else if (targetType == TargetType.SELF) {
-//            prefix += " yourself ";
-//        } else if (targetType == TargetType.RANDOM_ALLY) {
-//            prefix += " a random ally ";
-//        } else if (targetType == TargetType.RANDOM_ENEMY) {
-//            prefix += " a random enemy.";
-//        } else if (targetType == TargetType.ALL_ALLY) {
-//            prefix += " all allied units ";
-//        } else if (targetType == TargetType.ALL_ENEMY) {
-//            prefix += " all enemy units ";
-//        } else if (targetType == TargetType.ALL) {
-//            prefix += " all units ";
-//        }
-//        suffix += " for " + Math.floor(dto.getMinValue()) + "-" + Math.floor(dto.getMaxValue()) + " turns " +
-//                "(rolled between values: "+dto.getMinValue()+" - "+dto.getMaxValue()+").";
-//        return prefix+pending+suffix;
-//    }
-
+    private static String processGroup(SkillStatusEffect effect, List<SkillEffect> skillEffects){
+        String prefixAddition="",delimiter="",suffix="";
+        if(ClassifiedEffectsList.THREE_TURN_EFFECTS.contains(effect)) {
+            prefixAddition=" of ";
+            delimiter=" and ";
+            suffix=" for three turns";
+        }else if(ClassifiedEffectsList.HITPOINT_EFFECTS.contains(effect)) {
+            prefixAddition=" to ";
+            delimiter=" and to ";
+        }else if(ClassifiedEffectsList.TURN_BASED_EFFECTS.contains(effect)){
+            prefixAddition=" ";
+            delimiter=" and ";
+        } else{
+            return "SkillStatusEffect not supported";
+        }
+        prefix = effect.name().toUpperCase().charAt(0)+effect.name().replaceAll("_", " ").toLowerCase().substring(1) + prefixAddition;
+        Map<TargetType, List<SkillEffect>> targetSkillEffectMap = skillEffects.stream().collect(Collectors.groupingBy(SkillEffect::getTargetType));
+        List<String> processedBundleTooltip=new ArrayList<>();
+        targetSkillEffectMap.forEach((key,value)->processedBundleTooltip.add(sortByTargets(key,value,effect)));
+        return prefix+ String.join(delimiter,processedBundleTooltip) + suffix;
+    }
+    private static String sortByTargets(TargetType type, List<SkillEffect> effects, SkillStatusEffect status){
+        List<String> values = new ArrayList<>();
+        if(ClassifiedEffectsList.THREE_TURN_EFFECTS.contains(status)) {
+            effects.forEach(effect -> {
+                String value = type.name().toLowerCase().replace("_", " ") + " by " + effect.getMinValue() + " - " + effect.getMaxValue();
+                values.add(value);
+            });
+        } else if(ClassifiedEffectsList.HITPOINT_EFFECTS.contains(status)){
+            String temp = type.name().toLowerCase().replace("_"," ")+" equal to ";
+            List<String> tempValues = new ArrayList<>();
+            effects.forEach(effect->{
+                String value=effect.getMinValue()+" - "+effect.getMaxValue();
+                if(effect.getValueModifierType()==ValueModifierType.SELF_CURRENT_HP_BASED){
+                    value+="% of this unit's current health";
+                } else if(effect.getValueModifierType()==ValueModifierType.TARGET_CURRENT_HP_BASED){
+                    value+="% of target's current health";
+                } else if(effect.getValueModifierType()==ValueModifierType.STR_BASED){
+                    value+="% of this unit's strength";
+                }
+                tempValues.add(value);
+            });
+            values.add(temp+String.join(" plus ",tempValues));
+        } else if(ClassifiedEffectsList.TURN_BASED_EFFECTS.contains(status)){
+            effects.forEach(effect -> {
+                String value = type.name().toLowerCase().replace("_", " ")
+                        + " for " + Math.floor(effect.getMinValue()) + " - " + Math.floor(effect.getMaxValue())+" turns" +
+                        "(rolled between: "+effect.getMinValue()+" - "+effect.getMaxValue()+")";
+                values.add(value);
+            });
+        }
+        return String.join(" and ",values);
+    }
 }

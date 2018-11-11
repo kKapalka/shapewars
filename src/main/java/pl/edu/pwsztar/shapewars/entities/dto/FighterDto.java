@@ -25,6 +25,7 @@ public class FighterDto {
     private int strength;
     private int armor;
     private int speed;
+    private String slot;
 
     public static FighterDto fromEntity(Fighter fighter){
         return FighterDto.builder()
@@ -40,6 +41,7 @@ public class FighterDto {
                 .strength(fighter.getStrength().intValue())
                 .armor(fighter.getArmor().intValue())
                 .speed(fighter.getSpeed().intValue())
+                .slot(fighter.getSlot().name())
                 .build();
     }
 }

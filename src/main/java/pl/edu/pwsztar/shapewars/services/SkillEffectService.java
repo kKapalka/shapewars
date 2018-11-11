@@ -34,8 +34,6 @@ public class SkillEffectService {
         skillEffect.setTargetType(TargetType.valueOf(dto.getTargetType()));
         skillEffect.setSkillStatusEffect(SkillStatusEffect.valueOf(dto.getSkillStatusEffect()));
         skillEffect.setValueModifierType(ValueModifierType.valueOf(dto.getValueModifierType()));
-
-        System.out.println(skillEffect);
         return skillEffect;
     }
 }
