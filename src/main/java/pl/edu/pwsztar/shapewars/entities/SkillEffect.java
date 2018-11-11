@@ -1,6 +1,8 @@
 package pl.edu.pwsztar.shapewars.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import lombok.ToString;
 import pl.edu.pwsztar.shapewars.entities.enums.SkillStatusEffect;
 import pl.edu.pwsztar.shapewars.entities.enums.TargetType;
 import pl.edu.pwsztar.shapewars.entities.enums.ValueModifierType;
@@ -10,12 +12,17 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name="SKILL_EFFECT")
+@ToString(exclude = "skillEffectBundle")
 public class SkillEffect {
 
     @Id
     @GeneratedValue
     @Column(name="SKILL_EFFECT_ID")
     private Long ID;
+
+    @ManyToOne
+    @JoinColumn(name="SKILL_EFFECT_BUNDLE_ID")
+    private SkillEffectBundle skillEffectBundle;
 
     @Enumerated(EnumType.STRING)
     @Column(name="EFFECT")

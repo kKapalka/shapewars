@@ -3,9 +3,11 @@ package pl.edu.pwsztar.shapewars.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pwsztar.shapewars.entities.Skill;
+import pl.edu.pwsztar.shapewars.entities.SkillEffectBundle;
 import pl.edu.pwsztar.shapewars.entities.dto.FighterDto;
 import pl.edu.pwsztar.shapewars.entities.dto.SkillDto;
 import pl.edu.pwsztar.shapewars.repositories.SkillRepository;
+import pl.edu.pwsztar.shapewars.utilities.TooltipCreator;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -33,8 +35,8 @@ public class SkillService {
         }
         skill.setName(dto.getName());
         skill.setCost(dto.getCost());
-        skill.setTooltip("AAA");
-        skill.setSkillEffectBundles(skillEffectBundleService.createSkillEffectBundles(dto.getSkillEffectBundles()));
+        skill.setSkillEffectBundles(skillEffectBundleService.createSkillEffectBundles(skill,dto));
+        skill.setTooltip(TooltipCreator.createTooltip(skill));
         return skill;
     }
 

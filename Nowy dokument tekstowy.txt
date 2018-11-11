@@ -1,0 +1,19 @@
+JSON do zpaisu skillów:
+{
+	"name":"name",
+	"cost":1,
+	"skillEffectBundles":[
+		{
+			"accuracy":60,
+			"skillEffectDtos":[
+				{
+					"skillStatusEffect":"STUN",
+					"targetType":"ALL",
+					"minValue":1.55,
+					"maxValue":2.15,
+					"valueModifierType":"FLAT_VALUE"
+				}
+				]
+		}
+		]
+}

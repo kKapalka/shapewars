@@ -1,6 +1,8 @@
 package pl.edu.pwsztar.shapewars.entities;
 
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import pl.edu.pwsztar.shapewars.entities.enums.SkillStatusEffect;
 import pl.edu.pwsztar.shapewars.entities.enums.TargetType;
 import pl.edu.pwsztar.shapewars.entities.enums.ValueModifierType;
@@ -26,8 +28,7 @@ public class Skill {
     @Column(name="COST")
     private Long cost;
 
-    @OneToMany
-    @JoinColumn(name="SKILL_EFFECT_BUNDLE_ID")
+    @OneToMany (mappedBy = "skill")
     private List<SkillEffectBundle> skillEffectBundles;
 
     public Skill(){
