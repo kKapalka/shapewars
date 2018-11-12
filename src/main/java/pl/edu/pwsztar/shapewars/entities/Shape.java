@@ -3,17 +3,18 @@ package pl.edu.pwsztar.shapewars.entities;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Generated;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Data
-@Builder
+@NoArgsConstructor
 @Entity
 @Table(name="SHAPE")
 public class Shape {
     @Id
-    @Generated
+    @GeneratedValue
     @Column(name="SHAPE_ID")
     private Long id;
 

@@ -4,12 +4,13 @@ package pl.edu.pwsztar.shapewars.entities;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Generated;
+import lombok.NoArgsConstructor;
 import pl.edu.pwsztar.shapewars.entities.enums.FightStatus;
 
 import javax.persistence.*;
 
 @Data
-@Builder
+@NoArgsConstructor
 @Entity
 @Table(name="FIGHT")
 public class Fight {

@@ -14,11 +14,11 @@ import java.util.stream.Collectors;
 
 public class TooltipCreator {
 
-    private static String prefix;
     public static String createTooltip(Skill skill){
         String tooltip = String.join("\n",skill.getSkillEffectBundles().stream()
                 .map(TooltipCreator::processBundle).toArray(String[]::new))
                 + "\nCost: "+skill.getCost();
+        System.out.println(tooltip);
         return tooltip;
     }
 
@@ -44,7 +44,7 @@ public class TooltipCreator {
         } else{
             return "SkillStatusEffect not supported";
         }
-        prefix = effect.name().toUpperCase().charAt(0)+effect.name().replaceAll("_", " ").toLowerCase().substring(1) + prefixAddition;
+        String prefix = effect.name().toUpperCase().charAt(0)+effect.name().replaceAll("_", " ").toLowerCase().substring(1) + prefixAddition;
         Map<TargetType, List<SkillEffect>> targetSkillEffectMap = skillEffects.stream().collect(Collectors.groupingBy(SkillEffect::getTargetType));
         List<String> processedBundleTooltip=new ArrayList<>();
         targetSkillEffectMap.forEach((key,value)->processedBundleTooltip.add(sortByTargets(key,value,effect)));

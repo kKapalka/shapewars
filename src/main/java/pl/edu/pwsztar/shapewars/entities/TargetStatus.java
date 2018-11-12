@@ -1,11 +1,13 @@
 package pl.edu.pwsztar.shapewars.entities;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name="TARGET_STATUS")
 public class TargetStatus {

@@ -3,19 +3,20 @@ package pl.edu.pwsztar.shapewars.entities;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Generated;
-import pl.edu.pwsztar.shapewars.entities.enums.ColorType;
+import lombok.NoArgsConstructor;
+import pl.edu.pwsztar.shapewars.entities.enums.Colors;
 import pl.edu.pwsztar.shapewars.entities.enums.FighterSlot;
 
 import javax.persistence.*;
 
 @Data
-@Builder
 @Entity
 @Table(name="FIGHTER")
+@NoArgsConstructor
 public class Fighter {
 
     @Id
-    @Generated
+    @GeneratedValue
     @Column(name="FIGHTER_ID")
     private Long ID;
 
@@ -31,7 +32,7 @@ public class Fighter {
 
     @Column(name="COLOR")
     @Enumerated(EnumType.STRING)
-    private ColorType color;
+    private Colors.ColorType color;
 
     @Column(name="HITPOINTS")
     private Long hitPoints;

@@ -45,4 +45,8 @@ public class SkillService {
         ).collect(Collectors.toList());
     }
 
+    public List<Skill> getSkillsByIdIn(List<Long> ids){
+        return skillRepository.findAll().stream()
+                .filter(skill->ids.contains(skill.getID())).collect(Collectors.toList());
+    }
 }

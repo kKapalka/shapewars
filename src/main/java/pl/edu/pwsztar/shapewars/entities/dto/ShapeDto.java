@@ -16,9 +16,9 @@ public class ShapeDto {
     private Long id;
     private String name;
     private List<Long> skillIDset;
-    private List<Long> HPParameters;
-    private List<Long> STRParameters;
-    private List<Long> ARMParameters;
+    private List<Long> hpParameters;
+    private List<Long> strParameters;
+    private List<Long> armParameters;
     private Long speed;
 
 
@@ -27,9 +27,9 @@ public class ShapeDto {
                 .id(shape.getId())
                 .name(shape.getName())
                 .skillIDset(shape.getSkillSet().stream().map(Skill::getID).collect(Collectors.toList()))
-                .HPParameters(Arrays.asList(shape.getBaselineHp(),shape.getHPMinGrowth(),shape.getHPMaxGrowth()))
-                .STRParameters(Arrays.asList(shape.getBaselineStrength(),shape.getSTRMinGrowth(),shape.getSTRMaxGrowth()))
-                .ARMParameters(Arrays.asList(shape.getBaselineArmor(),shape.getARMMinGrowth(),shape.getARMMaxGrowth()))
+                .hpParameters(Arrays.asList(shape.getBaselineHp(),shape.getHPMinGrowth(),shape.getHPMaxGrowth()))
+                .strParameters(Arrays.asList(shape.getBaselineStrength(),shape.getSTRMinGrowth(),shape.getSTRMaxGrowth()))
+                .armParameters(Arrays.asList(shape.getBaselineArmor(),shape.getARMMinGrowth(),shape.getARMMaxGrowth()))
                 .speed(shape.getBaselineSpeed())
                 .build();
     }

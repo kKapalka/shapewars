@@ -3,12 +3,13 @@ package pl.edu.pwsztar.shapewars.entities;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Generated;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
-@Builder
+@NoArgsConstructor
 @Entity
 @Table(name="MESSAGE")
 public class Message {
