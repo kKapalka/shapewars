@@ -14,7 +14,7 @@ import java.util.List;
 public class User {
 
     @Id
-    @Generated
+    @GeneratedValue
     @Column(name="USER_ID")
     private Long ID;
 
@@ -43,6 +43,7 @@ public class User {
     )
     private List<Fighter> fighterList;
 
-
+    @Column(name="ADMIN")
+    private boolean hasAdminPrivileges;
 
 }

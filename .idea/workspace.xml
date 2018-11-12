@@ -2,46 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fde0f3e8-80d9-49d9-93f4-65397f6f6cc8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/controllers/FighterController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/controllers/ShapeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/enums/Colors.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/FighterService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/ShapeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f11f336e-5052-45c0-83a4-a83d7effbd70.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f11f336e-5052-45c0-83a4-a83d7effbd70.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f11f336e-5052-45c0-83a4-a83d7effbd70/storage_v2/_src_/database/shape-wars.NwHiKA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f11f336e-5052-45c0-83a4-a83d7effbd70/storage_v2/_src_/database/shape-wars.NwHiKA/schema/public.abK9xQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/angular-settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/controllers/auth/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/LoginDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Action$ActionBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Action.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Action.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Fight$FightBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Fight.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Fight.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Fighter$FighterBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Fighter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Fighter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Keyword$KeywordBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Keyword.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Keyword.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Message$MessageBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Message.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Shape$ShapeBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Shape.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/Shape.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/TargetStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/TargetStatus.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/FighterDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/FighterDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/ShapeDto$ShapeDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/ShapeDto$ShapeDtoBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/ShapeDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/ShapeDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/enums/ColorType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/services/SkillService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/services/SkillService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/utilities/SkillEvaluator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/utilities/SkillEvaluator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Fight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Fight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Fighter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Fighter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Keyword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Keyword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Shape.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/TargetStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/TargetStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/ShapeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/ShapeDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/enums/ColorType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/SkillRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/SkillRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/SkillEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/SkillEvaluator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/TooltipCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/TooltipCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/config/AuthConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/User$UserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/User$UserBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/UserDto$UserDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/UserDto$UserDtoBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/UserDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/entities/dto/UserDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/repositories/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/repositories/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/pl/edu/pwsztar/shapewars/services/CustomUserDetailsService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/config/AuthConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/config/AuthConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/CustomUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/UserDetailsServiceImpl.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -150,37 +131,54 @@
     <session id="-86899931">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.19" value="1" />
-          <entry key="project.open.time.21" value="2" />
+          <entry key="project.open.time.21" value="3" />
+          <entry key="project.open.time.25" value="1" />
           <entry key="project.open.time.29" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.30" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="DATABASE/f11f336e-5052-45c0-83a4-a83d7effbd70" value="2" />
-          <entry key="java" value="83" />
+          <entry key="gradle" value="2" />
+          <entry key="html" value="1" />
+          <entry key="java" value="131" />
+          <entry key="js" value="13" />
+          <entry key="ts" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="83" />
+          <entry key="Groovy" value="2" />
+          <entry key="HTML" value="1" />
+          <entry key="JAVA" value="131" />
+          <entry key="JavaScript" value="13" />
+          <entry key="TypeScript" value="4" />
           <entry key="UML" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dummy" value="12" />
-          <entry key="java" value="6329" />
+          <entry key="dummy" value="34" />
+          <entry key="gradle" value="2" />
+          <entry key="java" value="6812" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="6329" />
-          <entry key="PLAIN_TEXT" value="12" />
+          <entry key="Groovy" value="2" />
+          <entry key="JAVA" value="6812" />
+          <entry key="PLAIN_TEXT" value="34" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts">
+        <counts>
+          <entry key="Angular2LanguageService" value="1" />
+          <entry key="TypeScriptServerServiceImpl" value="1" />
         </counts>
       </usages-collector>
     </session>
@@ -191,22 +189,79 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/FighterService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/security/jwt/JwtProvider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-135">
-              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="125">
+              <caret line="32" selection-start-line="32" selection-end-line="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.jsonwebtoken/jjwt/0.9.1/4341772ad269e161a35d2d0ad66f4f6d2f5e79b9/jjwt-0.9.1-sources.jar!/io/jsonwebtoken/impl/DefaultJwtBuilder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="98" selection-start-line="98" selection-end-line="98" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.jsonwebtoken/jjwt/0.9.1/4341772ad269e161a35d2d0ad66f4f6d2f5e79b9/jjwt-0.9.1-sources.jar!/io/jsonwebtoken/impl/Base64Codec.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="25" selection-start-line="25" selection-end-line="25" />
+              <folding>
+                <element signature="e#945#946#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="281">
+              <caret line="42" column="84" selection-start-line="42" selection-start-column="84" selection-end-line="42" selection-end-column="84" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/enums/Colors.java">
+        <entry file="jar://C:/Program Files/Java/jdk-11.0.1/lib/src.zip!/java.base/java/lang/ClassLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="26" column="64" selection-start-line="26" selection-start-column="64" selection-end-line="26" selection-end-column="64" />
+            <state relative-caret-position="125">
+              <caret line="520" selection-start-line="520" selection-end-line="520" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk-11.0.1/lib/src.zip!/java.base/jdk/internal/loader/ClassLoaders.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="278">
+              <caret line="177" selection-start-line="177" selection-end-line="177" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk-11.0.1/lib/src.zip!/java.base/jdk/internal/loader/BuiltinClassLoader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="125">
+              <caret line="582" selection-start-line="582" selection-end-line="582" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/controllers/auth/AuthController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="69">
+              <caret line="42" column="71" selection-start-line="42" selection-start-column="71" selection-end-line="42" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -215,92 +270,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/controllers/ShapeController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/LoginDto.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#680#681#0" expanded="true" />
-                <element signature="e#701#702#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="119">
+              <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/controllers/FighterController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/security/jwt/JwtAuthTokenFilter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#687#688#0" expanded="true" />
-                <element signature="e#730#731#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/ShapeDto.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/ShapeService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="775">
-              <caret line="53" column="66" selection-start-line="53" selection-start-column="66" selection-end-line="53" selection-end-column="66" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Shape.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Fighter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="77">
-              <caret line="17" column="7" lean-forward="true" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Skill.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="58">
-              <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="463">
-              <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+            <state relative-caret-position="-385">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -561,9 +543,9 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="6165642549026" />
+        <entry key="$PROJECT_DIR$" value="6166342097398" />
         <entry key="$PROJECT_DIR$/.gradle" value="0" />
-        <entry key="$PROJECT_DIR$/build.gradle" value="1900411555" />
+        <entry key="$PROJECT_DIR$/build.gradle" value="1654794277" />
         <entry key="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" value="2007532874" />
         <entry key="$PROJECT_DIR$/settings.gradle" value="3487758081" />
       </map>
@@ -697,21 +679,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/validation/PasswordMatchesValidator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/controllers/UserController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/config/SecurityConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/config/MvcConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/UserDto.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/messages_en.properties" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/pages/register.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/pages/login.html" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/enums/FightStatus.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Player.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/enums/SkillEffect.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/FightLog.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/SkillEffectResult.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillEffectDto.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillEffectBundleDto.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillDto.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/SkillEffectBundleRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/SkillEffectRepository.java" />
@@ -719,7 +686,6 @@
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillEffectBundleService.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/SkillEffect.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/SkillEffectBundle.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/enums/FighterSlot.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/PlayerDto.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/FighterDto.java" />
@@ -748,6 +714,22 @@
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Fighter.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/ShapeService.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/enums/Colors.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/security/jwt/JwtAuthEntryPoint.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/UserDto.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/messages/JwtResponse.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/messages/ResponseMessage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/security/services/UserPrinciple.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/security/services/UserDetailsServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/UserRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/UserDetailsServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/config/SecurityConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/config/AuthConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/security/jwt/JwtAuthTokenFilter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/security/jwt/JwtProvider.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/LoginDto.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/controllers/auth/AuthController.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
       </list>
     </option>
   </component>
@@ -756,6 +738,14 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/front-end/node_modules" />
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/front-end/package.json" />
+    </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
@@ -770,7 +760,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -781,6 +770,38 @@
             <path>
               <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
               <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="front-end" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="front-end" type="462c0819:PsiDirectoryNode" />
+              <item name="out-tsc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="front-end" type="462c0819:PsiDirectoryNode" />
+              <item name="out-tsc" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="front-end" type="462c0819:PsiDirectoryNode" />
+              <item name="out-tsc" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="front-end" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -803,6 +824,15 @@
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="shapewars" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="shapewars" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
@@ -812,6 +842,16 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="shapewars" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="shapewars" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
@@ -849,7 +889,45 @@
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="shapewars" type="462c0819:PsiDirectoryNode" />
+              <item name="messages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="shapewars" type="462c0819:PsiDirectoryNode" />
               <item name="repositories" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="shapewars" type="462c0819:PsiDirectoryNode" />
+              <item name="security" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="shapewars" type="462c0819:PsiDirectoryNode" />
+              <item name="security" type="462c0819:PsiDirectoryNode" />
+              <item name="jwt" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shapewars" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="shapewars" type="462c0819:PsiDirectoryNode" />
+              <item name="security" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="shapewars" type="b2602c69:ProjectViewProjectNode" />
@@ -880,6 +958,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -890,11 +969,12 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542009882446" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542048687536" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.annotationProcessors" />
+    <property name="settings.editor.selected.configurable" value="settings.typescriptcompiler" />
+    <property name="ts.external.directory.path" value="C:\Users\kkapa\Desktop\shapewars\front-end\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -940,15 +1020,16 @@
       <workItem from="1541940595508" duration="5528000" />
       <workItem from="1541957131813" duration="6880000" />
       <workItem from="1542005088059" duration="4687000" />
+      <workItem from="1542012769998" duration="1835000" />
+      <workItem from="1542040997373" duration="5611000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33080000" />
+    <option name="totallyTimeSpent" value="40526000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="1" />
@@ -957,10 +1038,10 @@
       <window_info id="Favorites" order="4" sideWeight="0.5011765" side_tool="true" weight="0.2193646" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Web" order="6" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="7" sideWeight="0.49882352" visible="true" weight="0.22844176" />
+      <window_info content_ui="combo" id="Project" order="7" sideWeight="0.49882352" visible="true" weight="0.23600605" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3295082" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5763994" visible="true" weight="0.30327868" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.70574886" weight="0.30327868" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -968,11 +1049,12 @@
       <window_info anchor="bottom" id="Build" order="7" weight="0.40819672" />
       <window_info anchor="bottom" id="Spring" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.4236006" side_tool="true" weight="0.29836065" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.29425114" side_tool="true" visible="true" weight="0.30327868" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32786885" />
       <window_info anchor="bottom" id="Java Enterprise" order="12" />
       <window_info anchor="bottom" id="Database Changes" order="13" />
       <window_info anchor="bottom" id="Version Control" order="14" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="TypeScript" order="15" sideWeight="0.49924356" visible="true" weight="0.3295082" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -993,496 +1075,36 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/config/AuthConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/config/SecurityConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="24" column="98" selection-start-line="24" selection-start-column="98" selection-end-line="24" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/pages/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/enums/FightStatus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="19" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/f11f336e-5052-45c0-83a4-a83d7effbd70/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/SkillEffectResult.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="20" column="26" lean-forward="true" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/KeywordDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Player.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/MessageDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/SkillEffectBundleRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/SkillEffectRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="24" column="111" selection-start-line="24" selection-start-column="111" selection-end-line="24" selection-end-column="111" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-11.0.1/lib/src.zip!/java.base/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="833" selection-start-line="833" selection-end-line="833" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/controllers/SkillController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-          <folding>
-            <element signature="e#1061#1062#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/SkillEffect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="15" column="26" lean-forward="true" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/SkillEffectBundle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/enums/FighterSlot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/UserDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/PlayerDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="23" column="114" selection-start-line="23" selection-start-column="114" selection-end-line="23" selection-end-column="114" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/enums/TargetType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="48" lean-forward="true" selection-start-column="48" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/enums/ValueModifierType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="28" lean-forward="true" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/enums/SkillStatusEffect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/StatusEffectDto.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/TooltipCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillEffectBundleService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="33" column="98" selection-start-line="33" selection-start-column="98" selection-end-line="33" selection-end-column="98" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillEffectService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="35" column="96" selection-start-line="35" selection-start-column="96" selection-end-line="35" selection-end-column="96" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/FighterDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="43" column="47" selection-start-line="43" selection-start-column="47" selection-end-line="43" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillEffectDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/SkillEffectBundleDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/ClassifiedEffectsList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://DATABASE/f11f336e-5052-45c0-83a4-a83d7effbd70">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>DATABASE</ID>
-          <OriginalElement>f11f336e-5052-45c0-83a4-a83d7effbd70</OriginalElement>
-          <nodes>
-            <node x="626.9726562500001" y="866.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect</node>
-            <node x="213.1875" y="410.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fight</node>
-            <node x="112.41015625000011" y="55.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.users</node>
-            <node x="167.25" y="698.5">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.user_fighter</node>
-            <node x="0.0" y="399.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.message</node>
-            <node x="866.9726562500001" y="698.5">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape_skill</node>
-            <node x="537.75" y="1100.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect_result</node>
-            <node x="419.1875" y="344.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter</node>
-            <node x="640.9726562500001" y="687.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect_bundle</node>
-            <node x="1067.97265625" y="0.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.keyword</node>
-            <node x="667.9726562500001" y="410.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill</node>
-            <node x="350.6601562500001" y="654.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.action</node>
-            <node x="666.1625000000001" y="0.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape</node>
-            <node x="426.6601562500001" y="921.0">f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.target_status</node>
-          </nodes>
-          <notes />
-          <edges>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape">
-              <point x="0.0" y="-125.0" />
-              <point x="493.6875" y="319.0" />
-              <point x="712.1625000000001" y="319.0" />
-              <point x="-46.0" y="147.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.message" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.users">
-              <point x="-48.0" y="-70.0" />
-              <point x="48.0" y="319.0" />
-              <point x="129.71015625000007" y="319.0" />
-              <point x="-69.20000000000005" y="92.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.user_fighter" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.users">
-              <point x="-35.25" y="-36.5" />
-              <point x="202.5" y="319.0" />
-              <point x="198.9101562500001" y="319.0" />
-              <point x="0.0" y="92.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape_skill" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill">
-              <point x="-33.5" y="-36.5" />
-              <point x="900.4726562500001" y="634.0" />
-              <point x="794.6393229166667" y="634.0" />
-              <point x="50.66666666666663" y="59.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect_result" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.target_status">
-              <point x="-50.0" y="-48.0" />
-              <point x="587.75" y="1075.0" />
-              <point x="514.1601562500001" y="1075.0" />
-              <point x="0.0" y="37.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.action" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fight">
-              <point x="-79.125" y="-81.0" />
-              <point x="377.0351562500001" y="614.0" />
-              <point x="306.1875" y="614.0" />
-              <point x="0.0" y="59.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect_bundle">
-              <point x="0.0" y="-92.0" />
-              <point x="0.0" y="48.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.action" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill">
-              <point x="79.125" y="-81.0" />
-              <point x="535.2851562500001" y="634.0" />
-              <point x="693.3059895833335" y="634.0" />
-              <point x="-50.66666666666666" y="59.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect_result" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect">
-              <point x="50.0" y="-48.0" />
-              <point x="687.75" y="1075.0" />
-              <point x="743.9726562500001" y="1075.0" />
-              <point x="0.0" y="92.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.user_fighter" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter">
-              <point x="35.25" y="-36.5" />
-              <point x="273.0" y="624.0" />
-              <point x="437.8125" y="624.0" />
-              <point x="-55.875" y="125.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape_skill" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.shape">
-              <point x="33.5" y="-36.5" />
-              <point x="967.4726562500001" y="319.0" />
-              <point x="804.1625000000001" y="319.0" />
-              <point x="46.00000000000003" y="147.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.target_status" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter">
-              <point x="43.75" y="-37.0" />
-              <point x="557.9101562500001" y="841.0" />
-              <point x="572.1601562500001" y="841.0" />
-              <point x="572.1601562500001" y="624.0" />
-              <point x="549.5625" y="624.0" />
-              <point x="55.875" y="125.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fight" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.users">
-              <point x="-46.5" y="-59.0" />
-              <point x="259.6875" y="319.0" />
-              <point x="233.51015625000014" y="319.0" />
-              <point x="34.60000000000002" y="92.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.target_status" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.action">
-              <point x="-43.75" y="-37.0" />
-              <point x="470.4101562500001" y="841.0" />
-              <point x="456.1601562500001" y="841.0" />
-              <point x="0.0" y="81.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.action" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.fighter">
-              <point x="-26.375" y="-81.0" />
-              <point x="429.7851562500001" y="634.0" />
-              <point x="475.0625" y="634.0" />
-              <point x="-18.625" y="125.0" />
-            </edge>
-            <edge source="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill_effect_bundle" target="f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.skill">
-              <point x="0.0" y="-48.0" />
-              <point x="0.0" y="59.0" />
-            </edge>
-          </edges>
-          <settings layout="Hierarchic Group" zoom="0.39800995024875624" x="511.5" y="593.0" />
-          <SelectedNodes>
-            <node>f11f336e-5052-45c0-83a4-a83d7effbd70.TABLE:shape-wars.public.keyword</node>
-          </SelectedNodes>
-          <Categories>
-            <Category>Key columns</Category>
-            <Category>Columns</Category>
-          </Categories>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/CustomUserDetailsService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Keyword.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Action.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Fight.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Message.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/TargetStatus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="43" column="38" selection-start-line="43" selection-start-column="38" selection-end-line="43" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/utilities/SkillEvaluator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="e#173#174#0" expanded="true" />
-            <element signature="e#220#221#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/SkillRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/controllers/FighterController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
+        <state relative-caret-position="204">
           <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#687#688#0" expanded="true" />
-            <element signature="e#730#731#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/controllers/ShapeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#680#681#0" expanded="true" />
-            <element signature="e#701#702#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/ShapeDto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
+        <state relative-caret-position="323">
           <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/ShapeService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+        <state relative-caret-position="765">
+          <caret line="53" column="66" selection-start-line="53" selection-start-column="66" selection-end-line="53" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Skill.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Shape.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
+        <state relative-caret-position="170">
           <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1492,28 +1114,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Fighter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="17" column="7" lean-forward="true" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
+        <state relative-caret-position="170">
+          <caret line="17" column="7" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/ShapeService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/Skill.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="775">
-          <caret line="53" column="66" selection-start-line="53" selection-start-column="66" selection-end-line="53" selection-end-column="66" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="68">
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/FighterService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/SkillService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-135">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="646">
+          <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1522,11 +1141,282 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/enums/Colors.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
+        <state relative-caret-position="378">
           <caret line="26" column="64" selection-start-line="26" selection-start-column="64" selection-end-line="26" selection-end-column="64" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/main.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/app/app.component.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/out-tsc/app/environments/environment.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/out-tsc/app/environments/environment.prod.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/out-tsc/app/app.e2e-spec.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/out-tsc/app/app.po.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/out-tsc/app/main.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/out-tsc/app/app/app.component.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/e2e/src/app.po.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/e2e/src/app.e2e-spec.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/dist/out-tsc/src/app/app.component.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/dist/out-tsc/src/app/app.component.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/dist/out-tsc/src/app/app.module.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/dist/out-tsc/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/out-tsc/app/polyfills.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/out-tsc/app/app/app.module.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/dist/out-tsc/src/environments/environment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/Temp1_SpringBootJwtAuthentication-1.zip/SpringBootJwtAuthentication/src/main/java/com/grokonez/jwtauthentication/controller/AuthRestAPIs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/Temp1_SpringBootJwtAuthentication-1.zip/SpringBootJwtAuthentication/src/main/java/com/grokonez/jwtauthentication/security/WebSecurityConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="66" column="5" selection-start-line="26" selection-start-column="4" selection-end-line="66" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/PlayerDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/repositories/UserRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="12" column="6" lean-forward="true" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/services/UserDetailsServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="18" column="15" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/config/MvcConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/config/AuthConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="6" column="58" lean-forward="true" selection-start-line="6" selection-start-column="58" selection-end-line="6" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/config/SecurityConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/security/services/UserDetailsServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="21" column="47" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/security/services/UserPrinciple.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-340">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/messages/JwtResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-150">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/messages/ResponseMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/security/jwt/JwtAuthEntryPoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="24" column="8" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/UserDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/security/jwt/JwtAuthTokenFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-385">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/entities/dto/LoginDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/controllers/auth/AuthController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="42" column="71" selection-start-line="42" selection-start-column="71" selection-end-line="42" selection-end-column="71" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/pwsztar/shapewars/security/jwt/JwtProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.jsonwebtoken/jjwt/0.9.1/4341772ad269e161a35d2d0ad66f4f6d2f5e79b9/jjwt-0.9.1-sources.jar!/io/jsonwebtoken/impl/DefaultJwtBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="98" selection-start-line="98" selection-end-line="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.1/lib/src.zip!/java.base/jdk/internal/loader/ClassLoaders.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="177" selection-start-line="177" selection-end-line="177" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.1/lib/src.zip!/java.base/jdk/internal/loader/BuiltinClassLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="582" selection-start-line="582" selection-end-line="582" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="42" column="84" selection-start-line="42" selection-start-column="84" selection-end-line="42" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.jsonwebtoken/jjwt/0.9.1/4341772ad269e161a35d2d0ad66f4f6d2f5e79b9/jjwt-0.9.1-sources.jar!/io/jsonwebtoken/impl/Base64Codec.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <element signature="e#945#946#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.1/lib/src.zip!/java.base/java/lang/ClassLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="520" selection-start-line="520" selection-end-line="520" />
         </state>
       </provider>
     </entry>

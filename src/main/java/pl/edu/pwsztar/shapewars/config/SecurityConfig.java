@@ -1,52 +1,66 @@
 package pl.edu.pwsztar.shapewars.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import pl.edu.pwsztar.shapewars.security.jwt.JwtAuthEntryPoint;
+import pl.edu.pwsztar.shapewars.security.jwt.JwtAuthTokenFilter;
+import pl.edu.pwsztar.shapewars.security.services.UserDetailsServiceImpl;
 
 @Configuration
 @Order(70)
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    public SecurityConfig(){
-        super();
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    private JwtAuthEntryPoint unauthorizedHandler;
+
+    @Bean
+    public JwtAuthTokenFilter authenticationJwtTokenFilter() {
+        return new JwtAuthTokenFilter();
     }
 
     @Override
-    protected void configure(final HttpSecurity http) throws Exception {
-        // @formatter:off
-        http
-                .csrf().disable();
-//                .authorizeRequests()
-//                .antMatchers("/login*","/login*", "/logout*", "/signin/**", "/signup/**", "/customLogin",
-//                        "/user/register*", "/registrationConfirm*", "/expiredAccount*", "/register*",
-//                        "/badUser*", "/user/resendRegistrationToken*" ,"/forgetPassword*", "/user/resetPassword*",
-//                        "/user/changePassword*", "/emailError*", "/resources/**","/old/user/registration*","/successRegister*","/qrcode*").permitAll()
-//                .antMatchers("/invalidSession*").anonymous()
-//                .antMatchers("/user/updatePassword*","/user/savePassword*","/updatePassword*").hasAuthority("CHANGE_PASSWORD_PRIVILEGE")
-//                .anyRequest().hasAuthority("READ_PRIVILEGE")
-//                .and()
-//                .formLogin()
-//                .loginPage("/login")
-//                .defaultSuccessUrl("/homepage.html")
-//                .failureUrl("/login?error=true")
-//                .permitAll()
-//                .and()
-//                .sessionManagement()
-//                .invalidSessionUrl("/invalidSession.html")
-//                .sessionFixation().none()
-//                .and()
-//                .logout()
-//                .invalidateHttpSession(false)
-//                .logoutSuccessUrl("/logout.html?logSucc=true")
-//                .deleteCookies("JSESSIONID")
-//                .permitAll()
-//                .and()
-//                .a;
-        // @formatter:on
+    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder());
     }
 
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.cors().and().csrf().disable().
+                authorizeRequests()
+                .antMatchers("/auth/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+    }
 }
