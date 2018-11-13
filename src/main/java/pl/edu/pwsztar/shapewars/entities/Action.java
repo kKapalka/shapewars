@@ -35,6 +35,10 @@ public class Action {
     @JoinColumn(name="SKILL_ID")
     private Skill skill;
 
+    @ManyToOne
+    @JoinColumn(name="SELECTED_TARGET_ID")
+    private Fighter selectedTarget;
+
     @OneToMany
     @JoinColumn(name="TARGET_STATUS_ID")
     private List<TargetStatus> targetStatuses;

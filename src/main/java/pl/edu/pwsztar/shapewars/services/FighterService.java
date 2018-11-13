@@ -1,5 +1,6 @@
 package pl.edu.pwsztar.shapewars.services;
 
+import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pwsztar.shapewars.entities.Fighter;
@@ -20,6 +21,10 @@ public class FighterService {
     public FighterDto save(FighterDto dto){
         Fighter fighter = updateFighter(dto);
         return FighterDto.fromEntity(fighterRepository.save(fighter));
+    }
+
+    public Fighter getFighterById(Long id){
+        return fighterRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     //Instancje jednostek - albo są generowane losowo,

@@ -8,6 +8,7 @@ import pl.edu.pwsztar.shapewars.exceptions.EmailExistsException;
 import pl.edu.pwsztar.shapewars.repositories.UserRepository;
 import pl.edu.pwsztar.shapewars.services.interfaces.IUserService;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import javax.websocket.Session;
 
@@ -40,4 +41,8 @@ public class UserService implements IUserService {
         }
         return false;
     }
+    public User getUserById(Long id){
+        return userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
 }
