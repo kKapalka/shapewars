@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class Message {
 
     @Id
-    @Generated
+    @GeneratedValue
     @Column(name="MESSAGE_ID")
     private Long ID;
 

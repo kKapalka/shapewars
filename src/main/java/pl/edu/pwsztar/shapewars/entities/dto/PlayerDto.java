@@ -18,6 +18,7 @@ public class PlayerDto {
     private List<Long> allFighterIDList;
 
     public static PlayerDto fromEntity(User user){
+        System.out.println(user);
         return PlayerDto.builder()
                 .id(user.getID())
                 .level(user.getLevel().intValue())

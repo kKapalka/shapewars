@@ -16,7 +16,7 @@ import java.util.List;
 public class Action {
 
     @Id
-    @Generated
+    @GeneratedValue
     @Column(name="ACTION")
     private Long ID;
 
@@ -39,8 +39,7 @@ public class Action {
     @JoinColumn(name="SELECTED_TARGET_ID")
     private Fighter selectedTarget;
 
-    @OneToMany
-    @JoinColumn(name="TARGET_STATUS_ID")
+    @OneToMany(mappedBy = "action", cascade = CascadeType.ALL)
     private List<TargetStatus> targetStatuses;
 
     @ManyToOne

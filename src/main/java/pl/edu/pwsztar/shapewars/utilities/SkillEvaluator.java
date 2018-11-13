@@ -1,16 +1,10 @@
 package pl.edu.pwsztar.shapewars.utilities;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
-import pl.edu.pwsztar.shapewars.entities.Action;
-import pl.edu.pwsztar.shapewars.entities.Fighter;
-import pl.edu.pwsztar.shapewars.entities.SkillEffectBundle;
-import pl.edu.pwsztar.shapewars.entities.TargetStatus;
-import pl.edu.pwsztar.shapewars.entities.User;
+import pl.edu.pwsztar.shapewars.entities.*;
 import pl.edu.pwsztar.shapewars.entities.enums.FighterSlot;
 import pl.edu.pwsztar.shapewars.entities.enums.TargetType;
 
@@ -29,9 +23,8 @@ public class SkillEvaluator {
             enemies=getFighterList(action.getFight().getPlayerOne());
             allies=getFighterList(action.getFight().getPlayerTwo());
         }
-
-        action.getSkill().getSkillEffectBundles().forEach(SkillEvaluator::processBundle);
-        return new ArrayList<>();
+        action.getSkill().getSkillEffectBundles().stream().forEach(SkillEvaluator::processBundle);
+        return sortStatuses();
     }
 
     private static List<Fighter> getFighterList(User user){
@@ -40,7 +33,6 @@ public class SkillEvaluator {
     }
 
     private static void processBundle(SkillEffectBundle bundle){
-
         bundle.getSkillEffects().forEach(effect->{
             List<Fighter> eligibleTargets=new ArrayList<>();
             if(effect.getTargetType() == TargetType.ALL_UNITS){
@@ -57,10 +49,45 @@ public class SkillEvaluator {
             } else {
                 eligibleTargets.add(currentAction.getSelectedTarget());
             }
+            eligibleTargets=eligibleTargets.stream().distinct().collect(Collectors.toList());
             eligibleTargets.forEach(target->{
                 TargetStatus newTargetStatus=new TargetStatus();
-                //TODO dodawanie statusów
+                newTargetStatus.setTarget(target);
+                SkillEffectResult result = new SkillEffectResult();
+                result.setSkillEffect(effect);
+                if(new Random().nextInt(100)<bundle.getAccuracy()){
+                    result.setResult((double) 0);
+                    System.out.println("MISS");
+                } else{
+                    result.setResult(new Random().nextDouble()*(effect.getMaxValue()-effect.getMinValue())+effect.getMinValue());
+                    System.out.println("HIT");
+                }
+                newTargetStatus.setSkillEffectResultList(Arrays.asList(result));
+                statuses.add(newTargetStatus);
             });
         });
+    }
+    private static List<TargetStatus> sortStatuses(){
+        //TODO to jest brzydki kod, ale działający przymajmniej
+        List<TargetStatus> sortedTargetStatus = new ArrayList<>();
+        statuses.stream().forEach(status->{
+            if(sortedTargetStatus.stream().filter
+                    (sortedStatus->sortedStatus.getTarget()!=status.getTarget()).collect(Collectors.toList()).isEmpty()){
+                sortedTargetStatus.add(status);
+            } else{
+                TargetStatus targetStatus =  sortedTargetStatus.stream().filter
+                        (sortedStatus->sortedStatus.getTarget()!=status.getTarget())
+                        .findFirst()
+                        .get();
+                List<SkillEffectResult> results = new ArrayList<>();
+                results.addAll(targetStatus.getSkillEffectResultList());
+                results
+                        .add(status
+                                .getSkillEffectResultList()
+                        .get(0));
+                targetStatus.setSkillEffectResultList(results);
+            }
+        });
+        return sortedTargetStatus;
     }
 }

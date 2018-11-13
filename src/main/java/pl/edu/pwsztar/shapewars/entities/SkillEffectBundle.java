@@ -24,7 +24,7 @@ public class SkillEffectBundle {
     @Column(name="ACCURACY")
     private Double accuracy;
 
-    @OneToMany (mappedBy = "skillEffectBundle")
+    @OneToMany (mappedBy = "skillEffectBundle", cascade = CascadeType.ALL)
     private List<SkillEffect> skillEffects;
 
 }

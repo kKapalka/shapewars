@@ -11,6 +11,8 @@ import pl.edu.pwsztar.shapewars.services.interfaces.IUserService;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import javax.websocket.Session;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -18,6 +20,9 @@ public class UserService implements IUserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private FighterService fighterService;
 
     @Transactional
     @Override
@@ -32,6 +37,8 @@ public class UserService implements IUserService {
         user.setLogin(accountDto.getLogin());
         user.setPassword(accountDto.getPassword());
         user.setEmail(accountDto.getEmail());
+        user.setLevel(1L);
+        user.setExperiencePoints(0L);
         return userRepository.save(user);
     }
     private boolean emailExist(String email) {
@@ -43,6 +50,12 @@ public class UserService implements IUserService {
     }
     public User getUserById(Long id){
         return userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
+    public User addFightersToUser(Long userId, List<Long> list){
+        User user = getUserById(userId);
+        user.setFighterList(list.stream().map(fighterService::getFighterById).collect(Collectors.toList()));
+        return userRepository.save(user);
     }
 
 }

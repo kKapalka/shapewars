@@ -28,7 +28,7 @@ public class Skill {
     @Column(name="COST")
     private Long cost;
 
-    @OneToMany (mappedBy = "skill")
+    @OneToMany (mappedBy = "skill", cascade = CascadeType.ALL)
     private List<SkillEffectBundle> skillEffectBundles;
 
     public Skill(){

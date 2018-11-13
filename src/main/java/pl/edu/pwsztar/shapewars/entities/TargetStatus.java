@@ -21,7 +21,10 @@ public class TargetStatus {
     @JoinColumn(name="TARGET_ID")
     private Fighter target;
 
-    @OneToMany
-    @JoinColumn(name="SKILL_EFFECT_RESULT_ID")
+    @ManyToOne
+    @JoinColumn(name="ACTION_ID")
+    private Action action;
+
+    @OneToMany (mappedBy = "targetStatus", cascade = CascadeType.ALL)
     private List<SkillEffectResult> skillEffectResultList;
 }

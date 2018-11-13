@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class Fight {
 
     @Id
-    @Generated
+    @GeneratedValue
     @Column(name="FIGHT_ID")
     private Long ID;
 

@@ -71,7 +71,8 @@ public class AuthController {
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
         user.setHasAdminPrivileges(signUpRequest.isAdmin());
-
+        user.setLevel(1L);
+        user.setExperiencePoints(0L);
         userRepository.save(user);
 
         return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);

@@ -1,6 +1,8 @@
 package pl.edu.pwsztar.shapewars.services;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,9 @@ public class ActionService {
     @Autowired
     private FightService fightService;
 
+    @Autowired
+    private SkillService skillService;
+
     public ActionDto save(ActionDto dto){
         Action action = updateAction(dto);
         return ActionDto.fromEntity(actionRepository.save(action));
@@ -33,6 +38,7 @@ public class ActionService {
             action=actionRepository.getOne(dto.getId());
         }
         action.setID(dto.getId());
+        action.setSkill(skillService.getSkillsByIdIn(Arrays.asList(dto.getSkillId())).get(0));
         action.setActiveFighter(fighterService.getFighterById(dto.getActiveFighterId()));
         action.setSelectedTarget(fighterService.getFighterById(dto.getSelectedTargetId()));
         action.setNextActiveFighter(fighterService.getFighterById(dto.getNextActiveFighterId()));

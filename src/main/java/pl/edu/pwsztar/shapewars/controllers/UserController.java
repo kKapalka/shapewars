@@ -5,20 +5,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import pl.edu.pwsztar.shapewars.entities.User;
+import pl.edu.pwsztar.shapewars.entities.dto.PlayerDto;
 import pl.edu.pwsztar.shapewars.entities.dto.UserDto;
 import pl.edu.pwsztar.shapewars.exceptions.EmailExistsException;
 import pl.edu.pwsztar.shapewars.services.UserService;
 
 import javax.validation.Valid;
+import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("user")
 public class UserController {
 
@@ -59,4 +58,10 @@ public class UserController {
         }
         return registered;
     }
+
+    @PostMapping("add-fighters/{id}")
+    public PlayerDto addFighters(@RequestBody List<Long> list, @PathVariable Long id){
+        return PlayerDto.fromEntity(userService.addFightersToUser(id,list));
+    }
+
 }

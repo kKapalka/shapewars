@@ -18,7 +18,6 @@ public class TooltipCreator {
         String tooltip = String.join("\n",skill.getSkillEffectBundles().stream()
                 .map(TooltipCreator::processBundle).toArray(String[]::new))
                 + "\nCost: "+skill.getCost();
-        System.out.println(tooltip);
         return tooltip;
     }
 
