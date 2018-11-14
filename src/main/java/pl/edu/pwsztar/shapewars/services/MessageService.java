@@ -1,6 +1,9 @@
 package pl.edu.pwsztar.shapewars.services;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,4 +37,8 @@ public class MessageService {
         return message;
     }
 
+    public List<MessageDto> getAllMessagesByUserId(Long id){
+        return messageRepository.getAllBySenderOrReceiver(userService.getUserById(id))
+                .stream().map(MessageDto::fromEntity).collect(Collectors.toList());
+    }
 }

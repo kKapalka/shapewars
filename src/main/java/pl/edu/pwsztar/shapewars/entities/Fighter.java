@@ -1,9 +1,6 @@
 package pl.edu.pwsztar.shapewars.entities;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Generated;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.edu.pwsztar.shapewars.entities.enums.Colors;
 import pl.edu.pwsztar.shapewars.entities.enums.FighterSlot;
 
@@ -13,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="FIGHTER")
 @NoArgsConstructor
+@ToString(exclude="owner")
 public class Fighter {
 
     @Id
@@ -23,6 +21,10 @@ public class Fighter {
     @ManyToOne
     @JoinColumn(name="SHAPE_ID")
     private Shape shape;
+
+    @ManyToOne
+    @JoinColumn(name="OWNER_ID")
+    private User owner;
 
     @Column(name="LEVEL")
     private Long level;

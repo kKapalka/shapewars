@@ -1,4 +1,4 @@
-package pl.edu.pwsztar.shapewars.controllers;
+package pl.edu.pwsztar.shapewars.controllers.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -27,8 +27,10 @@ public class FighterService {
         return fighterRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    //Instancje jednostek - albo są generowane losowo,
+    //Instancje jednostek - edycja/zapis następuje w tych przypadkach:
+    // albo są generowane losowo,
     // albo otrzymują level-upy na podstawie odbytej walki
+    // albo zmieniają położenie u właściciela
     private Fighter updateFighter(FighterDto dto){
         Fighter fighter = new Fighter();
         if(dto.getId()!=null){
@@ -40,7 +42,6 @@ public class FighterService {
     }
 
     private Fighter generateFighter(FighterDto dto){
-        System.out.println(dto);
         Fighter fighter = new Fighter();
         fighter.setShape(shapeService.getRandomShape());
         fighter.setColor(Colors.ColorType.getRandom());

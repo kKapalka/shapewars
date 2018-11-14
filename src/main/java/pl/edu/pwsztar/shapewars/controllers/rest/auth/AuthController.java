@@ -1,4 +1,4 @@
-package pl.edu.pwsztar.shapewars.controllers.auth;
+package pl.edu.pwsztar.shapewars.controllers.rest.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,8 +19,6 @@ import pl.edu.pwsztar.shapewars.repositories.UserRepository;
 import pl.edu.pwsztar.shapewars.security.jwt.JwtProvider;
 
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "localhost:4200",maxAge = 3600)
@@ -70,7 +68,7 @@ public class AuthController {
         user.setLogin(signUpRequest.getLogin());
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
-        user.setHasAdminPrivileges(signUpRequest.isAdmin());
+        user.setAdmin(signUpRequest.isAdmin());
         user.setLevel(1L);
         user.setExperiencePoints(0L);
         userRepository.save(user);

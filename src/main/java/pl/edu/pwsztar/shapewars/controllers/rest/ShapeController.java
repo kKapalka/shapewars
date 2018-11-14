@@ -1,23 +1,22 @@
-package pl.edu.pwsztar.shapewars.controllers;
+package pl.edu.pwsztar.shapewars.controllers.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import pl.edu.pwsztar.shapewars.entities.dto.ActionDto;
-import pl.edu.pwsztar.shapewars.services.ActionService;
+import pl.edu.pwsztar.shapewars.entities.dto.ShapeDto;
+import pl.edu.pwsztar.shapewars.services.ShapeService;
 
 @RestController
-@RequestMapping("action")
-public class ActionController {
+@RequestMapping("shapes")
+public class ShapeController {
 
     @Autowired
-    private ActionService actionService;
+    private ShapeService shapeService;
 
     @PostMapping("save")
-    public ActionDto save(@RequestBody ActionDto dto){
-        return actionService.save(dto);
+    public ShapeDto save(@RequestBody ShapeDto dto){
+        return shapeService.save(dto);
     }
 }

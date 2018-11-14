@@ -36,14 +36,10 @@ public class User {
     @Column(name="XP_POINTS")
     private Long experiencePoints;
 
-    @ManyToMany
-    @JoinTable(name = "USER_FIGHTER",
-            joinColumns = @JoinColumn(name = "USER_ID"),
-            inverseJoinColumns = @JoinColumn(name = "FIGHTER_ID")
-    )
+    @OneToMany (mappedBy = "owner",cascade = CascadeType.ALL)
     private List<Fighter> fighterList;
 
     @Column(name="ADMIN")
-    private boolean hasAdminPrivileges;
+    private boolean admin;
 
 }

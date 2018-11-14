@@ -41,7 +41,7 @@ public class UserPrinciple implements UserDetails {
     public static UserPrinciple build(User user) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        if(user.isHasAdminPrivileges()){
+        if(user.isAdmin()){
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
 

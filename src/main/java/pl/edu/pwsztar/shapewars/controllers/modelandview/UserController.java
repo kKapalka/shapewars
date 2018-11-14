@@ -1,4 +1,4 @@
-package pl.edu.pwsztar.shapewars.controllers;
+package pl.edu.pwsztar.shapewars.controllers.modelandview;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,10 +58,4 @@ public class UserController {
         }
         return registered;
     }
-
-    @PostMapping("add-fighters/{id}")
-    public PlayerDto addFighters(@RequestBody List<Long> list, @PathVariable Long id){
-        return PlayerDto.fromEntity(userService.addFightersToUser(id,list));
-    }
-
 }
