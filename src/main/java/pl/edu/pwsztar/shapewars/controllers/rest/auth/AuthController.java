@@ -21,7 +21,7 @@ import pl.edu.pwsztar.shapewars.security.jwt.JwtProvider;
 import javax.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = "localhost:4200",maxAge = 3600)
+@CrossOrigin(origins = "*",maxAge = 3600)
 @RequestMapping("auth")
 public class AuthController {
 
@@ -39,10 +39,10 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginDto loginRequest) {
-
+        System.out.println(loginRequest);
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getLogin(), loginRequest.getPassword()));
-
+        System.out.println(authentication);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = jwtProvider.generateJwtToken(authentication);
@@ -53,6 +53,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody UserDto signUpRequest) {
+        System.out.println(signUpRequest);
         if (userRepository.findByLogin(signUpRequest.getLogin()).isPresent()) {
             return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
