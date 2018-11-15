@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.attemptAuth(this.loginInfo).subscribe(
       data => {
+        console.log(data);
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUsername(data.username);
         this.tokenStorage.saveAuthorities(data.authorities);
@@ -44,7 +45,7 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
-        window.location.pathname="/home";
+        //window.location.pathname="/home";
       },
       error => {
         console.log(error);

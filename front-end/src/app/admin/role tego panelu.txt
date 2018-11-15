@@ -1,0 +1,4 @@
+Wyœwietlenie listy jednostek,
+listy umiejêtnoœci,
+wyjœcia na dodawanie nowych jednostek i umiejêtnoœci,
+oraz edycja
