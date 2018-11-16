@@ -6,6 +6,9 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
+import {ShapePanelComponent} from "./admin/shape-panel/shape-panel.component";
+import {SkillPanelComponent} from "./admin/skill-panel/skill-panel.component";
+import {UserPanelComponent} from "./admin/user-panel/user-panel.component";
 
 const routes: Routes = [
     {
@@ -18,7 +21,26 @@ const routes: Routes = [
     },
     {
         path: 'admin',
-        component: AdminComponent
+        component: AdminComponent,
+        children:[
+          {
+            path: '',
+            redirectTo: 'shapes',
+            pathMatch: 'full'
+          },
+          {
+          path: 'shapes',
+          component: ShapePanelComponent,
+          },
+          {
+            path: 'users',
+            component: UserPanelComponent,
+          },
+          {
+            path: 'skills',
+            component: SkillPanelComponent,
+          },
+        ]
     },
     {
         path: 'auth/login',

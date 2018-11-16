@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
+import {TokenStorageService} from "../auth/token-storage.service";
 
 @Component({
   selector: 'app-user',
@@ -7,14 +8,15 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  board: string;
+  board: object;
   errorMessage: string;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private tokenService: TokenStorageService) { }
 
   ngOnInit() {
-    this.userService.getUserBoard().subscribe(
+    this.userService.getPlayerData(this.tokenService.getUsername()).subscribe(
       data => {
+        console.log(data);
         this.board = data;
       },
       error => {

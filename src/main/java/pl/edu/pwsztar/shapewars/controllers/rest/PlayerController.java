@@ -9,6 +9,7 @@ import java.util.List;
 
 @RequestMapping("player")
 @RestController
+@CrossOrigin("*")
 public class PlayerController {
 
     @Autowired
@@ -18,5 +19,11 @@ public class PlayerController {
     public PlayerDto addFighters(@RequestBody List<Long> list, @PathVariable Long id){
         return PlayerDto.fromEntity(userService.addFightersToUser(id,list));
     }
+
+    @GetMapping("/{login}")
+    public PlayerDto get(@PathVariable String login){
+        return PlayerDto.fromEntity(userService.getUserByLogin(login));
+    }
+
 
 }

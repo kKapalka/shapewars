@@ -58,4 +58,8 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
+    public User getUserByLogin(String login){
+        return userRepository.findByLogin(login).orElseThrow(EntityNotFoundException::new);
+    }
+
 }
