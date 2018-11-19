@@ -33,14 +33,14 @@ import { UserPanelComponent } from './admin/user-panel/user-panel.component';
     SideBarComponent,
     SkillPanelComponent,
     ShapePanelComponent,
-    UserPanelComponent
+    UserPanelComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

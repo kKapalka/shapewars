@@ -1,0 +1,19 @@
+
+#sidebar{
+  height: 100vh !important;
+  position: fixed;
+  top: 50px;
+  width: 8.75%;
+  background-color: grey;
+  left: -5px;
+  z-index:900;
+}
+#sidebar>ul>.nav-item{
+  width:100%;
+}
+a{
+   color:black;
+ }
+a:hover{
+  color:black;
+}

@@ -1,11 +1,13 @@
-<ul class="flex-column">
-  <li>
-    <a [routerLink]="['admin/skills']">Skills</a>
+<nav id="sidebar" class="navbar">
+<ul class="flex-column nav navbar-nav">
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['skills']">Skills</a>
   </li>
-  <li>
-    <a [routerLink]="['admin/shapes']">Shapes</a>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['shapes']">Shapes</a>
   </li>
-  <li>
-    <a [routerLink]="['admin/users']">Users</a>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['users']">Users</a>
   </li>
 </ul>
+</nav>

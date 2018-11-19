@@ -50,4 +50,9 @@ public class SkillService {
         return skillRepository.findAll().stream()
                 .filter(skill->ids.contains(skill.getID())).collect(Collectors.toList());
     }
+
+    public List<Skill> getAll(){
+        return skillRepository.findAll();
+    }
+
 }

@@ -1,0 +1,15 @@
+.navbar{
+  margin-bottom: 0;
+  position:fixed;
+  width:100%;
+  z-index:1000;
+}
+body{
+  background-color:#112;
+}
+.my-container{
+  position:absolute;
+  top:80px;
+  left:8.75%;
+  width:92.5%;
+}

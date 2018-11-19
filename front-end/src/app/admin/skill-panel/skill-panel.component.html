@@ -1,1 +1,18 @@
-Skill-panel
+<div class="container skill-panel">
+  <h2> Skill list</h2>
+  <div class="row" *ngFor="let skill of skills$">
+    <div class="col-sm-3" style="background-color:red">
+      <h4>{{skill.name}}</h4>
+
+    </div>
+    <div class="col-sm-7">
+      <span style="white-space:pre-line">{{skill.tooltip}}</span>
+    </div>
+    <div class="col-sm-2">
+      <button class=" btn btn-block">EDIT</button>
+      <button class=" btn btn-block">DELETE</button>
+    </div>
+  </div>
+</div>
+
+

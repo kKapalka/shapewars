@@ -53,4 +53,9 @@ public class ShapeService {
         List<Shape> shapeList = shapeRepository.findAll();
         return shapeList.get(new Random().nextInt(shapeList.size()));
     }
+
+    public List<Shape> getAll(){
+        return shapeRepository.findAll();
+    }
+
 }
