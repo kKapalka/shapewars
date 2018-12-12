@@ -1,11 +1,11 @@
 <div class="container skill-panel">
   <h2> Skill list</h2>
   <div class="row" *ngFor="let skill of skills$">
-    <div class="col-sm-3" style="background-color:red">
-      <h4>{{skill.name}}</h4>
-
+    <div class="col-sm-2">
+      <img style="width:100px; height:100px; margin-left:20%" src="skill.icon">
+      <h4 style="text-align: center">{{skill.name}}</h4>
     </div>
-    <div class="col-sm-7">
+    <div class="col-sm-8">
       <span style="white-space:pre-line">{{skill.tooltip}}</span>
     </div>
     <div class="col-sm-2">

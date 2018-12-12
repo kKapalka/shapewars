@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 public class SkillDto {
     private Long id;
     private String name;
+    private String icon;
     private String tooltip;
     private Long cost;
     private List<SkillEffectBundleDto> skillEffectBundles;
@@ -21,6 +22,7 @@ public class SkillDto {
         return SkillDto.builder().id(skill.getID())
                 .name(skill.getName())
                 .tooltip(skill.getTooltip())
+                .icon(skill.getIcon()==null?"":new String(skill.getIcon()))
                 .cost(skill.getCost())
                 .skillEffectBundles(skill.getSkillEffectBundles().stream().map(SkillEffectBundleDto::fromEntity).collect(Collectors.toList()))
                 .build();

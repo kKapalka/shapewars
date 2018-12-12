@@ -35,9 +35,9 @@ public class SkillService {
         }
         skill.setName(dto.getName());
         skill.setCost(dto.getCost());
+        skill.setIcon(dto.getIcon().getBytes());
         skill.setSkillEffectBundles(skillEffectBundleService.createSkillEffectBundles(skill,dto));
         skill.setTooltip(TooltipCreator.createTooltip(skill));
-        System.out.println(skill);
         return skill;
     }
 

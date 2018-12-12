@@ -22,6 +22,9 @@ public class Skill {
     @Column(name="NAME")
     private String name;
 
+    @Column(name="ICON")
+    private byte[] icon;
+
     @Column(name="TOOLTIP", columnDefinition="TEXT")
     private String tooltip;
 
