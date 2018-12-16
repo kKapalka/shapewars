@@ -11,6 +11,7 @@ import pl.edu.pwsztar.shapewars.entities.enums.TargetType;
 import pl.edu.pwsztar.shapewars.entities.enums.ValueModifierType;
 import pl.edu.pwsztar.shapewars.repositories.SkillEffectRepository;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,5 +36,17 @@ public class SkillEffectService {
         skillEffect.setSkillStatusEffect(SkillStatusEffect.valueOf(dto.getSkillStatusEffect()));
         skillEffect.setValueModifierType(ValueModifierType.valueOf(dto.getValueModifierType()));
         return skillEffect;
+    }
+
+    public List<String> getAllTargetTypes(){
+        return Arrays.stream(TargetType.values()).map(Enum::name).collect(Collectors.toList());
+    }
+
+    public List<String> getAllStatusEffects(){
+        return Arrays.stream(SkillStatusEffect.values()).map(Enum::name).collect(Collectors.toList());
+    }
+
+    public List<String> getAllModifierTypes(){
+        return Arrays.stream(ValueModifierType.values()).map(Enum::name).collect(Collectors.toList());
     }
 }
