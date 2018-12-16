@@ -43,6 +43,7 @@ public class ShapeService {
         shape.setBaselineStrength(dto.getStrParameters().get(0));
         shape.setSTRMinGrowth(dto.getStrParameters().get(1));
         shape.setSTRMaxGrowth(dto.getStrParameters().get(2));
+        shape.setImage(dto.getImage().getBytes());
         return shape;
     }
 

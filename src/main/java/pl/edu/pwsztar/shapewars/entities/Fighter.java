@@ -32,9 +32,9 @@ public class Fighter {
     @Column(name="XP_POINTS")
     private Long experiencePoints;
 
-    @Column(name="COLOR")
-    @Enumerated(EnumType.STRING)
-    private Colors.ColorType color;
+    @ManyToOne
+    @JoinColumn(name="COLOR_ID")
+    private ColorMap color;
 
     @Column(name="HITPOINTS")
     private Long hitPoints;

@@ -17,7 +17,7 @@ public class Action {
 
     @Id
     @GeneratedValue
-    @Column(name="ACTION")
+    @Column(name="ACTION_ID")
     private Long ID;
 
     @ManyToOne

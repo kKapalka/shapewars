@@ -20,6 +20,7 @@ public class ShapeDto {
     private List<Long> strParameters;
     private List<Long> armParameters;
     private Long speed;
+    private String image;
 
 
     public static ShapeDto fromEntity(Shape shape){
@@ -31,6 +32,7 @@ public class ShapeDto {
                 .strParameters(Arrays.asList(shape.getBaselineStrength(),shape.getSTRMinGrowth(),shape.getSTRMaxGrowth()))
                 .armParameters(Arrays.asList(shape.getBaselineArmor(),shape.getARMMinGrowth(),shape.getARMMaxGrowth()))
                 .speed(shape.getBaselineSpeed())
+                .image(new String(shape.getImage()))
                 .build();
     }
 

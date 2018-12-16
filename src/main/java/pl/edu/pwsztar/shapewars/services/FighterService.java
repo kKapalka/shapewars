@@ -9,6 +9,8 @@ import pl.edu.pwsztar.shapewars.entities.enums.Colors;
 import pl.edu.pwsztar.shapewars.entities.enums.FighterSlot;
 import pl.edu.pwsztar.shapewars.repositories.FighterRepository;
 
+import java.awt.*;
+
 @Service
 public class FighterService {
 
@@ -17,6 +19,9 @@ public class FighterService {
 
     @Autowired
     private ShapeService shapeService;
+
+    @Autowired
+    private ColorMapService colorMapService;
 
     public FighterDto save(FighterDto dto){
         Fighter fighter = updateFighter(dto);
@@ -32,7 +37,7 @@ public class FighterService {
     // albo otrzymują level-upy na podstawie odbytej walki
     // albo zmieniają położenie u właściciela
     private Fighter updateFighter(FighterDto dto){
-        Fighter fighter = new Fighter();
+        Fighter fighter;
         if(dto.getId()!=null){
             fighter=fighterRepository.getOne(dto.getId());
         } else{
@@ -44,7 +49,7 @@ public class FighterService {
     private Fighter generateFighter(FighterDto dto){
         Fighter fighter = new Fighter();
         fighter.setShape(shapeService.getRandomShape());
-        fighter.setColor(Colors.ColorType.getRandom());
+        fighter.setColor(colorMapService.getRandomColor());
         fighter.setExperiencePoints(0L);
         fighter.setLevel(1L);
         fighter.setArmor(fighter.getShape().getBaselineArmor());

@@ -15,11 +15,12 @@ public class FighterDto {
 
     private Long id;
     private String shapeName;
+    private String image;
     private int level;
     private int xpPoints;
     private List<Long> shapeSkillIDSet;
     private List<String> shapeSkillNameSet;
-    private String color;
+    private ColorMapDto colorMapDto;
     private int maximumHp;
     private int currentHp;
     private int strength;
@@ -31,11 +32,12 @@ public class FighterDto {
         return FighterDto.builder()
                 .id(fighter.getID())
                 .shapeName(fighter.getShape().getName())
+                .image(new String(fighter.getShape().getImage()))
                 .level(fighter.getLevel().intValue())
                 .xpPoints(fighter.getExperiencePoints().intValue())
                 .shapeSkillIDSet(fighter.getShape().getSkillSet().stream().map(Skill::getID).collect(Collectors.toList()))
                 .shapeSkillNameSet(fighter.getShape().getSkillSet().stream().map(Skill::getName).collect(Collectors.toList()))
-                .color(fighter.getColor().name())
+                .colorMapDto(ColorMapDto.fromEntity(fighter.getColor()))
                 .maximumHp(fighter.getHitPoints().intValue())
                 .currentHp(fighter.getHitPoints().intValue())
                 .strength(fighter.getStrength().intValue())

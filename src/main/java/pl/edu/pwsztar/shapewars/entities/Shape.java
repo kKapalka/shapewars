@@ -58,4 +58,6 @@ public class Shape {
     @Column(name="ARM_MAX_GROWTH")
     private Long ARMMaxGrowth;
 
+    @Column(name="IMAGE")
+    private byte[] image;
 }
