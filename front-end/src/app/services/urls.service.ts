@@ -8,5 +8,6 @@ export class UrlsService {
   playerData=this.host+"/player/";
   allSkills=this.host+"/skill/all";
   allShapes=this.host+"/shapes/all";
+  lastMaintenanceMessage=this.host+"/maintenance-log/retrieve";
   constructor() { }
 }

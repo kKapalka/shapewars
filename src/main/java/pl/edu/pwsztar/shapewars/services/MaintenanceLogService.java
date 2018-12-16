@@ -30,7 +30,7 @@ public class MaintenanceLogService {
     }
 
     private MaintenanceLog updateMaintenanceLog(MaintenanceLogDto dto) throws Exception {
-        User user = userRepository.findByLogin
+        User user = userRepository.findByLoginEquals
                 (dto.getInformerName()).orElseThrow(EntityNotFoundException::new);
         if(!user.isAdmin()){
             throw new Exception("You've got no access to add entries to this table");

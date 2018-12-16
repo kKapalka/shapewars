@@ -23,5 +23,4 @@ public class MaintenanceLogDto {
                 .messageType(entity.getMessageType().name())
                 .build();
     }
-
 }

@@ -9,6 +9,7 @@ import { AdminComponent } from './admin/admin.component';
 import {ShapePanelComponent} from "./admin/shape-panel/shape-panel.component";
 import {SkillPanelComponent} from "./admin/skill-panel/skill-panel.component";
 import {UserPanelComponent} from "./admin/user-panel/user-panel.component";
+import {InactiveSiteComponent} from "./inactive-site/inactive-site.component";
 
 const routes: Routes = [
     {
@@ -18,6 +19,10 @@ const routes: Routes = [
     {
         path: 'user',
         component: UserComponent
+    },
+    {
+        path: 'error',
+        component: InactiveSiteComponent
     },
     {
         path: 'admin',

@@ -19,6 +19,7 @@ import { SideBarComponent } from './admin/side-bar/side-bar.component';
 import { SkillPanelComponent } from './admin/skill-panel/skill-panel.component';
 import { ShapePanelComponent } from './admin/shape-panel/shape-panel.component';
 import { UserPanelComponent } from './admin/user-panel/user-panel.component';
+import {InactiveSiteComponent} from "./inactive-site/inactive-site.component";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { UserPanelComponent } from './admin/user-panel/user-panel.component';
     SkillPanelComponent,
     ShapePanelComponent,
     UserPanelComponent,
+    InactiveSiteComponent,
   ],
   imports: [
     BrowserModule,

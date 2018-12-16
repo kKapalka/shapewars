@@ -59,7 +59,7 @@ public class UserService implements IUserService {
     }
 
     public User getUserByLogin(String login){
-        return userRepository.findByLogin(login).orElseThrow(EntityNotFoundException::new);
+        return userRepository.findByLoginEquals(login).orElseThrow(EntityNotFoundException::new);
     }
 
 }

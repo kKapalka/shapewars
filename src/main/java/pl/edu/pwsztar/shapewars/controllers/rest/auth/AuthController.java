@@ -51,7 +51,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody UserDto signUpRequest) {
-        if (userRepository.findByLogin(signUpRequest.getLogin()).isPresent()) {
+        if (userRepository.findByLoginEquals(signUpRequest.getLogin()).isPresent()) {
             return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }

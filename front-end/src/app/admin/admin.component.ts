@@ -13,6 +13,9 @@ export class AdminComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-
+    let lastMessageType = localStorage.getItem("LastLogType");
+    if(lastMessageType!=="WORKING"){
+      window.location.href = "/error";
+    }
   }
 }

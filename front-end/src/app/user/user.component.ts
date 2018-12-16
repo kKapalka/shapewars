@@ -14,6 +14,10 @@ export class UserComponent implements OnInit {
   constructor(private userService: UserService, private tokenService: TokenStorageService) { }
 
   ngOnInit() {
+    let lastMessageType = localStorage.getItem("LastLogType");
+    if(lastMessageType!=="WORKING"){
+      window.location.href = "/error";
+    }
     this.userService.getPlayerData(this.tokenService.getUsername()).subscribe(
       data => {
         console.log(data);

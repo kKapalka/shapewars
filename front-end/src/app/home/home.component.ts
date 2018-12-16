@@ -13,13 +13,12 @@ export class HomeComponent implements OnInit {
   constructor(private token: TokenStorageService) { }
 
   ngOnInit() {
-    console.log(this.token);
     this.info = {
-
       token: this.token.getToken(),
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
+
   }
 
   logout() {

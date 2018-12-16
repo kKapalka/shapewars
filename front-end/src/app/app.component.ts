@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from './auth/token-storage.service';
+import {MaintenanceService} from "./services/maintenance.service";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,10 +9,16 @@ import { TokenStorageService } from './auth/token-storage.service';
 export class AppComponent implements OnInit {
   private roles: string[];
   private authority: string;
-
-  constructor(private tokenStorage: TokenStorageService) { }
+  private lastLogMessage: any;
+  private lastLogMessageType: string;
+  constructor(private tokenStorage: TokenStorageService, private maintenanceService:MaintenanceService) { }
 
   ngOnInit() {
+    this.maintenanceService.getLastMaintenanceLogMessage().subscribe(res=>{
+      this.lastLogMessage = res;
+      this.lastLogMessageType = this.lastLogMessage.messageType;
+      localStorage.setItem("LastLogType",this.lastLogMessageType);
+    });
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();
       this.roles.every(role => {

@@ -17,7 +17,12 @@ export class RegisterComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    let lastMessageType = localStorage.getItem("LastLogType");
+    if(lastMessageType!=="WORKING"){
+      window.location.href = "/error";
+    }
+  }
 
   onSubmit() {
     console.log(this.form);

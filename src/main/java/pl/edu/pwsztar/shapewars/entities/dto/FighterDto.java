@@ -2,7 +2,6 @@ package pl.edu.pwsztar.shapewars.entities.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import pl.edu.pwsztar.shapewars.entities.Fight;
 import pl.edu.pwsztar.shapewars.entities.Fighter;
 import pl.edu.pwsztar.shapewars.entities.Skill;
 
