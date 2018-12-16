@@ -6,4 +6,7 @@ import pl.edu.pwsztar.shapewars.entities.MaintenanceLog;
 
 @Repository
 public interface MaintenanceLogRepository extends JpaRepository<MaintenanceLog,Long> {
+
+    MaintenanceLog findFirstByOrderByMessageTimeDesc();
+
 }
