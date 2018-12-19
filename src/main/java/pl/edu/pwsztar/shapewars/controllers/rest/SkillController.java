@@ -13,18 +13,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("skill")
-@CrossOrigin("*")
+@CrossOrigin
 public class SkillController {
 
     @Autowired
     private SkillService skillService;
-
-    @Autowired
-    private SkillEffectBundleService skillEffectBundleService;
-
-    @Autowired
-    private SkillEffectService skillEffectService;
-
 
     @PostMapping("save")
     public SkillDto save(@RequestBody SkillDto skillDto){

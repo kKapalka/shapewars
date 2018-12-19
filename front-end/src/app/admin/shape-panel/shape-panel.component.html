@@ -1,1 +1,26 @@
-Shape-panel
+<div class="container skill-panel">
+  <div class="row">
+    <div class="col-sm-6">
+      <h2>Shape list</h2>
+    </div>
+    <div class="col-sm-6">
+      <button class="float-right btn btn-success" [routerLink]="['create']">Add new shape</button>
+    </div>
+  </div>
+
+  <div class="row" *ngFor="let shape of shapes$">
+    <div class="col-sm-4">
+      <h4 style="text-align: center">{{shape.name}}</h4>
+      <img style="width:100px; height:100px; margin-left:20%" src="shape.image">
+    </div>
+    <div class="col-sm-7">
+
+    </div>
+    <div class="col-sm-1">
+      <button class="btn btn-block" [routerLink]="[skill.id]">EDIT</button>
+      <button class="btn btn-block">DELETE</button>
+    </div>
+  </div>
+</div>
+
+

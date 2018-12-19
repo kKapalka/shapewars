@@ -20,6 +20,8 @@ import { SkillPanelComponent } from './admin/skill-panel/skill-panel.component';
 import { ShapePanelComponent } from './admin/shape-panel/shape-panel.component';
 import { UserPanelComponent } from './admin/user-panel/user-panel.component';
 import {InactiveSiteComponent} from "./inactive-site/inactive-site.component";
+import { AddEditSkillComponent } from './admin/skill-panel/add-edit-skill/add-edit-skill.component';
+import { AddEditShapeComponent } from './admin/shape-panel/add-edit-shape/add-edit-shape.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import {InactiveSiteComponent} from "./inactive-site/inactive-site.component";
     ShapePanelComponent,
     UserPanelComponent,
     InactiveSiteComponent,
+    AddEditSkillComponent,
+    AddEditShapeComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,7 @@ import java.util.List;
 
 @RequestMapping("player")
 @RestController
-@CrossOrigin("*")
+@CrossOrigin()
 public class PlayerController {
 
     @Autowired

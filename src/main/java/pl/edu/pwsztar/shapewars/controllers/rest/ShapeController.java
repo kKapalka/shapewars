@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("shapes")
+@CrossOrigin
 public class ShapeController {
 
     @Autowired

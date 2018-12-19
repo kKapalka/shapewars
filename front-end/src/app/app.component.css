@@ -4,9 +4,7 @@
   width:100%;
   z-index:1000;
 }
-body{
-  background-color:#112;
-}
+
 .my-container{
   position:absolute;
   top:80px;

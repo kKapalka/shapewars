@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ShapeService} from "../../services/shape.service";
 
 @Component({
   selector: 'app-shape-panel',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShapePanelComponent implements OnInit {
 
-  constructor() { }
+  shapes$;
+  constructor(private service: ShapeService) {
+    this.service.getAllShapes().subscribe(res=>{
+      this.shapes$=res;
+      console.log(res);
+    })
+  }
 
   ngOnInit() {
   }

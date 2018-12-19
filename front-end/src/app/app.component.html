@@ -6,9 +6,9 @@
         {{lastLogMessage.message + " - " + lastLogMessage.informerName + " (zgłoszone: " + lastLogMessage.messageTime + ")"}}
       </span>
     </div>
-    <ul class="nav navbar-nav" routerLinkActive="active" *ngIf="lastLogMessageType==='WORKING'">
+    <ul class="nav navbar-nav" routerLinkActive="active">
       <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
-      <li *ngIf="authority === 'user'" class="nav-item">
+      <li *ngIf="authority === 'user' && lastLogMessageType==='WORKING'" class="nav-item">
         <a class="nav-link" routerLink="user">Your profile</a>
       </li>
       <li *ngIf="authority === 'admin'" class="nav-item">
@@ -17,8 +17,8 @@
 
     </ul>
 
-    <ul class="nav navbar-nav" routerLinkActive="active" style="float:right" *ngIf="lastLogMessageType==='WORKING'">
-      <li *ngIf="!authority" class="nav-item" style="float:right">
+    <ul class="nav navbar-nav" routerLinkActive="active" style="float:right">
+      <li *ngIf="!authority && lastLogMessageType==='WORKING'" class="nav-item" style="float:right">
         <a class="nav-link" routerLink="signup">Register</a>
       </li>
       <li *ngIf="!authority" class="nav-item" style="float:right">

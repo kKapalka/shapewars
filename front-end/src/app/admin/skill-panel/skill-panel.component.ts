@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SkillsService} from "../../services/skills.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-skill-panel',
@@ -17,6 +18,9 @@ export class SkillPanelComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+  editSkill(e:Event, id:number){
+    window.location.href="admin/skills/"+id;
   }
 
 }

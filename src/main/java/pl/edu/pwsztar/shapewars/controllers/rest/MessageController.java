@@ -9,6 +9,7 @@ import java.util.List;
 
 @RequestMapping("message")
 @RestController
+@CrossOrigin
 public class MessageController {
 
     @Autowired

@@ -1,5 +1,13 @@
 <div class="container skill-panel">
-  <h2> Skill list</h2>
+  <div class="row">
+    <div class="col-sm-6">
+      <h2>Skill list</h2>
+    </div>
+    <div class="col-sm-6">
+      <button class="float-right btn btn-success" [routerLink]="['create']">Add new skill</button>
+    </div>
+  </div>
+
   <div class="row" *ngFor="let skill of skills$">
     <div class="col-sm-2">
       <img style="width:100px; height:100px; margin-left:20%" src="skill.icon">
@@ -8,9 +16,9 @@
     <div class="col-sm-8">
       <span style="white-space:pre-line">{{skill.tooltip}}</span>
     </div>
-    <div class="col-sm-2">
-      <button class=" btn btn-block">EDIT</button>
-      <button class=" btn btn-block">DELETE</button>
+    <div class="col-sm-1">
+      <button class="btn btn-block" [routerLink]="[skill.id]">EDIT</button>
+      <button class="btn btn-block">DELETE</button>
     </div>
   </div>
 </div>
