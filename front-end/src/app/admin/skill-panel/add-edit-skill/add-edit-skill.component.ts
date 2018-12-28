@@ -13,9 +13,28 @@ import {SkillEffect} from "../../../dtos/skillEffect";
 })
 export class AddEditSkillComponent implements OnInit {
   form: Skill={};
+  targetTypes:string[]=[];
+  valueModTypes:string[]=[];
+  statusEffects:string[]=[];
   dataSources:MatTableDataSource<SkillEffect>[] = [];
-  constructor(private service: SkillsService, private router:Router,private activatedRoute: ActivatedRoute) {
-    // subscribe to router event
+  constructor(private service: SkillsService, private router:Router,private activatedRoute: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.retrieveSkillData();
+    this.retrieveSkillEnums();
+  }
+  retrieveSkillEnums() {
+    this.service.getAllSkillStatusEffects().subscribe((res) => {
+      this.statusEffects = res;
+    });
+    this.service.getAllTargetTypes().subscribe((res) => {
+      this.targetTypes = res;
+    });
+    this.service.getAllValueModifierTypes().subscribe((res) => {
+      this.valueModTypes = res;
+    });
+  }
+  retrieveSkillData(){
     let skillId:number=parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
     if(!isNaN(skillId)) {
       this.activatedRoute.queryParams.subscribe(() => {
@@ -35,10 +54,6 @@ export class AddEditSkillComponent implements OnInit {
         cost:0
       }
     }
-
-  }
-
-  ngOnInit() {
   }
   onSubmit(){
     this.service.saveSkill(this.form).subscribe(res=>{

@@ -20,4 +20,13 @@ export class SkillsService {
   saveSkill(skill:Skill):Observable<any>{
     return this.http.post(this.urls.saveSkill,skill,{responseType:'json'})
   }
+  getAllSkillStatusEffects():Observable<any>{
+    return this.http.get(this.urls.allSkillStatusEffects,{responseType:'json'})
+  }
+  getAllTargetTypes():Observable<any>{
+    return this.http.get(this.urls.allTargetTypes,{responseType:'json'})
+  }
+  getAllValueModifierTypes():Observable<any>{
+    return this.http.get(this.urls.allValueModifierTypes,{responseType:'json'})
+  }
 }

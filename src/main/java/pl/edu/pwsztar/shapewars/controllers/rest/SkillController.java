@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pwsztar.shapewars.entities.SkillEffectBundle;
 import pl.edu.pwsztar.shapewars.entities.dto.SkillDto;
+import pl.edu.pwsztar.shapewars.entities.enums.SkillStatusEffect;
+import pl.edu.pwsztar.shapewars.entities.enums.TargetType;
+import pl.edu.pwsztar.shapewars.entities.enums.ValueModifierType;
 import pl.edu.pwsztar.shapewars.services.SkillEffectBundleService;
 import pl.edu.pwsztar.shapewars.services.SkillEffectService;
 import pl.edu.pwsztar.shapewars.services.SkillService;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,5 +35,18 @@ public class SkillController {
     @GetMapping("{id}")
     public SkillDto get(@PathVariable Long id){
         return skillService.getSkillById(id);
+    }
+
+    @GetMapping("effects")
+    public List<SkillStatusEffect> getAllSkillStatusEffects(){
+        return Arrays.asList(SkillStatusEffect.values());
+    }
+    @GetMapping("targets")
+    public List<TargetType> getAllTargetTypes(){
+        return Arrays.asList(TargetType.values());
+    }
+    @GetMapping("modifiers")
+    public List<ValueModifierType> getAllValueModifierTypes(){
+        return Arrays.asList(ValueModifierType.values());
     }
 }

@@ -52,10 +52,12 @@
           <ng-container matColumnDef="skillStatusEffect">
             <mat-header-cell *matHeaderCellDef> Status Effect </mat-header-cell>
             <mat-cell *matCellDef="let el">
-              <input type="text" class="form-control" name="skillStatusEffect{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
-                     [(ngModel)]="el.skillStatusEffect"
-                     #el.skillStatusEffect="ngModel"
-                     required />
+              <select class="form-control" name="skillStatusEffect{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
+                      [(ngModel)]="el.skillStatusEffect"
+                      #el.skillStatusEffect="ngModel"
+                      required>
+                <option *ngFor="let effect of statusEffects" [value]="effect">{{effect}}</option>
+              </select>
 
             </mat-cell>
           </ng-container>
@@ -64,10 +66,12 @@
           <ng-container matColumnDef="targetType">
             <mat-header-cell *matHeaderCellDef> Target Type </mat-header-cell>
             <mat-cell *matCellDef="let el">
-              <input type="text" class="form-control" name="targetType{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
+              <select class="form-control" name="targetType{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
                      [(ngModel)]="el.targetType"
                      #el.targetType="ngModel"
-                     required />
+                     required >
+              <option *ngFor="let type of targetTypes" [value]="type">{{type}}</option>
+            </select>
             </mat-cell>
           </ng-container>
 
@@ -75,10 +79,12 @@
           <ng-container matColumnDef="valueModifierType">
             <mat-header-cell *matHeaderCellDef> Value Modifier Type </mat-header-cell>
             <mat-cell *matCellDef="let el">
-              <input type="text" class="form-control" name="valueModifierType{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
+              <select class="form-control" name="valueModifierType{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
                      [(ngModel)]="el.valueModifierType"
                      #el.valueModifierType="ngModel"
-                     required />
+                     required >
+                <option *ngFor="let mod of valueModTypes" [value]="mod">{{mod}}</option>
+              </select>
             </mat-cell>
           </ng-container>
 
