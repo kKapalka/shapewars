@@ -1,4 +1,12 @@
 <div class="row" style="position:relative; margin: 0 50px; left:-30px">
+      <div class="row">
+        <div class="col-sm-9">
+          <h2 class="float-left"> Add/edit skill</h2>
+        </div>
+        <div class="col-sm-3">
+          <button class="float-right btn btn-success" (click)="addEffectBundle($event)">Add new effect bundle</button>
+        </div>
+      </div>
   <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
   <mat-tab-group>
     <mat-tab label="Basic info">
@@ -99,10 +107,10 @@
           <!-- Options Definition -->
           <ng-container matColumnDef="options">
             <mat-header-cell *matHeaderCellDef>
-              <button (click)="addNewEffect($event,bundle)"> Add new</button>
+              <button (click)="addNewEffect($event,bundle)" class="btn btn-success"> Add new</button>
             </mat-header-cell>
             <mat-cell *matCellDef="let el">
-              <button (click)="test($event,el)">BJB</button>
+              <button (click)="remove($event,bundle,el)" class="btn btn-danger">Remove</button>
             </mat-cell>
           </ng-container>
 
@@ -113,55 +121,6 @@
         </table>
       </div>
     </mat-tab>
-
-        <!--<div *ngFor="let effect of bundle.skillEffectDtos; let j=index" class="row">-->
-        <!--<div class="col-sm-2">-->
-          <!--<label>Status Effect</label>-->
-
-        <!--</div>-->
-        <!--<div class="col-sm-2">-->
-          <!--<label>Target Type</label>-->
-
-        <!--</div>-->
-        <!--<div class="col-sm-2">-->
-          <!--<label>Value Modifier Type</label>-->
-
-        <!--</div>-->
-        <!--<div class="col-sm-2">-->
-          <!--<label>Minimal Value</label>-->
-
-        <!--</div>-->
-        <!--<div class="col-sm-2">-->
-          <!--<label>Maximal Value</label>-->
-
-        <!--</div>-->
-      <!--</div>-->
-      <!--</div>-->
   </mat-tab-group>
   </form>
-  <!---->
-      <!--<div class="row">-->
-        <!--<div class="col-sm-10">-->
-
-        <!--</div>-->
-        <!--<div class="col-sm-2">-->
-
-        <!--</div>-->
-      <!--</div>-->
-
-      <!--<div class="row">-->
-
-      <!--</div>-->
-        <!--<div class="row">-->
-          <!--<div *ngFor="let bundle of form.skillEffectBundles; let i=index">-->
-            <!--<div class="col-sm-1">-->
-
-            <!--</div>-->
-            <!--<div class="col-sm-11">-->
-
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-
-    <!--</form>-->
   </div>
