@@ -23,6 +23,10 @@ export class AddEditSkillComponent implements OnInit {
     this.retrieveSkillData();
     this.retrieveSkillEnums();
   }
+  removeBundle(ev,index){
+    ev.preventDefault();
+    this.form.skillEffectBundles.splice(index,1);
+  }
   retrieveSkillEnums() {
     this.service.getAllSkillStatusEffects().subscribe((res) => {
       this.statusEffects = res;

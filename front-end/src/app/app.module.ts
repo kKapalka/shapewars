@@ -24,7 +24,7 @@ import { AddEditSkillComponent } from './admin/skill-panel/add-edit-skill/add-ed
 import { AddEditShapeComponent } from './admin/shape-panel/add-edit-shape/add-edit-shape.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {MatTableModule} from "@angular/material";
+import {MatSelectModule, MatTableModule} from "@angular/material";
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +51,9 @@ import {MatTableModule} from "@angular/material";
     NgbModule,
     MatTabsModule,
     BrowserAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule,
+
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

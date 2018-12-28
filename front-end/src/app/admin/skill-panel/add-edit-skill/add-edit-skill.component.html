@@ -31,33 +31,36 @@
                  required />
         </div>
       </div>
-      <div class="row">
-      <div class="form-group">
-        <button class="btn btn-primary">Submit changes</button>
-      </div>
-      </div>
       </div>
     </mat-tab>
     <mat-tab *ngFor="let bundle of form.skillEffectBundles; let i=index"
              label="Effect Bundle{{' '+(form.skillEffectBundles.indexOf(bundle)+1)
               +' (Accuracy: '+bundle.accuracy+'%)'}}">
       <div style="margin: 0 40px">
-      <label>Accuracy (%)</label>
-      <input type="number" class="form-control" name="accuracy{{i}}"
-             [(ngModel)]="bundle.accuracy"
-             #bundle.accuracy="ngModel"
-             required />
+        <div class="row">
+          <div class="col-sm-10">
+            <label>Accuracy (%)</label>
+            <input type="number" class="form-control" name="accuracy{{i}}"
+                   [(ngModel)]="bundle.accuracy"
+                   #bundle.accuracy="ngModel"
+                   required />
+          </div>
+          <div class="col-sm-2">
+            <button class="btn btn-danger" (click)="removeBundle($event,i)"> Remove this bundle</button>
+          </div>
+        </div>
+
         <table mat-table [(dataSource)]="dataSources[i]" style="width:100%">
           <!-- Status Effect Definition -->
           <ng-container matColumnDef="skillStatusEffect">
             <mat-header-cell *matHeaderCellDef> Status Effect </mat-header-cell>
             <mat-cell *matCellDef="let el">
-              <select class="form-control" name="skillStatusEffect{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
+              <mat-select class="form-control" name="skillStatusEffect{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
                       [(ngModel)]="el.skillStatusEffect"
                       #el.skillStatusEffect="ngModel"
                       required>
-                <option *ngFor="let effect of statusEffects" [value]="effect">{{effect}}</option>
-              </select>
+                <mat-option *ngFor="let effect of statusEffects" [value]="effect">{{effect}}</mat-option>
+              </mat-select>
 
             </mat-cell>
           </ng-container>
@@ -66,12 +69,12 @@
           <ng-container matColumnDef="targetType">
             <mat-header-cell *matHeaderCellDef> Target Type </mat-header-cell>
             <mat-cell *matCellDef="let el">
-              <select class="form-control" name="targetType{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
+              <mat-select class="form-control" name="targetType{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
                      [(ngModel)]="el.targetType"
                      #el.targetType="ngModel"
                      required >
-              <option *ngFor="let type of targetTypes" [value]="type">{{type}}</option>
-            </select>
+              <mat-option *ngFor="let type of targetTypes" [value]="type">{{type}}</mat-option>
+            </mat-select>
             </mat-cell>
           </ng-container>
 
@@ -79,12 +82,12 @@
           <ng-container matColumnDef="valueModifierType">
             <mat-header-cell *matHeaderCellDef> Value Modifier Type </mat-header-cell>
             <mat-cell *matCellDef="let el">
-              <select class="form-control" name="valueModifierType{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
+              <mat-select class="form-control" name="valueModifierType{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
                      [(ngModel)]="el.valueModifierType"
                      #el.valueModifierType="ngModel"
                      required >
-                <option *ngFor="let mod of valueModTypes" [value]="mod">{{mod}}</option>
-              </select>
+                <mat-option *ngFor="let mod of valueModTypes" [value]="mod">{{mod}}</mat-option>
+              </mat-select>
             </mat-cell>
           </ng-container>
 
@@ -128,5 +131,8 @@
       </div>
     </mat-tab>
   </mat-tab-group>
+    <div class="form-group">
+      <button class="btn btn-primary">Submit changes</button>
+    </div>
   </form>
   </div>
