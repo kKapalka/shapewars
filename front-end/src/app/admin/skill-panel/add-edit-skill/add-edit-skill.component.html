@@ -12,24 +12,32 @@
     <mat-tab label="Basic info">
       <div style="margin:0 40px">
       <div class="row">
-      <div class="form-group">
-        <input type="text" class="form-control" name="name" [(ngModel)]="form.name" #name="ngModel"
-               required style="font-weight: bold; font-size:175%; height:40px"/>
-      </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-9">
+        <div class="col-sm-3">
           <div class="form-group">
-            <label>Tooltip</label>
-            <textarea class="form-control" name="tooltip" [(ngModel)]="form.tooltip" #tooltip="ngModel"
-                      required rows="5" cols="120" disabled></textarea>
+            <label>Skill cost</label>
+            <input type="number" class="form-control" name="cost" [(ngModel)]="form.cost" #cost="ngModel"
+                   required />
+          </div>
+          <div class="form-group">
+            <label for="icon">
+              <div>Click icon to change:</div>
+              <img src="{{form.icon}}" style="width:150px; height:150px" />
+              <input type='file' (change)="onSelectFile($event)" id="icon" style="display:none">
+            </label>
           </div>
         </div>
-        <div class="col-sm-3">
-          <label>Skill cost</label>
-          <input type="number" class="form-control" name="cost" [(ngModel)]="form.cost" #cost="ngModel"
-                 required />
+      <div class="col-sm-9">
+        <div class="form-group">
+          <label>Skill name</label>
+          <input type="text" class="form-control" name="name" [(ngModel)]="form.name" #name="ngModel"
+                 required style="font-weight: bold; font-size:175%; height:40px"/>
         </div>
+        <div class="form-group">
+          <label>Tooltip</label>
+          <textarea class="form-control" name="tooltip" [(ngModel)]="form.tooltip" #tooltip="ngModel"
+                    required rows="5" cols="120" disabled></textarea>
+        </div>
+      </div>
       </div>
       </div>
     </mat-tab>

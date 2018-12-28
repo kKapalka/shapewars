@@ -10,8 +10,8 @@
 
   <div class="row" *ngFor="let skill of skills$">
     <div class="col-sm-2">
-      <img style="width:100px; height:100px; margin-left:20%" src="skill.icon">
       <h4 style="text-align: center">{{skill.name}}</h4>
+      <img style="width:100px; height:100px; margin-left:20%" src="{{skill.icon}}">
     </div>
     <div class="col-sm-8">
       <span style="white-space:pre-line">{{skill.tooltip}}</span>
