@@ -29,9 +29,10 @@ export class AddEditSkillComponent implements OnInit {
   }
   onSelectFile(event) { // called each time file input changes
     if (event.target.files && event.target.files[0]) {
-      let reader = new FileReader();
+      let reader:FileReader = new FileReader();
       reader.readAsDataURL(event.target.files[0]); // read file as data url
       reader.onload = (event) => { // called once readAsDataURL is completed
+        // @ts-ignore result z event.target ponoć nie istnieje
         this.form.icon = event.target.result;
         console.log(event.target);
       }

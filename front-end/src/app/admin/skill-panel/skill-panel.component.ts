@@ -17,10 +17,5 @@ export class SkillPanelComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
-  editSkill(e:Event, id:number){
-    window.location.href="admin/skills/"+id;
-  }
-z
 }

@@ -12,7 +12,6 @@ export class ShapePanelComponent implements OnInit {
   constructor(private service: ShapeService) {
     this.service.getAllShapes().subscribe(res=>{
       this.shapes$=res;
-      console.log(res);
     })
   }
 
