@@ -30,52 +30,113 @@
       </div>
       </div>
     </mat-tab>
-    <mat-tab *ngFor="let bundle of form.skillEffectBundles; let i=index" label="Effect Bundle{{' '+(form.skillEffectBundles.indexOf(bundle)+1)}}">
+    <mat-tab *ngFor="let bundle of form.skillEffectBundles; let i=index"
+             label="Effect Bundle{{' '+(form.skillEffectBundles.indexOf(bundle)+1)
+              +' (Accuracy: '+bundle.accuracy+'%)'}}">
       <div style="margin: 0 40px">
       <label>Accuracy (%)</label>
       <input type="number" class="form-control" name="accuracy{{i}}"
              [(ngModel)]="bundle.accuracy"
              #bundle.accuracy="ngModel"
              required />
-      <div *ngFor="let effect of bundle.skillEffectDtos; let j=index" class="row">
-        <div class="col-sm-2">
-          <label>Status Effect</label>
-          <input type="text" class="form-control" name="skillStatusEffect{{i+''+j}}"
-                 [(ngModel)]="effect.skillStatusEffect"
-                 #effect.skillStatusEffect="ngModel"
-                 required />
-        </div>
-        <div class="col-sm-2">
-          <label>Target Type</label>
-          <input type="text" class="form-control" name="targetType{{i+''+j}}"
-                 [(ngModel)]="effect.targetType"
-                 #effect.targetType="ngModel"
-                 required />
-        </div>
-        <div class="col-sm-2">
-          <label>Value Modifier Type</label>
-          <input type="text" class="form-control" name="valueModifierType{{i+''+j}}"
-                 [(ngModel)]="effect.valueModifierType"
-                 #effect.valueModifierType="ngModel"
-                 required />
-        </div>
-        <div class="col-sm-2">
-          <label>Minimal Value</label>
-          <input type="number" class="form-control" name="minValue{{i+''+j}}"
-                 [(ngModel)]="effect.minValue"
-                 #effect.minValue="ngModel"
-                 required />
-        </div>
-        <div class="col-sm-2">
-          <label>Maximal Value</label>
-          <input type="number" class="form-control" name="maxValue{{i+''+j}}"
-                 [(ngModel)]="effect.maxValue"
-                 #effect.maxValue="ngModel"
-                 required />
-        </div>
-      </div>
+        <table mat-table [(dataSource)]="dataSources[i]" style="width:100%">
+          <!-- Status Effect Definition -->
+          <ng-container matColumnDef="skillStatusEffect">
+            <mat-header-cell *matHeaderCellDef> Status Effect </mat-header-cell>
+            <mat-cell *matCellDef="let el">
+              <input type="text" class="form-control" name="skillStatusEffect{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
+                     [(ngModel)]="el.skillStatusEffect"
+                     #el.skillStatusEffect="ngModel"
+                     required />
+
+            </mat-cell>
+          </ng-container>
+
+          <!-- Target Type Definition -->
+          <ng-container matColumnDef="targetType">
+            <mat-header-cell *matHeaderCellDef> Target Type </mat-header-cell>
+            <mat-cell *matCellDef="let el">
+              <input type="text" class="form-control" name="targetType{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
+                     [(ngModel)]="el.targetType"
+                     #el.targetType="ngModel"
+                     required />
+            </mat-cell>
+          </ng-container>
+
+          <!-- Modifier Type Definition -->
+          <ng-container matColumnDef="valueModifierType">
+            <mat-header-cell *matHeaderCellDef> Value Modifier Type </mat-header-cell>
+            <mat-cell *matCellDef="let el">
+              <input type="text" class="form-control" name="valueModifierType{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
+                     [(ngModel)]="el.valueModifierType"
+                     #el.valueModifierType="ngModel"
+                     required />
+            </mat-cell>
+          </ng-container>
+
+          <!-- Min Value Definition -->
+          <ng-container matColumnDef="minValue">
+            <mat-header-cell *matHeaderCellDef>Minimum Value </mat-header-cell>
+            <mat-cell *matCellDef="let el">
+              <input type="number" class="form-control" name="minValue{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
+                     [(ngModel)]="el.minValue"
+                     #el.minValue="ngModel"
+                     required />
+            </mat-cell>
+          </ng-container>
+
+          <!-- Max Value Definition -->
+          <ng-container matColumnDef="maxValue">
+            <mat-header-cell *matHeaderCellDef> Maximum Value </mat-header-cell>
+            <mat-cell *matCellDef="let el">
+              <input type="number" class="form-control" name="maxValue{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
+                     [(ngModel)]="el.maxValue"
+                     #el.maxValue="ngModel"
+                     required />
+            </mat-cell>
+          </ng-container>
+
+          <!-- Options Definition -->
+          <ng-container matColumnDef="options">
+            <mat-header-cell *matHeaderCellDef>
+              <button (click)="addNewEffect($event,bundle)"> Add new</button>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let el">
+              <button (click)="test($event,el)">BJB</button>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Header and Row Declarations -->
+          <mat-header-row *matHeaderRowDef="['skillStatusEffect', 'targetType', 'valueModifierType','minValue','maxValue','options']"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: ['skillStatusEffect', 'targetType', 'valueModifierType','minValue','maxValue','options']"></mat-row>
+
+        </table>
       </div>
     </mat-tab>
+
+        <!--<div *ngFor="let effect of bundle.skillEffectDtos; let j=index" class="row">-->
+        <!--<div class="col-sm-2">-->
+          <!--<label>Status Effect</label>-->
+
+        <!--</div>-->
+        <!--<div class="col-sm-2">-->
+          <!--<label>Target Type</label>-->
+
+        <!--</div>-->
+        <!--<div class="col-sm-2">-->
+          <!--<label>Value Modifier Type</label>-->
+
+        <!--</div>-->
+        <!--<div class="col-sm-2">-->
+          <!--<label>Minimal Value</label>-->
+
+        <!--</div>-->
+        <!--<div class="col-sm-2">-->
+          <!--<label>Maximal Value</label>-->
+
+        <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
   </mat-tab-group>
   </form>
   <!---->

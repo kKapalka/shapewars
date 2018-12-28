@@ -1,8 +1,8 @@
 export class SkillEffect{
-  id:number;
+  id?:number;
   skillStatusEffect:string;
   targetType:string;
   minValue:number;
   maxValue:number;
-  valueModifierType:number;
+  valueModifierType:string;
 }
