@@ -28,5 +28,8 @@ public class SkillController {
     public List<SkillDto> getAll(){
         return skillService.getAll().stream().map(SkillDto::fromEntity).collect(Collectors.toList());
     }
-
+    @GetMapping("{id}")
+    public SkillDto get(@PathVariable Long id){
+        return skillService.getSkillById(id);
+    }
 }

@@ -2,8 +2,8 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Shape Wars</a>
-      <span *ngIf="lastLogMessageType!=='WORKING'" style="margin-left:45px; padding:15px; float:left; color:white; font-size:125%">
-        {{lastLogMessage.message + " - " + lastLogMessage.informerName + " (zgłoszone: " + lastLogMessage.messageTime + ")"}}
+      <span *ngIf="lastLogMessageType!=='WORKING' && lastLogMessage" style="margin-left:45px; padding:15px; float:left; color:white; font-size:125%">
+        {{"["+lastLogMessage.type+"] "+lastLogMessage.message + " - " + lastLogMessage.informerName + " (zgłoszone: " + lastLogMessage.messageTime + ")"}}
       </span>
     </div>
     <ul class="nav navbar-nav" routerLinkActive="active">

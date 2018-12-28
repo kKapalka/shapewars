@@ -9,6 +9,7 @@ import pl.edu.pwsztar.shapewars.entities.dto.SkillDto;
 import pl.edu.pwsztar.shapewars.repositories.SkillRepository;
 import pl.edu.pwsztar.shapewars.utilities.TooltipCreator;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,6 +54,10 @@ public class SkillService {
 
     public List<Skill> getAll(){
         return skillRepository.findAll();
+    }
+
+    public SkillDto getSkillById(Long id){
+        return SkillDto.fromEntity(skillRepository.findById(id).orElseThrow(EntityNotFoundException::new));
     }
 
 }

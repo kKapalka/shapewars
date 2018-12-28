@@ -22,5 +22,5 @@ export class SkillPanelComponent implements OnInit {
   editSkill(e:Event, id:number){
     window.location.href="admin/skills/"+id;
   }
-
+z
 }
