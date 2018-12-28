@@ -2,3 +2,4 @@
 @import "app/app.component.css";
 @import "app/admin/side-bar/side-bar.component.css";
 @import "app/admin/skill-panel/skill-panel.component.css";
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";

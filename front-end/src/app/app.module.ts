@@ -22,7 +22,8 @@ import { UserPanelComponent } from './admin/user-panel/user-panel.component';
 import {InactiveSiteComponent} from "./inactive-site/inactive-site.component";
 import { AddEditSkillComponent } from './admin/skill-panel/add-edit-skill/add-edit-skill.component';
 import { AddEditShapeComponent } from './admin/shape-panel/add-edit-shape/add-edit-shape.component';
-
+import {MatTabsModule} from '@angular/material/tabs';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +48,8 @@ import { AddEditShapeComponent } from './admin/shape-panel/add-edit-shape/add-ed
     FormsModule,
     HttpClientModule,
     NgbModule,
+    MatTabsModule,
+    BrowserAnimationsModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

@@ -28,6 +28,7 @@ export class AddEditSkillComponent implements OnInit {
   onSubmit(){
     this.service.saveSkill(this.form).subscribe(res=>{
       this.form=res;
+      this.router.navigate(['/admin/skills']);
     })
   }
 }
