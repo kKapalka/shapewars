@@ -48,11 +48,25 @@ export class AddEditShapeComponent implements OnInit {
     }
   }
   onSubmit(){
-    this.service.saveShape(this.form).subscribe(res=>{
-      this.form=res;
-      this.router.navigate(['/admin/shapes']);
-    })
+    if(this.form.skillIDset.length!=4){
+      alert("Shape must have access to exactly 4 skills!");
+    } else{
+      this.service.saveShape(this.form).subscribe(res=>{
+        this.form=res;
+        this.router.navigate(['/admin/shapes']);
+      })
+    }
+
   }
-
-
+  onSelectFile(event) { // called each time file input changes
+    if (event.target.files && event.target.files[0]) {
+      let reader:FileReader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        // @ts-ignore result z event.target ponoć nie istnieje
+        this.form.image = event.target.result;
+        console.log(event.target);
+      }
+    }
+  }
 }

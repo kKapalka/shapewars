@@ -25,4 +25,8 @@ public class ShapeController {
     public List<ShapeDto> getAll(){
         return shapeService.getAll().stream().map(ShapeDto::fromEntity).collect(Collectors.toList());
     }
+    @GetMapping("{id}")
+    public ShapeDto getById(@PathVariable Long id){
+        return ShapeDto.fromEntity(shapeService.getShapeById(id));
+    }
 }
