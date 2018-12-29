@@ -9,12 +9,36 @@
   </div>
 
   <div class="row" *ngFor="let shape of shapes$">
-    <div class="col-sm-4">
+    <div class="col-sm-2">
       <h4 style="text-align: center">{{shape.name}}</h4>
-      <img style="width:100px; height:100px; margin-left:20%" src="shape.image">
+      <img style="width:150px; height:225px; margin-left:20%" src="{{shape.image}}">
     </div>
-    <div class="col-sm-7">
-
+    <div class="col-sm-8">
+      <div class="row">
+        <div class="col-sm-3">
+          <h3>Statistics: </h3>
+          <div>
+            <b>Health: </b>{{shape.hpParameters[0]+" +("+shape.hpParameters[1]+"-"+shape.hpParameters[2]+")/lvl"}}
+          </div>
+          <div>
+            <b>Armor: </b>{{shape.armParameters[0]+" +("+shape.armParameters[1]+"-"+shape.armParameters[2]+")/lvl"}}
+          </div>
+          <div>
+            <b>Strength: </b>{{shape.strParameters[0]+" +("+shape.strParameters[1]+"-"+shape.strParameters[2]+")/lvl"}}
+          </div>
+          <div>
+            <b>Speed: </b>{{shape.speed}}
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <h3>Available skills:</h3>
+          <div *ngFor="let skill of filterSkillsWithIds(shape.skillIDset)">
+            <b>{{skill.name}}</b>
+            -
+            {{skill.tooltip}}
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-sm-1">
       <button class="btn btn-block" [routerLink]="[shape.id]">EDIT</button>
