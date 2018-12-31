@@ -74,12 +74,11 @@ public class AuthController {
         user.setAdmin(signUpRequest.isAdmin());
         user.setLevel(1L);
         user.setExperiencePoints(0L);
+        user = userRepository.save(user);
         if(!signUpRequest.isAdmin()){
-            user.setFighterList(Arrays.asList(fighterService.generateFighter(),fighterService.generateFighter(),
-                    fighterService.generateFighter(),fighterService.generateFighter()));
+            user.setFighterList(Arrays.asList(fighterService.generateFighter(user),fighterService.generateFighter(user),
+                    fighterService.generateFighter(user),fighterService.generateFighter(user)));
         }
-        userRepository.save(user);
-
         return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);
     }
 
