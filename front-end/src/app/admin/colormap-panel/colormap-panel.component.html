@@ -1,0 +1,26 @@
+<div class="container skill-panel">
+  <div class="row">
+    <div class="col-sm-6">
+      <h2>Color map list</h2>
+    </div>
+    <div class="col-sm-6">
+      <button class="float-right btn btn-success" [routerLink]="['create']">Add new color to map</button>
+    </div>
+  </div>
+
+  <div class="row" *ngFor="let color of colors">
+    <div class="col-sm-2">
+      <h4 style="text-align: center">{{color.colorName}}</h4>
+      <img style="width:100px; height:100px; margin-left:20%" src="{{color.colorMap}}">
+    </div>
+    <!--<div class="col-sm-8">-->
+      <!--<span style="white-space:pre-line">{{skill.tooltip}}</span>-->
+    <!--</div>-->
+    <div class="col-sm-2">
+      <button class="btn btn-block" [routerLink]="[color.id]">EDIT</button>
+      <button class="btn btn-block">DELETE</button>
+    </div>
+  </div>
+</div>
+
+

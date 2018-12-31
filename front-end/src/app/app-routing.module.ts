@@ -12,6 +12,8 @@ import {UserPanelComponent} from "./admin/user-panel/user-panel.component";
 import {InactiveSiteComponent} from "./inactive-site/inactive-site.component";
 import {AddEditShapeComponent} from "./admin/shape-panel/add-edit-shape/add-edit-shape.component";
 import {AddEditSkillComponent} from "./admin/skill-panel/add-edit-skill/add-edit-skill.component";
+import {ColormapPanelComponent} from "./admin/colormap-panel/colormap-panel.component";
+import {AddEditColormapComponent} from "./admin/colormap-panel/add-edit-colormap/add-edit-colormap.component";
 
 const routes: Routes = [
     {
@@ -47,6 +49,19 @@ const routes: Routes = [
           {
             path: 'shapes/:create',
             component: AddEditShapeComponent,
+          },
+          {
+            path: 'colors',
+            component: ColormapPanelComponent,
+            pathMatch: 'full'
+          },
+          {
+            path: 'colors/:id',
+            component: AddEditColormapComponent,
+          },
+          {
+            path: 'colors/:create',
+            component: AddEditColormapComponent,
           },
           {
             path: 'users',

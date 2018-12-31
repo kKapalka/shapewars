@@ -17,8 +17,10 @@ import pl.edu.pwsztar.shapewars.messages.JwtResponse;
 import pl.edu.pwsztar.shapewars.messages.ResponseMessage;
 import pl.edu.pwsztar.shapewars.repositories.UserRepository;
 import pl.edu.pwsztar.shapewars.security.jwt.JwtProvider;
+import pl.edu.pwsztar.shapewars.services.FighterService;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 
 @RestController
 @CrossOrigin
@@ -36,6 +38,9 @@ public class AuthController {
 
     @Autowired
     JwtProvider jwtProvider;
+
+    @Autowired
+    private FighterService fighterService;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginDto loginRequest) {
@@ -69,6 +74,10 @@ public class AuthController {
         user.setAdmin(signUpRequest.isAdmin());
         user.setLevel(1L);
         user.setExperiencePoints(0L);
+        if(!signUpRequest.isAdmin()){
+            user.setFighterList(Arrays.asList(fighterService.generateFighter(),fighterService.generateFighter(),
+                    fighterService.generateFighter(),fighterService.generateFighter()));
+        }
         userRepository.save(user);
 
         return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);

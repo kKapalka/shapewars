@@ -13,6 +13,7 @@ import javax.persistence.EntityNotFoundException;
 import java.awt.*;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 public class ColorMapService {
@@ -42,5 +43,9 @@ public class ColorMapService {
 
     public ColorMap getColorMapById(Long id){
         return colorMapRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
+    public List<ColorMap> getAll(){
+        return colorMapRepository.findAll();
     }
 }

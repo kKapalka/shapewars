@@ -18,4 +18,5 @@ public class FighterController {
     public FighterDto save(@RequestBody FighterDto dto){
         return fighterService.save(dto);
     }
+
 }

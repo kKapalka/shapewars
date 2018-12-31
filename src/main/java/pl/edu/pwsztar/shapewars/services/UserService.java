@@ -11,6 +11,7 @@ import pl.edu.pwsztar.shapewars.services.interfaces.IUserService;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import javax.websocket.Session;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +40,7 @@ public class UserService implements IUserService {
         user.setEmail(accountDto.getEmail());
         user.setLevel(1L);
         user.setExperiencePoints(0L);
+
         return userRepository.save(user);
     }
     private boolean emailExist(String email) {

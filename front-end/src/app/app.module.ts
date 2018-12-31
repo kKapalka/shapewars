@@ -25,6 +25,8 @@ import { AddEditShapeComponent } from './admin/shape-panel/add-edit-shape/add-ed
 import {MatTabsModule} from '@angular/material/tabs';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatSelectModule, MatTableModule} from "@angular/material";
+import { ColormapPanelComponent } from './admin/colormap-panel/colormap-panel.component';
+import { AddEditColormapComponent } from './admin/colormap-panel/add-edit-colormap/add-edit-colormap.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +44,8 @@ import {MatSelectModule, MatTableModule} from "@angular/material";
     InactiveSiteComponent,
     AddEditSkillComponent,
     AddEditShapeComponent,
+    ColormapPanelComponent,
+    AddEditColormapComponent,
   ],
   imports: [
     BrowserModule,

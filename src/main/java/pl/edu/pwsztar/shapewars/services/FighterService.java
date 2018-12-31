@@ -41,12 +41,12 @@ public class FighterService {
         if(dto.getId()!=null){
             fighter=fighterRepository.getOne(dto.getId());
         } else{
-            fighter = generateFighter(dto);
+            fighter = generateFighter();
         }
         return fighter;
     }
 
-    private Fighter generateFighter(FighterDto dto){
+    public Fighter generateFighter(){
         Fighter fighter = new Fighter();
         fighter.setShape(shapeService.getRandomShape());
         fighter.setColor(colorMapService.getRandomColor());
@@ -56,7 +56,8 @@ public class FighterService {
         fighter.setHitPoints(fighter.getShape().getBaselineHp());
         fighter.setStrength(fighter.getShape().getBaselineStrength());
         fighter.setSpeed(fighter.getShape().getBaselineSpeed());
-        fighter.setSlot(FighterSlot.valueOf(dto.getSlot()));
-        return fighter;
+        fighter.setSlot(FighterSlot.INVENTORY);
+
+        return fighterRepository.save(fighter);
     }
 }

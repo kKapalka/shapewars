@@ -9,6 +9,9 @@ export class UrlsService {
   allSkills=this.host+"/skill/all";
   saveSkill=this.host+"/skill/save";
   skillById=this.host+"/skill/";
+  allColors=this.host+"/colormap/all";
+  saveColor=this.host+"/colormap/save";
+  colorById=this.host+"/colormap/";
   allSkillStatusEffects=this.host+"/skill/effects";
   allTargetTypes=this.host+"/skill/targets";
   allValueModifierTypes=this.host+"/skill/modifiers";
