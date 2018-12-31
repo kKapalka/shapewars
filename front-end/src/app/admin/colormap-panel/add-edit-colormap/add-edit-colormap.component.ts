@@ -11,13 +11,19 @@ import {ColormapService} from "../../../services/colormap.service";
 export class AddEditColormapComponent implements OnInit {
 
   form:ColorMap;
-  skills:any;
+  sampleShape:string;
+  canvas:HTMLCanvasElement;
   constructor(private service: ColormapService, private router:Router,
               private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.retrieveColorData();
+    setTimeout(()=>{
+      this.getSampleShapeIcon();
+    },1000);
+    // @ts-ignore
+    this.canvas=document.getElementById("iconCanvas");
   }
   retrieveColorData(){
     let colorId:number=parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
@@ -34,6 +40,28 @@ export class AddEditColormapComponent implements OnInit {
       }
     }
   }
+  getSampleShapeIcon(){
+    this.service.getSampleShapeIcon().subscribe(res=>{
+      this.sampleShape=res;
+      this.refreshCanvas();
+    })
+  }
+  refreshCanvas(){
+    let ctx=this.canvas.getContext("2d");
+    ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
+    let bgImage=new Image();
+    bgImage.src=this.form.colorMap;
+    bgImage.onload=function(){
+      ctx.drawImage(bgImage,0,0);
+    }
+
+    ctx.globalCompositeOperation = 'destination-atop';
+    let iconImg=new Image();
+    iconImg.src=this.sampleShape;
+    iconImg.onload=function(){
+      ctx.drawImage(iconImg,0,0);
+    }
+  }
   onSubmit(){
     this.service.saveColor(this.form).subscribe(res=>{
       this.form=res;
@@ -47,7 +75,7 @@ export class AddEditColormapComponent implements OnInit {
       reader.onload = (event) => { // called once readAsDataURL is completed
         // @ts-ignore result z event.target ponoć nie istnieje
         this.form.colorMap = event.target.result;
-        console.log(event.target);
+        this.refreshCanvas();
       }
     }
   }

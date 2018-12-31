@@ -12,6 +12,7 @@ export class UrlsService {
   allColors=this.host+"/colormap/all";
   saveColor=this.host+"/colormap/save";
   colorById=this.host+"/colormap/";
+  sampleShape=this.host+"/shapes/sample";
   allSkillStatusEffects=this.host+"/skill/effects";
   allTargetTypes=this.host+"/skill/targets";
   allValueModifierTypes=this.host+"/skill/modifiers";

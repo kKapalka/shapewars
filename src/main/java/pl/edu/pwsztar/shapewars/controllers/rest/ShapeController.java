@@ -29,4 +29,9 @@ public class ShapeController {
     public ShapeDto getById(@PathVariable Long id){
         return ShapeDto.fromEntity(shapeService.getShapeById(id));
     }
+
+    @GetMapping("sample")
+    public String getSampleShapeIcon(){
+        return new String(shapeService.getAll().get(0).getImage());
+    }
 }

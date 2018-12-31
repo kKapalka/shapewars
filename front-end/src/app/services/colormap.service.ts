@@ -19,4 +19,7 @@ export class ColormapService {
   saveColor(colormap:any):Observable<any>{
     return this.http.post(this.urls.saveColor,colormap,{responseType:'json'})
   }
+  getSampleShapeIcon():Observable<any>{
+    return this.http.get(this.urls.sampleShape, {responseType:'text'});
+  }
 }
