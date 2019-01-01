@@ -14,6 +14,7 @@ import {AddEditShapeComponent} from "./admin/shape-panel/add-edit-shape/add-edit
 import {AddEditSkillComponent} from "./admin/skill-panel/add-edit-skill/add-edit-skill.component";
 import {ColormapPanelComponent} from "./admin/colormap-panel/colormap-panel.component";
 import {AddEditColormapComponent} from "./admin/colormap-panel/add-edit-colormap/add-edit-colormap.component";
+import {XpthresholdPanelComponent} from "./admin/xpthreshold-panel/xpthreshold-panel.component";
 
 const routes: Routes = [
     {
@@ -36,6 +37,10 @@ const routes: Routes = [
             path: '',
             redirectTo: 'shapes',
             pathMatch: 'full'
+          },
+          {
+            path:'thresholds',
+            component:XpthresholdPanelComponent
           },
           {
           path: 'shapes',

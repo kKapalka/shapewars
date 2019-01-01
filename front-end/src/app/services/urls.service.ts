@@ -20,5 +20,7 @@ export class UrlsService {
   saveShape=this.host+"/shapes/save";
   shapeById=this.host+"/shapes/";
   lastMaintenanceMessage=this.host+"/maintenance-log/retrieve";
+  allThresholds=this.host+"/thresholds/all";
+  saveThreshold=this.host+"/thresholds/save";
   constructor() { }
 }

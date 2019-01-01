@@ -1,3 +1,48 @@
-<p>
-  xpthreshold-panel works!
-</p>
+<div class="container skill-panel">
+  <div class="row">
+    <div class="col-sm-6">
+      <h2>Experience threshold editing panel</h2>
+    </div>
+  </div>
+  <div class="row">
+    <table mat-table [(dataSource)]="thresholds" style="width:100%">
+      <!-- Level Definition -->
+      <ng-container matColumnDef="level">
+        <mat-header-cell *matHeaderCellDef> Level </mat-header-cell>
+        <mat-cell *matCellDef="let el">
+          <input class="form-control" name="level{{el.level}}" [(ngModel)]="el.level"
+                 #el.level="ngModel" type="number" step="1"
+                 required/>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Threshold Definition -->
+      <ng-container matColumnDef="threshold">
+        <mat-header-cell *matHeaderCellDef> Threshold </mat-header-cell>
+        <mat-cell *matCellDef="let el">
+          <input class="form-control" name="threshold{{el.level}}" [(ngModel)]="el.threshold"
+                 #el.threshold="ngModel" type="number" step="1"
+                 required/>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Options Definition -->
+      <ng-container matColumnDef="options">
+        <mat-header-cell *matHeaderCellDef>
+          <button (click)="addNewThreshold($event)" class="btn btn-success"> Add new</button>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let el">
+          <button (click)="save($event,el)" class="btn btn-success">Save</button>
+          <button (click)="remove($event,el)" class="btn btn-danger">Remove</button>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Header and Row Declarations -->
+      <mat-header-row *matHeaderRowDef="['level','threshold','options']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['level','threshold','options']"></mat-row>
+
+    </table>
+  </div>
+</div>
+
+
