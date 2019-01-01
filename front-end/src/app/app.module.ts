@@ -27,6 +27,9 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatSelectModule, MatTableModule} from "@angular/material";
 import { ColormapPanelComponent } from './admin/colormap-panel/colormap-panel.component';
 import { AddEditColormapComponent } from './admin/colormap-panel/add-edit-colormap/add-edit-colormap.component';
+import { XpThresholdComponent } from './admin/xp-threshold/xp-threshold.component';
+import { XpthresholdPanelComponent } from './admin/xpthreshold-panel/xpthreshold-panel.component';
+import { AddEditXpthresholdComponent } from './admin/xpthreshold-panel/add-edit-xpthreshold/add-edit-xpthreshold.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +49,9 @@ import { AddEditColormapComponent } from './admin/colormap-panel/add-edit-colorm
     AddEditShapeComponent,
     ColormapPanelComponent,
     AddEditColormapComponent,
+    XpThresholdComponent,
+    XpthresholdPanelComponent,
+    AddEditXpthresholdComponent,
   ],
   imports: [
     BrowserModule,
