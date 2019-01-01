@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.edu.pwsztar.shapewars.entities.Fight;
 import pl.edu.pwsztar.shapewars.entities.User;
 import pl.edu.pwsztar.shapewars.entities.dto.UserDto;
+import pl.edu.pwsztar.shapewars.entities.enums.FightStatus;
+import pl.edu.pwsztar.shapewars.entities.enums.FighterSlot;
 import pl.edu.pwsztar.shapewars.exceptions.EmailExistsException;
 import pl.edu.pwsztar.shapewars.repositories.UserRepository;
 import pl.edu.pwsztar.shapewars.services.interfaces.IUserService;
@@ -25,6 +27,9 @@ public class UserService implements IUserService {
 
     @Autowired
     private FighterService fighterService;
+
+    @Autowired
+    private ExperienceThresholdService experienceThresholdService;
 
     @Transactional
     @Override
@@ -77,7 +82,53 @@ public class UserService implements IUserService {
         userRepository.delete(user);
     }
     public void processFightFinalization(Fight fight){
-        //process XP and fighter gains
+        User winner, loser;
+        if(fight.getFightStatus()== FightStatus.VICTORY_PLAYER_ONE){
+            winner=fight.getPlayerOne();
+            loser=fight.getPlayerTwo();
+        } else{
+            winner=fight.getPlayerTwo();
+            loser=fight.getPlayerOne();
+        }
+
+        winner.setExperiencePoints(winner.getExperiencePoints()+(winner.getLevel()*70));
+        winner.getFighterList().forEach(fighter->{
+            if(fighter.getSlot()!= FighterSlot.INVENTORY) {
+                fighter.setExperiencePoints(Math.round(fighter.getExperiencePoints() +
+                        (loser.getLevel() * 70) * Math.pow(1.15, (winner.getLevel() - fighter.getLevel()))));
+                Long fighterThreshold = experienceThresholdService.getByLevel(fighter.getLevel()).getThreshold();
+                if(fighter.getExperiencePoints()>fighterThreshold){
+                    fighter.setExperiencePoints(fighter.getExperiencePoints()-fighterThreshold);
+                    fighter.setLevel(fighter.getLevel()+1);
+                }
+                fighterService.saveFighter(fighter);
+            }
+        });
+        loser.setExperiencePoints(loser.getExperiencePoints()+(winner.getLevel()*35));
+        loser.getFighterList().forEach(fighter->{
+            if(fighter.getSlot()!= FighterSlot.INVENTORY) {
+                fighter.setExperiencePoints(Math.round(fighter.getExperiencePoints() +
+                        (winner.getLevel() * 35) * Math.pow(1.15, (loser.getLevel() - fighter.getLevel()))));
+                Long fighterThreshold = experienceThresholdService.getByLevel(fighter.getLevel()).getThreshold();
+                if(fighter.getExperiencePoints()>fighterThreshold){
+                    fighter.setExperiencePoints(fighter.getExperiencePoints()-fighterThreshold);
+                    fighter.setLevel(fighter.getLevel()+1);
+                }
+                fighterService.saveFighter(fighter);
+            }
+        });
+        Long winnerXPThreshold = experienceThresholdService.getByLevel(winner.getLevel()).getThreshold();
+        if(winner.getExperiencePoints()>winnerXPThreshold){
+            winner.setExperiencePoints(winner.getExperiencePoints()-winnerXPThreshold);
+            winner.setLevel(winner.getLevel()+1L);
+        }
+        Long loserXPThreshold = experienceThresholdService.getByLevel(loser.getLevel()).getThreshold();
+        if(loser.getExperiencePoints()>loserXPThreshold){
+            loser.setExperiencePoints(loser.getExperiencePoints()-loserXPThreshold);
+            loser.setLevel(loser.getLevel()+1L);
+        }
+
+
         if(fight.getPlayerTwo().getLogin()==null){
             //it means it really is an AI
             delete(fight.getPlayerTwo());

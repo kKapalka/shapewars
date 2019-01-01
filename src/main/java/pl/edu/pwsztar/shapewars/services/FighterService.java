@@ -28,9 +28,14 @@ public class FighterService {
     @Autowired
     private UserRepository userRepository;
 
+    //for fighter generation is totally different method
     public FighterDto save(FighterDto dto){
-        Fighter fighter = updateFighter(dto);
-        return FighterDto.fromEntity(fighterRepository.save(fighter));
+        if(dto.getId()!=null) {
+            Fighter fighter = updateFighter(dto);
+            return FighterDto.fromEntity(fighterRepository.save(fighter));
+        } else{
+            return dto;
+        }
     }
 
     public Fighter getFighterById(Long id){
@@ -40,19 +45,17 @@ public class FighterService {
         User owner = userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         return fighterRepository.findAllByOwner(owner);
     }
-    //Instancje jednostek - edycja/zapis następuje w tych przypadkach:
-    // albo są generowane losowo,
-    // albo otrzymują level-upy na podstawie odbytej walki
-    // albo zmieniają położenie u właściciela
+    //Instancje jednostek - edycja następuje w tych przypadkach:
+    // otrzymują level-upy na podstawie odbytej walki
+    // zmieniają położenie u właściciela
     private Fighter updateFighter(FighterDto dto){
-        Fighter fighter = new Fighter();
-        if(dto.getId()!=null) {
-            fighter = fighterRepository.getOne(dto.getId());
-        }
-//        } else{
-//            fighter = generateFighter();
-//        }
+        Fighter fighter = fighterRepository.findById(dto.getId()).orElseThrow(EntityNotFoundException::new);
+        fighter.setSlot(FighterSlot.valueOf(dto.getSlot()));
         return fighter;
+    }
+
+    public Fighter saveFighter(Fighter fighter){
+        return fighterRepository.save(fighter);
     }
 
     public Fighter generateFighter(User user){
