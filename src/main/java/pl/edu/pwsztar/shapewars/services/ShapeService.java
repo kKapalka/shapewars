@@ -20,13 +20,11 @@ public class ShapeService {
     private SkillService skillService;
 
     public ShapeDto save(ShapeDto dto){
-        System.out.println(dto);
         Shape shape = updateShape(dto);
         return ShapeDto.fromEntity(shapeRepository.save(shape));
     }
 
     private Shape updateShape(ShapeDto dto){
-        System.out.println(dto);
         Shape shape = new Shape();
         if(dto.getId()!=null){
             shape=shapeRepository.getOne(dto.getId());

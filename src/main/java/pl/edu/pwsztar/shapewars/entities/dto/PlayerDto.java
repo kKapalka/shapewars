@@ -15,14 +15,16 @@ public class PlayerDto {
     private Long id;
     private int level;
     private int xpPoints;
-    private List<Long> allFighterIDList;
+    private List<String> allFighterList;
 
     public static PlayerDto fromEntity(User user){
-        System.out.println(user);
         return PlayerDto.builder()
                 .id(user.getID())
                 .level(user.getLevel().intValue())
-                .allFighterIDList(user.getFighterList().stream().map(Fighter::getID).collect(Collectors.toList()))
+                .allFighterList(user.getFighterList().stream().map(fighter->
+                    fighter.getColor().getColorName().toString().toLowerCase() +" "+ fighter.getShape().getName()
+                        +", level "+fighter.getLevel()
+                ).collect(Collectors.toList()))
                 .build();
     }
 }

@@ -25,5 +25,8 @@ public class PlayerController {
         return PlayerDto.fromEntity(userService.getUserByLogin(login));
     }
 
-
+    @GetMapping("/generate?lvl={level}")
+    public PlayerDto generateOpponentWithLevel(@PathVariable Long level){
+        return PlayerDto.fromEntity(userService.generateOpponentWithLevel(level));
+    }
 }

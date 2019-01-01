@@ -2,6 +2,7 @@ package pl.edu.pwsztar.shapewars.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.edu.pwsztar.shapewars.entities.Fight;
 import pl.edu.pwsztar.shapewars.entities.User;
 import pl.edu.pwsztar.shapewars.entities.dto.UserDto;
 import pl.edu.pwsztar.shapewars.exceptions.EmailExistsException;
@@ -62,6 +63,25 @@ public class UserService implements IUserService {
 
     public User getUserByLogin(String login){
         return userRepository.findByLoginEquals(login).orElseThrow(EntityNotFoundException::new);
+    }
+
+    public User generateOpponentWithLevel(Long level){
+        User user = new User();
+        user.setLevel(level);
+        userRepository.save(user);
+        user.setFighterList(Arrays.asList(fighterService.generateFighter(user),fighterService.generateFighter(user),
+                fighterService.generateFighter(user),fighterService.generateFighter(user)));
+        return user;
+    }
+    public void delete(User user){
+        userRepository.delete(user);
+    }
+    public void processFightFinalization(Fight fight){
+        //process XP and fighter gains
+        if(fight.getPlayerTwo().getLogin()==null){
+            //it means it really is an AI
+            delete(fight.getPlayerTwo());
+        }
     }
 
 }

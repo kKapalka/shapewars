@@ -6,11 +6,12 @@ import org.springframework.stereotype.Service;
 import pl.edu.pwsztar.shapewars.entities.Fighter;
 import pl.edu.pwsztar.shapewars.entities.User;
 import pl.edu.pwsztar.shapewars.entities.dto.FighterDto;
-import pl.edu.pwsztar.shapewars.entities.enums.Colors;
 import pl.edu.pwsztar.shapewars.entities.enums.FighterSlot;
 import pl.edu.pwsztar.shapewars.repositories.FighterRepository;
+import pl.edu.pwsztar.shapewars.repositories.UserRepository;
 
-import java.awt.*;
+import java.util.List;
+
 
 @Service
 public class FighterService {
@@ -24,6 +25,9 @@ public class FighterService {
     @Autowired
     private ColorMapService colorMapService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public FighterDto save(FighterDto dto){
         Fighter fighter = updateFighter(dto);
         return FighterDto.fromEntity(fighterRepository.save(fighter));
@@ -32,7 +36,10 @@ public class FighterService {
     public Fighter getFighterById(Long id){
         return fighterRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
-
+    public List<Fighter> getFightersByUserId(Long id){
+        User owner = userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return fighterRepository.findAllByOwner(owner);
+    }
     //Instancje jednostek - edycja/zapis następuje w tych przypadkach:
     // albo są generowane losowo,
     // albo otrzymują level-upy na podstawie odbytej walki
@@ -54,7 +61,7 @@ public class FighterService {
         fighter.setColor(colorMapService.getRandomColor());
         fighter.setOwner(user);
         fighter.setExperiencePoints(0L);
-        fighter.setLevel(1L);
+        fighter.setLevel(user.getLevel());
         fighter.setArmor(fighter.getShape().getBaselineArmor());
         fighter.setHitPoints(fighter.getShape().getBaselineHp());
         fighter.setStrength(fighter.getShape().getBaselineStrength());
