@@ -28,6 +28,7 @@ import {MatSelectModule, MatTableModule} from "@angular/material";
 import { ColormapPanelComponent } from './admin/colormap-panel/colormap-panel.component';
 import { AddEditColormapComponent } from './admin/colormap-panel/add-edit-colormap/add-edit-colormap.component';
 import { XpthresholdPanelComponent } from './admin/xpthreshold-panel/xpthreshold-panel.component';
+import { NotificationBoxComponent } from './notification-box/notification-box.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,7 @@ import { XpthresholdPanelComponent } from './admin/xpthreshold-panel/xpthreshold
     ColormapPanelComponent,
     AddEditColormapComponent,
     XpthresholdPanelComponent,
+    NotificationBoxComponent,
   ],
   imports: [
     BrowserModule,
