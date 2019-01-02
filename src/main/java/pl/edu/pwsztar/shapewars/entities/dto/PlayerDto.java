@@ -13,18 +13,17 @@ import java.util.stream.Collectors;
 public class PlayerDto {
 
     private Long id;
+    private String login;
     private int level;
     private int xpPoints;
-    private List<String> allFighterList;
+    private List<FighterBaseDto> allFighterList;
 
     public static PlayerDto fromEntity(User user){
         return PlayerDto.builder()
                 .id(user.getID())
+                .login(user.getLogin())
                 .level(user.getLevel().intValue())
-                .allFighterList(user.getFighterList().stream().map(fighter->
-                    fighter.getColor().getColorName().toString().toLowerCase() +" "+ fighter.getShape().getName()
-                        +", level "+fighter.getLevel()
-                ).collect(Collectors.toList()))
+                .allFighterList(user.getFighterList().stream().map(FighterBaseDto::fromEntity).collect(Collectors.toList()))
                 .build();
     }
 }

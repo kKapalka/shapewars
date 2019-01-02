@@ -8,7 +8,7 @@ import {TokenStorageService} from "../auth/token-storage.service";
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  board: object;
+  user: object;
   errorMessage: string;
 
   constructor(private userService: UserService, private tokenService: TokenStorageService) { }
@@ -21,7 +21,7 @@ export class UserComponent implements OnInit {
     this.userService.getPlayerData(this.tokenService.getUsername()).subscribe(
       data => {
         console.log(data);
-        this.board = data;
+        this.user = data;
       },
       error => {
         this.errorMessage = `${error.status}: ${JSON.parse(error.error).message}`;
