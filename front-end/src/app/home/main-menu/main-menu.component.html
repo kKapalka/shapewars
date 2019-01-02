@@ -1,13 +1,20 @@
 <div *ngIf="info.fighting!=='true'; else fighting">
-<h5 class="text-primary">Your Information</h5>
-<p>
-  <strong>Username:</strong> {{info.username}}<br/>
-  <strong>Roles:</strong> {{info.authorities}}<br />
-  <strong>Token:</strong> {{info.token}}.<br/>
-  Wha'ts gonna be here? Patch notes? Search bar for other users with written out name (not all in the open)?<br>
-  Friends list? Button to start AI fight? This for template #1, template #2 will be fight panel
-</p>
-<button class="btn btn-secondary" (click)="logout()">Logout</button>
+  <div class="row">
+    <div class="col-sm-8">
+      <h5 class="text-primary">Your Information</h5>
+    </div>
+  <div class="col-sm-4">
+    <p>
+      <strong>Username:</strong> {{info.username}}<br/>
+      <strong>Roles:</strong> {{info.authorities}}<br />
+      Wha'ts gonna be here? Patch notes? Search bar for other users with written out name (not all in the open)?<br>
+      Friends list? Button to start AI fight? This for template #1, template #2 will be fight panel
+    </p>
+  </div>
+  </div>
+  <div style="position:fixed; display:inline; z-index:1500; top:56px; left:42.5%; width:15%; height:80px; border-radius: 15px; background-color:yellowgreen">
+    <p style="padding:20px 36px; font-size:24px">Play VS. Bot</p>
+  </div>
 </div>
 <ng-template #fighting>
   <app-fight-window user="info.username"></app-fight-window>

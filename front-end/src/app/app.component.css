@@ -8,7 +8,16 @@
 .my-container{
   position:absolute;
   top:80px;
-  left:7.5%;
-  width:92.5%;
+  left:10%;
+  width:90%;
   height:87.5%;
+}
+.nav-link, .navbar-brand{
+  color:white!important;
+}
+.nav-link:hover, .navbar-brand:hover{
+  color:lightgray!important;
+}
+.nav-link:active, .navbar-brand:active{
+  color:white!important;
 }
