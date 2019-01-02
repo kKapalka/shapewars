@@ -1,3 +1,4 @@
+<div *ngIf="info.fighting!=='true'; else fighting">
 <h5 class="text-primary">Your Information</h5>
 <p>
   <strong>Username:</strong> {{info.username}}<br/>
@@ -7,3 +8,7 @@
   Friends list? Button to start AI fight? This for template #1, template #2 will be fight panel
 </p>
 <button class="btn btn-secondary" (click)="logout()">Logout</button>
+</div>
+<ng-template #fighting>
+  <app-fight-window user="info.username"></app-fight-window>
+</ng-template>

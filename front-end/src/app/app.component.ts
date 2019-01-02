@@ -40,4 +40,5 @@ export class AppComponent implements OnInit {
     this.tokenStorage.signOut();
     window.location.pathname="/home";
   }
+
 }

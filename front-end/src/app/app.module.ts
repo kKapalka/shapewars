@@ -29,6 +29,7 @@ import { ColormapPanelComponent } from './admin/colormap-panel/colormap-panel.co
 import { AddEditColormapComponent } from './admin/colormap-panel/add-edit-colormap/add-edit-colormap.component';
 import { XpthresholdPanelComponent } from './admin/xpthreshold-panel/xpthreshold-panel.component';
 import { NotificationBoxComponent } from './notification-box/notification-box.component';
+import { FightWindowComponent } from './fight-window/fight-window.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +51,7 @@ import { NotificationBoxComponent } from './notification-box/notification-box.co
     AddEditColormapComponent,
     XpthresholdPanelComponent,
     NotificationBoxComponent,
+    FightWindowComponent,
   ],
   imports: [
     BrowserModule,
