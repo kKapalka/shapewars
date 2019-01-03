@@ -13,4 +13,7 @@ export class UserService {
   getPlayerData(login:string): Observable<object> {
     return this.http.get(this.urls.playerData+login, { responseType: 'json' });
   }
+  findFriendsByUsername(login:string): Observable<object>{
+    return this.http.get(this.urls.friends+login, { responseType: 'json' });
+  }
 }

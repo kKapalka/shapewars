@@ -22,5 +22,6 @@ export class UrlsService {
   lastMaintenanceMessage=this.host+"/maintenance-log/retrieve";
   allThresholds=this.host+"/thresholds/all";
   saveThreshold=this.host+"/thresholds/save";
+  friends = this.host+"/player/friends/";
   constructor() { }
 }

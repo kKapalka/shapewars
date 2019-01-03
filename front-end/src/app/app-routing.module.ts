@@ -15,6 +15,7 @@ import {AddEditSkillComponent} from "./admin/skill-panel/add-edit-skill/add-edit
 import {ColormapPanelComponent} from "./admin/colormap-panel/colormap-panel.component";
 import {AddEditColormapComponent} from "./admin/colormap-panel/add-edit-colormap/add-edit-colormap.component";
 import {XpthresholdPanelComponent} from "./admin/xpthreshold-panel/xpthreshold-panel.component";
+import {FightWindowComponent} from "./fight-window/fight-window.component";
 
 const routes: Routes = [
     {
@@ -26,8 +27,16 @@ const routes: Routes = [
         component: UserComponent
     },
     {
+      path: 'user/:username',
+      component: UserComponent,
+    },
+    {
         path: 'error',
         component: InactiveSiteComponent
+    },
+    {
+        path: 'fight',
+        component:FightWindowComponent,
     },
     {
         path: 'admin',
@@ -43,8 +52,8 @@ const routes: Routes = [
             component:XpthresholdPanelComponent
           },
           {
-          path: 'shapes',
-          component: ShapePanelComponent,
+            path: 'shapes',
+            component: ShapePanelComponent,
             pathMatch: 'full'
           },
           {
@@ -67,10 +76,6 @@ const routes: Routes = [
           {
             path: 'colors/:create',
             component: AddEditColormapComponent,
-          },
-          {
-            path: 'users',
-            component: UserPanelComponent,
           },
           {
             path: 'skills',

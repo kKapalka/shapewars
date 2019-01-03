@@ -6,6 +6,7 @@ import pl.edu.pwsztar.shapewars.entities.dto.PlayerDto;
 import pl.edu.pwsztar.shapewars.services.UserService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequestMapping("player")
 @RestController
@@ -28,5 +29,10 @@ public class PlayerController {
     @GetMapping("/generate?lvl={level}")
     public PlayerDto generateOpponentWithLevel(@PathVariable Long level){
         return PlayerDto.fromEntity(userService.generateOpponentWithLevel(level));
+    }
+
+    @GetMapping("/friends/{login}")
+    public List<PlayerDto> getFriendsByLogin(@PathVariable String login){
+        return userService.getFriendsByLogin(login).stream().map(PlayerDto::fromEntity).collect(Collectors.toList());
     }
 }

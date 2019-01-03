@@ -8,7 +8,7 @@
     </div>
     <ul class="nav navbar-inverse" routerLinkActive="active">
       <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
-      <li *ngIf="authority === 'user' && lastLogMessageType==='WORKING'" class="nav-item">
+      <li *ngIf="authority ==='user' || authority==='admin' && lastLogMessageType==='WORKING'" class="nav-item">
         <a class="nav-link" routerLink="user">Your profile</a>
       </li>
       <li *ngIf="authority === 'admin'" class="nav-item">

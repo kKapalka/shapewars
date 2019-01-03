@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {SkillsService} from "../../services/skills.service";
 import {ColormapService} from "../../services/colormap.service";
 
 @Component({

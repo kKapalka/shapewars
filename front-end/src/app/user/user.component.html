@@ -1,21 +1,31 @@
 <div class="container skill-panel">
   <div class="row">
     <div class="col-sm-6">
+      <div class="min-height:70vh">
       <h2>{{user.login}}</h2>
+        <div class="row">
+          AAA
+        </div>
+      </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-6" *ngIf="currentUser">
       <button>Edit user profile</button>
+      <div class="col-sm-8">
+        BBB
+      </div>
+    </div>
+    <div class="col-sm-6" *ngIf="!currentUser">
+      <button>Challenge</button>
+      <div class="col-sm-8">
+        CCC
+      </div>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-4">
-      <div class="row">
-        AAA
-      </div>
+
     </div>
-    <div class="col-sm-8">
-      BBB
-    </div>
+
   </div>
 </div>
 

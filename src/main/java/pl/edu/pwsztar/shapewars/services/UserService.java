@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pwsztar.shapewars.entities.Fight;
 import pl.edu.pwsztar.shapewars.entities.User;
+import pl.edu.pwsztar.shapewars.entities.dto.MessageDto;
 import pl.edu.pwsztar.shapewars.entities.dto.UserDto;
 import pl.edu.pwsztar.shapewars.entities.enums.FightStatus;
 import pl.edu.pwsztar.shapewars.entities.enums.FighterSlot;
@@ -27,6 +28,9 @@ public class UserService implements IUserService {
 
     @Autowired
     private FighterService fighterService;
+
+    @Autowired
+    private MessageService messageService;
 
     @Autowired
     private ExperienceThresholdService experienceThresholdService;
@@ -133,6 +137,15 @@ public class UserService implements IUserService {
             //it means it really is an AI
             delete(fight.getPlayerTwo());
         }
+    }
+
+    public List<User> getFriendsByLogin(String login){
+        Long userId = userRepository.findByLoginEquals(login).orElseThrow(EntityNotFoundException::new).getID();
+        List<Long> friendsIds= messageService.getAllMessagesByUserId(userId)
+                .stream().map(MessageDto::getReceiverId).filter(id-> !id.equals(userId)).collect(Collectors.toList());
+        friendsIds.addAll(messageService.getAllMessagesByUserId(userId)
+                .stream().map(MessageDto::getSenderId).filter(id-> !id.equals(userId)).collect(Collectors.toList()));
+        return userRepository.findAllById(friendsIds);
     }
 
 }

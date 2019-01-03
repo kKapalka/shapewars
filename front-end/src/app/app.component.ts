@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
     });
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();
+      console.log(this.roles);
       this.roles.every(role => {
         if (role === 'ROLE_ADMIN') {
           this.authority = 'admin';
@@ -33,6 +34,7 @@ export class AppComponent implements OnInit {
         return true;
       });
     }
+
   }
 
   onLogout(event){
