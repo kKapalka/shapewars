@@ -141,11 +141,11 @@ public class UserService implements IUserService {
 
     public List<User> getFriendsByLogin(String login){
         Long userId = userRepository.findByLoginEquals(login).orElseThrow(EntityNotFoundException::new).getID();
-        List<Long> friendsIds= messageService.getAllMessagesByUserId(userId)
-                .stream().map(MessageDto::getReceiverId).filter(id-> !id.equals(userId)).collect(Collectors.toList());
-        friendsIds.addAll(messageService.getAllMessagesByUserId(userId)
-                .stream().map(MessageDto::getSenderId).filter(id-> !id.equals(userId)).collect(Collectors.toList()));
-        return userRepository.findAllById(friendsIds);
+        List<String> friends= messageService.getAllMessagesByUserId(userId)
+                .stream().map(MessageDto::getReceiver).filter(frLogin-> !frLogin.equals(login)).collect(Collectors.toList());
+        friends.addAll(messageService.getAllMessagesByUserId(userId)
+                .stream().map(MessageDto::getSender).filter(frLogin-> !frLogin.equals(login)).collect(Collectors.toList()));
+        return userRepository.findAllByLoginIn(friends);
     }
 
 }

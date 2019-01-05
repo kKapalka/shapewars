@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from './auth/token-storage.service';
 import {MaintenanceService} from "./services/maintenance.service";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +12,8 @@ export class AppComponent implements OnInit {
   private authority: string;
   private lastLogMessage: any;
   private lastLogMessageType: string;
-  constructor(private tokenStorage: TokenStorageService, private maintenanceService:MaintenanceService) { }
+  constructor(private tokenStorage: TokenStorageService, private maintenanceService:MaintenanceService){
+  }
 
   ngOnInit() {
     this.maintenanceService.getLastMaintenanceLogMessage().subscribe(res=>{

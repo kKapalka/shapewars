@@ -23,5 +23,7 @@ export class UrlsService {
   allThresholds=this.host+"/thresholds/all";
   saveThreshold=this.host+"/thresholds/save";
   friends = this.host+"/player/friends/";
+  messagesByCallers = this.host+"/message/get";
+  messageSave = this.host+"/message/save";
   constructor() { }
 }

@@ -16,10 +16,19 @@
     </div>
     <div class="col-sm-6" *ngIf="!currentUser">
       <button>Challenge</button>
-      <div class="col-sm-8">
-        CCC
+        <ul style="min-height:60vh; overflow-y: scroll">
+          <li *ngFor="let message of messages">
+            <div>
+              <span style="font-size:12px; color:grey">{{message.sender+" - "+message.messageTime}}</span><br>
+              <span>{{message.message}}</span>
+            </div>
+          </li>
+          <li *ngIf="messages.length==0">
+            <span style="font-size:12px; color:grey">Start communicating with {{user.login}}</span>
+          </li>
+        </ul>
+        <input type="text" [(ngModel)]="messageToSend" style="width:80%"><button (click)="sendMessage()">send</button>
       </div>
-    </div>
   </div>
   <div class="row">
     <div class="col-sm-4">

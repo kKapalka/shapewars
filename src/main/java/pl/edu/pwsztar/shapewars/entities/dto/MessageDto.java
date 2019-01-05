@@ -8,16 +8,16 @@ import pl.edu.pwsztar.shapewars.entities.Message;
 @Data
 public class MessageDto {
     private Long id;
-    private Long senderId;
-    private Long receiverId;
+    private String sender;
+    private String receiver;
     private String messageTime;
     private String message;
 
     public static MessageDto fromEntity(Message message){
         return MessageDto.builder()
                 .id(message.getID())
-                .senderId(message.getSender().getID())
-                .receiverId(message.getReceiver().getID())
+                .sender(message.getSender().getLogin())
+                .receiver(message.getReceiver().getLogin())
                 .messageTime(message.getMessageTime().toString())
                 .message(message.getMessage())
                 .build();

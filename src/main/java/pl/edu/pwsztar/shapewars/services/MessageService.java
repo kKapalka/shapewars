@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pl.edu.pwsztar.shapewars.entities.Message;
+import pl.edu.pwsztar.shapewars.entities.User;
+import pl.edu.pwsztar.shapewars.entities.dto.CommunicationDto;
 import pl.edu.pwsztar.shapewars.entities.dto.MessageDto;
 import pl.edu.pwsztar.shapewars.repositories.MessageRepository;
 
@@ -32,13 +34,19 @@ public class MessageService {
         }
         message.setMessage(dto.getMessage());
         message.setMessageTime(LocalDateTime.now());
-        message.setSender(userService.getUserById(dto.getSenderId()));
-        message.setReceiver(userService.getUserById(dto.getReceiverId()));
+        message.setSender(userService.getUserByLogin(dto.getSender()));
+        message.setReceiver(userService.getUserByLogin(dto.getReceiver()));
         return message;
     }
 
-    public List<MessageDto> getAllMessagesByUserId(Long id){
-        return messageRepository.getAllBySenderOrReceiver(userService.getUserById(id))
+    public List<MessageDto> getAllMessagesByCallers(CommunicationDto dto){
+        List<User> callers = dto.getCallers().stream().map(caller->userService.getUserByLogin(caller)).collect(Collectors.toList());
+        List<MessageDto> list = messageRepository.getAllByCallers(callers.get(0),callers.get(1))
                 .stream().map(MessageDto::fromEntity).collect(Collectors.toList());
+        return list;
+    }
+    public List<MessageDto> getAllMessagesByUserId(Long userId){
+        User user = userService.getUserById(userId);
+        return messageRepository.getAllBySenderOrReceiver(user).stream().map(MessageDto::fromEntity).collect(Collectors.toList());
     }
 }

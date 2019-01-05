@@ -2,6 +2,7 @@ package pl.edu.pwsztar.shapewars.controllers.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.pwsztar.shapewars.entities.dto.CommunicationDto;
 import pl.edu.pwsztar.shapewars.entities.dto.MessageDto;
 import pl.edu.pwsztar.shapewars.services.MessageService;
 
@@ -20,8 +21,8 @@ public class MessageController {
         return messageService.save(dto);
     }
 
-    @GetMapping("get/user/{id}")
-    public List<MessageDto> getAllMessagesByUserId(@PathVariable Long id){
-        return messageService.getAllMessagesByUserId(id);
+    @PostMapping("get")
+    public List<MessageDto> getAllMessagesByCallers(@RequestBody CommunicationDto dto){
+        return messageService.getAllMessagesByCallers(dto);
     }
 }
