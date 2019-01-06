@@ -29,6 +29,7 @@ import { ColormapPanelComponent } from './admin/colormap-panel/colormap-panel.co
 import { AddEditColormapComponent } from './admin/colormap-panel/add-edit-colormap/add-edit-colormap.component';
 import { XpthresholdPanelComponent } from './admin/xpthreshold-panel/xpthreshold-panel.component';
 import { FightWindowComponent } from './fight-window/fight-window.component';
+import { ShapeInventoryComponent } from './user/shape-inventory/shape-inventory.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +51,7 @@ import { FightWindowComponent } from './fight-window/fight-window.component';
     AddEditColormapComponent,
     XpthresholdPanelComponent,
     FightWindowComponent,
+    ShapeInventoryComponent,
   ],
   imports: [
     BrowserModule,

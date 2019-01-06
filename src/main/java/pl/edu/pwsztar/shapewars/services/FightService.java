@@ -38,8 +38,8 @@ public class FightService {
             fight=fightRepository.getOne(dto.getId());
         } else{
             //only new fights can get their player set, because why would other option make sense?
-            fight.setPlayerOne(userService.getUserById(dto.getPlayerOneId()));
-            fight.setPlayerTwo(userService.getUserById(dto.getPlayerTwoId()));
+            fight.setPlayerOne(userService.getUserByLogin(dto.getPlayerOne()));
+            fight.setPlayerTwo(userService.getUserByLogin(dto.getPlayerTwo()));
         }
         fight.setFightStatus(FightStatus.valueOf(dto.getFightStatus()));
         return fight;

@@ -16,4 +16,7 @@ export class UserService {
   findFriendsByUsername(login:string): Observable<object>{
     return this.http.get(this.urls.friends+login, { responseType: 'json' });
   }
+  getFightersByUser(login:string): Observable<any>{
+    return this.http.get(this.urls.fightersByUser+login,{ responseType: 'json' })
+  }
 }

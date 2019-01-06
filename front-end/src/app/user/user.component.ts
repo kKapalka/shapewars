@@ -17,6 +17,8 @@ export class UserComponent implements OnInit, OnDestroy {
   currentUser:boolean=false;
   messages:any=[];
   interval:any;
+  fighters:any=[];
+  inventoryFighters:any=[];
   constructor(private token: TokenStorageService,private router:Router,
               private activatedRoute: ActivatedRoute,private service: UserService,
               private messageService:MessagesService) {
@@ -25,7 +27,6 @@ export class UserComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let lastMessageType = sessionStorage.getItem("LastLogType");
-    console.log(lastMessageType);
     if(lastMessageType && lastMessageType!=="WORKING"){
       window.location.href = "/error";
     }
@@ -35,10 +36,15 @@ export class UserComponent implements OnInit, OnDestroy {
           .subscribe(res => {
             if(this.messages!==res){
               this.messages=res;
-              console.log(res);
             }
           })
       }, 1500);
+    } else{
+      this.service.getFightersByUser(this.token.getUsername()).subscribe(res=>{
+        this.fighters=res;
+        this.inventoryFighters=res.filter(fighter=>fighter.slot==="INVENTORY");
+        console.log(res);
+      })
     }
   }
   checkIfThisPlayerProfile():boolean{
@@ -64,5 +70,15 @@ export class UserComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     clearInterval(this.interval);
+  }
+  challenge():any{
+    let challenge={
+      playerOne:this.token.getUsername(),
+      playerTwo:this.profileUsername,
+      fightStatus:"INVITE_PENDING"
+    };
+    this.messageService.challenge(challenge).subscribe(res=>{
+      console.log(res);
+    },console.log)
   }
 }

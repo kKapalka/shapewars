@@ -9,6 +9,7 @@ import pl.edu.pwsztar.shapewars.entities.dto.FighterDto;
 import pl.edu.pwsztar.shapewars.entities.enums.FighterSlot;
 import pl.edu.pwsztar.shapewars.repositories.FighterRepository;
 import pl.edu.pwsztar.shapewars.repositories.UserRepository;
+import pl.edu.pwsztar.shapewars.utilities.FighterImageGenerator;
 
 import java.util.List;
 
@@ -41,8 +42,8 @@ public class FighterService {
     public Fighter getFighterById(Long id){
         return fighterRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
-    public List<Fighter> getFightersByUserId(Long id){
-        User owner = userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    public List<Fighter> getFightersByLogin(String login){
+        User owner = userRepository.findByLoginEquals(login).orElseThrow(EntityNotFoundException::new);
         return fighterRepository.findAllByOwner(owner);
     }
     //Instancje jednostek - edycja następuje w tych przypadkach:
@@ -70,7 +71,7 @@ public class FighterService {
         fighter.setStrength(fighter.getShape().getBaselineStrength());
         fighter.setSpeed(fighter.getShape().getBaselineSpeed());
         fighter.setSlot(FighterSlot.INVENTORY);
-
+        fighter.setFighterImage(FighterImageGenerator.generateImageFrom(fighter.getShape(),fighter.getColor()));
         return fighterRepository.save(fighter);
     }
 }

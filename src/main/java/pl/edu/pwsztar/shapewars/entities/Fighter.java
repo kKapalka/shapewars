@@ -52,4 +52,6 @@ public class Fighter {
     @Column(name="SLOT")
     private FighterSlot slot;
 
+    @Column(name="FIGHTER_IMAGE")
+    private byte[] fighterImage;
 }

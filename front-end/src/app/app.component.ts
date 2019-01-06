@@ -24,16 +24,14 @@ export class AppComponent implements OnInit {
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();
       console.log(this.roles);
-      this.roles.every(role => {
+      this.roles.forEach(role => {
         if (role === 'ROLE_ADMIN') {
           this.authority = 'admin';
-          return false;
         } else if (role === 'ROLE_PM') {
           this.authority = 'pm';
-          return false;
+        } else if(role === 'ROLE_USER'){
+          this.authority = 'user';
         }
-        this.authority = 'user';
-        return true;
       });
     }
 

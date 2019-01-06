@@ -18,4 +18,7 @@ export class MessagesService {
   sendMessage(message:Message):Observable<any>{
     return this.http.post(this.urls.messageSave,message,{responseType: 'json'});
   }
+  challenge(challenge:any):Observable<any>{
+    return this.http.post(this.urls.challenge,challenge,{responseType: 'json'})
+  }
 }

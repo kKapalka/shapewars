@@ -22,9 +22,9 @@ public class FighterController {
         return fighterService.save(dto);
     }
 
-    @GetMapping("user/{id}")
-    public List<FighterDto> getByUserId(@PathVariable Long id){
-        return fighterService.getFightersByUserId(id).stream().map(FighterDto::fromEntity).collect(Collectors.toList());
+    @GetMapping("user/{login}")
+    public List<FighterDto> getByUserId(@PathVariable String login){
+        return fighterService.getFightersByLogin(login).stream().map(FighterDto::fromEntity).collect(Collectors.toList());
     }
 
 }

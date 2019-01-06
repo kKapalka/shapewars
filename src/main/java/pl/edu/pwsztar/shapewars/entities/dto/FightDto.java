@@ -9,15 +9,15 @@ import pl.edu.pwsztar.shapewars.entities.Fight;
 public class FightDto {
 
     private Long id;
-    private Long playerOneId;
-    private Long playerTwoId;
+    private String playerOne;
+    private String playerTwo;
     private String fightStatus;
 
     public static FightDto fromEntity(Fight fight){
         return FightDto.builder()
                         .id(fight.getID())
-                       .playerOneId(fight.getPlayerOne().getID())
-                       .playerTwoId(fight.getPlayerTwo().getID())
+                       .playerOne(fight.getPlayerOne().getLogin())
+                       .playerTwo(fight.getPlayerTwo().getLogin())
                        .fightStatus(fight.getFightStatus().name())
                         .build();
     }
