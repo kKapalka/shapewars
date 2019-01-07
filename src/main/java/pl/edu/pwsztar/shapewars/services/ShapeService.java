@@ -19,9 +19,14 @@ public class ShapeService {
     @Autowired
     private SkillService skillService;
 
+    @Autowired
+    private FighterService fighterService;
+
     public ShapeDto save(ShapeDto dto){
         Shape shape = updateShape(dto);
-        return ShapeDto.fromEntity(shapeRepository.save(shape));
+        Shape newShape = shapeRepository.save(shape);
+        fighterService.refreshFightersViaShape(newShape);
+        return ShapeDto.fromEntity(newShape);
     }
 
     private Shape updateShape(ShapeDto dto){

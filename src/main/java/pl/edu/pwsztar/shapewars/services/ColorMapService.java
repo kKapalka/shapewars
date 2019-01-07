@@ -21,6 +21,9 @@ public class ColorMapService {
     @Autowired
     private ColorMapRepository colorMapRepository;
 
+    @Autowired
+    private FighterService fighterService;
+
     public ColorMap getRandomColor(){
         List<ColorMap> allColors = colorMapRepository.findAll();
         return allColors.get(new Random().nextInt(allColors.size()));
@@ -28,7 +31,9 @@ public class ColorMapService {
 
     public ColorMapDto save(ColorMapDto dto){
         ColorMap color = updateColorMap(dto);
-        return ColorMapDto.fromEntity(colorMapRepository.save(color));
+        ColorMap newColor = colorMapRepository.save(color);
+        fighterService.refreshFightersViaColorMap(newColor);
+        return ColorMapDto.fromEntity(newColor);
     }
 
     private ColorMap updateColorMap(ColorMapDto dto) {

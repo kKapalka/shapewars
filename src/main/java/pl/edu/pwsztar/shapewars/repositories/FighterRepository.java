@@ -11,4 +11,9 @@ import java.util.List;
 public interface FighterRepository extends JpaRepository<Fighter,Long> {
 
     List<Fighter> findAllByOwner(User owner);
+
+    List<Fighter> findAllByShape(Shape shape);
+
+    List<ColorMap> findAllByColor(ColorMap color);
+
 }

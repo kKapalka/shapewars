@@ -74,4 +74,18 @@ public class FighterService {
         fighter.setFighterImage(FighterImageGenerator.generateImageFrom(fighter.getShape(),fighter.getColor()));
         return fighterRepository.save(fighter);
     }
+    public void refreshFightersViaShape(Shape shape){
+        List<Fighter> fighterList = fighterRepository.findAllByShape(shape);
+        fighterList.forEach(fighter->{
+            fighter.setFighterImage(FighterImageGenerator.generateImageFrom(fighter.getShape(),fighter.getColor()));
+            fighterRepository.save(fighter);
+        })
+    }
+    public void refreshFightersViaColorMap(ColorMap colorMap){
+        List<Fighter> fighterList = fighterRepository.findAllByColor(colorMap);
+        fighterList.forEach(fighter->{
+            fighter.setFighterImage(FighterImageGenerator.generateImageFrom(fighter.getShape(),fighter.getColor()));
+            fighterRepository.save(fighter);
+        })
+    }
 }
