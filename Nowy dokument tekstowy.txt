@@ -9,7 +9,7 @@ Lista zadañ:
 - Dodaæ u¿ytkownika admin/admin gdy baza u¿ytkowników jest pusta - low (0.9)
 - panel u¿ytkowników - administrator - inny administrator ma prawo do przyznania istniej¹cym u¿ytkownikom uprawnieñ administratorskich i dodania liczby losowych jednostek - mid (1.7)
 - zaimplementowaæ system walki - extreme (15.5)
-- panel administatora - powinien na samej górze mieæ inputkê do wstawiania MaintenanceLogów (pocz¹tek jest) i ¿eby z panelu admina nie wywala³o - low(0.8)
+- ¿eby, jeœli ostatni MaintenanceLog nie jest 'WORKING' to ¿eby robi³o popup zamiast paskudnie wiœwietlaæ na navbarze (0.5)
 - Serwisy od: Shape, ColorMap, Skill, ExperienceThreshold powinny automatycznie dodawaæ wpis do Changelog - mid (2.2)
 - Wyrzuciæ tabelkê Keyword - to nie bêdzie rozwijane - v_low(0.1)
 
