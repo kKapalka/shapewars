@@ -17,6 +17,7 @@ export class ShapeInventoryComponent implements OnInit {
     return this.fighters.filter(fighter=>fighter.slot!=='INVENTORY');
   }
   getInventoryFighters() {
+    console.log(this.fighters.filter(fighter => fighter.slot === 'INVENTORY'))
     return this.fighters.filter(fighter => fighter.slot === 'INVENTORY');
   }
 }

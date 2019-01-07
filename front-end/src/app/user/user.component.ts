@@ -18,6 +18,7 @@ export class UserComponent implements OnInit, OnDestroy {
   messages:any=[];
   interval:any;
   fighters:any=[];
+  partyFighters:any=[];
   inventoryFighters:any=[];
   constructor(private token: TokenStorageService,private router:Router,
               private activatedRoute: ActivatedRoute,private service: UserService,
@@ -43,6 +44,7 @@ export class UserComponent implements OnInit, OnDestroy {
       this.service.getFightersByUser(this.token.getUsername()).subscribe(res=>{
         this.fighters=res;
         this.inventoryFighters=res.filter(fighter=>fighter.slot==="INVENTORY");
+        this.partyFighters=res.filter(fighter=>fighter.slot!=='INVENTORY').sort((a,b)=>{a.slot.localeCompare(b.slot)});
         console.log(res);
       })
     }
@@ -80,5 +82,17 @@ export class UserComponent implements OnInit, OnDestroy {
     this.messageService.challenge(challenge).subscribe(res=>{
       console.log(res);
     },console.log)
+  }
+  
+  set(fighter,slot){
+    if(slot!=='INVENTORY'){
+      let currentSlotFighter=this.fighters.find(fighter=>fighter.slot===slot);
+      if(Boolean(currentSlotFighter)){
+        currentSlotFighter.slot='INVENTORY';
+      }
+    }
+    fighter.slot=slot;
+    this.inventoryFighters=this.fighters.filter(fighter=>fighter.slot==="INVENTORY");
+    this.partyFighters=this.fighters.filter(fighter=>fighter.slot!=='INVENTORY').sort((a,b)=>{return a.slot.localeCompare(b.slot)});
   }
 }
