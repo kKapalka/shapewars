@@ -19,7 +19,7 @@ public class FighterBaseDto {
         return FighterBaseDto.builder()
                 .id(entity.getID())
                 .name(entity.getShape().getName())
-                .color(entity.getColor().getColorName().name())
+                .color(entity.getColor().getColorName())
                 .level(entity.getLevel())
                 .xpPoints(entity.getExperiencePoints())
                 .slot(entity.getSlot().name()).build();

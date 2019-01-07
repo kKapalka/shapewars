@@ -15,7 +15,7 @@ public class ColorMapDto {
     public static ColorMapDto fromEntity(ColorMap colorMap){
         return ColorMapDto.builder()
                 .id(colorMap.getID())
-                .colorName(colorMap.getColorName().name())
+                .colorName(colorMap.getColorName())
                 .colorMap(new String(colorMap.getColorMap()))
                 .build();
     }

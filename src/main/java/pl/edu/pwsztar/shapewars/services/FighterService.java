@@ -5,10 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pwsztar.shapewars.entities.Fighter;
 import pl.edu.pwsztar.shapewars.entities.User;
+import pl.edu.pwsztar.shapewars.entities.Shape;
+import pl.edu.pwsztar.shapewars.entities.ColorMap;
 import pl.edu.pwsztar.shapewars.entities.dto.FighterDto;
 import pl.edu.pwsztar.shapewars.entities.enums.FighterSlot;
 import pl.edu.pwsztar.shapewars.repositories.FighterRepository;
 import pl.edu.pwsztar.shapewars.repositories.UserRepository;
+import pl.edu.pwsztar.shapewars.services.ShapeService;
+import pl.edu.pwsztar.shapewars.services.ColorMapService;
 import pl.edu.pwsztar.shapewars.utilities.FighterImageGenerator;
 
 import java.util.List;
@@ -79,13 +83,13 @@ public class FighterService {
         fighterList.forEach(fighter->{
             fighter.setFighterImage(FighterImageGenerator.generateImageFrom(fighter.getShape(),fighter.getColor()));
             fighterRepository.save(fighter);
-        })
+        });
     }
     public void refreshFightersViaColorMap(ColorMap colorMap){
         List<Fighter> fighterList = fighterRepository.findAllByColor(colorMap);
         fighterList.forEach(fighter->{
             fighter.setFighterImage(FighterImageGenerator.generateImageFrom(fighter.getShape(),fighter.getColor()));
             fighterRepository.save(fighter);
-        })
+        });
     }
 }

@@ -3,7 +3,6 @@ package pl.edu.pwsztar.shapewars.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.edu.pwsztar.shapewars.entities.enums.Colors;
 import pl.edu.pwsztar.shapewars.entities.enums.MessageType;
 
 import javax.persistence.*;

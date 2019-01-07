@@ -1,7 +1,6 @@
 package pl.edu.pwsztar.shapewars.entities;
 
 import lombok.*;
-import pl.edu.pwsztar.shapewars.entities.enums.Colors;
 import pl.edu.pwsztar.shapewars.entities.enums.FighterSlot;
 
 import javax.persistence.*;

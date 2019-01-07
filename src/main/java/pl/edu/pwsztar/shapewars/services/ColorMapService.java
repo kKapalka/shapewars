@@ -6,7 +6,6 @@ import pl.edu.pwsztar.shapewars.entities.ColorMap;
 import pl.edu.pwsztar.shapewars.entities.Fighter;
 import pl.edu.pwsztar.shapewars.entities.dto.ColorMapDto;
 import pl.edu.pwsztar.shapewars.entities.dto.FighterDto;
-import pl.edu.pwsztar.shapewars.entities.enums.Colors;
 import pl.edu.pwsztar.shapewars.repositories.ColorMapRepository;
 
 import javax.persistence.EntityNotFoundException;
@@ -41,7 +40,7 @@ public class ColorMapService {
         if(dto.getId()!=null){
             colorMap = getColorMapById(dto.getId());
         }
-        colorMap.setColorName(Colors.ColorType.valueOf(dto.getColorName()));
+        colorMap.setColorName(dto.getColorName());
         colorMap.setColorMap(dto.getColorMap().getBytes());
         return colorMap;
     }

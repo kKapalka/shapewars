@@ -35,7 +35,7 @@ public class FighterDto {
                 .xpPoints(fighter.getExperiencePoints().intValue())
                 .shapeSkillIDSet(fighter.getShape().getSkillSet().stream().map(Skill::getID).collect(Collectors.toList()))
                 .shapeSkillNameSet(fighter.getShape().getSkillSet().stream().map(Skill::getName).collect(Collectors.toList()))
-                .color(fighter.getColor().getColorName().name())
+                .color(fighter.getColor().getColorName())
                 .maximumHp(fighter.getHitPoints().intValue())
                 .currentHp(fighter.getHitPoints().intValue())
                 .strength(fighter.getStrength().intValue())

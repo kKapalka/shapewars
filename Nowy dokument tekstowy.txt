@@ -6,7 +6,6 @@ Lista zadañ:
 - Narysowaæ resztê kszta³tów (jeszcze tak z 3, do testów)
 - Dodaæ nowe umiejêtnoœci (z 2) i ikonki do nich (wszystkie)
 - dodaæ parametry do ColorMapy - obra¿enia zadawane innym kolorom
-- Wyj¹æ ENUMA z ColorMapy
 - Dodaæ u¿ytkownika admin/admin gdy baza u¿ytkowników jest pusta
 panel u¿ytkowników - administrator - inny administrator ma prawo do przyznania istniej¹cym u¿ytkownikom uprawnieñ administratorskich i dodania liczby losowych jednostek
 - zaimplementowaæ system walki
