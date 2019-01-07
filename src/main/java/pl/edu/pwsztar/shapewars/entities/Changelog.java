@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name="CHANGELOG")
-public class ColorMap {
+public class Changelog {
     @Id
     @GeneratedValue
     @Column(name="CHANGELOG_ID")

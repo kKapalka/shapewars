@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
-import {ActivatedRoute} from "@angular/router";
 import {TokenStorageService} from "../auth/token-storage.service";
+import {MaintenanceService} from "../services/maintenance.service";
+import MaintenanceMessage from "../dtos/maintenanceMessage";
 
 @Component({
   selector: 'app-admin',
@@ -10,13 +11,27 @@ import {TokenStorageService} from "../auth/token-storage.service";
 })
 export class AdminComponent implements OnInit {
   info: any;
-  board: string;
-  errorMessage: string;
-  constructor(private userService: UserService, private token: TokenStorageService) { }
+  form:MaintenanceMessage={};
+  messageTypes:string[];
+  constructor(private userService: UserService, private token: TokenStorageService,
+    private maintenanceService:MaintenanceService) { }
 
   ngOnInit() {
     if(!this.token.getAuthorities().includes("ROLE_ADMIN")){
       window.location.href = "/";
+    } else{
+      this.maintenanceService.getMessageTypes().subscribe(res=>{
+        this.messageTypes=res;
+        console.log(res);
+      });
     }
+
+  }
+  onSubmit(){
+    this.form.informerName=this.token.getUsername();
+    console.log(this.form);
+    this.maintenanceService.saveMaintenanceMessage(this.form).subscribe(res=>{
+      console.log(res);
+    })
   }
 }

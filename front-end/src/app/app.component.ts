@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from './auth/token-storage.service';
 import {MaintenanceService} from "./services/maintenance.service";
-import {Router} from "@angular/router";
+import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {MessagesService} from "./services/messages.service";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,7 +13,10 @@ export class AppComponent implements OnInit {
   private authority: string;
   private lastLogMessage: any;
   private lastLogMessageType: string;
-  constructor(private tokenStorage: TokenStorageService, private maintenanceService:MaintenanceService){
+  private closeResult:string;
+  constructor(private tokenStorage: TokenStorageService,
+              private maintenanceService:MaintenanceService,
+              private modalService:NgbModal){
   }
 
   ngOnInit() {
@@ -42,5 +46,20 @@ export class AppComponent implements OnInit {
     this.tokenStorage.signOut();
     window.location.pathname="/home";
   }
-
+  openMaintenanceMessage(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
 }
