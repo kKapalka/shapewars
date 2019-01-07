@@ -1,19 +1,15 @@
-JSON do zpaisu skillów:
-{
-	"name":"name",
-	"cost":1,
-	"skillEffectBundles":[
-		{
-			"accuracy":60,
-			"skillEffectDtos":[
-				{
-					"skillStatusEffect":"STUN",
-					"targetType":"ALL",
-					"minValue":1.55,
-					"maxValue":2.15,
-					"valueModifierType":"FLAT_VALUE"
-				}
-				]
-		}
-		]
-}
+Lista zadañ:
+- ograniczyæ umiejêtnoœci: inne ni¿ DEAL_DAMAGE, RESTORE_HEALTH nie powinny mieæ dostêpu do modów innych ni¿ "FLAT_VALUE"
+- Do profilu u¿ytkownika doczepiæ statystyki odnoœnie zwyciêstw/przegranych/opuszczeñ meczy
+- dodaæ nas³uchiwanie wyzwañ od u¿ytkownika
+- Zastosowaæ blokadê: je¿eli gracz ma chocia¿by jedn¹ walkê IN_PROGRESS, nie powinien móc siê przelokowaæ na 	inn¹ stronê
+- Narysowaæ resztê kszta³tów (jeszcze tak z 3, do testów)
+- Dodaæ nowe umiejêtnoœci (z 2) i ikonki do nich (wszystkie)
+- dodaæ parametry do ColorMapy - obra¿enia zadawane innym kolorom
+- Wyj¹æ ENUMA z ColorMapy
+- Dodaæ u¿ytkownika admin/admin gdy baza u¿ytkowników jest pusta
+panel u¿ytkowników - administrator - inny administrator ma prawo do przyznania istniej¹cym u¿ytkownikom uprawnieñ administratorskich i dodania liczby losowych jednostek
+- zaimplementowaæ system walki
+- panel administatora - powinien na samej górze mieæ inputkê do wstawiania MaintenanceLogów
+- nowa tabela - Changelog, zawieraj¹ca datê zmiany i synopsê zmiany
+- Serwisy od: Shape, ColorMap, Skill, ExperienceThreshold powinny automatycznie dodawaæ wpis do Changelog
