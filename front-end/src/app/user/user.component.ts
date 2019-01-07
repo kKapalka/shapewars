@@ -4,6 +4,9 @@ import {TokenStorageService} from "../auth/token-storage.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MessagesService} from "../services/messages.service";
 import Message from "../dtos/message";
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {SkillsService} from '../services/skills.service';
+import {Skill} from '../dtos/skill';
 
 @Component({
   selector: 'app-user',
@@ -13,16 +16,22 @@ import Message from "../dtos/message";
 export class UserComponent implements OnInit, OnDestroy {
   user: object;
   profileUsername:string;
+  closeResult:string;
   messageToSend:string;
   currentUser:boolean=false;
   messages:any=[];
   interval:any;
+  selectedFighter:any;
   fighters:any=[];
   partyFighters:any=[];
   inventoryFighters:any=[];
+  xpThreshold:any;
+  skills:any;
+  selectedFighterSkills:any;
   constructor(private token: TokenStorageService,private router:Router,
               private activatedRoute: ActivatedRoute,private service: UserService,
-              private messageService:MessagesService) {
+              private messageService:MessagesService, private modalService:NgbModal,
+              private skillService: SkillsService) {
     this.retrieveUserData();
   }
 
@@ -44,8 +53,10 @@ export class UserComponent implements OnInit, OnDestroy {
       this.service.getFightersByUser(this.token.getUsername()).subscribe(res=>{
         this.fighters=res;
         this.inventoryFighters=res.filter(fighter=>fighter.slot==="INVENTORY");
-        this.partyFighters=res.filter(fighter=>fighter.slot!=='INVENTORY').sort((a,b)=>{a.slot.localeCompare(b.slot)});
-        console.log(res);
+        this.partyFighters=res.filter(fighter=>fighter.slot!=='INVENTORY').sort((a,b)=>{return a.slot.localeCompare(b.slot)});
+      });
+      this.skillService.getAllSkills().subscribe(res=>{
+        this.skills=res;
       })
     }
   }
@@ -68,7 +79,10 @@ export class UserComponent implements OnInit, OnDestroy {
       receiver:this.profileUsername,
       message:this.messageToSend
     };
-    this.messageService.sendMessage(message).subscribe(console.log,console.log);
+    this.messageService.sendMessage(message).subscribe((res)=> {
+      console.log(res);
+      this.messageToSend="";
+    },console.log);
   }
   ngOnDestroy(): void {
     clearInterval(this.interval);
@@ -83,7 +97,7 @@ export class UserComponent implements OnInit, OnDestroy {
       console.log(res);
     },console.log)
   }
-  
+
   set(fighter,slot){
     if(slot!=='INVENTORY'){
       let currentSlotFighter=this.fighters.find(fighter=>fighter.slot===slot);
@@ -94,5 +108,28 @@ export class UserComponent implements OnInit, OnDestroy {
     fighter.slot=slot;
     this.inventoryFighters=this.fighters.filter(fighter=>fighter.slot==="INVENTORY");
     this.partyFighters=this.fighters.filter(fighter=>fighter.slot!=='INVENTORY').sort((a,b)=>{return a.slot.localeCompare(b.slot)});
+    this.service.saveFighter(fighter).subscribe(res=>{
+      console.log(res);
+    });
   }
+
+  openDetailsForFighter(fighter,content) {
+    this.selectedFighter=fighter;
+    this.selectedFighterSkills=this.skills.filter(skill=>this.selectedFighter.shapeSkillIDSet.includes(skill.id));
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+  
 }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ShapeInventoryComponent } from './shape-inventory.component';
+import { FighterDetailsComponent } from './fighter-details.component';
 
-describe('ShapeInventoryComponent', () => {
-  let component: ShapeInventoryComponent;
-  let fixture: ComponentFixture<ShapeInventoryComponent>;
+describe('FighterDetailsComponent', () => {
+  let component: FighterDetailsComponent;
+  let fixture: ComponentFixture<FighterDetailsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShapeInventoryComponent ]
+      declarations: [ FighterDetailsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShapeInventoryComponent);
+    fixture = TestBed.createComponent(FighterDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -27,5 +27,6 @@ export class UrlsService {
   messageSave = this.host+"/message/save";
   challenge=this.host+"/fight/save";
   fightersByUser=this.host+"/fighters/user/";
+  saveFighter=this.host+"/fighters/save";
   constructor() { }
 }

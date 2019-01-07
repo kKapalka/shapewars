@@ -21,3 +21,6 @@
 .nav-link:active, .navbar-brand:active{
   color:white!important;
 }
+.modal-dialog{
+  top:100px;
+}

@@ -1,3 +1,38 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Fighter Details: {{selectedFighter.color+ " "+selectedFighter
+      .shapeName}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-sm-12">
+      Level: {{selectedFighter.level}}
+      <br/>
+      Experience:{{selectedFighter.xpPoints}}
+      <br/>
+      Hit points: {{selectedFighter.maximumHp}}
+      <br/>
+      Strength: {{selectedFighter.strength}}
+      <br/>
+      Armor: {{selectedFighter.armor}}
+      <br/>
+      Speed: {{selectedFighter.speed}}
+      
+      <br/> Abilities:
+      <p *ngFor = "let skill of selectedFighterSkills">
+        <strong>{{skill.name}}</strong>{{' - '+skill.tooltip}}
+      </p>
+    </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+
 <div class="container skill-panel">
   <div class="row">
     <div class="col-sm-6">
@@ -8,6 +43,7 @@
         </div>
       </div>
     </div>
+
     <div class="col-sm-6" *ngIf="currentUser">
       <button>Edit user profile</button>
       <div class="col-sm-8">
@@ -28,7 +64,7 @@
               </div>
               <span class="dropdown-item" (click)="set(pFighter,'INVENTORY')">Move to inventory</span>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Show details</a>
+              <span class="dropdown-item" (click)="openDetailsForFighter(pFighter,content)">Show details</span>
             </div>
           </div>
         </div>
@@ -51,7 +87,7 @@
               <span class="dropdown-item" (click)="set(invFighter,'SLOT_3')">Move to slot 3</span>
               <span class="dropdown-item" (click)="set(invFighter,'SLOT_4')">Move to slot 4</span>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Show details</a>
+              <span class="dropdown-item" (click)="openDetailsForFighter(invFighter,content)">Show details</span>
             </div>
           </div>
         </div>
