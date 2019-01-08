@@ -40,4 +40,10 @@ export class UserService {
   getFightsByUser(login:string):Observable<any>{
     return this.http.post(this.urls.fightsByUser+login,{responseType:'json'});
   }
+  getChallengesForUser(login:string):Observable<any>{
+    return this.http.get(this.urls.challengesForUser+login,{responseType:'json'});
+  }
+  getChallengesByChallenger(login:string):Observable<any>{
+    return this.http.get(this.urls.challengesByChallenger+login,{responseType:'json'});
+  }
 }

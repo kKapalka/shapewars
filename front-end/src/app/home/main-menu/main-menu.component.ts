@@ -13,22 +13,30 @@ export class MainMenuComponent implements OnInit {
   searchUsername:string;
   friends:any;
   changelog:any;
+  challenges:any;
   constructor(private service:UserService, private router:Router) { }
 
   ngOnInit() {
-    console.log(this.info);
     this.service.findFriendsByUsername(this.info.username).subscribe(res=>{
       this.friends=res;
     })
     this.service.getChangelog().subscribe((res=>{
       this.changelog=res;
       console.log(res);
-    }))
+    }));
+    this.service.getChallengesForUser(this.info.username).subscribe(res=>{
+      this.challenges=res;
+    })
   }
   search(){
     this.service.getPlayerData(this.searchUsername).subscribe(()=>{
       this.router.navigate(["user",this.searchUsername]);
     },console.log);
-    console.log(this.searchUsername);
+  }
+  checkForChallenge(login:string):string{
+    if(this.challenges.map(challenge=>challenge.playerOne).includes(login)){
+      return "[CHALLENGER]";
+    }
+    return "";
   }
 }

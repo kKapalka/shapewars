@@ -24,7 +24,7 @@
     <div class="col-sm-4" style="max-height:70vh!important; overflow-y:scroll">
       <ul class="list-unstyled">
         <li *ngFor="let friend of friends">
-            <a routerLink="../user/{{friend.login}}"><h4>{{friend.login}}</h4></a>
+            <a routerLink="../user/{{friend.login}}"><h4>{{friend.login+checkForChallenge(friend.login)}}</h4></a>
         </li>
       </ul>
     </div>

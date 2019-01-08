@@ -14,11 +14,15 @@ public class FightDto {
     private String fightStatus;
 
     public static FightDto fromEntity(Fight fight){
-        return FightDto.builder()
-                        .id(fight.getID())
-                       .playerOne(fight.getPlayerOne().getLogin())
-                       .playerTwo(fight.getPlayerTwo().getLogin())
-                       .fightStatus(fight.getFightStatus().name())
-                        .build();
+        if(fight!=null) {
+            return FightDto.builder()
+                    .id(fight.getID())
+                    .playerOne(fight.getPlayerOne().getLogin())
+                    .playerTwo(fight.getPlayerTwo().getLogin())
+                    .fightStatus(fight.getFightStatus().name())
+                    .build();
+        } else{
+            return null;
+        }
     }
 }

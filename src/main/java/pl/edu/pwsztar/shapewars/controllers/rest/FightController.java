@@ -3,6 +3,7 @@ package pl.edu.pwsztar.shapewars.controllers.rest;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import pl.edu.pwsztar.shapewars.entities.dto.CommunicationDto;
@@ -18,12 +19,21 @@ public class FightController {
     private FightService fightService;
 
     @PostMapping("save")
-    public FightDto save(@RequestBody FightDto dto){
+    public FightDto save(@RequestBody FightDto dto) throws Exception {
         return fightService.save(dto);
     }
 
     @GetMapping("all/{login}")
     public List<FightDto> findByUser(@PathVariable String login){
         return fightService.findByUser(login).stream().map(FightDto::fromEntity).collect(Collectors.toList());
+    }
+
+    @GetMapping("challenges/{login}")
+    public List<FightDto> findChallengesByUser(@PathVariable String login){
+        return fightService.getChallengesForUser(login).stream().map(FightDto::fromEntity).collect(Collectors.toList());
+    }
+    @GetMapping("{login}")
+    public FightDto findByChallenger(@PathVariable String login){
+        return FightDto.fromEntity(fightService.findByChallenger(login));
     }
 }

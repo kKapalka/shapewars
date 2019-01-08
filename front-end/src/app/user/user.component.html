@@ -104,7 +104,13 @@
       </div>
     </div>
     <div class="col-sm-6" *ngIf="!currentUser">
-      <button (click)="challenge()">Challenge</button>
+      <div *ngIf="!challengeIssued">
+        <button (click)="challenge()">Challenge</button>
+      </div>
+      <div *ngIf="challengeIssued">
+        <button (click)="acceptChallenge()">Accept Challenge</button>
+        <button (click)="rejectChallenge()">Reject Challenge</button>
+      </div>
         <ul style="min-height:60vh; max-height: 60vh; overflow-y: scroll">
           <li *ngFor="let message of messages">
             <div>

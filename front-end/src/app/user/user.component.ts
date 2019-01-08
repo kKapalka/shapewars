@@ -24,7 +24,7 @@ export class UserComponent implements OnInit, OnDestroy {
   fighters:any=[];
   partyFighters:any=[];
   inventoryFighters:any=[];
-  xpThreshold:any;
+  challengeIssued:any;
   skills:any;
   selectedFighterSkills:any;
   fights={
@@ -45,7 +45,6 @@ export class UserComponent implements OnInit, OnDestroy {
       window.location.href = "/error";
     }
     this.service.getFightsByUser(this.profileUsername).subscribe(res=>{
-      console.log(res);
       this.fights={
         won: res.filter(fight=>((fight.playerOne==this.profileUsername && fight.status==='VICTORY_PLAYER_ONE')
                               || (fight.playerTwo==this.profileUsername && fight.status==='VICTORY_PLAYER_TWO'))).length,
@@ -64,6 +63,9 @@ export class UserComponent implements OnInit, OnDestroy {
             }
           })
       }, 1500);
+      this.service.getChallengesByChallenger(this.profileUsername).subscribe(res=>{
+        this.challengeIssued=res;
+      })
     } else{
       this.service.getFightersByUser(this.token.getUsername()).subscribe(res=>{
         this.fighters=res;
@@ -148,5 +150,18 @@ export class UserComponent implements OnInit, OnDestroy {
       return  `with: ${reason}`;
     }
   }
-  
+  acceptChallenge(){
+    this.challengeIssued.fightStatus="IN_PROGRESS";
+    this.messageService.challenge(this.challengeIssued).subscribe(res=>{
+      console.log(res);
+      this.challengeIssued=null;
+    })
+  }
+  rejectChallenge(){
+    this.challengeIssued.fightStatus="INVITE_REJECTED";
+    this.messageService.challenge(this.challengeIssued).subscribe(res=>{
+      console.log(res);
+      this.challengeIssued=null;
+    })
+  }
 }
