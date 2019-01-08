@@ -5,8 +5,7 @@ Lista zadañ:
 - Narysowaæ resztê kszta³tów (jeszcze tak z 3, do testów) - high (4.5)
 - Dodaæ nowe umiejêtnoœci (z 2) i ikonki do nich (wszystkie) - v_high (7.5)
 - dodaæ parametry do ColorMapy - obra¿enia zadawane innym kolorom - mid (3.2)
-- panel u¿ytkowników - administrator - inny administrator ma prawo do przyznania istniej¹cym u¿ytkownikom uprawnieñ administratorskich i dodania liczby losowych jednostek - mid (1.7) (I BANOWANIE)
 - zaimplementowaæ system walki - extreme (15.5)
-- ¿eby, jeœli ostatni MaintenanceLog nie jest 'WORKING' to ¿eby robi³o popup zamiast paskudnie wiœwietlaæ na navbarze (0.5)
+- ¿eby, jeœli ostatni MaintenanceLog nie jest 'WORKING' to ¿eby robi³o popup zamiast paskudnie wiœwietlaæ na navbarze (0.5, zale¿ne od zadania 2)
 
-13 zmian
+8 zmian
