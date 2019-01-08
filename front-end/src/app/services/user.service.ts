@@ -25,4 +25,16 @@ export class UserService {
   getChangelog():Observable<any>{
     return this.http.get(this.urls.changelog,{responseType:'json'})
   }
+  getAllPlayers():Observable<any>{
+    return this.http.get(this.urls.allPlayers,{responseType:'json'})
+  }
+  setPrivileges(dto:any):Observable<any>{
+    return this.http.post(this.urls.setPrivileges,dto,{responseType:'json'})
+  }
+  resetFighters(login:string):Observable<any>{
+    return this.http.post(this.urls.resetFighters+login,{responseType:'json'})
+  }
+  ban(login:string,token:string):Observable<any>{
+    return this.http.post(this.urls.ban+login,token,{responseType:'json'});
+  }
 }

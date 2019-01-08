@@ -27,8 +27,8 @@ const routes: Routes = [
         component: UserComponent
     },
     {
-      path: 'user/:username',
-      component: UserComponent,
+        path: 'user/:username',
+        component: UserComponent,
     },
     {
         path: 'error',
@@ -89,6 +89,11 @@ const routes: Routes = [
           {
             path: 'skills/create',
             component: AddEditSkillComponent
+          },
+          {
+            path: 'users',
+            component: UserPanelComponent,
+            pathMatch: 'full'
           },
         ]
     },

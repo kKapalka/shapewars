@@ -16,6 +16,11 @@ public class PlayerController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("all")
+    public List<PlayerDto> getAll(){
+        return userService.getAll().stream().map(PlayerDto::fromEntity).collect(Collectors.toList());
+    }
+
     @PostMapping("add-fighters/{id}")
     public PlayerDto addFighters(@RequestBody List<Long> list, @PathVariable Long id){
         return PlayerDto.fromEntity(userService.addFightersToUser(id,list));

@@ -147,5 +147,7 @@ public class UserService implements IUserService {
                 .stream().map(MessageDto::getSender).filter(frLogin-> !frLogin.equals(login)).collect(Collectors.toList()));
         return userRepository.findAllByLoginIn(friends);
     }
-
+    public List<User> getAll(){
+        return userRepository.findAll();
+    }
 }

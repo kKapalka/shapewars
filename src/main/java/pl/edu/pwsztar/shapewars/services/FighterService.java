@@ -92,4 +92,7 @@ public class FighterService {
             fighterRepository.save(fighter);
         });
     }
+    public void resetFighterList(User user){
+        fighterRepository.deleteAllByOwner(user);
+    }
 }

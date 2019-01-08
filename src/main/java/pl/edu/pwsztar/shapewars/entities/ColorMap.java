@@ -20,5 +20,4 @@ public class ColorMap {
 
     @Column(name="COLOR_MAP")
     private byte[] colorMap;
-
 }

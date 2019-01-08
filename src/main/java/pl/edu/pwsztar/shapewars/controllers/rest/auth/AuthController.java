@@ -1,8 +1,10 @@
 package pl.edu.pwsztar.shapewars.controllers.rest.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,13 +14,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pwsztar.shapewars.entities.User;
 import pl.edu.pwsztar.shapewars.entities.dto.LoginDto;
+import pl.edu.pwsztar.shapewars.entities.dto.PrivilegesDto;
 import pl.edu.pwsztar.shapewars.entities.dto.UserDto;
 import pl.edu.pwsztar.shapewars.messages.JwtResponse;
 import pl.edu.pwsztar.shapewars.messages.ResponseMessage;
 import pl.edu.pwsztar.shapewars.repositories.UserRepository;
 import pl.edu.pwsztar.shapewars.security.jwt.JwtProvider;
 import pl.edu.pwsztar.shapewars.services.FighterService;
+import pl.edu.pwsztar.shapewars.services.MaintenanceLogService;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.Arrays;
 
@@ -41,6 +46,25 @@ public class AuthController {
 
     @Autowired
     private FighterService fighterService;
+
+    @PostMapping("/privileges")
+    public ResponseEntity<?> grantPrivileges(@RequestBody PrivilegesDto dto){
+        User issuer =
+              userRepository.findByLoginEquals(jwtProvider.getUserNameFromJwtToken(dto.getIssuerToken().replaceAll("[\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]", ""))).orElseThrow(
+                    EntityNotFoundException::new);
+        if(!issuer.isAdmin()){
+            return new ResponseEntity<>(new ResponseMessage("Fail - you are not an admin to do this kind of things!"),
+                  HttpStatus.UNAUTHORIZED);
+        } else{
+            User newAdmin =
+                  userRepository.findByLoginEquals(dto.getSelectUsername()).orElseThrow(EntityNotFoundException::new);
+            newAdmin.setAdmin(dto.isAdmin());
+            userRepository.save(newAdmin);
+            return new ResponseEntity<>(new ResponseMessage("Success! "+dto.getSelectUsername()+(dto.isAdmin()?" is ":
+                                                            " is not ")+"an admin now!"),
+                  HttpStatus.OK);
+        }
+    }
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginDto loginRequest) {
@@ -81,5 +105,28 @@ public class AuthController {
         }
         return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);
     }
+    @PostMapping("/reset-fighters/{login}")
+    public ResponseEntity<?> resetFighters(@PathVariable String login){
+        User user = userRepository.findByLoginEquals(login).orElseThrow(EntityNotFoundException::new);
+        fighterService.resetFighterList(user);
+        user.setFighterList(Arrays.asList(fighterService.generateFighter(user),fighterService.generateFighter(user),
+              fighterService.generateFighter(user),fighterService.generateFighter(user)));
+        return new ResponseEntity<>(new ResponseMessage("Fighter list reset successfully!"), HttpStatus.OK);
+    }
 
+    @PostMapping("/ban/{login}")
+    public ResponseEntity<?> ban(@PathVariable String login, @RequestBody String token){
+        User issuer =
+              userRepository.findByLoginEquals(jwtProvider.getUserNameFromJwtToken(token.replaceAll("[\\x00-\\x09\\x0B" +
+                                                                                                "\\x0C\\x0E-\\x1F\\x7F]", ""))).orElseThrow(
+                    EntityNotFoundException::new);
+        if(!issuer.isAdmin()){
+            return new ResponseEntity<>(new ResponseMessage("Fail - you are not an admin to do this kind of things!"),
+                  HttpStatus.UNAUTHORIZED);
+        } else {
+            User user = userRepository.findByLoginEquals(login).orElseThrow(EntityNotFoundException::new);
+            userRepository.delete(user);
+            return new ResponseEntity<>(new ResponseMessage("Success! " + login + " has been banned!"), HttpStatus.OK);
+        }
+    }
 }

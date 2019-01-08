@@ -1,16 +1,12 @@
 Lista zadañ:
-- ograniczyæ umiejêtnoœci: inne ni¿ DEAL_DAMAGE, RESTORE_HEALTH nie powinny mieæ dostêpu do modów innych ni¿ "FLAT_VALUE" - low (0.5)
 - Do profilu u¿ytkownika doczepiæ statystyki odnoœnie zwyciêstw/przegranych/opuszczeñ meczy - mid (3.0)
 - dodaæ nas³uchiwanie wyzwañ od u¿ytkownika - mid-high (4.0)
 - Zastosowaæ blokadê: je¿eli gracz ma chocia¿by jedn¹ walkê IN_PROGRESS, nie powinien móc siê przelokowaæ na 	inn¹ stronê - low (0.7)
 - Narysowaæ resztê kszta³tów (jeszcze tak z 3, do testów) - high (4.5)
 - Dodaæ nowe umiejêtnoœci (z 2) i ikonki do nich (wszystkie) - v_high (7.5)
 - dodaæ parametry do ColorMapy - obra¿enia zadawane innym kolorom - mid (3.2)
-- Dodaæ u¿ytkownika admin/admin gdy baza u¿ytkowników jest pusta - low (0.9)
-- panel u¿ytkowników - administrator - inny administrator ma prawo do przyznania istniej¹cym u¿ytkownikom uprawnieñ administratorskich i dodania liczby losowych jednostek - mid (1.7)
+- panel u¿ytkowników - administrator - inny administrator ma prawo do przyznania istniej¹cym u¿ytkownikom uprawnieñ administratorskich i dodania liczby losowych jednostek - mid (1.7) (I BANOWANIE)
 - zaimplementowaæ system walki - extreme (15.5)
 - ¿eby, jeœli ostatni MaintenanceLog nie jest 'WORKING' to ¿eby robi³o popup zamiast paskudnie wiœwietlaæ na navbarze (0.5)
-- Serwisy od: Shape, ColorMap, Skill, ExperienceThreshold powinny automatycznie dodawaæ wpis do Changelog - mid (2.2)
-- Wyrzuciæ tabelkê Keyword - to nie bêdzie rozwijane - v_low(0.1)
 
 13 zmian

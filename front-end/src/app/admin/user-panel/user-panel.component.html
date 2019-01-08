@@ -1,25 +1,58 @@
 <div class="container skill-panel">
   <div class="row">
     <div class="col-sm-6">
-      <h2>Shape list</h2>
-    </div>
-    <div class="col-sm-6">
-      <button class="float-right btn btn-success" [routerLink]="['create']">Add new shape</button>
+      <h2>User list</h2>
     </div>
   </div>
 
-  <div class="row" *ngFor="let shape of shapes$">
-    <div class="col-sm-4">
-      <h4 style="text-align: center">{{shape.name}}</h4>
-      <img style="width:100px; height:100px; margin-left:20%" src="shape.image">
-    </div>
-    <div class="col-sm-7">
+  <div class="row">
+    <table mat-table [dataSource]="users" style="width:100%">
+      <!-- Status Effect Definition -->
+      <ng-container matColumnDef="login">
+        <mat-header-cell *matHeaderCellDef> Username </mat-header-cell>
+        <mat-cell *matCellDef="let el">
+          {{el.login}}
+        </mat-cell>
+      </ng-container>
 
-    </div>
-    <div class="col-sm-1">
-      <button class="btn btn-block" [routerLink]="[skill.id]">EDIT</button>
-      <button class="btn btn-block">DELETE</button>
-    </div>
+      <!-- Target Type Definition -->
+      <ng-container matColumnDef="admin">
+        <mat-header-cell *matHeaderCellDef> Admin Privileges </mat-header-cell>
+        <mat-cell *matCellDef="let el">
+          <mat-slide-toggle [(ngModel)]="el.admin" (change)="toggleAdminPrivileges(el)">
+          </mat-slide-toggle>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="fighterList">
+        <mat-header-cell *matHeaderCellDef> List of fighters </mat-header-cell>
+        <mat-cell *matCellDef="let el" >
+          {{el.allFighterList.length+":"}}
+          <ul>
+            <li *ngFor="let fighter of el.allFighterList">
+              {{"["+fighter.level+"]"+fighter.color + " "+fighter.name}}
+            </li>
+          </ul>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Options Definition -->
+      <ng-container matColumnDef="options">
+        <mat-header-cell *matHeaderCellDef>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let el">
+          <button class="btn btn-info" (click)="resetFighters(el.login)">Reset fighters</button>
+          <button class="btn btn-danger" (click)="ban(el.login)">BAN</button>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Header and Row Declarations -->
+      <mat-header-row
+        *matHeaderRowDef="['login', 'admin', 'fighterList', 'options']"></mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: ['login', 'admin', 'fighterList', 'options']"></mat-row>
+
+    </table>
   </div>
 </div>
 

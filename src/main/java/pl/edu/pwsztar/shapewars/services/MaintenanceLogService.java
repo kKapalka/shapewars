@@ -51,6 +51,7 @@ public class MaintenanceLogService {
     }
 
     public MaintenanceLogDto retrieveLatest(){
+
         return MaintenanceLogDto.fromEntity(maintenanceLogRepository.findFirstByOrderByMessageTimeDesc());
     }
 }

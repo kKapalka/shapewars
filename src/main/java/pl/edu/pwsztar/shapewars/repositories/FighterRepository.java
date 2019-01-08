@@ -8,6 +8,7 @@ import pl.edu.pwsztar.shapewars.entities.Shape;
 import pl.edu.pwsztar.shapewars.entities.ColorMap;
 
 import java.util.List;
+import javax.transaction.Transactional;
 
 @Repository
 public interface FighterRepository extends JpaRepository<Fighter,Long> {
@@ -18,4 +19,6 @@ public interface FighterRepository extends JpaRepository<Fighter,Long> {
 
     List<Fighter> findAllByColor(ColorMap color);
 
+    @Transactional
+    List<Fighter> deleteAllByOwner(User owner);
 }

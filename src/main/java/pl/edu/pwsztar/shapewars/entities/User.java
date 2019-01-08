@@ -36,10 +36,24 @@ public class User {
     @Column(name="XP_POINTS")
     private Long experiencePoints;
 
-    @OneToMany (mappedBy = "owner",cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "owner",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Fighter> fighterList;
 
     @Column(name="ADMIN")
     private boolean admin;
 
+    @OneToMany (mappedBy = "informer",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<MaintenanceLog> maintenanceLogList;
+
+    @OneToMany (mappedBy = "sender",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Message> messagesSent;
+
+    @OneToMany (mappedBy = "receiver",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Message> messagesReceived;
+
+    @OneToMany (mappedBy = "playerOne",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Fight> fightsAsPlayerOne;
+
+    @OneToMany (mappedBy = "playerTwo",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Fight> fightsAsPlayerTwo;
 }

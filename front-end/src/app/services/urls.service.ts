@@ -25,6 +25,10 @@ export class UrlsService {
   allThresholds=this.host+"/thresholds/all";
   saveThreshold=this.host+"/thresholds/save";
   friends = this.host+"/player/friends/";
+  allPlayers = this.host+"/player/all";
+  setPrivileges = this.host+"/auth/privileges";
+  resetFighters = this.host+"/auth/reset-fighters/";
+  ban = this.host+"/auth/ban/";
   messagesByCallers = this.host+"/message/get";
   messageSave = this.host+"/message/save";
   challenge=this.host+"/fight/save";

@@ -17,7 +17,7 @@ public class Fighter {
     @Column(name="FIGHTER_ID")
     private Long ID;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name="SHAPE_ID")
     private Shape shape;
 
@@ -31,7 +31,7 @@ public class Fighter {
     @Column(name="XP_POINTS")
     private Long experiencePoints;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name="COLOR_ID")
     private ColorMap color;
 
