@@ -2,11 +2,15 @@ package pl.edu.pwsztar.shapewars.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import pl.edu.pwsztar.shapewars.entities.Changelog;
 import pl.edu.pwsztar.shapewars.entities.Skill;
 import pl.edu.pwsztar.shapewars.entities.SkillEffectBundle;
 import pl.edu.pwsztar.shapewars.entities.dto.FighterDto;
 import pl.edu.pwsztar.shapewars.entities.dto.SkillDto;
+import pl.edu.pwsztar.shapewars.repositories.ChangelogRepository;
 import pl.edu.pwsztar.shapewars.repositories.SkillRepository;
+import pl.edu.pwsztar.shapewars.utilities.ChangelogUtility;
 import pl.edu.pwsztar.shapewars.utilities.TooltipCreator;
 
 import javax.persistence.EntityNotFoundException;
@@ -24,9 +28,16 @@ public class SkillService {
     @Autowired
     private SkillEffectBundleService skillEffectBundleService;
 
+    @Autowired
+    private ChangelogRepository changelogRepository;
+
     public SkillDto save(SkillDto skillDto){
+        Changelog changelog =
+              ChangelogUtility.compute(skillRepository.findById(skillDto.getId()).orElse(new Skill()),skillDto);
         Skill skill = updateSkill(skillDto);
-        return SkillDto.fromEntity(skillRepository.save(skill));
+        SkillDto newDto = SkillDto.fromEntity(skillRepository.save(skill));
+        changelogRepository.save(changelog);
+        return newDto;
     }
 
     public Skill updateSkill(SkillDto dto){

@@ -2,9 +2,13 @@ package pl.edu.pwsztar.shapewars.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import pl.edu.pwsztar.shapewars.entities.Changelog;
 import pl.edu.pwsztar.shapewars.entities.Shape;
 import pl.edu.pwsztar.shapewars.entities.dto.ShapeDto;
+import pl.edu.pwsztar.shapewars.repositories.ChangelogRepository;
 import pl.edu.pwsztar.shapewars.repositories.ShapeRepository;
+import pl.edu.pwsztar.shapewars.utilities.ChangelogUtility;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -22,9 +26,15 @@ public class ShapeService {
     @Autowired
     private FighterService fighterService;
 
+    @Autowired
+    private ChangelogRepository changelogRepository;
+
     public ShapeDto save(ShapeDto dto){
+        Changelog changelog =
+              ChangelogUtility.compute(shapeRepository.findById(dto.getId()).orElse(new Shape()),dto);
         Shape shape = updateShape(dto);
         Shape newShape = shapeRepository.save(shape);
+        changelogRepository.save(changelog);
         fighterService.refreshFightersViaShape(newShape);
         return ShapeDto.fromEntity(newShape);
     }

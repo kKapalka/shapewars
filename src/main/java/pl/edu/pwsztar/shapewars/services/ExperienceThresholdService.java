@@ -2,9 +2,13 @@ package pl.edu.pwsztar.shapewars.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import pl.edu.pwsztar.shapewars.entities.Changelog;
 import pl.edu.pwsztar.shapewars.entities.ExperienceThreshold;
 import pl.edu.pwsztar.shapewars.entities.dto.ExperienceThresholdDto;
+import pl.edu.pwsztar.shapewars.repositories.ChangelogRepository;
 import pl.edu.pwsztar.shapewars.repositories.ExperienceThresholdRepository;
+import pl.edu.pwsztar.shapewars.utilities.ChangelogUtility;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -15,8 +19,14 @@ public class ExperienceThresholdService {
     @Autowired
     private ExperienceThresholdRepository repository;
 
+    @Autowired
+    private ChangelogRepository changelogRepository;
+
     public ExperienceThresholdDto save(ExperienceThresholdDto dto){
+        Changelog changelog =
+              ChangelogUtility.compute(repository.findById(dto.getId()).orElse(new ExperienceThreshold()),dto);
         ExperienceThreshold threshold = updateThreshold(dto);
+        changelogRepository.save(changelog);
         return ExperienceThresholdDto.fromEntity(repository.save(threshold));
     }
 
