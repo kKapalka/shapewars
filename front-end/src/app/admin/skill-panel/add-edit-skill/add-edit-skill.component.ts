@@ -23,6 +23,12 @@ export class AddEditSkillComponent implements OnInit {
     this.retrieveSkillData();
     this.retrieveSkillEnums();
   }
+  filterValueModTypes(statusEffect){
+    if(['DEAL_DAMAGE','RESTORE_HEALTH'].includes(statusEffect)){
+      return this.valueModTypes;
+    }
+    return ['FLAT_VALUE'];
+  }
   removeBundle(ev,index){
     ev.preventDefault();
     this.form.skillEffectBundles.splice(index,1);

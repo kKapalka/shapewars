@@ -94,7 +94,8 @@
                      [(ngModel)]="el.valueModifierType"
                      #el.valueModifierType="ngModel"
                      required >
-                <mat-option *ngFor="let mod of valueModTypes" [value]="mod">{{mod}}</mat-option>
+                <mat-option *ngFor="let mod of filterValueModTypes(el.skillStatusEffect)" [value]="mod">{{mod
+                  }}</mat-option>
               </mat-select>
             </mat-cell>
           </ng-container>
