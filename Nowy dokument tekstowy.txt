@@ -5,6 +5,6 @@ Lista zadañ:
 - Dodaæ nowe umiejêtnoœci (z 2) i ikonki do nich (wszystkie) - v_high (7.5)
 - dodaæ parametry do ColorMapy - obra¿enia zadawane innym kolorom - mid (3.2)
 - zaimplementowaæ system walki - extreme (15.5)
-- ¿eby, jeœli ostatni MaintenanceLog nie jest 'WORKING' to ¿eby robi³o popup zamiast paskudnie wiœwietlaæ na navbarze (0.5, zale¿ne od zadania 2)
+- ¿eby, jeœli ostatni MaintenanceLog nie jest 'WORKING' to ¿eby robi³o popup zamiast paskudnie wiœwietlaæ na navbarze (0.5, zale¿ne od zadania 1)
 
 7 zmian
