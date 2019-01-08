@@ -1,5 +1,4 @@
 Lista zadañ:
-- Do profilu u¿ytkownika doczepiæ statystyki odnoœnie zwyciêstw/przegranych/opuszczeñ meczy - mid (3.0)
 - dodaæ nas³uchiwanie wyzwañ od u¿ytkownika - mid-high (4.0)
 - Zastosowaæ blokadê: je¿eli gracz ma chocia¿by jedn¹ walkê IN_PROGRESS, nie powinien móc siê przelokowaæ na 	inn¹ stronê - low (0.7)
 - Narysowaæ resztê kszta³tów (jeszcze tak z 3, do testów) - high (4.5)
@@ -8,4 +7,4 @@ Lista zadañ:
 - zaimplementowaæ system walki - extreme (15.5)
 - ¿eby, jeœli ostatni MaintenanceLog nie jest 'WORKING' to ¿eby robi³o popup zamiast paskudnie wiœwietlaæ na navbarze (0.5, zale¿ne od zadania 2)
 
-8 zmian
+7 zmian
