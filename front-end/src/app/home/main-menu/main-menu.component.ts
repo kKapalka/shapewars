@@ -12,6 +12,7 @@ export class MainMenuComponent implements OnInit {
   info;
   searchUsername:string;
   friends:any;
+  changelog:any;
   constructor(private service:UserService, private router:Router) { }
 
   ngOnInit() {
@@ -19,6 +20,10 @@ export class MainMenuComponent implements OnInit {
     this.service.findFriendsByUsername(this.info.username).subscribe(res=>{
       this.friends=res;
     })
+    this.service.getChangelog().subscribe((res=>{
+      this.changelog=res;
+      console.log(res);
+    }))
   }
   search(){
     this.service.getPlayerData(this.searchUsername).subscribe(()=>{

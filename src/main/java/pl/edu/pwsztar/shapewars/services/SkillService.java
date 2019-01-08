@@ -33,7 +33,8 @@ public class SkillService {
 
     public SkillDto save(SkillDto skillDto){
         Changelog changelog =
-              ChangelogUtility.compute(skillRepository.findById(skillDto.getId()).orElse(new Skill()),skillDto);
+              ChangelogUtility.compute(skillDto.getId()==null?new Skill():
+                                       skillRepository.findById(skillDto.getId()).orElse(new Skill()),skillDto);
         Skill skill = updateSkill(skillDto);
         SkillDto newDto = SkillDto.fromEntity(skillRepository.save(skill));
         changelogRepository.save(changelog);

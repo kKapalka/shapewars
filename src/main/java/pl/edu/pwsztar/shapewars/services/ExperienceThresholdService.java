@@ -24,7 +24,8 @@ public class ExperienceThresholdService {
 
     public ExperienceThresholdDto save(ExperienceThresholdDto dto){
         Changelog changelog =
-              ChangelogUtility.compute(repository.findById(dto.getId()).orElse(new ExperienceThreshold()),dto);
+              ChangelogUtility.compute(dto.getId()==null?new ExperienceThreshold():
+                                       repository.findById(dto.getId()).orElse(new ExperienceThreshold()),dto);
         ExperienceThreshold threshold = updateThreshold(dto);
         changelogRepository.save(changelog);
         return ExperienceThresholdDto.fromEntity(repository.save(threshold));

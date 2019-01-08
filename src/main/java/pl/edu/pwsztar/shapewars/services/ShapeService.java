@@ -31,7 +31,8 @@ public class ShapeService {
 
     public ShapeDto save(ShapeDto dto){
         Changelog changelog =
-              ChangelogUtility.compute(shapeRepository.findById(dto.getId()).orElse(new Shape()),dto);
+              ChangelogUtility.compute(dto.getId()==null?new Shape():
+                                       shapeRepository.findById(dto.getId()).orElse(new Shape()),dto);
         Shape shape = updateShape(dto);
         Shape newShape = shapeRepository.save(shape);
         changelogRepository.save(changelog);

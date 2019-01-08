@@ -22,4 +22,7 @@ export class UserService {
   saveFighter(fighter:any):Observable<any>{
     return this.http.post(this.urls.saveFighter,fighter,{responseType:'json'})
   }
+  getChangelog():Observable<any>{
+    return this.http.get(this.urls.changelog,{responseType:'json'})
+  }
 }

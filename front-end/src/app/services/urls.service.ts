@@ -30,5 +30,6 @@ export class UrlsService {
   challenge=this.host+"/fight/save";
   fightersByUser=this.host+"/fighters/user/";
   saveFighter=this.host+"/fighters/save";
+  changelog=this.host+"/changelog/all";
   constructor() { }
 }

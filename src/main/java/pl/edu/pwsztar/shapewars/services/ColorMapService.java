@@ -37,7 +37,8 @@ public class ColorMapService {
 
     public ColorMapDto save(ColorMapDto dto){
         Changelog changelog =
-              ChangelogUtility.compute(colorMapRepository.findById(dto.getId()).orElse(new ColorMap()),dto);
+              ChangelogUtility.compute(dto.getId()==null?new ColorMap():
+                                       colorMapRepository.findById(dto.getId()).orElse(new ColorMap()),dto);
         ColorMap color = updateColorMap(dto);
         ColorMap newColor = colorMapRepository.save(color);
         changelogRepository.save(changelog);

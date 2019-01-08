@@ -3,6 +3,7 @@ package pl.edu.pwsztar.shapewars.utilities;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -84,30 +85,25 @@ public class ChangelogUtility {
             if(!new String(shape.getImage()).equals(dto.getImage())){
                 changeSet.add("updated graphics");
             }
-            if(Arrays.asList(shape.getBaselineHp(),shape.getHPMinGrowth(),shape.getHPMaxGrowth())!=
-                  dto.getHpParameters()){
+            if(!Arrays.asList(shape.getBaselineHp(),shape.getHPMinGrowth(),shape.getHPMaxGrowth()).equals(dto.getHpParameters())){
                 changeSet.add("changed scaling on hitpoints");
             }
-            if(Arrays.asList(shape.getBaselineArmor(),shape.getARMMinGrowth(),shape.getARMMaxGrowth())!=
-               dto.getArmParameters()){
+            if(!Arrays.asList(shape.getBaselineArmor(),shape.getARMMinGrowth(),shape.getARMMaxGrowth()).equals(
+               dto.getArmParameters())){
                 changeSet.add("changed scaling on armor");
             }
-            if(Arrays.asList(shape.getBaselineStrength(),shape.getSTRMinGrowth(),shape.getSTRMaxGrowth())!=
-               dto.getStrParameters()){
+            if(!Arrays.asList(shape.getBaselineStrength(),shape.getSTRMinGrowth(),shape.getSTRMaxGrowth()).equals(
+               dto.getStrParameters())){
                 changeSet.add("changed scaling on strength");
             }
             if(!shape.getBaselineSpeed().equals(dto.getSpeed())){
                 changeSet.add("changed speed, from "+shape.getBaselineSpeed()+" to "+dto.getSpeed());
             }
             List<Long> shapeSkillSet = shape.getSkillSet().stream().map(Skill::getID).collect(Collectors.toList());
-            if(shapeSkillSet!=dto.getSkillIDset()){
+            if(!shapeSkillSet.equals(dto.getSkillIDset())){
                 changeSet.add("changed skillset");
             }
-            if(changeSet.size()>3){
-                change+="major overhaul";
-            } else{
-                change+= String.join(", ",changeSet);
-            }
+            change+= String.join(", ",changeSet);
         }
         return change;
     }
