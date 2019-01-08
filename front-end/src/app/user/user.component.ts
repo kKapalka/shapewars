@@ -6,7 +6,6 @@ import {MessagesService} from "../services/messages.service";
 import Message from "../dtos/message";
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {SkillsService} from '../services/skills.service';
-import {Skill} from '../dtos/skill';
 
 @Component({
   selector: 'app-user',
@@ -17,7 +16,7 @@ export class UserComponent implements OnInit, OnDestroy {
   user: object;
   profileUsername:string;
   closeResult:string;
-  messageToSend:string;
+  messageToSend:string="";
   currentUser:boolean=false;
   messages:any=[];
   interval:any;
@@ -28,6 +27,11 @@ export class UserComponent implements OnInit, OnDestroy {
   xpThreshold:any;
   skills:any;
   selectedFighterSkills:any;
+  fights={
+    won:0,
+    lost:0,
+    abandoned:0
+  };
   constructor(private token: TokenStorageService,private router:Router,
               private activatedRoute: ActivatedRoute,private service: UserService,
               private messageService:MessagesService, private modalService:NgbModal,
@@ -40,6 +44,17 @@ export class UserComponent implements OnInit, OnDestroy {
     if(lastMessageType && lastMessageType!=="WORKING"){
       window.location.href = "/error";
     }
+    this.service.getFightsByUser(this.profileUsername).subscribe(res=>{
+      console.log(res);
+      this.fights={
+        won: res.filter(fight=>((fight.playerOne==this.profileUsername && fight.status==='VICTORY_PLAYER_ONE')
+                              || (fight.playerTwo==this.profileUsername && fight.status==='VICTORY_PLAYER_TWO'))).length,
+        lost: res.filter(fight=>((fight.playerOne==this.profileUsername && fight.status==='VICTORY_PLAYER_TWO')
+          || (fight.playerTwo==this.profileUsername && fight.status==='VICTORY_PLAYER_ONE'))).length,
+        abandoned: res.filter(fight=>((fight.playerOne==this.profileUsername || fight.playerTwo==this.profileUsername)
+          && fight.status==='VICTORY_PLAYER_TWO')).length
+      };
+    })
     if(!this.checkIfThisPlayerProfile()) {
       this.interval = setInterval(() => {
         this.messageService.getMessagesByCallers([this.token.getUsername(), this.profileUsername])
@@ -73,16 +88,18 @@ export class UserComponent implements OnInit, OnDestroy {
       this.user=res;
     },console.log);
   }
-  sendMessage(){
-    let message:Message={
-      sender:this.token.getUsername(),
-      receiver:this.profileUsername,
-      message:this.messageToSend
-    };
-    this.messageService.sendMessage(message).subscribe((res)=> {
-      console.log(res);
-      this.messageToSend="";
-    },console.log);
+  sendMessage(event){
+    event.preventDefault();
+    if(this.messageToSend.length>0) {
+      let message: Message = {
+        sender: this.token.getUsername(),
+        receiver: this.profileUsername,
+        message: this.messageToSend
+      };
+      this.messageService.sendMessage(message).subscribe((res) => {
+        this.messageToSend = "";
+      }, console.log);
+    }
   }
   ngOnDestroy(): void {
     clearInterval(this.interval);

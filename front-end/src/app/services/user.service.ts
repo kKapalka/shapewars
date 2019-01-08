@@ -37,4 +37,7 @@ export class UserService {
   ban(login:string,token:string):Observable<any>{
     return this.http.post(this.urls.ban+login,token,{responseType:'json'});
   }
+  getFightsByUser(login:string):Observable<any>{
+    return this.http.post(this.urls.fightsByUser+login,{responseType:'json'});
+  }
 }

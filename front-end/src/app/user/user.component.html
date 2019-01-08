@@ -39,7 +39,17 @@
       <div class="min-height:70vh">
       <h2>{{user.login}}</h2>
         <div class="row">
-          AAA
+          <div class="col-sm-12">
+            Level: {{user.level}}
+            <br/>
+            Experience points: {{user.xpPoints}}
+            <br/>
+            Fights won: {{fights.won}}
+            <br/>
+            Fights lost: {{fights.lost}}
+            <br/>
+            Fights abandoned: {{fights.abandoned}}
+          </div>
         </div>
       </div>
     </div>
@@ -106,7 +116,11 @@
             <span style="font-size:12px; color:grey">Start communicating with {{user.login}}</span>
           </li>
         </ul>
-        <input type="text" [(ngModel)]="messageToSend" style="width:80%"><button (click)="sendMessage()">send</button>
+      <form (submit)="sendMessage($event)">
+        <input type="text" [(ngModel)]="messageToSend" style="width:80%" name="message"><button
+        class="btn btn-primary">Send
+      </button>
+      </form>
       </div>
   </div>
   <div class="row">

@@ -19,7 +19,9 @@ public interface FightRepository extends JpaRepository<Fight,Long> {
            " or (f.playerOne=?1 and f.fightStatus like 'VICTORY_PLAYER_TWO')")
     List<Fight> findAllLostByUser(User user);
 
-    @Query("select f from Fight f where (f.playerOne=?1 or f.playerOne=?2) and f.fightStatus like 'ABANDONED'")
+    @Query("select f from Fight f where (f.playerOne=?1 or f.playerOne=?1) and f.fightStatus like 'ABANDONED'")
     List<Fight> findAllAbandonedByUser(User user);
 
+    @Query("select f from Fight f where (f.playerOne=?1 or f.playerOne=?1)")
+    List<Fight> findByUser(User user);
 }

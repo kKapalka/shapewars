@@ -12,6 +12,7 @@ import pl.edu.pwsztar.shapewars.entities.enums.FightStatus;
 import pl.edu.pwsztar.shapewars.repositories.FightRepository;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class FightService {
@@ -46,5 +47,9 @@ public class FightService {
     }
     public Fight findFightById(Long id){
         return fightRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
+    public List<Fight> findByUser(String login){
+        return fightRepository.findByUser(userService.getUserByLogin(login));
     }
 }
