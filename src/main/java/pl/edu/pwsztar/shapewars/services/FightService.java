@@ -14,6 +14,7 @@ import pl.edu.pwsztar.shapewars.repositories.FightRepository;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FightService {
@@ -48,7 +49,13 @@ public class FightService {
             fight.setPlayerOne(userService.getUserByLogin(dto.getPlayerOne()));
             fight.setPlayerTwo(userService.getUserByLogin(dto.getPlayerTwo()));
         }
-        fight.setFightStatus(FightStatus.valueOf(dto.getFightStatus()));
+        if(fight.getFightStatus()==FightStatus.INVITE_PENDING && dto.getFightStatus().equals("IN_PROGRESS")) {
+            List<Fight> challengesToReject = fightRepository.findAllPendingInvitesForPlayers(Arrays.asList(fight.getPlayerOne(), fight.getPlayerTwo()));
+            challengesToReject.remove(fight);
+            fightRepository.updateFightsSetAsAbandoned(challengesToReject.stream().map(Fight::getID).collect(Collectors.toList()));
+        } else if(fight.getFightStatus()==FightStatus.INVITE_PENDING && !dto.getFightStatus().equals("INVITE_REJECTED")) {
+            fight.setFightStatus(FightStatus.valueOf(dto.getFightStatus()));
+        }
         return fight;
     }
     public Fight findFightById(Long id){
@@ -63,7 +70,7 @@ public class FightService {
         return fightRepository.findChallengesForUser(userService.getUserByLogin(login));
     }
     public Fight findByChallenger(String login){
-        List<Fight> list = fightRepository.findByChallenger(userService.getUserByLogin(login), PageRequest.of(0,1));
+        List<Fight> list = fightRepository.findByChallenger(userService.getUserByLogin(login));
         return list.size()>0?list.get(0):null;
     }
 }
