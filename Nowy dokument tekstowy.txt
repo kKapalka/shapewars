@@ -1,9 +1,8 @@
 Lista zadañ:
 - Narysowaæ umiejêtnoœci - mid(3.0)
-- dodaæ parametry do ColorMapy - obra¿enia zadawane innym kolorom - mid (2.2)
 - zaimplementowaæ system walki - extreme (15.5)
-- system komunikatów - high(6.0)
-4 zmiany
+2 zmiany
 (opcjonalne):
 - zablokowaæ wielokrotne logowanie
 - zablokowaæ wstawianie innych kszta³tów ni¿ 500x500px
+- system komunikatów - high(6.0)
