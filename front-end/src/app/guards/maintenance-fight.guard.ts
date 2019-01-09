@@ -11,8 +11,6 @@ export class MaintenanceFightGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-    console.log(sessionStorage.getItem("maintenanceMessageType"));
-    console.log(sessionStorage.getItem("fightStatus"));
     if(sessionStorage.getItem("maintenanceMessageType")!=='WORKING'){
       this.router.navigate(["error"]);
       return false;

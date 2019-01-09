@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import ColorMap from "../../../dtos/colorMap";
 import {ColormapService} from "../../../services/colormap.service";
+import ColorDamage from "../../../dtos/colorDamage";
 
 @Component({
   selector: 'app-add-edit-colormap',
@@ -10,33 +11,61 @@ import {ColormapService} from "../../../services/colormap.service";
 })
 export class AddEditColormapComponent implements OnInit {
 
-  form:ColorMap;
-  sampleShape:string;
-  canvas:HTMLCanvasElement;
-  constructor(private service: ColormapService, private router:Router,
+  form: ColorMap={};
+  allOtherColors: ColorMap[]=[];
+  sampleShape: string="";
+  canvas: HTMLCanvasElement;
+
+  constructor(private service: ColormapService, private router: Router,
               private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.retrieveColorData();
-    setTimeout(()=>{
+    setTimeout(() => {
       this.getSampleShapeIcon();
-    },1000);
+    }, 1000);
     // @ts-ignore
-    this.canvas=document.getElementById("iconCanvas");
+    this.canvas = document.getElementById("iconCanvas");
   }
-  retrieveColorData(){
-    let colorId:number=parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
-    if(!isNaN(colorId)) {
+
+  retrieveColorData() {
+    let colorId: number = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
+    this.service.getAllColors().subscribe((res) => {
+      this.allOtherColors = res;
+    });
+    if (!isNaN(colorId)) {
       this.activatedRoute.queryParams.subscribe(() => {
         this.service.getColorById(colorId).subscribe(res => {
+          this.allOtherColors = this.allOtherColors.filter(color => color.colorName != res.colorName);
           this.form = res;
+          let absentColors=this.allOtherColors
+            .filter(color=>!this.form.colorDamageDtoList.map
+            (presentColor=>presentColor.enemyColorName).includes(color.colorName));
+          let absentColorDamageList=absentColors
+            .map(color => ({
+              colorName: this.form.colorName,
+              enemyColorName: color.colorName,
+              damagePercentage: 100
+            }));
+          console.log(absentColorDamageList);
+          console.log(this.form.colorDamageDtoList);
+          if(this.form.colorDamageDtoList.length==0){
+            this.form.colorDamageDtoList=absentColorDamageList;
+          } else{
+            this.form.colorDamageDtoList=this.form.colorDamageDtoList.concat(absentColorDamageList);
+          }
         })
       });
-    } else{
+    } else {
       this.form = {
-        colorName:"",
-        colorMap:""
+        colorName: "",
+        colorMap: "",
+        colorDamageDtoList: this.allOtherColors.map(color => ({
+          colorName: this.form.colorName,
+          enemyColorName: color.colorName,
+          damagePercentage: 100
+        }))
       }
     }
   }

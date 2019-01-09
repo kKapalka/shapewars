@@ -7,7 +7,7 @@
   <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
     <div style="margin:0 40px">
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-7">
           <div class="form-group">
             <label for="icon">
               <div>
@@ -24,11 +24,38 @@
             </label>
           </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-5">
           <div class="form-group">
             <label>Color name</label>
             <input type="text" class="form-control" name="name" [(ngModel)]="form.colorName" #colorName="ngModel"
                    required style="font-weight: bold; font-size:175%; height:40px"/>
+          </div>
+          <div class="form-group">
+            <label>Damage dealt against other colors</label>
+            <table mat-table [dataSource]="form.colorDamageDtoList" style="width:100%">
+              <!-- Status Effect Definition -->
+              <ng-container matColumnDef="enemyColorName">
+                <mat-header-cell *matHeaderCellDef> Enemy Color Name </mat-header-cell>
+                <mat-cell *matCellDef="let el">
+                  {{el.enemyColorName}}
+                </mat-cell>
+              </ng-container>
+
+              <!-- Target Type Definition -->
+              <ng-container matColumnDef="damage">
+                <mat-header-cell *matHeaderCellDef> Damage Percentage </mat-header-cell>
+                <mat-cell *matCellDef="let el">
+                  <input type="number" [(ngModel)]="el.damagePercentage"
+                         #damagePercentage="ngModel" name="damagePercentage{{el.enemyColorName}}">
+                </mat-cell>
+              </ng-container>
+              <!-- Header and Row Declarations -->
+              <mat-header-row
+                *matHeaderRowDef="['enemyColorName', 'damage']"></mat-header-row>
+              <mat-row
+                *matRowDef="let row; columns: ['enemyColorName', 'damage']"></mat-row>
+
+            </table>
           </div>
         </div>
       </div>

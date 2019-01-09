@@ -53,7 +53,8 @@ public class FightService {
             List<Fight> challengesToReject = fightRepository.findAllPendingInvitesForPlayers(Arrays.asList(fight.getPlayerOne(), fight.getPlayerTwo()));
             challengesToReject.remove(fight);
             fightRepository.updateFightsSetAsAbandoned(challengesToReject.stream().map(Fight::getID).collect(Collectors.toList()));
-        } else if(fight.getFightStatus()==FightStatus.INVITE_PENDING && !dto.getFightStatus().equals("INVITE_REJECTED")) {
+        }
+        if(fight.getFightStatus()!=FightStatus.INVITE_REJECTED) {
             fight.setFightStatus(FightStatus.valueOf(dto.getFightStatus()));
         }
         return fight;

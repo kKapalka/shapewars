@@ -10,10 +10,10 @@ export class UserService {
 
   constructor(private http: HttpClient, private urls: UrlsService) { }
 
-  getPlayerData(login:string): Observable<object> {
+  getPlayerData(login:string): Observable<any> {
     return this.http.get(this.urls.playerData+login, { responseType: 'json' });
   }
-  findFriendsByUsername(login:string): Observable<object>{
+  findFriendsByUsername(login:string): Observable<any>{
     return this.http.get(this.urls.friends+login, { responseType: 'json' });
   }
   getFightersByUser(login:string): Observable<any>{

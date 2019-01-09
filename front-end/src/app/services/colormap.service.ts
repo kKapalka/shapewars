@@ -10,7 +10,7 @@ export class ColormapService {
 
   constructor(private http: HttpClient, private urls: UrlsService) { }
 
-  getAllColors(): Observable<object> {
+  getAllColors(): Observable<any> {
     return this.http.get(this.urls.allColors, { responseType: 'json' });
   }
   getColorById(id:number):Observable<any>{

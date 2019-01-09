@@ -103,14 +103,21 @@ export class UserComponent implements OnInit, OnDestroy {
     clearInterval(this.interval);
   }
   challenge():any{
-    let challenge={
-      playerOne:this.token.getUsername(),
-      playerTwo:this.profileUsername,
-      fightStatus:"INVITE_PENDING"
-    };
-    this.messageService.challenge(challenge).subscribe(res=>{
-      console.log(res);
-    },console.log)
+    this.service.getPlayerData(this.token.getUsername()).subscribe(res=>{
+      if(res.allFighterList.filter(fighter=>fighter.slot!=='INVENTORY').length!==4){
+        console.log("You must have complete party before challenging another player!");
+      } else{
+        let challenge={
+          playerOne:this.token.getUsername(),
+          playerTwo:this.profileUsername,
+          fightStatus:"INVITE_PENDING"
+        };
+        this.messageService.challenge(challenge).subscribe(res=>{
+          console.log(res);
+        },console.log)
+      }
+    });
+
   }
 
   set(fighter,slot){
@@ -147,11 +154,17 @@ export class UserComponent implements OnInit, OnDestroy {
     }
   }
   acceptChallenge(){
-    this.challengeIssued.fightStatus="IN_PROGRESS";
-    this.messageService.challenge(this.challengeIssued).subscribe(res=>{
-      console.log(res);
-      this.challengeIssued=null;
-    })
+    this.service.getPlayerData(this.token.getUsername()).subscribe(res=> {
+      if (res.allFighterList.filter(fighter => fighter.slot !== 'INVENTORY').length !== 4) {
+        console.log("You must have complete party before accepting a challenge from another player!");
+      } else {
+        this.challengeIssued.fightStatus = "IN_PROGRESS";
+        this.messageService.challenge(this.challengeIssued).subscribe(res => {
+          console.log(res);
+          this.challengeIssued = null;
+        });
+      }
+    });
   }
   rejectChallenge(){
     this.challengeIssued.fightStatus="INVITE_REJECTED";

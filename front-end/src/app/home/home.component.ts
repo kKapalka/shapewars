@@ -14,7 +14,6 @@ export class HomeComponent implements OnInit {
   constructor(private token: TokenStorageService, private router:Router) { }
 
   ngOnInit() {
-    console.log(sessionStorage.getItem("fightStatus"));
     if(sessionStorage.getItem("fightStatus")==='IN_PROGRESS'){
       if(this.router.url.toString().indexOf('fight')===-1){
         this.router.navigate(['fight']);
