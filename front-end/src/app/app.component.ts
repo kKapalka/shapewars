@@ -10,7 +10,6 @@ import {UserService} from "./services/user.service";
 export class AppComponent implements OnInit {
   private roles: string[];
   private authority: string;
-  private lastLogMessage: any;
   private lastLogMessageType: string;
   constructor(private tokenStorage: TokenStorageService,
               private maintenanceService:MaintenanceService){
@@ -18,9 +17,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.maintenanceService.getLastMaintenanceLogMessage().subscribe(res=>{
-      this.lastLogMessage = res;
-      this.lastLogMessageType = this.lastLogMessage.messageType;
-      localStorage.setItem("LastLogType",this.lastLogMessageType);
+      this.lastLogMessageType = res.messageType;
     });
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();

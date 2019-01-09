@@ -40,10 +40,6 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    let lastMessageType = sessionStorage.getItem("LastLogType");
-    if(lastMessageType && lastMessageType!=="WORKING"){
-      window.location.href = "/error";
-    }
     this.service.getFightsByUser(this.profileUsername).subscribe(res=>{
       this.fights={
         won: res.filter(fight=>((fight.playerOne==this.profileUsername && fight.status==='VICTORY_PLAYER_ONE')

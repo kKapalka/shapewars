@@ -16,31 +16,40 @@ import {ColormapPanelComponent} from "./admin/colormap-panel/colormap-panel.comp
 import {AddEditColormapComponent} from "./admin/colormap-panel/add-edit-colormap/add-edit-colormap.component";
 import {XpthresholdPanelComponent} from "./admin/xpthreshold-panel/xpthreshold-panel.component";
 import {FightWindowComponent} from "./fight-window/fight-window.component";
+import {AdminGuard} from "./guards/admin.guard";
+import {MaintenanceGuard} from "./guards/maintenance.guard";
+import {MaintenanceReverseGuard} from "./guards/maintenance-reverse.guard";
 
 const routes: Routes = [
     {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
+        canActivate:[MaintenanceGuard]
     },
     {
         path: 'user',
-        component: UserComponent
+        component: UserComponent,
+        canActivate:[MaintenanceGuard]
     },
     {
         path: 'user/:username',
         component: UserComponent,
+        canActivate:[MaintenanceGuard]
     },
     {
         path: 'error',
-        component: InactiveSiteComponent
+        component: InactiveSiteComponent,
+        canActivate:[MaintenanceReverseGuard]
     },
     {
         path: 'fight',
         component:FightWindowComponent,
+        canActivate:[MaintenanceGuard]
     },
     {
         path: 'admin',
         component: AdminComponent,
+        canActivate:[AdminGuard],
         children:[
           {
             path: '',
@@ -103,7 +112,8 @@ const routes: Routes = [
     },
     {
         path: 'signup',
-        component: RegisterComponent
+        component: RegisterComponent,
+        canActivate:[MaintenanceGuard]
     },
     {
         path: '',

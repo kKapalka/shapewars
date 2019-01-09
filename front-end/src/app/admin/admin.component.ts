@@ -17,15 +17,10 @@ export class AdminComponent implements OnInit {
     private maintenanceService:MaintenanceService) { }
 
   ngOnInit() {
-    if(!this.token.getAuthorities().includes("ROLE_ADMIN")){
-      window.location.href = "/";
-    } else{
-      this.maintenanceService.getMessageTypes().subscribe(res=>{
-        this.messageTypes=res;
-        console.log(res);
-      });
-    }
-
+    this.maintenanceService.getMessageTypes().subscribe(res=>{
+      this.messageTypes=res;
+      console.log(res);
+    });
   }
   onSubmit(){
     this.form.informerName=this.token.getUsername();

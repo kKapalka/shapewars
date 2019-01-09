@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {MaintenanceService} from "../services/maintenance.service";
+import MaintenanceMessage from "../dtos/maintenanceMessage";
 
 @Component({
   selector: 'app-inactive-site',
@@ -6,14 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inactive-site.component.css']
 })
 export class InactiveSiteComponent implements OnInit {
-
-  constructor() { }
+  message:MaintenanceMessage={};
+  constructor(private service:MaintenanceService) { }
 
   ngOnInit() {
-    let lastMessageType = localStorage.getItem("LastLogType");
-    if(lastMessageType==="WORKING"){
-      window.location.href = "/";
-    }
+
+    this.service.getLastMaintenanceLogMessage().subscribe(res=>{
+      this.message=res;
+    })
   }
 
 }

@@ -4,7 +4,7 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Shape Wars</a>
       <span *ngIf="lastLogMessageType!=='WORKING' && lastLogMessage" style="color:#aab">
-        {{"["+lastLogMessage.messageType+"] "+lastLogMessage.message + " - " + lastLogMessage.informerName + " (reported: " + lastLogMessage.messageTime + ")"}}
+        {{"["+lastLogMessageType+"]"}}
       </span>
     </div>
     <ul class="nav navbar-inverse" routerLinkActive="active">

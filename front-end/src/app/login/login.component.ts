@@ -22,10 +22,6 @@ export class LoginComponent implements OnInit {
               private tokenStorage: TokenStorageService, private router: Router) { }
 
   ngOnInit() {
-    let lastMessageType = localStorage.getItem("LastLogType");
-    if(lastMessageType!=="WORKING"){
-      window.location.href = "/error";
-    }
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getAuthorities();

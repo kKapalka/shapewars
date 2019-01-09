@@ -1,9 +1,8 @@
 Lista zadañ:
 - Zastosowaæ blokadê: je¿eli gracz ma chocia¿by jedn¹ walkê IN_PROGRESS, nie powinien móc siê przelokowaæ na 	inn¹ stronê - mid(1.7)
-- Narysowaæ resztê kszta³tów (jeszcze tak z 3, do testów) - high (4.5)
-- Dodaæ nowe umiejêtnoœci (z 2) i ikonki do nich (wszystkie) - v_high (7.5)
+- Narysowaæ kszta³ty i umiejêtnoœci - mid(4.5)
 - dodaæ parametry do ColorMapy - obra¿enia zadawane innym kolorom - mid (3.2)
 - zaimplementowaæ system walki - extreme (15.5)
 - ¿eby, jeœli ostatni MaintenanceLog nie jest 'WORKING' to ¿eby robi³o popup zamiast paskudnie wiœwietlaæ na navbarze (0.5, zale¿ne od zadania 1)
-
-6 zmian
+- system komunikatów - high(6.0)
+7 zmian

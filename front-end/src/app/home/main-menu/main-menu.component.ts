@@ -22,7 +22,6 @@ export class MainMenuComponent implements OnInit {
     })
     this.service.getChangelog().subscribe((res=>{
       this.changelog=res;
-      console.log(res);
     }));
     this.service.getChallengesForUser(this.info.username).subscribe(res=>{
       this.challenges=res;
