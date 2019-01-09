@@ -13,12 +13,14 @@
       <h4 style="text-align: center">{{color.colorName}}</h4>
       <img style="width:100px; height:100px; margin-left:20%" src="{{color.colorMap}}">
     </div>
-    <!--<div class="col-sm-8">-->
-      <!--<span style="white-space:pre-line">{{skill.tooltip}}</span>-->
-    <!--</div>-->
-    <div class="col-sm-2">
-      <button class="btn btn-block" [routerLink]="[color.id]">EDIT</button>
-      <button class="btn btn-block">DELETE</button>
+    <div class="col-sm-6" style="margin-top:20px">
+      <span style="white-space:pre-line">{{composeEffect(color)}}</span>
+    </div>
+    <div class="col-sm-4">
+      <div style="margin-top:20px">
+      <button class="btn btn-info" [routerLink]="[color.id]">EDIT</button>
+      <button class="btn btn-danger">DELETE</button>
+      </div>
     </div>
   </div>
 </div>
