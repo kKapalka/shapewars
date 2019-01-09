@@ -19,22 +19,22 @@ import {FightWindowComponent} from "./fight-window/fight-window.component";
 import {AdminGuard} from "./guards/admin.guard";
 import {MaintenanceGuard} from "./guards/maintenance.guard";
 import {MaintenanceReverseGuard} from "./guards/maintenance-reverse.guard";
+import {MaintenanceFightGuard} from "./guards/maintenance-fight.guard";
 
 const routes: Routes = [
     {
         path: 'home',
         component: HomeComponent,
-        canActivate:[MaintenanceGuard]
     },
     {
         path: 'user',
         component: UserComponent,
-        canActivate:[MaintenanceGuard]
+        canActivate:[MaintenanceFightGuard]
     },
     {
         path: 'user/:username',
         component: UserComponent,
-        canActivate:[MaintenanceGuard]
+        canActivate:[MaintenanceFightGuard]
     },
     {
         path: 'error',

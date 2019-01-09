@@ -38,7 +38,7 @@ export class UserService {
     return this.http.post(this.urls.ban+login,token,{responseType:'json'});
   }
   getFightsByUser(login:string):Observable<any>{
-    return this.http.post(this.urls.fightsByUser+login,{responseType:'json'});
+    return this.http.get(this.urls.fightsByUser+login,{responseType:'json'});
   }
   getChallengesForUser(login:string):Observable<any>{
     return this.http.get(this.urls.challengesForUser+login,{responseType:'json'});

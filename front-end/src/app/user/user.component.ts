@@ -13,20 +13,20 @@ import {SkillsService} from '../services/skills.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit, OnDestroy {
-  user: object;
-  profileUsername:string;
-  closeResult:string;
+  user: object={};
+  profileUsername:string="";
+  closeResult:string="";
   messageToSend:string="";
   currentUser:boolean=false;
   messages:any=[];
-  interval:any;
+  interval:any={};
   selectedFighter:any;
   fighters:any=[];
   partyFighters:any=[];
   inventoryFighters:any=[];
-  challengeIssued:any;
-  skills:any;
-  selectedFighterSkills:any;
+  challengeIssued:any={};
+  skills:any=[];
+  selectedFighterSkills:any=[];
   fights={
     won:0,
     lost:0,
@@ -42,12 +42,12 @@ export class UserComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.service.getFightsByUser(this.profileUsername).subscribe(res=>{
       this.fights={
-        won: res.filter(fight=>((fight.playerOne==this.profileUsername && fight.status==='VICTORY_PLAYER_ONE')
-                              || (fight.playerTwo==this.profileUsername && fight.status==='VICTORY_PLAYER_TWO'))).length,
-        lost: res.filter(fight=>((fight.playerOne==this.profileUsername && fight.status==='VICTORY_PLAYER_TWO')
-          || (fight.playerTwo==this.profileUsername && fight.status==='VICTORY_PLAYER_ONE'))).length,
+        won: res.filter(fight=>((fight.playerOne==this.profileUsername && fight.fightStatus==='VICTORY_PLAYER_ONE')
+                              || (fight.playerTwo==this.profileUsername && fight.fightStatus==='VICTORY_PLAYER_TWO'))).length,
+        lost: res.filter(fight=>((fight.playerOne==this.profileUsername && fight.fightStatus==='VICTORY_PLAYER_TWO')
+          || (fight.playerTwo==this.profileUsername && fight.fightStatus==='VICTORY_PLAYER_ONE'))).length,
         abandoned: res.filter(fight=>((fight.playerOne==this.profileUsername || fight.playerTwo==this.profileUsername)
-          && fight.status==='VICTORY_PLAYER_TWO')).length
+          && fight.fightStatus==='ABANDONED')).length
       };
     })
     if(!this.checkIfThisPlayerProfile()) {
