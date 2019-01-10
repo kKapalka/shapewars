@@ -58,15 +58,17 @@ export class AddEditColormapComponent implements OnInit {
         });
       },500);
     } else {
-      this.form = {
-        colorName: "",
-        colorMap: "",
-        colorDamageDtoList: this.allOtherColors.map(color => ({
-          colorName: this.form.colorName,
-          enemyColorName: color.colorName,
-          damagePercentage: 100
-        }))
-      }
+      setTimeout(() => {
+        this.form = {
+          colorName: "",
+          colorMap: "",
+          colorDamageDtoList: this.allOtherColors.map(color => ({
+            colorName: this.form.colorName,
+            enemyColorName: color.colorName,
+            damagePercentage: 100
+          }))
+        }
+      },500);
     }
   }
   getSampleShapeIcon(){

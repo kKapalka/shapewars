@@ -1,147 +1,149 @@
-<div class="row" style="position:relative; margin: 0 50px; left:-30px">
-      <div class="row" style="width:100%">
-        <div class="col-sm-9">
-          <h2 class="float-left"> Add/edit skill</h2>
-        </div>
-        <div class="col-sm-3">
-          <button class="float-right btn btn-success" (click)="addEffectBundle($event)">Add new effect bundle</button>
-        </div>
-      </div>
-  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate style="width:100%">
-  <mat-tab-group>
-    <mat-tab label="Basic info">
-      <div style="margin:0 40px">
-      <div class="row" style="width:100%">
-        <div class="col-sm-3">
-          <div class="form-group">
-            <label>Skill cost</label>
-            <input type="number" class="form-control" name="cost" [(ngModel)]="form.cost" #cost="ngModel"
-                   required />
-          </div>
-          <div class="form-group">
-            <label for="icon">
-              <div>Click icon to change:</div>
-              <img src="{{form.icon}}" style="width:150px; height:150px" />
-              <input type='file' (change)="onSelectFile($event)" id="icon" style="display:none">
-            </label>
-          </div>
-        </div>
+<div class="container skill-panel">
+  <div class="row" style="position:relative; margin: 0 50px; left:-30px">
+    <div class="row" style="width:100%">
       <div class="col-sm-9">
-        <div class="form-group">
-          <label>Skill name</label>
-          <input type="text" class="form-control" name="name" [(ngModel)]="form.name" #name="ngModel"
-                 required style="font-weight: bold; font-size:175%; height:40px"/>
-        </div>
-        <div class="form-group">
-          <label>Tooltip</label>
-          <textarea class="form-control" name="tooltip" [(ngModel)]="form.tooltip" #tooltip="ngModel"
-                    required rows="5" cols="120" disabled></textarea>
-        </div>
+        <h2 class="float-left"> Add/edit skill</h2>
       </div>
+      <div class="col-sm-3">
+        <button class="float-right btn btn-success" (click)="addEffectBundle($event)">Add new effect bundle</button>
       </div>
-      </div>
-    </mat-tab>
-    <mat-tab *ngFor="let bundle of form.skillEffectBundles; let i=index"
-             label="Effect Bundle{{' '+(form.skillEffectBundles.indexOf(bundle)+1)
-              +' (Accuracy: '+bundle.accuracy+'%)'}}">
-      <div style="margin: 0 40px">
-        <div class="row" style="width:100%">
-          <div class="col-sm-10">
-            <label>Accuracy (%)</label>
-            <input type="number" class="form-control" name="accuracy{{i}}"
-                   [(ngModel)]="bundle.accuracy"
-                   #bundle.accuracy="ngModel"
-                   required />
-          </div>
-          <div class="col-sm-2">
-            <button class="btn btn-danger" (click)="removeBundle($event,i)"> Remove this bundle</button>
-          </div>
-        </div>
-
-        <table mat-table [(dataSource)]="dataSources[i]" style="width:100%">
-          <!-- Status Effect Definition -->
-          <ng-container matColumnDef="skillStatusEffect">
-            <mat-header-cell *matHeaderCellDef> Status Effect </mat-header-cell>
-            <mat-cell *matCellDef="let el">
-              <mat-select class="form-control" name="skillStatusEffect{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
-                      [(ngModel)]="el.skillStatusEffect"
-                      #el.skillStatusEffect="ngModel"
-                      required>
-                <mat-option *ngFor="let effect of statusEffects" [value]="effect">{{effect}}</mat-option>
-              </mat-select>
-
-            </mat-cell>
-          </ng-container>
-
-          <!-- Target Type Definition -->
-          <ng-container matColumnDef="targetType">
-            <mat-header-cell *matHeaderCellDef> Target Type </mat-header-cell>
-            <mat-cell *matCellDef="let el">
-              <mat-select class="form-control" name="targetType{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
-                     [(ngModel)]="el.targetType"
-                     #el.targetType="ngModel"
-                     required >
-              <mat-option *ngFor="let type of targetTypes" [value]="type">{{type}}</mat-option>
-            </mat-select>
-            </mat-cell>
-          </ng-container>
-
-          <!-- Modifier Type Definition -->
-          <ng-container matColumnDef="valueModifierType">
-            <mat-header-cell *matHeaderCellDef> Value Modifier Type </mat-header-cell>
-            <mat-cell *matCellDef="let el">
-              <mat-select class="form-control" name="valueModifierType{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
-                     [(ngModel)]="el.valueModifierType"
-                     #el.valueModifierType="ngModel"
-                     required >
-                <mat-option *ngFor="let mod of filterValueModTypes(el.skillStatusEffect)" [value]="mod">{{mod
-                  }}</mat-option>
-              </mat-select>
-            </mat-cell>
-          </ng-container>
-
-          <!-- Min Value Definition -->
-          <ng-container matColumnDef="minValue">
-            <mat-header-cell *matHeaderCellDef>Minimum Value </mat-header-cell>
-            <mat-cell *matCellDef="let el">
-              <input type="number" class="form-control" name="minValue{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
-                     [(ngModel)]="el.minValue"
-                     #el.minValue="ngModel"
-                     required />
-            </mat-cell>
-          </ng-container>
-
-          <!-- Max Value Definition -->
-          <ng-container matColumnDef="maxValue">
-            <mat-header-cell *matHeaderCellDef> Maximum Value </mat-header-cell>
-            <mat-cell *matCellDef="let el">
-              <input type="number" class="form-control" name="maxValue{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
-                     [(ngModel)]="el.maxValue"
-                     #el.maxValue="ngModel"
-                     required />
-            </mat-cell>
-          </ng-container>
-
-          <!-- Options Definition -->
-          <ng-container matColumnDef="options">
-            <mat-header-cell *matHeaderCellDef>
-              <button (click)="addNewEffect($event,bundle)" class="btn btn-success"> Add new</button>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let el">
-              <button (click)="remove($event,bundle,el)" class="btn btn-danger">Remove</button>
-            </mat-cell>
-          </ng-container>
-
-          <!-- Header and Row Declarations -->
-          <mat-header-row *matHeaderRowDef="['skillStatusEffect', 'targetType', 'valueModifierType','minValue','maxValue','options']"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: ['skillStatusEffect', 'targetType', 'valueModifierType','minValue','maxValue','options']"></mat-row>
-
-        </table>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
-    <div class="form-group">
-      <button class="btn btn-primary">Submit changes</button>
     </div>
-  </form>
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate style="width:100%">
+      <mat-tab-group>
+        <mat-tab label="Basic info">
+          <div style="margin:0 40px">
+            <div class="row" style="width:100%">
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label>Skill cost</label>
+                  <input type="number" class="form-control" name="cost" [(ngModel)]="form.cost" #cost="ngModel"
+                         required />
+                </div>
+                <div class="form-group">
+                  <label for="icon">
+                    <div>Click icon to change:</div>
+                    <img src="{{form.icon}}" style="width:150px; height:150px" />
+                    <input type='file' (change)="onSelectFile($event)" id="icon" style="display:none">
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-9">
+                <div class="form-group">
+                  <label>Skill name</label>
+                  <input type="text" class="form-control" name="name" [(ngModel)]="form.name" #name="ngModel"
+                         required style="font-weight: bold; font-size:175%; height:40px"/>
+                </div>
+                <div class="form-group">
+                  <label>Tooltip</label>
+                  <textarea class="form-control" name="tooltip" [(ngModel)]="form.tooltip" #tooltip="ngModel"
+                            required rows="5" cols="120" disabled></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab *ngFor="let bundle of form.skillEffectBundles; let i=index"
+                 label="Effect Bundle{{' '+(form.skillEffectBundles.indexOf(bundle)+1)
+              +' (Accuracy: '+bundle.accuracy+'%)'}}">
+          <div style="margin: 0 40px">
+            <div class="row" style="width:100%">
+              <div class="col-sm-10">
+                <label>Accuracy (%)</label>
+                <input type="number" class="form-control" name="accuracy{{i}}"
+                       [(ngModel)]="bundle.accuracy"
+                       #bundle.accuracy="ngModel"
+                       required />
+              </div>
+              <div class="col-sm-2">
+                <button class="btn btn-danger" (click)="removeBundle($event,i)"> Remove this bundle</button>
+              </div>
+            </div>
+
+            <table mat-table [(dataSource)]="dataSources[i]" style="width:100%">
+              <!-- Status Effect Definition -->
+              <ng-container matColumnDef="skillStatusEffect">
+                <mat-header-cell *matHeaderCellDef> Status Effect </mat-header-cell>
+                <mat-cell *matCellDef="let el">
+                  <mat-select class="form-control" name="skillStatusEffect{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
+                              [(ngModel)]="el.skillStatusEffect"
+                              #el.skillStatusEffect="ngModel"
+                              required>
+                    <mat-option *ngFor="let effect of statusEffects" [value]="effect">{{effect}}</mat-option>
+                  </mat-select>
+
+                </mat-cell>
+              </ng-container>
+
+              <!-- Target Type Definition -->
+              <ng-container matColumnDef="targetType">
+                <mat-header-cell *matHeaderCellDef> Target Type </mat-header-cell>
+                <mat-cell *matCellDef="let el">
+                  <mat-select class="form-control" name="targetType{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
+                              [(ngModel)]="el.targetType"
+                              #el.targetType="ngModel"
+                              required >
+                    <mat-option *ngFor="let type of targetTypes" [value]="type">{{type}}</mat-option>
+                  </mat-select>
+                </mat-cell>
+              </ng-container>
+
+              <!-- Modifier Type Definition -->
+              <ng-container matColumnDef="valueModifierType">
+                <mat-header-cell *matHeaderCellDef> Value Modifier Type </mat-header-cell>
+                <mat-cell *matCellDef="let el">
+                  <mat-select class="form-control" name="valueModifierType{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
+                              [(ngModel)]="el.valueModifierType"
+                              #el.valueModifierType="ngModel"
+                              required >
+                    <mat-option *ngFor="let mod of filterValueModTypes(el.skillStatusEffect)" [value]="mod">{{mod
+                      }}</mat-option>
+                  </mat-select>
+                </mat-cell>
+              </ng-container>
+
+              <!-- Min Value Definition -->
+              <ng-container matColumnDef="minValue">
+                <mat-header-cell *matHeaderCellDef>Minimum Value </mat-header-cell>
+                <mat-cell *matCellDef="let el">
+                  <input type="number" class="form-control" name="minValue{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
+                         [(ngModel)]="el.minValue"
+                         #el.minValue="ngModel"
+                         required />
+                </mat-cell>
+              </ng-container>
+
+              <!-- Max Value Definition -->
+              <ng-container matColumnDef="maxValue">
+                <mat-header-cell *matHeaderCellDef> Maximum Value </mat-header-cell>
+                <mat-cell *matCellDef="let el">
+                  <input type="number" class="form-control" name="maxValue{{bundle.id+''+bundle.skillEffectDtos.indexOf(el)}}"
+                         [(ngModel)]="el.maxValue"
+                         #el.maxValue="ngModel"
+                         required />
+                </mat-cell>
+              </ng-container>
+
+              <!-- Options Definition -->
+              <ng-container matColumnDef="options">
+                <mat-header-cell *matHeaderCellDef>
+                  <button (click)="addNewEffect($event,bundle)" class="btn btn-success"> Add new</button>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let el">
+                  <button (click)="remove($event,bundle,el)" class="btn btn-danger">Remove</button>
+                </mat-cell>
+              </ng-container>
+
+              <!-- Header and Row Declarations -->
+              <mat-header-row *matHeaderRowDef="['skillStatusEffect', 'targetType', 'valueModifierType','minValue','maxValue','options']"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: ['skillStatusEffect', 'targetType', 'valueModifierType','minValue','maxValue','options']"></mat-row>
+
+            </table>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+      <div class="form-group">
+        <button class="btn btn-primary">Submit changes</button>
+      </div>
+    </form>
   </div>
+</div>
