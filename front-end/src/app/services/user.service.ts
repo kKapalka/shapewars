@@ -19,6 +19,9 @@ export class UserService {
   getFightersByUser(login:string): Observable<any>{
     return this.http.get(this.urls.fightersByUser+login,{ responseType: 'json' })
   }
+  getCombatantsByUser(login:string): Observable<any>{
+    return this.http.get(this.urls.combatantsByUser+login,{ responseType: 'json' })
+  }
   saveFighter(fighter:any):Observable<any>{
     return this.http.post(this.urls.saveFighter,fighter,{responseType:'json'})
   }

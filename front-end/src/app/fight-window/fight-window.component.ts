@@ -18,7 +18,7 @@ export class FightWindowComponent implements OnInit {
     console.log(this.token.getUsername());
     this.service.getPlayerData(this.token.getUsername()).subscribe(res=>{
       this.you=res;
-      this.service.getFightersByUser(this.token.getUsername()).subscribe(res=>{
+      this.service.getCombatantsByUser(this.token.getUsername()).subscribe(res=>{
         this.you.allFighterList=res;
       });
     });
@@ -32,7 +32,7 @@ export class FightWindowComponent implements OnInit {
       }
       this.service.getPlayerData(opponentName).subscribe(res=>{
         this.opponent=res;
-        this.service.getPlayerData(opponentName).subscribe(res=>{
+        this.service.getCombatantsByUser(opponentName).subscribe(res=>{
           this.opponent.allFighterList=res;
           console.log(this.you);
           console.log(this.opponent);

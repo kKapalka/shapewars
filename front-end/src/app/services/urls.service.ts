@@ -32,7 +32,8 @@ export class UrlsService {
   messagesByCallers = this.host+"/message/get";
   messageSave = this.host+"/message/save";
   challenge=this.host+"/fight/save";
-  fightersByUser=this.host+"/fighters/user/";
+  fightersByUser=this.host+"/fighters/";
+  combatantsByUser=this.host+"/fighters/combat/";
   saveFighter=this.host+"/fighters/save";
   changelog=this.host+"/changelog/all";
   fightsByUser=this.host+"/fight/all/";

@@ -46,6 +46,10 @@ public class FighterService {
     public Fighter getFighterById(Long id){
         return fighterRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
+    public List<Fighter> getCombatantsByLogin(String login){
+        User owner = userRepository.findByLoginEquals(login).orElseThrow(EntityNotFoundException::new);
+        return fighterRepository.findCombatantsForUser(owner);
+    }
     public List<Fighter> getFightersByLogin(String login){
         User owner = userRepository.findByLoginEquals(login).orElseThrow(EntityNotFoundException::new);
         return fighterRepository.findAllByOwner(owner);

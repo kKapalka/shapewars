@@ -1,4 +1,36 @@
 <div style="position:fixed; top: 0; left: 0; width:100%; height:100%">
-  <div style="width:100%; position:relative; height:75vh; background-color:#ff00ff"></div>
+  <div style="width:100%; position:relative; height:75vh;
+   background-image:url(../../assets/bg.jpg);
+  background-size:100% 100%;">
+
+    <div class="row" style="height:200px">
+
+    </div>
+    <div class="row" style="padding: 0 50px;">
+      <div class="col-sm-5">
+        <div class="row">
+          <div class="col-sm-3" *ngFor="let fighter of you.allFighterList">
+            <progress id="health{{fighter.id}}" value="{{fighter.currentHp}}"
+                      max="{{fighter.maximumHp}}" style="width:100%; height:20px;">
+              {{fighter.currentHp+" / "+fighter.maximumHp}}</progress>
+            <img src="{{fighter.fighterImage}}" style="width:100%; height:175px">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-5 offset-sm-2">
+        <div class="row">
+          <div class="col-sm-3" *ngFor="let enemyfighter of opponent.allFighterList">
+            <progress id="health{{enemyfighter.id}}" value="{{enemyfighter.currentHp}}"
+                      max="{{enemyfighter.maximumHp}}" style="width:100%; height:20px">
+              {{enemyfighter.currentHp+" / "+enemyfighter.maximumHp}}</progress>
+            <img src="{{enemyfighter.fighterImage}}" style="width:100%; height:175px; float:right">
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
   <div style="width:100%; position:relative; height:25vh; background: #00ff00"></div>
 </div>
