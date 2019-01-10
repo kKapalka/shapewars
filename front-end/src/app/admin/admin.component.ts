@@ -19,12 +19,10 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.maintenanceService.getMessageTypes().subscribe(res=>{
       this.messageTypes=res;
-      console.log(res);
     });
   }
   onSubmit(){
     this.form.informerName=this.token.getUsername();
-    console.log(this.form);
     this.maintenanceService.saveMaintenanceMessage(this.form).subscribe(res=>{
       console.log(res);
     })

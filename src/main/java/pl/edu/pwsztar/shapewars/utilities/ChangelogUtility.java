@@ -13,6 +13,7 @@ import pl.edu.pwsztar.shapewars.entities.ExperienceThreshold;
 import pl.edu.pwsztar.shapewars.entities.Shape;
 import pl.edu.pwsztar.shapewars.entities.Skill;
 import pl.edu.pwsztar.shapewars.entities.SkillEffectBundle;
+import pl.edu.pwsztar.shapewars.entities.dto.ColorDamageDto;
 import pl.edu.pwsztar.shapewars.entities.dto.ColorMapDto;
 import pl.edu.pwsztar.shapewars.entities.dto.ExperienceThresholdDto;
 import pl.edu.pwsztar.shapewars.entities.dto.ShapeDto;
@@ -46,8 +47,11 @@ public class ChangelogUtility {
             if(!colorMap.getColorName().equals(dto.getColorName())){
                 changeSet.add("renamed to "+dto.getColorName());
             }
-            if(!colorMap.getColorMap().equals(dto.getColorMap())){
+            if(!new String(colorMap.getColorMap()).equals(dto.getColorMap())){
                 changeSet.add("updated graphics");
+            }
+            if(!colorMap.getColorDamageList().stream().map(ColorDamageDto::fromEntity).collect(Collectors.toList()).equals(dto.getColorDamageDtoList())){
+                changeSet.add("changed % of damage dealt to other colors");
             }
             change+= String.join(", ",changeSet);
         }

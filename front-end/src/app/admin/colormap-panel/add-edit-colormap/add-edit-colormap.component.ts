@@ -35,28 +35,28 @@ export class AddEditColormapComponent implements OnInit {
       this.allOtherColors = res;
     });
     if (!isNaN(colorId)) {
-      this.activatedRoute.queryParams.subscribe(() => {
-        this.service.getColorById(colorId).subscribe(res => {
-          this.allOtherColors = this.allOtherColors.filter(color => color.colorName != res.colorName);
-          this.form = res;
-          let absentColors=this.allOtherColors
-            .filter(color=>!this.form.colorDamageDtoList.map
-            (presentColor=>presentColor.enemyColorName).includes(color.colorName));
-          let absentColorDamageList=absentColors
-            .map(color => ({
-              colorName: this.form.colorName,
-              enemyColorName: color.colorName,
-              damagePercentage: 100
-            }));
-          console.log(absentColorDamageList);
-          console.log(this.form.colorDamageDtoList);
-          if(this.form.colorDamageDtoList.length==0){
-            this.form.colorDamageDtoList=absentColorDamageList;
-          } else{
-            this.form.colorDamageDtoList=this.form.colorDamageDtoList.concat(absentColorDamageList);
-          }
-        })
-      });
+      setTimeout(()=>{
+        this.activatedRoute.queryParams.subscribe(() => {
+          this.service.getColorById(colorId).subscribe(res => {
+            this.allOtherColors = this.allOtherColors.filter(color => color.colorName != res.colorName);
+            this.form = res;
+            let absentColors=this.allOtherColors
+              .filter(color=>!this.form.colorDamageDtoList.map
+              (presentColor=>presentColor.enemyColorName).includes(color.colorName));
+            let absentColorDamageList=absentColors
+              .map(color => ({
+                colorName: this.form.colorName,
+                enemyColorName: color.colorName,
+                damagePercentage: 100
+              }));
+            if(this.form.colorDamageDtoList.length==0){
+              this.form.colorDamageDtoList=absentColorDamageList;
+            } else{
+              this.form.colorDamageDtoList=this.form.colorDamageDtoList.concat(absentColorDamageList);
+            }
+          })
+        });
+      },500);
     } else {
       this.form = {
         colorName: "",
