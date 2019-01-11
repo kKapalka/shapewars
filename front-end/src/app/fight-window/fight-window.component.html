@@ -1,36 +1,64 @@
 <div style="position:fixed; top: 0; left: 0; width:100%; height:100%">
-  <div style="width:100%; position:relative; height:75vh;
+  <div style="width:100%; position:relative; height:65vh;
    background-image:url(../../assets/bg.jpg);
   background-size:100% 100%;">
 
-    <div class="row" style="height:200px">
+    <div class="row" style="height:20vh">
 
     </div>
     <div class="row" style="padding: 0 50px;">
       <div class="col-sm-5">
         <div class="row">
-          <div class="col-sm-3" *ngFor="let fighter of you.allFighterList">
+          <div class="col-sm-3" *ngFor="let fighter of you.allFighterList"
+               [ngStyle]="fighter==currentFighter && {'border': '2px solid red'}">
             <progress id="health{{fighter.id}}" value="{{fighter.currentHp}}"
                       max="{{fighter.maximumHp}}" style="width:100%; height:20px;">
               {{fighter.currentHp+" / "+fighter.maximumHp}}</progress>
-            <img src="{{fighter.fighterImage}}" style="width:100%; height:175px">
+            <progress id="mana{{fighter.id}}" value="{{fighter.currentMana}}"
+                      max="{{fighter.maximumMana}}" style="width:100%; height:10px; color:blue;
+              background-color: blue"></progress>
+            <img src="{{fighter.fighterImage}}" style="width:100%; height:175px" (click)="performAttack(fighter)">
           </div>
         </div>
       </div>
       <div class="col-sm-5 offset-sm-2">
-        <div class="row">
-          <div class="col-sm-3" *ngFor="let enemyfighter of opponent.allFighterList">
+        <div class="row" style="flex-direction: row-reverse;">
+          <div class="col-sm-3" *ngFor="let enemyfighter of opponent.allFighterList"
+               [ngStyle]="enemyfighter==currentFighter && {'border': '2px solid red'}">
+
             <progress id="health{{enemyfighter.id}}" value="{{enemyfighter.currentHp}}"
                       max="{{enemyfighter.maximumHp}}" style="width:100%; height:20px">
               {{enemyfighter.currentHp+" / "+enemyfighter.maximumHp}}</progress>
-            <img src="{{enemyfighter.fighterImage}}" style="width:100%; height:175px; float:right">
-
-
+            <progress id="mana{{enemyfighter.id}}" value="{{enemyfighter.currentMana}}"
+                      max="{{enemyfighter.maximumMana}}" style="width:100%; height:10px; color:blue;
+              background-color: blue"></progress>
+            <img src="{{enemyfighter.fighterImage}}" style="width:100%; height:175px; float:right" (click)="performAttack(enemyfighter)">
           </div>
         </div>
       </div>
     </div>
 
   </div>
-  <div style="width:100%; position:relative; height:25vh; background: #00ff00"></div>
+  <div style="width:100%; position:relative; height:35vh; background: #3c454d">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="row">
+        <div style="margin-left:30px; padding:10px; width:100%; height:35vh;max-height:35vh; overflow-y:auto">
+
+        </div>
+        </div>
+      </div>
+      <div class="col-sm-4" style="padding-top: 80px">
+        <div class="row" *ngIf="currentFighter.id!==undefined">
+          <div class="col-sm-3" *ngFor="let skill of currentFighter.shapeSkillset">
+            <img src="{{skill.icon}}" style="width:100%" [ngStyle]="skill===currentSkill && {'border': '2px solid green'}"
+                 [matTooltip]="(skill.name+' - '+skill.tooltip)" (click)="selectSkill(skill)">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3" style="padding-top: 80px">
+        <button class="btn btn-danger float-right" (click)="abandonFight()">Abandon fight</button>
+      </div>
+    </div>
+  </div>
 </div>

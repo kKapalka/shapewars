@@ -47,4 +47,7 @@ export class UserService {
   getChallengesByChallenger(login:string):Observable<any>{
     return this.http.get(this.urls.challengesByChallenger+login,{responseType:'json'});
   }
+  challenge(challenge:any):Observable<any>{
+    return this.http.post(this.urls.challenge,challenge,{responseType: 'json'})
+  }
 }

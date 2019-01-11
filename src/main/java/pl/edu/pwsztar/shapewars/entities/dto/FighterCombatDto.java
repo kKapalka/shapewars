@@ -16,6 +16,8 @@ public class FighterCombatDto {
     private List<SkillDto> shapeSkillset;
     private String color;
     private int maximumHp;
+    private int currentMana;
+    private int maximumMana;
     private int currentHp;
     private int strength;
     private int armor;
@@ -31,6 +33,8 @@ public class FighterCombatDto {
                 .color(fighter.getColor().getColorName())
                 .maximumHp(fighter.getHitPoints().intValue())
                 .currentHp(fighter.getHitPoints().intValue())
+                .currentMana(100)
+                .maximumMana(100)
                 .strength(fighter.getStrength().intValue())
                 .armor(fighter.getArmor().intValue())
                 .speed(fighter.getSpeed().intValue())

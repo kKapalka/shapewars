@@ -2,6 +2,7 @@ package pl.edu.pwsztar.shapewars.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -25,4 +26,15 @@ public class ColorDamage {
 
     @Column(name="DAMAGE_PERCENTAGE")
     private Long damagePercentage = 100L;
+
+
+    @Override
+    public String toString() {
+        return "ColorDamage{" +
+                "ID=" + ID +
+                ", color=" + color.getColorName() +
+                ", enemyColor=" + enemyColor.getColorName() +
+                ", damagePercentage=" + damagePercentage +
+                '}';
+    }
 }

@@ -52,15 +52,14 @@ public class SkillEvaluator {
             eligibleTargets=eligibleTargets.stream().distinct().collect(Collectors.toList());
             eligibleTargets.forEach(target->{
                 TargetStatus newTargetStatus=new TargetStatus();
+                newTargetStatus.setAction(currentAction);
                 newTargetStatus.setTarget(target);
                 SkillEffectResult result = new SkillEffectResult();
                 result.setSkillEffect(effect);
-                if(new Random().nextInt(100)<bundle.getAccuracy()){
+                if(new Random().nextInt(100)>bundle.getAccuracy()){
                     result.setResult((double) 0);
-                    System.out.println("MISS");
                 } else{
-                    result.setResult(new Random().nextDouble()*(effect.getMaxValue()-effect.getMinValue())+effect.getMinValue());
-                    System.out.println("HIT");
+                    result.setResult((new Random().nextDouble()*(effect.getMaxValue()-effect.getMinValue()))+effect.getMinValue());
                 }
                 newTargetStatus.setSkillEffectResultList(Arrays.asList(result));
                 statuses.add(newTargetStatus);

@@ -112,7 +112,7 @@ export class UserComponent implements OnInit, OnDestroy {
           playerTwo:this.profileUsername,
           fightStatus:"INVITE_PENDING"
         };
-        this.messageService.challenge(challenge).subscribe(res=>{
+        this.service.challenge(challenge).subscribe(res=>{
           console.log(res);
         },console.log)
       }
@@ -159,7 +159,7 @@ export class UserComponent implements OnInit, OnDestroy {
         console.log("You must have complete party before accepting a challenge from another player!");
       } else {
         this.challengeIssued.fightStatus = "IN_PROGRESS";
-        this.messageService.challenge(this.challengeIssued).subscribe(res => {
+        this.service.challenge(this.challengeIssued).subscribe(res => {
           console.log(res);
           this.challengeIssued = null;
         });
@@ -168,7 +168,7 @@ export class UserComponent implements OnInit, OnDestroy {
   }
   rejectChallenge(){
     this.challengeIssued.fightStatus="INVITE_REJECTED";
-    this.messageService.challenge(this.challengeIssued).subscribe(res=>{
+    this.service.challenge(this.challengeIssued).subscribe(res=>{
       console.log(res);
       this.challengeIssued=null;
     })

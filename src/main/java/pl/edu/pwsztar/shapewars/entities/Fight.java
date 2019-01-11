@@ -32,4 +32,13 @@ public class Fight {
     @Column(name="FIGHT_STATUS")
     private FightStatus fightStatus;
 
+    @Override
+    public String toString() {
+        return "Fight{" +
+                "ID=" + ID +
+                ", playerOne=" + playerOne.getLogin() +
+                ", playerTwo=" + playerTwo.getLogin() +
+                ", fightStatus=" + fightStatus +
+                '}';
+    }
 }

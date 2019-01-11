@@ -41,5 +41,6 @@ export class UrlsService {
   challengesByChallenger=this.host+"/fight/";
   actionListForFight=this.host+"/action/";
   turnOrder=this.host+"/fight/turn-order/";
+  actionSave=this.host+"/action/save";
   constructor() { }
 }

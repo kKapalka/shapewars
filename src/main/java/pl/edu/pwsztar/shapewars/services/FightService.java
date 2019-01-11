@@ -99,7 +99,7 @@ public class FightService {
     private List<TurnOrder> createTurnOrders(FightCombatDto dto, Long turn){
         List<FighterSpeedDto> speeds = dto.getFighterSpeedDtos();
         Fight fight = fightRepository.findById(dto.getFightId()).orElseThrow(EntityNotFoundException::new);
-        speeds.sort((a, b)->(int)(a.getSpeed()-b.getSpeed()));
+        speeds.sort((a, b)->(int)(b.getSpeed()-a.getSpeed()));
         List<TurnOrder> turnOrders = speeds.stream().map(speed->{
             TurnOrder turnOrder = new TurnOrder();
             turnOrder.setFight(fight);

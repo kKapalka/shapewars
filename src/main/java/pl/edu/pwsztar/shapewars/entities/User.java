@@ -43,17 +43,22 @@ public class User {
     private boolean admin;
 
     @OneToMany (mappedBy = "informer",cascade = CascadeType.ALL,orphanRemoval = true)
+    @ToString.Exclude
     private List<MaintenanceLog> maintenanceLogList;
 
     @OneToMany (mappedBy = "sender",cascade = CascadeType.ALL,orphanRemoval = true)
+    @ToString.Exclude
     private List<Message> messagesSent;
 
     @OneToMany (mappedBy = "receiver",cascade = CascadeType.ALL,orphanRemoval = true)
+    @ToString.Exclude
     private List<Message> messagesReceived;
 
     @OneToMany (mappedBy = "playerOne",cascade = CascadeType.ALL,orphanRemoval = true)
+    @ToString.Exclude
     private List<Fight> fightsAsPlayerOne;
 
     @OneToMany (mappedBy = "playerTwo",cascade = CascadeType.ALL,orphanRemoval = true)
+    @ToString.Exclude
     private List<Fight> fightsAsPlayerTwo;
 }

@@ -24,7 +24,13 @@ import { AddEditSkillComponent } from './admin/skill-panel/add-edit-skill/add-ed
 import { AddEditShapeComponent } from './admin/shape-panel/add-edit-shape/add-edit-shape.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {MatProgressBarModule, MatSelectModule, MatSlideToggleModule, MatTableModule} from "@angular/material";
+import {
+  MatProgressBarModule,
+  MatSelectModule,
+  MatSlideToggleModule,
+  MatTableModule,
+  MatTooltipModule
+} from "@angular/material";
 import { ColormapPanelComponent } from './admin/colormap-panel/colormap-panel.component';
 import { AddEditColormapComponent } from './admin/colormap-panel/add-edit-colormap/add-edit-colormap.component';
 import { XpthresholdPanelComponent } from './admin/xpthreshold-panel/xpthreshold-panel.component';
@@ -64,7 +70,8 @@ import { FighterDetailsComponent } from './user/fighter-details/fighter-details.
     MatTableModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTooltipModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

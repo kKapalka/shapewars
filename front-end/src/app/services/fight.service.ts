@@ -19,4 +19,7 @@ export class FightService {
   getTurnOrderForFightAndTurn(fightCombatDto:any,turn:number)  : Observable<any>{
     return this.http.post(this.urls.turnOrder+turn,fightCombatDto,{ responseType: 'json' })
   }
+  saveAction(actionDto:any):Observable<any>{
+    return this.http.post(this.urls.actionSave,actionDto,{ responseType: 'json' })
+  }
 }

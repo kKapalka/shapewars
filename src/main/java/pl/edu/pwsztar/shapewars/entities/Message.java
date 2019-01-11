@@ -38,4 +38,14 @@ public class Message {
     private String message;
 
 
+    @Override
+    public String toString() {
+        return "Message{" +
+                "ID=" + ID +
+                ", sender=" + sender.getLogin() +
+                ", receiver=" + receiver.getLogin() +
+                ", messageTime=" + messageTime +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

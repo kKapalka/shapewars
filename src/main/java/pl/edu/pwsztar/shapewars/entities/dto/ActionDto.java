@@ -21,15 +21,15 @@ public class ActionDto {
 
     public static ActionDto fromEntity(Action action){
         return ActionDto.builder()
-                .id(action.getID())
+                .id(action.getId())
                 .fightId(action.getFight().getID())
                         .actionTime(action.getActionTime().toString())
                         .activeFighterId(action.getActiveFighter().getID())
                         .selectedTargetId(action.getSelectedTarget().getID())
-                        .nextActiveFighterId(action.getNextActiveFighter().getID())
+                        .nextActiveFighterId(action.getNextActiveFighter()!=null?action.getNextActiveFighter().getID():null)
                         .targetStatusDtoList(action.getTargetStatuses().stream().map(TargetStatusDto::fromEntity).collect(
                               Collectors.toList()))
-                        .skillId(action.getSkill().getID())
+                        .skillId(action.getSkill()!=null?action.getSkill().getID():null)
                 .build();
     }
 }

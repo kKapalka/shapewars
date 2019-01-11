@@ -13,6 +13,8 @@ import pl.edu.pwsztar.shapewars.entities.dto.FightDto;
 import pl.edu.pwsztar.shapewars.repositories.ActionRepository;
 import pl.edu.pwsztar.shapewars.utilities.SkillEvaluator;
 
+import javax.persistence.EntityNotFoundException;
+
 @Service
 public class ActionService {
 
@@ -30,20 +32,21 @@ public class ActionService {
 
     public ActionDto save(ActionDto dto){
         Action action = updateAction(dto);
-        return ActionDto.fromEntity(actionRepository.save(action));
+        Action newAction = actionRepository.save(action);
+        return ActionDto.fromEntity(newAction);
     }
     public List<Action> getActionsForFight(Long id){
         //żeby było po kolei
         List<Action> fightActions = actionRepository.findAllByFight(fightService.findFightById(id));
-        fightActions.sort((a,b)->(int)(a.getID()-b.getID()));
+        fightActions.sort((a,b)->(int)(a.getId()-b.getId()));
         return fightActions;
     }
     private Action updateAction(ActionDto dto){
         Action action = new Action();
         if(dto.getId()!=null){
-            action=actionRepository.getOne(dto.getId());
+            action=actionRepository.findById(dto.getId()).orElseThrow(EntityNotFoundException::new);
         }
-        action.setID(dto.getId());
+        action.setFight(fightService.findFightById(dto.getFightId()));
         if(dto.getSkillId()!=0){
             //skillId=0 -> postać nic nie robi/jest ogłuszona
             action.setSkill(skillService.getSkillsByIdIn(Arrays.asList(dto.getSkillId())).get(0));
@@ -55,7 +58,6 @@ public class ActionService {
             action.setNextActiveFighter(fighterService.getFighterById(dto.getNextActiveFighterId()));
         }
         action.setActionTime(LocalDateTime.now());
-        action.setFight(fightService.findFightById(dto.getFightId()));
         if(dto.getSkillId()!=0){
             //jak ogłuszony to nic nie robi
             action.setTargetStatuses(SkillEvaluator.perform(action));

@@ -1,8 +1,6 @@
 package pl.edu.pwsztar.shapewars.entities;
 
-import lombok.Builder;
 import lombok.Data;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -17,8 +15,8 @@ public class Action {
 
     @Id
     @GeneratedValue
-    @Column(name="ACTION_ID")
-    private Long ID;
+    @Column(name="ACTION")
+    private Long Id;
 
     @ManyToOne
     @JoinColumn(name="FIGHT_ID")
