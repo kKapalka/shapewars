@@ -6,11 +6,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import pl.edu.pwsztar.shapewars.entities.Fight;
+import pl.edu.pwsztar.shapewars.entities.TurnOrder;
 import pl.edu.pwsztar.shapewars.entities.User;
+import pl.edu.pwsztar.shapewars.entities.dto.FightCombatDto;
 import pl.edu.pwsztar.shapewars.entities.dto.FightDto;
 import pl.edu.pwsztar.shapewars.entities.dto.FighterDto;
+import pl.edu.pwsztar.shapewars.entities.dto.FighterSpeedDto;
 import pl.edu.pwsztar.shapewars.entities.enums.FightStatus;
+import pl.edu.pwsztar.shapewars.entities.enums.FighterSlot;
 import pl.edu.pwsztar.shapewars.repositories.FightRepository;
+import pl.edu.pwsztar.shapewars.repositories.TurnOrderRepository;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +28,13 @@ public class FightService {
     private FightRepository fightRepository;
 
     @Autowired
+    TurnOrderRepository turnOrderRepository;
+
+    @Autowired
     private UserService userService;
+
+    @Autowired
+    private FighterService fighterService;
 
     public FightDto save(FightDto dto) throws Exception {
         List<Fight> challenges = fightRepository.findChallengeByFightingSides(userService.getUserByLogin(dto.getPlayerOne()),
@@ -73,5 +84,30 @@ public class FightService {
     public Fight findByChallenger(String login){
         List<Fight> list = fightRepository.findByChallenger(userService.getUserByLogin(login));
         return list.size()>0?list.get(0):null;
+    }
+
+    public List<TurnOrder> getTurnOrderForFight(FightCombatDto dto, Long turn){
+        List<TurnOrder> turnOrders = turnOrderRepository.getTurnOrderForFightByTurnNumber(
+                fightRepository.findById(dto.getFightId()).orElseThrow(EntityNotFoundException::new),
+                turn);
+        if(turnOrders.size()!=8){
+            turnOrders = createTurnOrders(dto,turn);
+        }
+        return turnOrders;
+    }
+
+    private List<TurnOrder> createTurnOrders(FightCombatDto dto, Long turn){
+        List<FighterSpeedDto> speeds = dto.getFighterSpeedDtos();
+        Fight fight = fightRepository.findById(dto.getFightId()).orElseThrow(EntityNotFoundException::new);
+        speeds.sort((a, b)->(int)(a.getSpeed()-b.getSpeed()));
+        List<TurnOrder> turnOrders = speeds.stream().map(speed->{
+            TurnOrder turnOrder = new TurnOrder();
+            turnOrder.setFight(fight);
+            turnOrder.setTurn(turn);
+            turnOrder.setFighter(fighterService.getFighterById(speed.getFighterId()));
+            turnOrder.setOrder((long)speeds.indexOf(speed));
+            return turnOrder;
+        }).collect(Collectors.toList());
+        return turnOrderRepository.saveAll(turnOrders);
     }
 }

@@ -1,6 +1,7 @@
 Lista zadañ:
-- Narysowaæ umiejêtnoœci - mid(3.0)
-- zaimplementowaæ system walki - extreme (15.5)
+- zaimplementowaæ system walki - extreme (10.5)
+- ¿eby admin nie móg³ resetowaæ jednostek gracza który w³aœnie walczy - low(1.4)
+- napisaæ AI - high(7.7)
 2 zmiany
 (opcjonalne):
 - zablokowaæ wielokrotne logowanie

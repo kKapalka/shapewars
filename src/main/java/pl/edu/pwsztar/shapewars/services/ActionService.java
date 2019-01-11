@@ -33,7 +33,10 @@ public class ActionService {
         return ActionDto.fromEntity(actionRepository.save(action));
     }
     public List<Action> getActionsForFight(Long id){
-        return actionRepository.findAllByFight(fightService.findFightById(id));
+        //żeby było po kolei
+        List<Action> fightActions = actionRepository.findAllByFight(fightService.findFightById(id));
+        fightActions.sort((a,b)->(int)(a.getID()-b.getID()));
+        return fightActions;
     }
     private Action updateAction(ActionDto dto){
         Action action = new Action();
@@ -41,13 +44,22 @@ public class ActionService {
             action=actionRepository.getOne(dto.getId());
         }
         action.setID(dto.getId());
-        action.setSkill(skillService.getSkillsByIdIn(Arrays.asList(dto.getSkillId())).get(0));
+        if(dto.getSkillId()!=0){
+            //skillId=0 -> postać nic nie robi/jest ogłuszona
+            action.setSkill(skillService.getSkillsByIdIn(Arrays.asList(dto.getSkillId())).get(0));
+        }
         action.setActiveFighter(fighterService.getFighterById(dto.getActiveFighterId()));
         action.setSelectedTarget(fighterService.getFighterById(dto.getSelectedTargetId()));
-        action.setNextActiveFighter(fighterService.getFighterById(dto.getNextActiveFighterId()));
+        if(dto.getNextActiveFighterId()!=0){
+            //nie ma następnego wojownika -> trzeba utworzyć nową kolejkę
+            action.setNextActiveFighter(fighterService.getFighterById(dto.getNextActiveFighterId()));
+        }
         action.setActionTime(LocalDateTime.now());
         action.setFight(fightService.findFightById(dto.getFightId()));
-        action.setTargetStatuses(SkillEvaluator.perform(action));
+        if(dto.getSkillId()!=0){
+            //jak ogłuszony to nic nie robi
+            action.setTargetStatuses(SkillEvaluator.perform(action));
+        }
         return action;
     }
 

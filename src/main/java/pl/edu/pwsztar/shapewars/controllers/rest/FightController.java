@@ -7,7 +7,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import pl.edu.pwsztar.shapewars.entities.dto.CommunicationDto;
+import pl.edu.pwsztar.shapewars.entities.dto.FightCombatDto;
 import pl.edu.pwsztar.shapewars.entities.dto.FightDto;
+import pl.edu.pwsztar.shapewars.entities.dto.TurnOrderDto;
 import pl.edu.pwsztar.shapewars.services.FightService;
 
 @RestController
@@ -35,5 +37,9 @@ public class FightController {
     @GetMapping("{login}")
     public FightDto findByChallenger(@PathVariable String login){
         return FightDto.fromEntity(fightService.findByChallenger(login));
+    }
+    @PostMapping("/turn-order/{turn}")
+    public List<TurnOrderDto> getTurnOrder(@RequestBody FightCombatDto dto, @PathVariable Long turn){
+        return fightService.getTurnOrderForFight(dto,turn).stream().map(TurnOrderDto::fromEntity).collect(Collectors.toList());
     }
 }

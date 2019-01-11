@@ -39,5 +39,7 @@ export class UrlsService {
   fightsByUser=this.host+"/fight/all/";
   challengesForUser=this.host+"/fight/challenges/";
   challengesByChallenger=this.host+"/fight/";
+  actionListForFight=this.host+"/action/";
+  turnOrder=this.host+"/fight/turn-order/";
   constructor() { }
 }
