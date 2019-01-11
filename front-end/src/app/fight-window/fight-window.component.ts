@@ -15,6 +15,7 @@ export class FightWindowComponent implements OnInit {
   currentFight:any;
   actionList:any[]=[];
   lastActionId:any;
+  turnOrder:any;
   turn:any;
   interval:any;
   constructor(private service:UserService, private token:TokenStorageService,
@@ -40,26 +41,26 @@ export class FightWindowComponent implements OnInit {
         this.opponent=res;
         this.fightService.getCombatantsByUser(opponentName).subscribe(res=>{
           this.opponent.allFighterList=res;
-          console.log(this.you);
-          console.log(this.opponent);
           this.interval=setInterval(()=>{
             this.fightService.getActionListForFight(this.currentFight.id).subscribe(res=>{
               this.actionList=res;
-              if(this.actionList.length==0 || this.actionList[this.actionList.length-1].nextActiveFighterId===0){
+              if((this.actionList.length==0 && this.turn==0) ||
+                (this.actionList[this.actionList.length-1].nextActiveFighterId===0 && this.turn===Math.floor(this.actionList.length/8))){
                 let fighterSpeeds=this.you.allFighterList.map(fighter=>({
                   fighterId:fighter.id,
                     speed:fighter.speed
                 }));
-                fighterSpeeds=fighterSpeeds.merge(this.opponent.allFighterList.map(fighter=>({
+                fighterSpeeds=fighterSpeeds.concat(this.opponent.allFighterList.map(fighter=>({
                   fighterId:fighter.id,
                   speed:fighter.speed
                 })));
                 let fightCombatDto={
                   fightId:this.currentFight.id,
-                  fighterSpeeds:fighterSpeeds
+                  fighterSpeedDtos:fighterSpeeds
                 };
-                this.fightService.getTurnOrderForFightAndTurn(fightCombatDto,Math.floor(this.actionList.length)+1).subscribe(res=>{
-                  console.log(res);
+                this.turn=Math.floor(this.actionList.length/8)+1;
+                this.fightService.getTurnOrderForFightAndTurn(fightCombatDto,this.turn).subscribe(res=>{
+                  this.turnOrder=res;
                 })
               }
             })

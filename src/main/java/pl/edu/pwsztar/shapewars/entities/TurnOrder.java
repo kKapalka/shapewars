@@ -1,16 +1,12 @@
 package pl.edu.pwsztar.shapewars.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name="TURN_ORDER")
 public class TurnOrder {
@@ -31,6 +27,6 @@ public class TurnOrder {
     @Column(name="TURN")
     private Long turn;
 
-    @Column(name="ORDER")
+    @Column(name="TURN_ORDER")
     private Long order;
 }

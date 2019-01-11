@@ -28,7 +28,7 @@ public class FightService {
     private FightRepository fightRepository;
 
     @Autowired
-    TurnOrderRepository turnOrderRepository;
+    private TurnOrderRepository turnOrderRepository;
 
     @Autowired
     private UserService userService;
