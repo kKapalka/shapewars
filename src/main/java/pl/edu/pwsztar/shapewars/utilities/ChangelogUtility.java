@@ -53,6 +53,9 @@ public class ChangelogUtility {
             if(!colorMap.getColorDamageList().stream().map(ColorDamageDto::fromEntity).collect(Collectors.toList()).equals(dto.getColorDamageDtoList())){
                 changeSet.add("changed % of damage dealt to other colors");
             }
+            if(changeSet.size()==0){
+                return "";
+            }
             change+= String.join(", ",changeSet);
         }
         return change;
@@ -70,6 +73,9 @@ public class ChangelogUtility {
             }
             if(!threshold.getThreshold().equals(dto.getThreshold())){
                 changeSet.add("now equals "+dto.getThreshold());
+            }
+            if(changeSet.size()==0){
+                return "";
             }
             change+= String.join(", ",changeSet);
         }
@@ -107,6 +113,9 @@ public class ChangelogUtility {
             if(!shapeSkillSet.equals(dto.getSkillIDset())){
                 changeSet.add("changed skillset");
             }
+            if(changeSet.size()==0){
+                return "";
+            }
             change+= String.join(", ",changeSet);
         }
         return change;
@@ -129,6 +138,9 @@ public class ChangelogUtility {
             }
             if(!skill.getSkillEffectBundles().stream().map(SkillEffectBundleDto::fromEntity).collect(Collectors.toList()).equals(dto.getSkillEffectBundles())){
                 changeSet.add("has new effect");
+            }
+            if(changeSet.size()==0){
+                return "";
             }
             change+= String.join(", ",changeSet);
         }

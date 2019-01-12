@@ -34,9 +34,13 @@ public class FightController {
     public List<FightDto> findChallengesByUser(@PathVariable String login){
         return fightService.getChallengesForUser(login).stream().map(FightDto::fromEntity).collect(Collectors.toList());
     }
-    @GetMapping("{login}")
+    @GetMapping("challenger/{login}")
     public FightDto findByChallenger(@PathVariable String login){
         return FightDto.fromEntity(fightService.findByChallenger(login));
+    }
+    @GetMapping("{id}")
+    public FightDto findById(@PathVariable Long id){
+        return FightDto.fromEntity(fightService.findFightById(id));
     }
     @PostMapping("/turn-order/{turn}")
     public List<TurnOrderDto> getTurnOrder(@RequestBody FightCombatDto dto, @PathVariable Long turn){

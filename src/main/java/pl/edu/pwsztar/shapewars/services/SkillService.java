@@ -37,7 +37,9 @@ public class SkillService {
                                        skillRepository.findById(skillDto.getId()).orElse(new Skill()),skillDto);
         Skill skill = updateSkill(skillDto);
         SkillDto newDto = SkillDto.fromEntity(skillRepository.save(skill));
-        changelogRepository.save(changelog);
+        if(!changelog.getChange().equals("")) {
+            changelogRepository.save(changelog);
+        }
         return newDto;
     }
 

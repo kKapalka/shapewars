@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService} from "../services/user.service";
 import {TokenStorageService} from "../auth/token-storage.service";
 import {FightService} from "../services/fight.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-fight-window',
   templateUrl: './fight-window.component.html',
   styleUrls: ['./fight-window.component.css']
 })
-export class FightWindowComponent implements OnInit {
+export class FightWindowComponent implements OnInit, OnDestroy {
 
   you:any;
   opponent:any;
@@ -17,7 +18,8 @@ export class FightWindowComponent implements OnInit {
   actionList:any[]=[];
   turnOrder:any=[];
   turn:any;
-  interval:any;
+  actionInterval:any;
+  fightInterval:any;
   currentSkill:any;
   fightLog:string[]=[];
   currentFighter:any={
@@ -37,7 +39,7 @@ export class FightWindowComponent implements OnInit {
     ]
   };
   constructor(private service:UserService, private token:TokenStorageService,
-              private fightService:FightService) { }
+              private fightService:FightService, private router:Router) { }
 
   ngOnInit() {
     this.turn=0;
@@ -61,7 +63,16 @@ export class FightWindowComponent implements OnInit {
           this.opponent.allFighterList=res;
           this.allFighters=this.you.allFighterList;
           this.allFighters=this.allFighters.concat(this.opponent.allFighterList);
-          this.interval=setInterval(()=>{
+          this.fightInterval=setInterval(()=>{
+            this.fightService.getFightById(this.currentFight.id).subscribe(res=>{
+              this.currentFight=res;
+              if(this.currentFight.fightStatus=='ABANDONED'){
+                sessionStorage.setItem("fightStatus", "");
+                this.router.navigate(['home']);
+              }
+            })
+          })
+          this.actionInterval=setInterval(()=>{
             this.fightService.getActionListForFight(this.currentFight.id).subscribe(res=>{
               this.actionList=res;
               if(this.turnOrder.length>0){
@@ -132,5 +143,10 @@ export class FightWindowComponent implements OnInit {
     this.service.challenge(fight).subscribe(res=>{
       console.log(res);
     })
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.actionInterval);
+    clearInterval(this.fightInterval);
   }
 }

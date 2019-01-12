@@ -35,7 +35,9 @@ public class ShapeService {
                                        shapeRepository.findById(dto.getId()).orElse(new Shape()),dto);
         Shape shape = updateShape(dto);
         Shape newShape = shapeRepository.save(shape);
-        changelogRepository.save(changelog);
+        if(!changelog.getChange().equals("")) {
+            changelogRepository.save(changelog);
+        }
         fighterService.refreshFightersViaShape(newShape);
         return ShapeDto.fromEntity(newShape);
     }

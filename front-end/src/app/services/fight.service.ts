@@ -22,4 +22,7 @@ export class FightService {
   saveAction(actionDto:any):Observable<any>{
     return this.http.post(this.urls.actionSave,actionDto,{ responseType: 'json' })
   }
+  getFightById(id:number):Observable<any>{
+    return this.http.get(this.urls.fightById+id,{ responseType: 'json' })
+  }
 }

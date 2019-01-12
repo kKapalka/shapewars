@@ -47,7 +47,9 @@ public class ColorMapService {
                                        colorMapRepository.findById(dto.getId()).orElse(new ColorMap()),dto);
         ColorMap color = updateColorMap(dto);
         ColorMap newColor = colorMapRepository.save(color);
-        changelogRepository.save(changelog);
+        if(!changelog.getChange().equals("")) {
+            changelogRepository.save(changelog);
+        }
         fighterService.refreshFightersViaColorMap(newColor);
 
         return ColorMapDto.fromEntity(newColor);
