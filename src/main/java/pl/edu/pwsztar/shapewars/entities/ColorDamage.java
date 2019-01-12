@@ -17,10 +17,6 @@ public class ColorDamage {
     private Long ID;
 
     @ManyToOne
-    @JoinColumn(name="COLOR_ID")
-    private ColorMap color;
-
-    @ManyToOne
     @JoinColumn(name="ENEMY_COLOR_ID")
     private ColorMap enemyColor;
 
@@ -32,7 +28,6 @@ public class ColorDamage {
     public String toString() {
         return "ColorDamage{" +
                 "ID=" + ID +
-                ", color=" + color.getColorName() +
                 ", enemyColor=" + enemyColor.getColorName() +
                 ", damagePercentage=" + damagePercentage +
                 '}';

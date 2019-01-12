@@ -2,6 +2,8 @@ package pl.edu.pwsztar.shapewars.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,7 +24,9 @@ public class ColorMap {
     @Column(name="COLOR_MAP")
     private byte[] colorMap;
 
-    @OneToMany (mappedBy = "color", cascade = CascadeType.ALL)
+    @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JoinColumn(name="COLOR_ID", referencedColumnName = "COLOR_ID", nullable = false)
     private List<ColorDamage> colorDamageList;
 
 }

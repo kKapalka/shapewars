@@ -105,7 +105,7 @@ public class AuthController {
         user.setLevel(1L);
         user.setExperiencePoints(0L);
         user = userRepository.save(user);
-        if(!signUpRequest.isAdmin()){
+        if(!user.isAdmin()){
             user.setFighterList(Arrays.asList(fighterService.generateFighter(user),fighterService.generateFighter(user),
                     fighterService.generateFighter(user),fighterService.generateFighter(user)));
         }

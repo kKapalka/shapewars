@@ -66,14 +66,10 @@ public class ColorMapService {
         return colorMap;
     }
     private ColorDamage updateColorDamage(ColorDamageDto dto){
-        if(dto.getColorName().equals(dto.getEnemyColorName())){
-            return null;
-        }
         ColorDamage colorDamage = new ColorDamage();
         if(dto.getId()!=null){
             colorDamage = colorDamageRepository.findById(dto.getId()).orElseThrow(EntityNotFoundException::new);
         }
-        colorDamage.setColor(getColorMapByName(dto.getColorName()));
         colorDamage.setEnemyColor(getColorMapByName(dto.getEnemyColorName()));
         colorDamage.setDamagePercentage(dto.getDamagePercentage());
         return colorDamage;

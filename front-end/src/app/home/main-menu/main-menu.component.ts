@@ -27,7 +27,8 @@ export class MainMenuComponent implements OnInit {
       this.challenges=res;
     })
   }
-  search(){
+  search(event){
+    event.preventDefault();
     this.service.getPlayerData(this.searchUsername).subscribe(()=>{
       this.router.navigate(["user",this.searchUsername]);
     },console.log);

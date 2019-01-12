@@ -45,7 +45,6 @@ export class AddEditColormapComponent implements OnInit {
               (presentColor=>presentColor.enemyColorName).includes(color.colorName));
             let absentColorDamageList=absentColors
               .map(color => ({
-                colorName: this.form.colorName,
                 enemyColorName: color.colorName,
                 damagePercentage: 100
               }));
@@ -63,7 +62,6 @@ export class AddEditColormapComponent implements OnInit {
           colorName: "",
           colorMap: "",
           colorDamageDtoList: this.allOtherColors.map(color => ({
-            colorName: this.form.colorName,
             enemyColorName: color.colorName,
             damagePercentage: 100
           }))
@@ -94,6 +92,7 @@ export class AddEditColormapComponent implements OnInit {
     }
   }
   onSubmit(){
+    console.log(this.form);
     this.service.saveColor(this.form).subscribe(res=>{
       this.form=res;
       this.router.navigate(['/admin/colors']);
