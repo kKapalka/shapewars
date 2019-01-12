@@ -26,6 +26,7 @@ import pl.edu.pwsztar.shapewars.services.MaintenanceLogService;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -95,7 +96,12 @@ public class AuthController {
         user.setLogin(signUpRequest.getLogin());
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
-        user.setAdmin(signUpRequest.isAdmin());
+        List<User> currentUserList = userRepository.findAll();
+        if(currentUserList.size()==0){
+            user.setAdmin(true);
+        } else{
+            user.setAdmin(signUpRequest.isAdmin());
+        }
         user.setLevel(1L);
         user.setExperiencePoints(0L);
         user = userRepository.save(user);

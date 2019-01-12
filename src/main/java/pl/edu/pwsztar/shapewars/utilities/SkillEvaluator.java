@@ -52,7 +52,6 @@ public class SkillEvaluator {
             eligibleTargets=eligibleTargets.stream().distinct().collect(Collectors.toList());
             eligibleTargets.forEach(target->{
                 TargetStatus newTargetStatus=new TargetStatus();
-                newTargetStatus.setAction(currentAction);
                 newTargetStatus.setTarget(target);
                 SkillEffectResult result = new SkillEffectResult();
                 result.setSkillEffect(effect);

@@ -51,7 +51,12 @@ public class MaintenanceLogService {
     }
 
     public MaintenanceLogDto retrieveLatest(){
-
+        if(maintenanceLogRepository.findAll().size()==0){
+            return MaintenanceLogDto.builder()
+                    .messageType("WORKING")
+                    .informerName("TEMP")
+                    .message("TEMP").build();
+        }
         return MaintenanceLogDto.fromEntity(maintenanceLogRepository.findFirstByOrderByMessageTimeDesc());
     }
 }

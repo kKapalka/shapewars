@@ -15,10 +15,6 @@ public class SkillEffectResult {
     private Long ID;
 
     @ManyToOne
-    @JoinColumn(name="TARGET_STATUS_ID")
-    private TargetStatus targetStatus;
-
-    @ManyToOne
     @JoinColumn(name="SKILL_EFFECT_ID")
     private SkillEffect skillEffect;
 

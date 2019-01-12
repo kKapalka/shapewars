@@ -25,14 +25,22 @@
         <div class="row" style="flex-direction: row-reverse;">
           <div class="col-sm-3" *ngFor="let enemyfighter of opponent.allFighterList"
                [ngStyle]="enemyfighter==currentFighter && {'border': '2px solid red'}">
-
-            <progress id="health{{enemyfighter.id}}" value="{{enemyfighter.currentHp}}"
-                      max="{{enemyfighter.maximumHp}}" style="width:100%; height:20px">
-              {{enemyfighter.currentHp+" / "+enemyfighter.maximumHp}}</progress>
-            <progress id="mana{{enemyfighter.id}}" value="{{enemyfighter.currentMana}}"
-                      max="{{enemyfighter.maximumMana}}" style="width:100%; height:10px; color:blue;
+            <div class="row">
+              <progress id="health{{enemyfighter.id}}" value="{{enemyfighter.currentHp}}"
+                        max="{{enemyfighter.maximumHp}}" style="width:100%; height:20px">
+                {{enemyfighter.currentHp+" / "+enemyfighter.maximumHp}}</progress>
+              <progress id="mana{{enemyfighter.id}}" value="{{enemyfighter.currentMana}}"
+                        max="{{enemyfighter.maximumMana}}" style="width:100%; height:10px; color:blue;
               background-color: blue"></progress>
-            <img src="{{enemyfighter.fighterImage}}" style="width:100%; height:175px; float:right" (click)="performAttack(enemyfighter)">
+              <img src="{{enemyfighter.fighterImage}}" style="width:100%; height:175px; float:right" (click)="performAttack(enemyfighter)">
+            </div>
+            <div class="row" style="padding: 5px 10px">
+              <div *ngFor="let i of ['1','1','1','1','1','1','1','1','1','1','1']"
+                   class="col-sm-2" style="height:20px; margin: 2px; padding:0; background-color:white"
+              matTooltip="Tooltip for an effect will appear here">
+                {{i}}
+              </div>
+            </div>
           </div>
         </div>
       </div>

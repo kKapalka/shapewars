@@ -37,7 +37,8 @@ public class Action {
     @JoinColumn(name="SELECTED_TARGET_ID")
     private Fighter selectedTarget;
 
-    @OneToMany(mappedBy = "action", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name="ACTION_ID", referencedColumnName = "ACTION", nullable = false)
     private List<TargetStatus> targetStatuses;
 
     @ManyToOne

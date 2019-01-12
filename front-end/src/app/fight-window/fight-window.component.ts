@@ -74,7 +74,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
           })
           this.actionInterval=setInterval(()=>{
             this.fightService.getActionListForFight(this.currentFight.id).subscribe(res=>{
-              this.actionList=res;
+              this.applyEffects(res);
               if(this.turnOrder.length>0){
                 this.currentFighter=this.allFighters.find
                 (fighter=>fighter.id===this.turnOrder[this.actionList.length%8].fighterId);
@@ -149,4 +149,12 @@ export class FightWindowComponent implements OnInit, OnDestroy {
     clearInterval(this.actionInterval);
     clearInterval(this.fightInterval);
   }
+
+  applyEffects(actionList:any):void{
+    if(this.actionList.length!==actionList.length){
+      this.actionList=actionList;
+      console.log(this.actionList);
+    }
+  }
+
 }
