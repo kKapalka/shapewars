@@ -13,15 +13,16 @@ export class FightWindowComponent implements OnInit, OnDestroy {
 
   you:any;
   opponent:any;
-  allFighters:any[]=[];
+  allFighters:any=[];
   currentFight:any;
-  actionList:any[]=[];
+  actionList:any=[];
   turnOrder:any=[];
   turn:any;
   actionInterval:any;
   fightInterval:any;
   currentSkill:any;
   fightLog:string[]=[];
+  lastActionId:number=0;
   currentFighter:any={
     fighterModelReferenceDto: {
       skillSet:[
@@ -46,11 +47,9 @@ export class FightWindowComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.turn = 0;
-    console.log(this.token.getUsername());
     this.fightService.findFightInProgressForUser(this.token.getUsername()).subscribe(res => {
-
       this.currentFight = res;
-      if (this.currentFight.playerOne === this.token.getUsername()) {
+      if (this.currentFight.playerOne.login === this.token.getUsername()) {
         this.you = this.currentFight.playerOne;
         this.opponent = this.currentFight.playerTwo;
       } else {
@@ -59,6 +58,13 @@ export class FightWindowComponent implements OnInit, OnDestroy {
       }
       this.allFighters = this.you.allFighterList;
       this.allFighters = this.allFighters.concat(this.opponent.allFighterList);
+      this.allFighters.forEach(fighter=>fighter.statusEffects={
+        dead:false,
+        armorBonus:[],
+        speedBonus:[],
+        strengthBonus:[],
+        stunnedForTurns:0
+      });
       this.fightInterval = setInterval(() => {
         this.fightService.getFightById(this.currentFight.id).subscribe(res => {
           this.currentFight = res;
@@ -81,7 +87,6 @@ export class FightWindowComponent implements OnInit, OnDestroy {
               fighterId: fighter.id,
               speed: fighter.speed
             }));
-            console.log(fighterSpeeds)
             let fightCombatDto = {
               fightId: this.currentFight.id,
               fighterSpeedDtos: fighterSpeeds
@@ -113,12 +118,15 @@ export class FightWindowComponent implements OnInit, OnDestroy {
         };
         this.fightService.saveAction(action).subscribe(res=>{
           console.log(res);
-          this.currentFight=undefined;
+          this.currentSkill=undefined;
         });
       }
     }
   }
   private checkIfValid(skill,fighter):boolean{
+    if(fighter.statusEffects.dead){
+      return false;
+    }
     let targetTypes=[].concat.apply([],skill.skillEffectBundles.map(bundle=>bundle.skillEffectDtos.map(dto=>dto.targetType)));
     if(targetTypes.some(type => ['TARGET_ENEMY', 'RANDOM_ENEMY', 'ALL_ENEMY_UNITS', 'ALL_UNITS'].includes(type))){
       return this.opponent.allFighterList.includes(fighter);
@@ -144,11 +152,85 @@ export class FightWindowComponent implements OnInit, OnDestroy {
     clearInterval(this.actionInterval);
     clearInterval(this.fightInterval);
   }
-
+  capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
   applyEffects(actionList:any):void{
+
     if(this.actionList.length!==actionList.length){
       this.actionList=actionList;
+      this.actionList
+        .filter(action=>action.id>this.lastActionId)
+        .forEach(action=>{
+          console.log(action);
+        let caster=this.allFighters.find(fighter=>fighter.id==action.activeFighterId);
+        this.allFighters.forEach(fighter=>{
+          fighter.storedHp=fighter.currentHp;
+        });
+        action.skillEffectResultDtoList.forEach(effectDto=> {
+          let target =  this.allFighters.find(fighter=>fighter.id==effectDto.targetId)
+          if(effectDto.statusEffect=='DEAL_DAMAGE' || effectDto.statusEffect=='RESTORE_HEALTH'){
+            let HPDifference:number;
+            if(effectDto.modifierType=='SELF_CURRENT_HP_BASED'){
+              HPDifference=Math.floor((effectDto.result*caster.storedHp)/100);
+            }
+            if(effectDto.modifierType=='TARGET_CURRENT_HP_BASED'){
+              HPDifference=Math.floor((effectDto.result*target.storedHp)/100);
+            }
+            if(effectDto.modifierType=='STR_BASED'){
+              HPDifference=Math.floor((effectDto.result*caster.strength)/100);
+            }
+            if(effectDto.modifierType=='FLAT_VALUE'){
+              HPDifference=Math.floor(effectDto.result);
+            }
+            if(effectDto.statusEffect=='DEAL_DAMAGE'){
+              HPDifference*=-1;
+            }
+            target.currentHp=Math.min(Math.max(target.currentHp+HPDifference, 0), target.maximumHp);
+            if(HPDifference!=0) {
+              this.fightLog.push(
+                (this.you.allFighterList.includes(target) ? "Your " : "Enemy's ") + target.fighterModelReferenceDto.colorName + " " + target.fighterModelReferenceDto.shapeName +
+                (effectDto.statusEffect == 'DEAL_DAMAGE' ? " has taken " + (HPDifference * -1) + " damage!" : " has restored " + HPDifference + " health!"));
+            }
+            if(target.currentHp==0){
+              target.statusEffects.dead=true;
+              this.fightLog.push((this.you.allFighterList.includes(target) ? "Your " : "Enemy's ") + target.fighterModelReferenceDto.colorName + " " + target.fighterModelReferenceDto.shapeName +
+                " has died!");
+            }
+          } else if(effectDto.result!=0){
+            if (effectDto.statusEffect!=='STUN'){
+              console.log(effectDto);
+
+              let value=Math.floor(effectDto.result);
+              let parameterName=effectDto.statusEffect.substring(effectDto.statusEffect.indexOf("_")+1).toLowerCase();
+              let direction = effectDto.statusEffect.substring(0,effectDto.statusEffect.indexOf("_")).toLowerCase();
+              let tooltip=this.capitalize(parameterName)+" "+direction+" by "+value;
+              let dto={
+                value:direction=='increase'?value:(value*-1),
+                tooltip:tooltip,
+                duration:3
+              };
+              if(parameterName=="armor"){
+                target.statusEffects.armorBonus.push(dto);
+              } else if(parameterName=='speed'){
+                target.statusEffects.speedBonus.push(dto);
+              } else if(parameterName=='strength'){
+                target.statusEffects.strengthBonus.push(dto);
+              }
+              this.fightLog.push((this.you.allFighterList.includes(target) ? "Your " : "Enemy's ") + target.fighterModelReferenceDto.colorName + " " + target.fighterModelReferenceDto.shapeName +
+                "'s "+parameterName+" has been "+direction +"d by "+value+"!");
+            } else{
+              target.statusEffects.stunnedForTurns+=effectDto.result;
+              this.fightLog.push((this.you.allFighterList.includes(target) ? "Your " : "Enemy's ") + target.fighterModelReferenceDto.colorName + " " + target.fighterModelReferenceDto.shapeName +
+                " has been stunned for "+effectDto.result+" turns!");
+            }
+          }
+        }
+        );
+        this.lastActionId=action.id;
+      });
       console.log(this.actionList);
+      console.log(this.allFighters);
     }
   }
 

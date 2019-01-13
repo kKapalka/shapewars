@@ -18,6 +18,23 @@
                       max="{{fighter.maximumMana}}" style="width:100%; height:10px; color:blue;
               background-color: blue"></progress>
             <img src="{{fighter.fighterModelReferenceDto.model}}" style="width:100%; height:175px" (click)="performAttack(fighter)">
+            <div class="row" style="padding: 5px 10px">
+              <div *ngFor="let effect of fighter.statusEffects.armorBonus"
+                   class="col-sm-1" style="height:12px; font-size:8px; margin: 2px; padding:0; background-color:white"
+                   [matTooltip]="effect.tooltip">
+                A
+              </div>
+              <div *ngFor="let effect of fighter.statusEffects.speedBonus"
+                   class="col-sm-1" style="height:12px; font-size:8px; margin: 2px; padding:0; background-color:white"
+                   [matTooltip]="effect.tooltip">
+                S
+              </div>
+              <div *ngFor="let effect of fighter.statusEffects.strengthBonus"
+                   class="col-sm-1" style="height:12px; font-size:8px; margin: 2px; padding:0; background-color:white"
+                   [matTooltip]="effect.tooltip">
+                s
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -25,7 +42,6 @@
         <div class="row" style="flex-direction: row-reverse;">
           <div class="col-sm-3" *ngFor="let enemyfighter of opponent.allFighterList"
                [ngStyle]="enemyfighter==currentFighter && {'border': '2px solid red'}">
-            <div class="row">
               <progress id="health{{enemyfighter.id}}" value="{{enemyfighter.currentHp}}"
                         max="{{enemyfighter.maximumHp}}" style="width:100%; height:20px">
                 {{enemyfighter.currentHp+" / "+enemyfighter.maximumHp}}</progress>
@@ -33,12 +49,21 @@
                         max="{{enemyfighter.maximumMana}}" style="width:100%; height:10px; color:blue;
               background-color: blue"></progress>
               <img src="{{enemyfighter.fighterModelReferenceDto.model}}" style="width:100%; height:175px; float:right" (click)="performAttack(enemyfighter)">
-            </div>
             <div class="row" style="padding: 5px 10px">
-              <div *ngFor="let i of ['1','1','1','1','1','1','1','1','1','1','1']"
-                   class="col-sm-2" style="height:20px; margin: 2px; padding:0; background-color:white"
-              matTooltip="Tooltip for an effect will appear here">
-                {{i}}
+              <div *ngFor="let effect of enemyfighter.statusEffects.armorBonus"
+                   class="col-sm-1" style="height:12px; font-size:8px; margin: 2px; padding:0; background-color:white"
+              [matTooltip]="effect.tooltip">
+                A
+              </div>
+              <div *ngFor="let effect of enemyfighter.statusEffects.speedBonus"
+                   class="col-sm-1" style="height:12px; font-size:8px; margin: 2px; padding:0; background-color:white"
+                   [matTooltip]="effect.tooltip">
+                S
+              </div>
+              <div *ngFor="let effect of enemyfighter.statusEffects.strengthBonus"
+                   class="col-sm-1" style="height:12px; font-size:8px; margin: 2px; padding:0; background-color:white"
+                   [matTooltip]="effect.tooltip">
+                s
               </div>
             </div>
           </div>
@@ -52,7 +77,9 @@
       <div class="col-sm-4">
         <div class="row">
         <div style="margin-left:30px; padding:10px; width:100%; height:35vh;max-height:35vh; overflow-y:auto">
-
+          <ul style="list-style-type: none; color:#cccccc">
+            <li *ngFor="let log of fightLog">{{log}}</li>
+          </ul>
         </div>
         </div>
       </div>
@@ -65,7 +92,7 @@
         </div>
       </div>
       <div class="col-sm-3" style="padding-top: 80px">
-        <button class="btn btn-danger float-right" (click)="abandonFight()">Abandon fight</button>
+        <button class="btn btn-danger float-right" (click)="abandonFight()" >Abandon fight</button>
       </div>
     </div>
   </div>
