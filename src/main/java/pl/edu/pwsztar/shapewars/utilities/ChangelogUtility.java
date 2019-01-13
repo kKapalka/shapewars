@@ -106,8 +106,8 @@ public class ChangelogUtility {
                dto.getStrParameters())){
                 changeSet.add("changed scaling on strength");
             }
-            if(!shape.getBaselineSpeed().equals(dto.getSpeed())){
-                changeSet.add("changed speed, from "+shape.getBaselineSpeed()+" to "+dto.getSpeed());
+            if(!shape.getSpeed().equals(dto.getSpeed())){
+                changeSet.add("changed speed, from "+shape.getSpeed()+" to "+dto.getSpeed());
             }
             List<Long> shapeSkillSet = shape.getSkillSet().stream().map(Skill::getID).collect(Collectors.toList());
             if(!shapeSkillSet.equals(dto.getSkillIDset())){

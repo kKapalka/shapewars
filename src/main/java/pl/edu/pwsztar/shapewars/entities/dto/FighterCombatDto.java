@@ -12,9 +12,8 @@ import java.util.stream.Collectors;
 @Builder
 public class FighterCombatDto {
     private Long id;
-    private String shapeName;
-    private List<SkillDto> shapeSkillset;
-    private String color;
+    private FighterModelReferenceDto fighterModelReferenceDto;
+    private List<SkillDto> skillSet;
     private int maximumHp;
     private int currentMana;
     private int maximumMana;
@@ -22,24 +21,25 @@ public class FighterCombatDto {
     private int strength;
     private int armor;
     private int speed;
-    private String fighterImage;
     private String slot;
 
     public static FighterCombatDto fromEntity(Fighter fighter){
+        int currentHp=fighter.getFighterModelReferrence().getShape().getBaselineHp().intValue()+
+                fighter.getHitPointsModifier().intValue();
         return FighterCombatDto.builder()
                 .id(fighter.getID())
-                .shapeName(fighter.getShape().getName())
-                .shapeSkillset(fighter.getShape().getSkillSet().stream().map(SkillDto::fromEntity).collect(Collectors.toList()))
-                .color(fighter.getColor().getColorName())
-                .maximumHp(fighter.getHitPoints().intValue())
-                .currentHp(fighter.getHitPoints().intValue())
-                .currentMana(100)
+                .fighterModelReferenceDto(FighterModelReferenceDto.fromEntity(fighter.getFighterModelReferrence()))
+                .skillSet(fighter.getFighterModelReferrence().getShape().getSkillSet().stream().map(SkillDto::fromEntity).collect(Collectors.toList()))
+                .maximumHp(currentHp)
+                .currentHp(currentHp)
                 .maximumMana(100)
-                .strength(fighter.getStrength().intValue())
-                .armor(fighter.getArmor().intValue())
-                .speed(fighter.getSpeed().intValue())
+                .currentMana(100)
+                .strength(fighter.getFighterModelReferrence().getShape().getBaselineStrength().intValue()+
+                        fighter.getStrengthModifier().intValue())
+                .armor(fighter.getFighterModelReferrence().getShape().getBaselineArmor().intValue()+
+                        fighter.getArmorModifier().intValue())
+                .speed(fighter.getFighterModelReferrence().getShape().getSpeed().intValue())
                 .slot(fighter.getSlot().name())
-                .fighterImage(new String(fighter.getFighterImage()))
                 .build();
     }
 }

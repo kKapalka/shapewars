@@ -16,10 +16,6 @@ public interface FighterRepository extends JpaRepository<Fighter,Long> {
 
     List<Fighter> findAllByOwner(User owner);
 
-    List<Fighter> findAllByShape(Shape shape);
-
-    List<Fighter> findAllByColor(ColorMap color);
-
     @Transactional
     List<Fighter> deleteAllByOwner(User owner);
 

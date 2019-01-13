@@ -24,7 +24,7 @@ public class ShapeService {
     private SkillService skillService;
 
     @Autowired
-    private FighterService fighterService;
+    private FighterModelService fighterModelService;
 
     @Autowired
     private ChangelogRepository changelogRepository;
@@ -38,7 +38,7 @@ public class ShapeService {
         if(!changelog.getChange().equals("")) {
             changelogRepository.save(changelog);
         }
-        fighterService.refreshFightersViaShape(newShape);
+        fighterModelService.refreshModelsViaShape(newShape);
         return ShapeDto.fromEntity(newShape);
     }
 
@@ -49,7 +49,7 @@ public class ShapeService {
         }
         shape.setName(dto.getName());
         shape.setSkillSet(skillService.getSkillsByIdIn(dto.getSkillIDset()));
-        shape.setBaselineSpeed(dto.getSpeed());
+        shape.setSpeed(dto.getSpeed());
         shape.setBaselineHp(dto.getHpParameters().get(0));
         shape.setHPMinGrowth(dto.getHpParameters().get(1));
         shape.setHPMaxGrowth(dto.getHpParameters().get(2));

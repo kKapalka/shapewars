@@ -10,12 +10,12 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name="ACTION")
-public class Action {
+@Table(name="FIGHT_ACTION")
+public class FightAction {
 
     @Id
     @GeneratedValue
-    @Column(name="ACTION")
+    @Column(name="FIGHT_ACTION_ID")
     private Long Id;
 
     @ManyToOne
@@ -37,9 +37,9 @@ public class Action {
     @JoinColumn(name="SELECTED_TARGET_ID")
     private Fighter selectedTarget;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name="ACTION_ID", referencedColumnName = "ACTION", nullable = false)
-    private List<TargetStatus> targetStatuses;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = SkillEffectResult.class)
+    @JoinColumn(name="FIGHT_ACTION_ID", referencedColumnName = "FIGHT_ACTION_ID", nullable = false)
+    private List<SkillEffectResult> resultSet;
 
     @ManyToOne
     @JoinColumn(name="NEXT_ACTIVE_FIGHTER_ID")

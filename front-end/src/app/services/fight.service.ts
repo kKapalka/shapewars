@@ -10,6 +10,10 @@ export class FightService {
 
   constructor(private http: HttpClient, private urls: UrlsService) { }
 
+  findFightInProgressForUser(login:string): Observable<any>{
+    return this.http.get(this.urls.fightInProgressForUser+login,{ responseType: 'json' })
+  }
+
   getCombatantsByUser(login:string): Observable<any>{
     return this.http.get(this.urls.combatantsByUser+login,{ responseType: 'json' })
   }

@@ -25,10 +25,7 @@ public class FighterService {
     private FighterRepository fighterRepository;
 
     @Autowired
-    private ShapeService shapeService;
-
-    @Autowired
-    private ColorMapService colorMapService;
+    private FighterModelService fighterModelService;
 
     @Autowired
     private UserRepository userRepository;
@@ -69,32 +66,15 @@ public class FighterService {
 
     public Fighter generateFighter(User user){
         Fighter fighter = new Fighter();
-        fighter.setShape(shapeService.getRandomShape());
-        fighter.setColor(colorMapService.getRandomColor());
+        fighter.setFighterModelReferrence(fighterModelService.getRandomReference());
         fighter.setOwner(user);
         fighter.setExperiencePoints(0L);
         fighter.setLevel(user.getLevel());
-        fighter.setArmor(fighter.getShape().getBaselineArmor());
-        fighter.setHitPoints(fighter.getShape().getBaselineHp());
-        fighter.setStrength(fighter.getShape().getBaselineStrength());
-        fighter.setSpeed(fighter.getShape().getBaselineSpeed());
+        fighter.setArmorModifier(0L);
+        fighter.setHitPointsModifier(0L);
+        fighter.setStrengthModifier(0L);
         fighter.setSlot(FighterSlot.INVENTORY);
-        fighter.setFighterImage(FighterImageGenerator.generateImageFrom(fighter.getShape(),fighter.getColor()));
         return fighterRepository.save(fighter);
-    }
-    public void refreshFightersViaShape(Shape shape){
-        List<Fighter> fighterList = fighterRepository.findAllByShape(shape);
-        fighterList.forEach(fighter->{
-            fighter.setFighterImage(FighterImageGenerator.generateImageFrom(fighter.getShape(),fighter.getColor()));
-            fighterRepository.save(fighter);
-        });
-    }
-    public void refreshFightersViaColorMap(ColorMap colorMap){
-        List<Fighter> fighterList = fighterRepository.findAllByColor(colorMap);
-        fighterList.forEach(fighter->{
-            fighter.setFighterImage(FighterImageGenerator.generateImageFrom(fighter.getShape(),fighter.getColor()));
-            fighterRepository.save(fighter);
-        });
     }
     public void resetFighterList(User user){
         fighterRepository.deleteAllByOwner(user);

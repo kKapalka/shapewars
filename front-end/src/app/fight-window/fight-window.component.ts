@@ -23,81 +23,76 @@ export class FightWindowComponent implements OnInit, OnDestroy {
   currentSkill:any;
   fightLog:string[]=[];
   currentFighter:any={
-    shapeSkillSet:[
-      {
-        icon:""
-      },
-      {
-        icon:""
-      },
-      {
-        icon:""
-      },
-      {
-        icon:""
-      }
-    ]
+    fighterModelReferenceDto: {
+      skillSet:[
+        {
+          icon:""
+        },
+
+        {
+          icon:""
+        },
+        {
+          icon:""
+        },
+        {
+          icon:""
+        }
+      ]
+    }
   };
   constructor(private service:UserService, private token:TokenStorageService,
               private fightService:FightService, private router:Router) { }
 
   ngOnInit() {
-    this.turn=0;
-    this.service.getPlayerData(this.token.getUsername()).subscribe(res=>{
-      this.you=res;
-      this.fightService.getCombatantsByUser(this.token.getUsername()).subscribe(res=>{
-        this.you.allFighterList=res;
-      });
-    });
-    this.service.getFightsByUser(this.token.getUsername()).subscribe(res=>{
-      this.currentFight=res.find(fight=>fight.fightStatus==='IN_PROGRESS');
-      let opponentName:string="";
-      if(this.currentFight.playerOne===this.token.getUsername()){
-        opponentName=this.currentFight.playerTwo;
-      } else{
-        opponentName=this.currentFight.playerOne;
+    this.turn = 0;
+    console.log(this.token.getUsername());
+    this.fightService.findFightInProgressForUser(this.token.getUsername()).subscribe(res => {
+
+      this.currentFight = res;
+      if (this.currentFight.playerOne === this.token.getUsername()) {
+        this.you = this.currentFight.playerOne;
+        this.opponent = this.currentFight.playerTwo;
+      } else {
+        this.you = this.currentFight.playerTwo;
+        this.opponent = this.currentFight.playerOne;
       }
-      this.service.getPlayerData(opponentName).subscribe(res=>{
-        this.opponent=res;
-        this.fightService.getCombatantsByUser(opponentName).subscribe(res=>{
-          this.opponent.allFighterList=res;
-          this.allFighters=this.you.allFighterList;
-          this.allFighters=this.allFighters.concat(this.opponent.allFighterList);
-          this.fightInterval=setInterval(()=>{
-            this.fightService.getFightById(this.currentFight.id).subscribe(res=>{
-              this.currentFight=res;
-              if(this.currentFight.fightStatus=='ABANDONED'){
-                sessionStorage.setItem("fightStatus", "");
-                this.router.navigate(['home']);
-              }
+      this.allFighters = this.you.allFighterList;
+      this.allFighters = this.allFighters.concat(this.opponent.allFighterList);
+      this.fightInterval = setInterval(() => {
+        this.fightService.getFightById(this.currentFight.id).subscribe(res => {
+          this.currentFight = res;
+          if (this.currentFight.fightStatus == 'ABANDONED') {
+            sessionStorage.setItem("fightStatus", "");
+            this.router.navigate(['home']);
+          }
+        })
+      }, 3000);
+      this.actionInterval = setInterval(() => {
+        this.fightService.getActionListForFight(this.currentFight.id).subscribe(res => {
+          this.applyEffects(res);
+          if (this.turnOrder.length > 0) {
+            this.currentFighter = this.allFighters.find
+            (fighter => fighter.id === this.turnOrder[this.actionList.length % 8].fighterId);
+          }
+          if ((this.turnOrder.length == 0) ||
+            (this.actionList.length != 0 && this.actionList[this.actionList.length - 1].nextActiveFighterId === 0 && this.turn === Math.floor(this.actionList.length / 8))) {
+            let fighterSpeeds = this.allFighters.map(fighter => ({
+              fighterId: fighter.id,
+              speed: fighter.speed
+            }));
+            console.log(fighterSpeeds)
+            let fightCombatDto = {
+              fightId: this.currentFight.id,
+              fighterSpeedDtos: fighterSpeeds
+            };
+            this.turn = Math.floor(this.actionList.length / 8) + 1;
+            this.fightService.getTurnOrderForFightAndTurn(fightCombatDto, this.turn).subscribe(res => {
+              this.turnOrder = res;
             })
-          })
-          this.actionInterval=setInterval(()=>{
-            this.fightService.getActionListForFight(this.currentFight.id).subscribe(res=>{
-              this.applyEffects(res);
-              if(this.turnOrder.length>0){
-                this.currentFighter=this.allFighters.find
-                (fighter=>fighter.id===this.turnOrder[this.actionList.length%8].fighterId);
-              }
-              if((this.turnOrder.length==0) ||
-                (this.actionList.length!=0 && this.actionList[this.actionList.length-1].nextActiveFighterId===0 && this.turn===Math.floor(this.actionList.length/8))){
-                let fighterSpeeds=this.allFighters.map(fighter=>({
-                  fighterId:fighter.id,
-                    speed:fighter.speed
-                }));
-                let fightCombatDto={
-                  fightId:this.currentFight.id,
-                  fighterSpeedDtos:fighterSpeeds
-                };
-                this.turn=Math.floor(this.actionList.length/8)+1;
-                this.fightService.getTurnOrderForFightAndTurn(fightCombatDto,this.turn).subscribe(res=>{
-                  this.turnOrder=res;
-                })
-              }
-            })
-          },3000);
-        });
-      });
+          }
+        })
+      }, 3000);
     })
   }
   selectSkill(skill){
@@ -116,9 +111,9 @@ export class FightWindowComponent implements OnInit, OnDestroy {
             this.turnOrder[this.actionList.length%8+1].fighterId,
           skillId:this.currentSkill.id
         };
-        console.log(action);
         this.fightService.saveAction(action).subscribe(res=>{
           console.log(res);
+          this.currentFight=undefined;
         });
       }
     }

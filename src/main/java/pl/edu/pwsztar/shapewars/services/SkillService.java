@@ -57,7 +57,7 @@ public class SkillService {
     }
 
     public List<SkillDto> getFighterSkills(FighterDto fighterDto){
-        return skillRepository.findAllById(fighterDto.getShapeSkillIDSet()).stream().map(SkillDto::fromEntity
+        return skillRepository.findAllById(fighterDto.getFighterModelReferrenceDto().getSkillSet()).stream().map(SkillDto::fromEntity
         ).collect(Collectors.toList());
     }
 

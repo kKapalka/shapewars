@@ -43,5 +43,6 @@ export class UrlsService {
   turnOrder=this.host+"/fight/turn-order/";
   actionSave=this.host+"/action/save";
   fightById=this.host+"/fight/";
+  fightInProgressForUser=this.host+"/fight/active/";
   constructor() { }
 }

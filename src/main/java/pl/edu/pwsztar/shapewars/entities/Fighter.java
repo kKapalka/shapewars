@@ -17,9 +17,9 @@ public class Fighter {
     @Column(name="FIGHTER_ID")
     private Long ID;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name="SHAPE_ID")
-    private Shape shape;
+    @ManyToOne
+    @JoinColumn(name="FIGHTER_MODEL_REFERRENCE_ID")
+    private FighterModelReference fighterModelReferrence;
 
     @ManyToOne
     @JoinColumn(name="OWNER_ID")
@@ -31,26 +31,16 @@ public class Fighter {
     @Column(name="XP_POINTS")
     private Long experiencePoints;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name="COLOR_ID")
-    private ColorMap color;
+    @Column(name="HITPOINTS_MOD")
+    private Long hitPointsModifier;
 
-    @Column(name="HITPOINTS")
-    private Long hitPoints;
+    @Column(name="STRENGTH_MOD")
+    private Long strengthModifier;
 
-    @Column(name="STRENGTH")
-    private Long strength;
-
-    @Column(name="SPEED")
-    private Long speed;
-
-    @Column(name="ARMOR")
-    private Long armor;
+    @Column(name="ARMOR_MOD")
+    private Long armorModifier;
 
     @Enumerated(EnumType.STRING)
     @Column(name="SLOT")
     private FighterSlot slot;
-
-    @Column(name="FIGHTER_IMAGE")
-    private byte[] fighterImage;
 }

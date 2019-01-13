@@ -31,6 +31,9 @@ public interface FightRepository extends JpaRepository<Fight,Long> {
     @Query("select f from Fight f where (f.playerOne in ?1 or f.playerTwo in ?1 and f.fightStatus='INVITE_PENDING')")
     List<Fight> findAllPendingInvitesForPlayers(List<User> users);
 
+    @Query("select f from Fight f where (f.playerOne=?1 or f.playerTwo=?1 and f.fightStatus='IN_PROGRESS')")
+    List<Fight> findFightInProgressForUser(User user, Pageable pageable);
+
     @Modifying
     @Transactional
     @Query("update Fight set fightStatus='INVITE_REJECTED' where ID in ?1")

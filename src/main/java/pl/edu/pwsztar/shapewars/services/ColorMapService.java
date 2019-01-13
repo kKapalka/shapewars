@@ -31,7 +31,7 @@ public class ColorMapService {
     private ColorDamageRepository colorDamageRepository;
 
     @Autowired
-    private FighterService fighterService;
+    private FighterModelService fighterModelService;
 
     @Autowired
     private ChangelogRepository changelogRepository;
@@ -50,8 +50,7 @@ public class ColorMapService {
         if(!changelog.getChange().equals("")) {
             changelogRepository.save(changelog);
         }
-        fighterService.refreshFightersViaColorMap(newColor);
-
+        fighterModelService.refreshModelsViaColorMap(newColor);
         return ColorMapDto.fromEntity(newColor);
     }
 

@@ -17,7 +17,7 @@
             <progress id="mana{{fighter.id}}" value="{{fighter.currentMana}}"
                       max="{{fighter.maximumMana}}" style="width:100%; height:10px; color:blue;
               background-color: blue"></progress>
-            <img src="{{fighter.fighterImage}}" style="width:100%; height:175px" (click)="performAttack(fighter)">
+            <img src="{{fighter.fighterModelReferenceDto.model}}" style="width:100%; height:175px" (click)="performAttack(fighter)">
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@
               <progress id="mana{{enemyfighter.id}}" value="{{enemyfighter.currentMana}}"
                         max="{{enemyfighter.maximumMana}}" style="width:100%; height:10px; color:blue;
               background-color: blue"></progress>
-              <img src="{{enemyfighter.fighterImage}}" style="width:100%; height:175px; float:right" (click)="performAttack(enemyfighter)">
+              <img src="{{enemyfighter.fighterModelReferenceDto.model}}" style="width:100%; height:175px; float:right" (click)="performAttack(enemyfighter)">
             </div>
             <div class="row" style="padding: 5px 10px">
               <div *ngFor="let i of ['1','1','1','1','1','1','1','1','1','1','1']"
@@ -58,7 +58,7 @@
       </div>
       <div class="col-sm-4" style="padding-top: 80px">
         <div class="row" *ngIf="currentFighter.id!==undefined">
-          <div class="col-sm-3" *ngFor="let skill of currentFighter.shapeSkillset">
+          <div class="col-sm-3" *ngFor="let skill of currentFighter.skillSet">
             <img src="{{skill.icon}}" style="width:100%" [ngStyle]="skill===currentSkill && {'border': '2px solid green'}"
                  [matTooltip]="(skill.name+' - '+skill.tooltip)" (click)="selectSkill(skill)">
           </div>

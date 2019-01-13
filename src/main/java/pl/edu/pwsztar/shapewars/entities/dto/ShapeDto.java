@@ -31,7 +31,7 @@ public class ShapeDto {
                 .hpParameters(Arrays.asList(shape.getBaselineHp(),shape.getHPMinGrowth(),shape.getHPMaxGrowth()))
                 .strParameters(Arrays.asList(shape.getBaselineStrength(),shape.getSTRMinGrowth(),shape.getSTRMaxGrowth()))
                 .armParameters(Arrays.asList(shape.getBaselineArmor(),shape.getARMMinGrowth(),shape.getARMMaxGrowth()))
-                .speed(shape.getBaselineSpeed())
+                .speed(shape.getSpeed())
                 .image(new String(shape.getImage()))
                 .build();
     }

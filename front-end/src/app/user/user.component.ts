@@ -137,7 +137,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
   openDetailsForFighter(fighter,content) {
     this.selectedFighter=fighter;
-    this.selectedFighterSkills=this.skills.filter(skill=>this.selectedFighter.shapeSkillIDSet.includes(skill.id));
+    this.selectedFighterSkills=this.skills.filter(skill=>this.selectedFighter.fighterModelReferrenceDto.skillSet.includes(skill.id));
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

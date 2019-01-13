@@ -1,6 +1,8 @@
 package pl.edu.pwsztar.shapewars.entities;
 
 import lombok.Data;
+import pl.edu.pwsztar.shapewars.entities.enums.SkillStatusEffect;
+import pl.edu.pwsztar.shapewars.entities.enums.ValueModifierType;
 
 import javax.persistence.*;
 
@@ -15,8 +17,16 @@ public class SkillEffectResult {
     private Long ID;
 
     @ManyToOne
-    @JoinColumn(name="SKILL_EFFECT_ID")
-    private SkillEffect skillEffect;
+    @JoinColumn(name="TARGET_ID")
+    private Fighter target;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="EFFECT")
+    private SkillStatusEffect skillStatusEffect;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="VALUE_MODIFIER_TYPE")
+    private ValueModifierType valueModifierType;
 
     @Column(name="RESULT")
     private Double result;

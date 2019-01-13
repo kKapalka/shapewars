@@ -1,5 +1,0 @@
-splash screen,
-wyœwietlenie czatu z innymi u¿ytkownikami,
-nadanie mo¿liwoœci zaproszenia u¿ytkowników do walki,
-
-walka w³aœciwa

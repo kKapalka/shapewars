@@ -7,10 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pl.edu.pwsztar.shapewars.entities.Action;
+import pl.edu.pwsztar.shapewars.entities.FightAction;
 import pl.edu.pwsztar.shapewars.entities.dto.ActionDto;
-import pl.edu.pwsztar.shapewars.entities.dto.FightDto;
-import pl.edu.pwsztar.shapewars.repositories.ActionRepository;
+import pl.edu.pwsztar.shapewars.repositories.FightActionRepository;
 import pl.edu.pwsztar.shapewars.utilities.SkillEvaluator;
 
 import javax.persistence.EntityNotFoundException;
@@ -19,7 +18,7 @@ import javax.persistence.EntityNotFoundException;
 public class ActionService {
 
     @Autowired
-    private ActionRepository actionRepository;
+    private FightActionRepository fightActionRepository;
 
     @Autowired
     private FighterService fighterService;
@@ -31,38 +30,38 @@ public class ActionService {
     private SkillService skillService;
 
     public ActionDto save(ActionDto dto){
-        Action action = updateAction(dto);
-        Action newAction = actionRepository.save(action);
-        return ActionDto.fromEntity(newAction);
+        FightAction fightAction = updateAction(dto);
+        FightAction newFightAction = fightActionRepository.save(fightAction);
+        return ActionDto.fromEntity(newFightAction);
     }
-    public List<Action> getActionsForFight(Long id){
+    public List<FightAction> getActionsForFight(Long id){
         //żeby było po kolei
-        List<Action> fightActions = actionRepository.findAllByFight(fightService.findFightById(id));
+        List<FightAction> fightActions = fightActionRepository.findAllByFight(fightService.findFightById(id));
         fightActions.sort((a,b)->(int)(a.getId()-b.getId()));
         return fightActions;
     }
-    private Action updateAction(ActionDto dto){
-        Action action = new Action();
+    private FightAction updateAction(ActionDto dto){
+        FightAction fightAction = new FightAction();
         if(dto.getId()!=null){
-            action=actionRepository.findById(dto.getId()).orElseThrow(EntityNotFoundException::new);
+            fightAction = fightActionRepository.findById(dto.getId()).orElseThrow(EntityNotFoundException::new);
         }
-        action.setFight(fightService.findFightById(dto.getFightId()));
+        fightAction.setFight(fightService.findFightById(dto.getFightId()));
         if(dto.getSkillId()!=0){
             //skillId=0 -> postać nic nie robi/jest ogłuszona
-            action.setSkill(skillService.getSkillsByIdIn(Arrays.asList(dto.getSkillId())).get(0));
+            fightAction.setSkill(skillService.getSkillsByIdIn(Arrays.asList(dto.getSkillId())).get(0));
         }
-        action.setActiveFighter(fighterService.getFighterById(dto.getActiveFighterId()));
-        action.setSelectedTarget(fighterService.getFighterById(dto.getSelectedTargetId()));
+        fightAction.setActiveFighter(fighterService.getFighterById(dto.getActiveFighterId()));
+        fightAction.setSelectedTarget(fighterService.getFighterById(dto.getSelectedTargetId()));
         if(dto.getNextActiveFighterId()!=0){
             //nie ma następnego wojownika -> trzeba utworzyć nową kolejkę
-            action.setNextActiveFighter(fighterService.getFighterById(dto.getNextActiveFighterId()));
+            fightAction.setNextActiveFighter(fighterService.getFighterById(dto.getNextActiveFighterId()));
         }
-        action.setActionTime(LocalDateTime.now());
+        fightAction.setActionTime(LocalDateTime.now());
         if(dto.getSkillId()!=0){
             //jak ogłuszony to nic nie robi
-            action.setTargetStatuses(SkillEvaluator.perform(action));
+            fightAction.setResultSet(SkillEvaluator.perform(fightAction));
         }
-        return action;
+        return fightAction;
     }
 
 }

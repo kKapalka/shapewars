@@ -37,8 +37,8 @@ public class Shape {
     @Column(name="BASELINE_ARM")
     private Long baselineArmor;
 
-    @Column(name="BASELINE_SPEED")
-    private Long baselineSpeed;
+    @Column(name="SPEED")
+    private Long speed;
 
     @Column(name="HP_MIN_GROWTH")
     private Long HPMinGrowth;

@@ -18,8 +18,8 @@ public class FighterBaseDto {
     public static FighterBaseDto fromEntity(Fighter entity){
         return FighterBaseDto.builder()
                 .id(entity.getID())
-                .name(entity.getShape().getName())
-                .color(entity.getColor().getColorName())
+                .name(entity.getFighterModelReferrence().getShape().getName())
+                .color(entity.getFighterModelReferrence().getColor().getColorName())
                 .level(entity.getLevel())
                 .xpPoints(entity.getExperiencePoints())
                 .slot(entity.getSlot().name()).build();
