@@ -23,6 +23,8 @@ export class FightWindowComponent implements OnInit, OnDestroy {
   currentSkill:any;
   fightLog:string[]=[];
   lastActionId:number=0;
+  winner:any;
+  currentFightStatus:string="";
   currentFighter:any={
     fighterModelReferenceDto: {
       skillSet:[
@@ -76,8 +78,19 @@ export class FightWindowComponent implements OnInit, OnDestroy {
       });
       this.fightInterval = setInterval(() => {
         this.fightService.getFightById(this.currentFight.id).subscribe(res => {
-          this.currentFight = res;
-          if (this.currentFight.fightStatus == 'ABANDONED') {
+          this.currentFightStatus = res.fightStatus;
+          this.attemptFinalizeFight();
+          if(this.currentFightStatus!=='IN_PROGRESS'){
+            clearInterval(this.fightInterval);
+            clearInterval(this.actionInterval);
+            if(this.winner!==this.you){
+              alert('You have won the fight!')
+            } else{
+              alert('You have lost the fight!')
+            }
+            sessionStorage.setItem("fightStatus", "");
+          }
+          if (this.currentFightStatus == 'ABANDONED') {
             sessionStorage.setItem("fightStatus", "");
             this.router.navigate(['home']);
           }
@@ -161,20 +174,46 @@ export class FightWindowComponent implements OnInit, OnDestroy {
     }
   }
   abandonFight(){
-    let fight=this.currentFight;
-    fight.fightStatus='ABANDONED';
-    this.service.challenge(fight).subscribe(res=>{
+    let fightBase={
+      id:this.currentFight.id,
+      playerOne:this.currentFight.playerOne.login,
+      playerTwo:this.currentFight.playerTwo.login,
+      fightStatus:'ABANDONED'
+    };
+    this.service.challenge(fightBase).subscribe(res=>{
       console.log(res);
     })
   }
-
+  attemptFinalizeFight(){
+    if(this.you.allFighterList.map(fighter=>fighter.currentHp).reduce((a,b)=>a+b)==0){
+      this.winner=this.you;
+    }
+    if(this.opponent.allFighterList.map(fighter=>fighter.currentHp).reduce((a,b)=>a+b)==0){
+      this.winner=this.opponent;
+    }
+    if(Boolean(this.winner) && this.currentFightStatus=='IN_PROGRESS'){
+      let fightStatus:string='';
+      if(this.winner.login==this.currentFight.playerOne.login){
+        fightStatus='VICTORY_PLAYER_ONE';
+      } else{
+        fightStatus='VICTORY_PLAYER_TWO'
+      }
+      let fightBase={
+        id:this.currentFight.id,
+        playerOne:this.currentFight.playerOne.login,
+        playerTwo:this.currentFight.playerTwo.login,
+        fightStatus:fightStatus
+      };
+      this.service.challenge(fightBase).subscribe(res=>{
+        console.log(res);
+      })
+    }
+  }
   ngOnDestroy(): void {
     clearInterval(this.actionInterval);
     clearInterval(this.fightInterval);
   }
-  capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+
   calculateFromBonuses(dtoList){
 
     if(dtoList.length>0) {

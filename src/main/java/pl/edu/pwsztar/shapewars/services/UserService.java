@@ -3,6 +3,8 @@ package pl.edu.pwsztar.shapewars.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pwsztar.shapewars.entities.Fight;
+import pl.edu.pwsztar.shapewars.entities.Fighter;
+import pl.edu.pwsztar.shapewars.entities.Shape;
 import pl.edu.pwsztar.shapewars.entities.User;
 import pl.edu.pwsztar.shapewars.entities.dto.MessageDto;
 import pl.edu.pwsztar.shapewars.entities.dto.UserDto;
@@ -15,8 +17,10 @@ import pl.edu.pwsztar.shapewars.services.interfaces.IUserService;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import javax.websocket.Session;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -94,29 +98,28 @@ public class UserService implements IUserService {
             winner=fight.getPlayerTwo();
             loser=fight.getPlayerOne();
         }
-
-        winner.setExperiencePoints(winner.getExperiencePoints()+(winner.getLevel()*70));
+        int winnerStoredLevel = winner.getLevel().intValue();
+        int loserStoredLevel = loser.getLevel().intValue();
+        winner.setExperiencePoints(winner.getExperiencePoints()+(loserStoredLevel*70));
         winner.getFighterList().forEach(fighter->{
             if(fighter.getSlot()!= FighterSlot.INVENTORY) {
                 fighter.setExperiencePoints(Math.round(fighter.getExperiencePoints() +
-                        (loser.getLevel() * 70) * Math.pow(1.15, (winner.getLevel() - fighter.getLevel()))));
+                        (loserStoredLevel * 70) * Math.pow(1.15, (winnerStoredLevel - fighter.getLevel()))));
                 Long fighterThreshold = experienceThresholdService.getByLevel(fighter.getLevel()).getThreshold();
                 if(fighter.getExperiencePoints()>fighterThreshold){
-                    fighter.setExperiencePoints(fighter.getExperiencePoints()-fighterThreshold);
-                    fighter.setLevel(fighter.getLevel()+1);
+                    fighter=levelUp(fighter,fighterThreshold);
                 }
                 fighterService.saveFighter(fighter);
             }
         });
-        loser.setExperiencePoints(loser.getExperiencePoints()+(winner.getLevel()*35));
+        loser.setExperiencePoints(loser.getExperiencePoints()+(winnerStoredLevel*35));
         loser.getFighterList().forEach(fighter->{
             if(fighter.getSlot()!= FighterSlot.INVENTORY) {
                 fighter.setExperiencePoints(Math.round(fighter.getExperiencePoints() +
-                        (winner.getLevel() * 35) * Math.pow(1.15, (loser.getLevel() - fighter.getLevel()))));
+                        (winnerStoredLevel * 35) * Math.pow(1.15, (loserStoredLevel - fighter.getLevel()))));
                 Long fighterThreshold = experienceThresholdService.getByLevel(fighter.getLevel()).getThreshold();
                 if(fighter.getExperiencePoints()>fighterThreshold){
-                    fighter.setExperiencePoints(fighter.getExperiencePoints()-fighterThreshold);
-                    fighter.setLevel(fighter.getLevel()+1);
+                    fighter=levelUp(fighter,fighterThreshold);
                 }
                 fighterService.saveFighter(fighter);
             }
@@ -131,9 +134,26 @@ public class UserService implements IUserService {
             loser.setExperiencePoints(loser.getExperiencePoints()-loserXPThreshold);
             loser.setLevel(loser.getLevel()+1L);
         }
-
-
-        if(fight.getPlayerTwo().getLogin()==null){
+        List<Fighter> loot;
+        if(loser.getEmail()==null){
+            //AI loser can lose shapes from its party - it will be deleted afterwards, so no worry
+            loot = loser.getFighterList();
+        } else{
+            loot = loser.getFighterList().stream().filter(fighter->fighter.getSlot()==FighterSlot.INVENTORY).collect(Collectors.toList());
+        }
+        //if loser has shapes to lose
+        //at least one
+        if(loot.size()!=0){
+            loot.get(new Random().nextInt(loot.size())).setOwner(winner);
+            //at most 2 will be transferred to winner
+            if(loot.size()>2){
+                loot.get(new Random().nextInt(loot.size())).setOwner(winner);
+            }
+        }
+        userRepository.save(winner);
+        userRepository.save(loser);
+        //bots won't have their e-mails set
+        if(fight.getPlayerTwo().getEmail()==null){
             //it means it really is an AI
             delete(fight.getPlayerTwo());
         }
@@ -149,5 +169,21 @@ public class UserService implements IUserService {
     }
     public List<User> getAll(){
         return userRepository.findAll();
+    }
+
+    private Fighter levelUp(Fighter fighter, Long fighterThreshold){
+        fighter.setExperiencePoints(fighter.getExperiencePoints()-fighterThreshold);
+        fighter.setLevel(fighter.getLevel()+1);
+        Shape shape = fighter.getFighterModelReferrence().getShape();
+        fighter.setStrengthModifier(fighter.getStrengthModifier()+
+                (long)(new Random().nextInt((shape.getSTRMaxGrowth().intValue()-shape.getSTRMinGrowth().intValue())
+                        +shape.getSTRMinGrowth().intValue())));
+        fighter.setHitPointsModifier(fighter.getHitPointsModifier()+
+                (long)(new Random().nextInt((shape.getHPMaxGrowth().intValue()-shape.getHPMinGrowth().intValue())
+                        +shape.getHPMinGrowth().intValue())));
+        fighter.setArmorModifier(fighter.getArmorModifier()+
+                (long)(new Random().nextInt((shape.getARMMaxGrowth().intValue()-shape.getARMMinGrowth().intValue())
+                        +shape.getARMMinGrowth().intValue())));
+        return fighter;
     }
 }

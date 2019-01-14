@@ -3,6 +3,7 @@ package pl.edu.pwsztar.shapewars.entities.dto;
 import lombok.Builder;
 import lombok.Data;
 import pl.edu.pwsztar.shapewars.entities.User;
+import pl.edu.pwsztar.shapewars.entities.enums.FighterSlot;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +24,9 @@ public class PlayerCombatDto {
                 .login(entity.getLogin())
                 .level(entity.getLevel())
                 .xpPoints(entity.getExperiencePoints())
-                .allFighterList(entity.getFighterList().stream().map(FighterCombatDto::fromEntity).collect(Collectors.toList()))
+                .allFighterList(entity.getFighterList().stream()
+                        .filter(fighter->fighter.getSlot()!= FighterSlot.INVENTORY)
+                        .map(FighterCombatDto::fromEntity).collect(Collectors.toList()))
                 .build();
     }
 }
