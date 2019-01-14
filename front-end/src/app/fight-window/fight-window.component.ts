@@ -60,9 +60,18 @@ export class FightWindowComponent implements OnInit, OnDestroy {
       this.allFighters = this.allFighters.concat(this.opponent.allFighterList);
       this.allFighters.forEach(fighter=>fighter.statusEffects={
         dead:false,
-        armorBonus:[],
-        speedBonus:[],
-        strengthBonus:[],
+        armorBonus:{
+          value:0,
+          bonuses:[]
+        },
+        speedBonus:{
+          value:0,
+          bonuses:[]
+        },
+        strengthBonus:{
+          value:0,
+          bonuses:[]
+        },
         stunnedForTurns:0
       });
       this.fightInterval = setInterval(() => {
@@ -73,19 +82,22 @@ export class FightWindowComponent implements OnInit, OnDestroy {
             this.router.navigate(['home']);
           }
         })
-      }, 3000);
+      }, 1500);
       this.actionInterval = setInterval(() => {
         this.fightService.getActionListForFight(this.currentFight.id).subscribe(res => {
           this.applyEffects(res);
           if (this.turnOrder.length > 0) {
             this.currentFighter = this.allFighters.find
             (fighter => fighter.id === this.turnOrder[this.actionList.length % 8].fighterId);
+            if((this.currentFighter.statusEffects.stunnedForDuration>0 || this.currentFighter.statusEffects.dead) && this.you.allFighterList.includes(this.currentFighter)){
+              console.log('stunned or dead');
+            }
           }
           if ((this.turnOrder.length == 0) ||
             (this.actionList.length != 0 && this.actionList[this.actionList.length - 1].nextActiveFighterId === 0 && this.turn === Math.floor(this.actionList.length / 8))) {
             let fighterSpeeds = this.allFighters.map(fighter => ({
               fighterId: fighter.id,
-              speed: fighter.speed
+              speed: fighter.speed + fighter.statusEffects.speedBonus.value
             }));
             let fightCombatDto = {
               fightId: this.currentFight.id,
@@ -97,7 +109,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
             })
           }
         })
-      }, 3000);
+      }, 1500);
     })
   }
   selectSkill(skill){
@@ -155,6 +167,19 @@ export class FightWindowComponent implements OnInit, OnDestroy {
   capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+  calculateFromBonuses(dtoList){
+
+    if(dtoList.length>0) {
+      return dtoList.map(dto => dto.value).reduce((a, b) => {
+        return a + b;
+      });
+    } else{
+      return 0;
+    }
+  }
+  abs(value){
+    return Math.abs(value);
+  }
   applyEffects(actionList:any):void{
 
     if(this.actionList.length!==actionList.length){
@@ -162,8 +187,31 @@ export class FightWindowComponent implements OnInit, OnDestroy {
       this.actionList
         .filter(action=>action.id>this.lastActionId)
         .forEach(action=>{
-          console.log(action);
         let caster=this.allFighters.find(fighter=>fighter.id==action.activeFighterId);
+        caster.statusEffects.armorBonus.bonuses.forEach(bonus=>{
+            bonus.duration--;
+            if(bonus.duration==0){
+              caster.statusEffects.armorBonus.bonuses.splice(caster.statusEffects.armorBonus.bonuses.indexOf(bonus,1));
+            }
+          });
+        caster.statusEffects.armorBonus.value=this.calculateFromBonuses(caster.statusEffects.armorBonus.bonuses);
+          caster.statusEffects.strengthBonus.bonuses.forEach(bonus=>{
+            bonus.duration--;
+            if(bonus.duration==0){
+              caster.statusEffects.strengthBonus.bonuses.splice(caster.statusEffects.strengthBonus.bonuses.indexOf(bonus,1));
+            }
+          });
+          caster.statusEffects.strengthBonus.value=this.calculateFromBonuses(caster.statusEffects.strengthBonus.bonuses);
+          caster.statusEffects.speedBonus.bonuses.forEach(bonus=>{
+            bonus.duration--;
+            if(bonus.duration==0){
+              caster.statusEffects.speedBonus.bonuses.splice(caster.statusEffects.speedBonus.bonuses.indexOf(bonus,1));
+            }
+          });
+          caster.statusEffects.speedBonus.value=this.calculateFromBonuses(caster.statusEffects.speedBonus.bonuses);
+          if(caster.statusEffects.stunnedForTurns>0){
+            caster.statusEffects.stunnedForTurns--;
+          }
         this.allFighters.forEach(fighter=>{
           fighter.storedHp=fighter.currentHp;
         });
@@ -178,7 +226,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
               HPDifference=Math.floor((effectDto.result*target.storedHp)/100);
             }
             if(effectDto.modifierType=='STR_BASED'){
-              HPDifference=Math.floor((effectDto.result*caster.strength)/100);
+              HPDifference=Math.floor((effectDto.result*(caster.strength+caster.statusEffects.strengthBonus.value)/100));
             }
             if(effectDto.modifierType=='FLAT_VALUE'){
               HPDifference=Math.floor(effectDto.result);
@@ -186,6 +234,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
             if(effectDto.statusEffect=='DEAL_DAMAGE'){
               HPDifference*=-1;
             }
+            HPDifference=Math.floor(HPDifference*(100/(100+target.armor+target.statusEffects.armorBonus.value)));
             target.currentHp=Math.min(Math.max(target.currentHp+HPDifference, 0), target.maximumHp);
             if(HPDifference!=0) {
               this.fightLog.push(
@@ -199,23 +248,23 @@ export class FightWindowComponent implements OnInit, OnDestroy {
             }
           } else if(effectDto.result!=0){
             if (effectDto.statusEffect!=='STUN'){
-              console.log(effectDto);
 
               let value=Math.floor(effectDto.result);
               let parameterName=effectDto.statusEffect.substring(effectDto.statusEffect.indexOf("_")+1).toLowerCase();
               let direction = effectDto.statusEffect.substring(0,effectDto.statusEffect.indexOf("_")).toLowerCase();
-              let tooltip=this.capitalize(parameterName)+" "+direction+" by "+value;
               let dto={
                 value:direction=='increase'?value:(value*-1),
-                tooltip:tooltip,
                 duration:3
               };
               if(parameterName=="armor"){
-                target.statusEffects.armorBonus.push(dto);
+                target.statusEffects.armorBonus.bonuses.push(dto);
+                target.statusEffects.armorBonus.value=this.calculateFromBonuses(target.statusEffects.armorBonus.bonuses);
               } else if(parameterName=='speed'){
-                target.statusEffects.speedBonus.push(dto);
+                target.statusEffects.speedBonus.bonuses.push(dto);
+                target.statusEffects.speedBonus.value=this.calculateFromBonuses(target.statusEffects.speedBonus.bonuses);
               } else if(parameterName=='strength'){
-                target.statusEffects.strengthBonus.push(dto);
+                target.statusEffects.strengthBonus.bonuses.push(dto);
+                target.statusEffects.strengthBonus.value=this.calculateFromBonuses(target.statusEffects.strengthBonus.bonuses);
               }
               this.fightLog.push((this.you.allFighterList.includes(target) ? "Your " : "Enemy's ") + target.fighterModelReferenceDto.colorName + " " + target.fighterModelReferenceDto.shapeName +
                 "'s "+parameterName+" has been "+direction +"d by "+value+"!");
@@ -228,9 +277,8 @@ export class FightWindowComponent implements OnInit, OnDestroy {
         }
         );
         this.lastActionId=action.id;
+        console.log(caster);
       });
-      console.log(this.actionList);
-      console.log(this.allFighters);
     }
   }
 
