@@ -51,7 +51,9 @@ public class ActionService {
             fightAction.setSkill(skillService.getSkillsByIdIn(Arrays.asList(dto.getSkillId())).get(0));
         }
         fightAction.setActiveFighter(fighterService.getFighterById(dto.getActiveFighterId()));
-        fightAction.setSelectedTarget(fighterService.getFighterById(dto.getSelectedTargetId()));
+        if(dto.getSelectedTargetId()!=0) {
+            fightAction.setSelectedTarget(fighterService.getFighterById(dto.getSelectedTargetId()));
+        }
         if(dto.getNextActiveFighterId()!=0){
             //nie ma następnego wojownika -> trzeba utworzyć nową kolejkę
             fightAction.setNextActiveFighter(fighterService.getFighterById(dto.getNextActiveFighterId()));

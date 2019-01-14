@@ -1,5 +1,6 @@
 package pl.edu.pwsztar.shapewars.entities.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,10 +26,12 @@ public class ActionDto {
                 .fightId(fightAction.getFight().getID())
                         .actionTime(fightAction.getActionTime().toString())
                         .activeFighterId(fightAction.getActiveFighter().getID())
-                        .selectedTargetId(fightAction.getSelectedTarget().getID())
+                        .selectedTargetId(fightAction.getSelectedTarget()!=null? fightAction.getSelectedTarget().getID():null)
                         .nextActiveFighterId(fightAction.getNextActiveFighter()!=null? fightAction.getNextActiveFighter().getID():null)
-                        .skillEffectResultDtoList(fightAction.getResultSet().stream().map(SkillEffectResultDto::fromEntity).collect(
-                              Collectors.toList()))
+                        .skillEffectResultDtoList(
+                              fightAction.getResultSet()!=null?
+                              fightAction.getResultSet().stream().map(SkillEffectResultDto::fromEntity).collect(
+                              Collectors.toList()):new ArrayList<>())
                         .skillId(fightAction.getSkill()!=null? fightAction.getSkill().getID():null)
                 .build();
     }

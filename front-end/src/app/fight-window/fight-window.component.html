@@ -58,20 +58,28 @@
               background-color: blue"></progress>
               <img src="{{enemyfighter.fighterModelReferenceDto.model}}" style="width:100%; height:175px; float:right" (click)="performAttack(enemyfighter)">
             <div class="row" style="padding: 5px 10px">
-              <div *ngFor="let effect of enemyfighter.statusEffects.armorBonus"
-                   class="col-sm-1" style="height:12px; font-size:8px; margin: 2px; padding:0; background-color:white"
-              [matTooltip]="effect.tooltip">
-                A
+              <div *ngIf="enemyfighter.statusEffects.armorBonus.value!=0"
+                   class="col-sm-2" style="height:25px; font-size:16px; margin: 2px; padding:0; background-color:white"
+                   [matTooltip]="(enemyfighter.statusEffects.armorBonus.value>0?'Armor increased':'Armor reduced')
+                    + ' by '+abs(enemyfighter.statusEffects.armorBonus.value)">
+                {{enemyfighter.statusEffects.armorBonus.value}}
               </div>
-              <div *ngFor="let effect of enemyfighter.statusEffects.speedBonus"
-                   class="col-sm-1" style="height:12px; font-size:8px; margin: 2px; padding:0; background-color:white"
-                   [matTooltip]="effect.tooltip">
-                S
+              <div *ngIf="enemyfighter.statusEffects.speedBonus.value!=0"
+                   class="col-sm-2" style="height:25px; font-size:16px; margin: 2px; padding:0; background-color:white"
+                   [matTooltip]="(enemyfighter.statusEffects.speedBonus.value>0?'Speed increased':' Speed reduced')
+                    + ' by '+abs(enemyfighter.statusEffects.speedBonus.value)">
+                {{enemyfighter.statusEffects.speedBonus.value}}
               </div>
-              <div *ngFor="let effect of enemyfighter.statusEffects.strengthBonus"
-                   class="col-sm-1" style="height:12px; font-size:8px; margin: 2px; padding:0; background-color:white"
-                   [matTooltip]="effect.tooltip">
-                s
+              <div *ngIf="enemyfighter.statusEffects.strengthBonus.value!=0"
+                   class="col-sm-2" style="height:25px; font-size:16px; margin: 2px; padding:0; background-color:white"
+                   [matTooltip]="(enemyfighter.statusEffects.strengthBonus.value>0?'Strength increased':'Strength reduced')
+                    + ' by '+abs(enemyfighter.statusEffects.strengthBonus.value)">
+                {{enemyfighter.statusEffects.strengthBonus.value}}
+              </div>
+              <div *ngIf="enemyfighter.statusEffects.stunnedForTurns!=0"
+                   class="col-sm-2" style="height:25px; font-size:16px; margin: 2px; padding:0; background-color:white"
+                   [matTooltip]="'Stunned for '+enemyfighter.statusEffects.stunnedForTurns+' turns'">
+                {{enemyfighter.statusEffects.stunnedForTurns}}
               </div>
             </div>
           </div>

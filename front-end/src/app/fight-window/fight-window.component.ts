@@ -89,8 +89,13 @@ export class FightWindowComponent implements OnInit, OnDestroy {
           if (this.turnOrder.length > 0) {
             this.currentFighter = this.allFighters.find
             (fighter => fighter.id === this.turnOrder[this.actionList.length % 8].fighterId);
-            if((this.currentFighter.statusEffects.stunnedForDuration>0 || this.currentFighter.statusEffects.dead) && this.you.allFighterList.includes(this.currentFighter)){
-              console.log('stunned or dead');
+            if((this.currentFighter.statusEffects.stunnedForTurns>0 || this.currentFighter.statusEffects.dead) && this.you.allFighterList.includes(this.currentFighter)){
+              this.currentSkill={
+                id:0
+              };
+              this.performAttack({
+                id:0
+              });
             }
           }
           if ((this.turnOrder.length == 0) ||
@@ -136,6 +141,9 @@ export class FightWindowComponent implements OnInit, OnDestroy {
     }
   }
   private checkIfValid(skill,fighter):boolean{
+    if(skill.id==0 && fighter.id==0){
+      return true;
+    }
     if(fighter.statusEffects.dead){
       return false;
     }
@@ -269,7 +277,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
               this.fightLog.push((this.you.allFighterList.includes(target) ? "Your " : "Enemy's ") + target.fighterModelReferenceDto.colorName + " " + target.fighterModelReferenceDto.shapeName +
                 "'s "+parameterName+" has been "+direction +"d by "+value+"!");
             } else{
-              target.statusEffects.stunnedForTurns+=effectDto.result;
+              target.statusEffects.stunnedForTurns+=Math.floor(effectDto.result);
               this.fightLog.push((this.you.allFighterList.includes(target) ? "Your " : "Enemy's ") + target.fighterModelReferenceDto.colorName + " " + target.fighterModelReferenceDto.shapeName +
                 " has been stunned for "+effectDto.result+" turns!");
             }
@@ -277,7 +285,6 @@ export class FightWindowComponent implements OnInit, OnDestroy {
         }
         );
         this.lastActionId=action.id;
-        console.log(caster);
       });
     }
   }
