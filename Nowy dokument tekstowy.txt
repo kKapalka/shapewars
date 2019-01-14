@@ -1,7 +1,9 @@
 Lista zadañ:
-- zaimplementowaæ system walki - extreme (10.5)
+- dopracowaæ system walki - mid(3.5) - numery tur, sprawdziæ szybkoœæ jednostek, panel koñcowy walki
+
 - ¿eby admin nie móg³ resetowaæ jednostek gracza który w³aœnie walczy - low(1.4)
-- napisaæ AI - high(7.7)
+
+- napisaæ AI - mid(bot po prostu bêdzie rzuca³ losowe umiejêtnoœci w losowe jednostki)(4.4)
 2 zmiany
 (opcjonalne):
 - zablokowaæ wielokrotne logowanie
