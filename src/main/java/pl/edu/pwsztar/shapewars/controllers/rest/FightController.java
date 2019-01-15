@@ -49,4 +49,13 @@ public class FightController {
     public CompleteFightDataDto findFightInProgressForUser(@PathVariable String login){
         return CompleteFightDataDto.fromEntity(fightService.findFightInProgressForUser(login));
     }
+
+    @GetMapping("bot-fight/{login}")
+    public FightDto generateBotFight(@PathVariable String login){
+        try {
+            return FightDto.fromEntity(fightService.generateBotFightForUser(login));
+        } catch(Exception e) {
+            return FightDto.builder().build();
+        }
+    }
 }

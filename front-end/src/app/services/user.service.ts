@@ -50,4 +50,7 @@ export class UserService {
   challenge(challenge:any):Observable<any>{
     return this.http.post(this.urls.challenge,challenge,{responseType: 'json'})
   }
+  generateBotFight(login:string):Observable<any>{
+    return this.http.get(this.urls.botFight+login,{responseType:'json'});
+  }
 }

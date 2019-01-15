@@ -39,4 +39,9 @@ export class MainMenuComponent implements OnInit {
     }
     return "";
   }
+  initiateBotFight(){
+    this.service.generateBotFight(this.info.username).subscribe(res=>{
+      console.log(res);
+    })
+  }
 }

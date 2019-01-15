@@ -44,5 +44,6 @@ export class UrlsService {
   actionSave=this.host+"/action/save";
   fightById=this.host+"/fight/";
   fightInProgressForUser=this.host+"/fight/active/";
+  botFight=this.host+"/fight/bot-fight/";
   constructor() { }
 }

@@ -16,6 +16,7 @@ import pl.edu.pwsztar.shapewars.entities.User;
 import pl.edu.pwsztar.shapewars.entities.dto.LoginDto;
 import pl.edu.pwsztar.shapewars.entities.dto.PrivilegesDto;
 import pl.edu.pwsztar.shapewars.entities.dto.UserDto;
+import pl.edu.pwsztar.shapewars.entities.enums.FighterSlot;
 import pl.edu.pwsztar.shapewars.messages.JwtResponse;
 import pl.edu.pwsztar.shapewars.messages.ResponseMessage;
 import pl.edu.pwsztar.shapewars.repositories.UserRepository;
@@ -81,6 +82,12 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody UserDto signUpRequest) {
+        if(signUpRequest.getLogin().length()>=9){
+            if(signUpRequest.getLogin().substring(0,9).equals("BOT_LEVEL")){
+                return new ResponseEntity<>(new ResponseMessage("Fail -> This username is reserved for BOTS ONLY!"),
+                      HttpStatus.BAD_REQUEST);
+            }
+        }
         if (userRepository.findByLoginEquals(signUpRequest.getLogin()).isPresent()) {
             return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
@@ -106,8 +113,10 @@ public class AuthController {
         user.setExperiencePoints(0L);
         user = userRepository.save(user);
         if(!user.isAdmin()){
-            user.setFighterList(Arrays.asList(fighterService.generateFighter(user),fighterService.generateFighter(user),
-                    fighterService.generateFighter(user),fighterService.generateFighter(user)));
+            user.setFighterList(Arrays.asList(fighterService.generateFighter(user, FighterSlot.SLOT_1),
+                  fighterService.generateFighter(user,FighterSlot.SLOT_2),
+                    fighterService.generateFighter(user,FighterSlot.SLOT_3),fighterService.generateFighter(user,
+                        FighterSlot.SLOT_4)));
         }
         return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);
     }
@@ -115,8 +124,10 @@ public class AuthController {
     public ResponseEntity<?> resetFighters(@PathVariable String login){
         User user = userRepository.findByLoginEquals(login).orElseThrow(EntityNotFoundException::new);
         fighterService.resetFighterList(user);
-        user.setFighterList(Arrays.asList(fighterService.generateFighter(user),fighterService.generateFighter(user),
-              fighterService.generateFighter(user),fighterService.generateFighter(user)));
+        user.setFighterList(Arrays.asList(fighterService.generateFighter(user, FighterSlot.SLOT_1),
+              fighterService.generateFighter(user,FighterSlot.SLOT_2),
+              fighterService.generateFighter(user,FighterSlot.SLOT_3),fighterService.generateFighter(user,
+                    FighterSlot.SLOT_4)));
         return new ResponseEntity<>(new ResponseMessage("Fighter list reset successfully!"), HttpStatus.OK);
     }
 

@@ -24,6 +24,7 @@ public class PlayerDto {
                 .id(user.getID())
                 .login(user.getLogin())
                 .admin(user.isAdmin())
+                .xpPoints(user.getExperiencePoints().intValue())
                 .level(user.getLevel().intValue())
                 .allFighterList(user.getFighterList().stream().map(FighterBaseDto::fromEntity).collect(Collectors.toList()))
                 .build();

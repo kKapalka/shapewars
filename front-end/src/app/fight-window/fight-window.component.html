@@ -102,8 +102,9 @@
       <div class="col-sm-4" style="padding-top: 80px">
         <div class="row" *ngIf="currentFighter.id!==undefined">
           <div class="col-sm-3" *ngFor="let skill of currentFighter.skillSet">
-            <img src="{{skill.icon}}" style="width:100%" [ngStyle]="skill===currentSkill && {'border': '2px solid green'}"
-                 [matTooltip]="(skill.name+' - '+skill.tooltip)" (click)="selectSkill(skill)">
+            <img src="{{skill.icon}}" style="width:100%"
+                 [ngStyle]="styleImages(skill)"
+                 [matTooltip]="(skill.name+' - '+skill.tooltip)" (click)="selectSkill(skill)" >
           </div>
         </div>
       </div>

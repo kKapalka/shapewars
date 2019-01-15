@@ -60,32 +60,32 @@ export class FightWindowComponent implements OnInit, OnDestroy {
       }
       this.allFighters = this.you.allFighterList;
       this.allFighters = this.allFighters.concat(this.opponent.allFighterList);
-      this.allFighters.forEach(fighter=>fighter.statusEffects={
-        dead:false,
-        armorBonus:{
-          value:0,
-          bonuses:[]
+      this.allFighters.forEach(fighter => fighter.statusEffects = {
+        dead: false,
+        armorBonus: {
+          value: 0,
+          bonuses: []
         },
-        speedBonus:{
-          value:0,
-          bonuses:[]
+        speedBonus: {
+          value: 0,
+          bonuses: []
         },
-        strengthBonus:{
-          value:0,
-          bonuses:[]
+        strengthBonus: {
+          value: 0,
+          bonuses: []
         },
-        stunnedForTurns:0
+        stunnedForTurns: 0
       });
       this.fightInterval = setInterval(() => {
         this.fightService.getFightById(this.currentFight.id).subscribe(res => {
           this.currentFightStatus = res.fightStatus;
           this.attemptFinalizeFight();
-          if(this.currentFightStatus!=='IN_PROGRESS'){
+          if (this.currentFightStatus !== 'IN_PROGRESS') {
             clearInterval(this.fightInterval);
             clearInterval(this.actionInterval);
-            if(this.winner!==this.you){
+            if (this.winner === this.you) {
               alert('You have won the fight!')
-            } else{
+            } else {
               alert('You have lost the fight!')
             }
             sessionStorage.setItem("fightStatus", "");
@@ -96,43 +96,60 @@ export class FightWindowComponent implements OnInit, OnDestroy {
           }
         })
       }, 1500);
-      this.actionInterval = setInterval(() => {
-        this.fightService.getActionListForFight(this.currentFight.id).subscribe(res => {
-          this.applyEffects(res);
-          if (this.turnOrder.length > 0) {
-            this.currentFighter = this.allFighters.find
-            (fighter => fighter.id === this.turnOrder[this.actionList.length % 8].fighterId);
-            if((this.currentFighter.statusEffects.stunnedForTurns>0 || this.currentFighter.statusEffects.dead) && this.you.allFighterList.includes(this.currentFighter)){
-              this.currentSkill={
-                id:0
-              };
-              this.performAttack({
-                id:0
-              });
-            }
-          }
-          if ((this.turnOrder.length == 0) ||
-            (this.actionList.length != 0 && this.actionList[this.actionList.length - 1].nextActiveFighterId === 0 && this.turn === Math.floor(this.actionList.length / 8))) {
-            let fighterSpeeds = this.allFighters.map(fighter => ({
-              fighterId: fighter.id,
-              speed: fighter.speed + fighter.statusEffects.speedBonus.value
-            }));
-            let fightCombatDto = {
-              fightId: this.currentFight.id,
-              fighterSpeedDtos: fighterSpeeds
-            };
-            this.turn = Math.floor(this.actionList.length / 8) + 1;
-            this.fightService.getTurnOrderForFightAndTurn(fightCombatDto, this.turn).subscribe(res => {
-              this.turnOrder = res;
-            })
-          }
-        })
-      }, 1500);
-    })
+      this.actionInterval = this.initActionInterval();
+    });
   }
+  initActionInterval(){
+       return  setInterval(() => {
+          this.fightService.getActionListForFight(this.currentFight.id).subscribe(res => {
+            this.applyEffects(res);
+            if (this.turnOrder.length > 0) {
+              this.currentFighter = this.allFighters.find
+              (fighter => fighter.id === this.turnOrder[this.actionList.length % 8].fighterId);
+              if((this.currentFighter.statusEffects.stunnedForTurns>0 || this.currentFighter.statusEffects.dead) && this.you.allFighterList.includes(this.currentFighter)){
+                this.currentSkill={
+                  id:0
+                };
+                this.performAttack({
+                  id:0
+                });
+              } else if(this.opponent.login.substring(0,9)==='BOT_LEVEL' && this.opponent.allFighterList.includes(this.currentFighter)){
+                clearInterval(this.actionInterval);
+                if((this.currentFighter.statusEffects.stunnedForTurns>0 || this.currentFighter.statusEffects.dead)){
+                  this.currentSkill={
+                    id:0
+                  };
+                  this.performAttack({
+                    id:0
+                  });
+                } else{
+                  this.executeBotAttack();
+                }
+              }
+            }
+            if ((this.turnOrder.length == 0) ||
+              (this.actionList.length != 0 && this.actionList[this.actionList.length - 1].nextActiveFighterId === 0 && this.turn === Math.floor(this.actionList.length / 8))) {
+              let fighterSpeeds = this.allFighters.map(fighter => ({
+                fighterId: fighter.id,
+                speed: fighter.speed + fighter.statusEffects.speedBonus.value
+              }));
+              let fightCombatDto = {
+                fightId: this.currentFight.id,
+                fighterSpeedDtos: fighterSpeeds
+              };
+              this.turn = Math.floor(this.actionList.length / 8) + 1;
+              this.fightService.getTurnOrderForFightAndTurn(fightCombatDto, this.turn).subscribe(res => {
+                this.turnOrder = res;
+              })
+            }
+          })
+        }, 1500);
+      }
   selectSkill(skill){
     if(this.you.allFighterList.includes(this.currentFighter)){
-      this.currentSkill=skill;
+      if(this.currentFighter.currentMana>=skill.cost){
+        this.currentSkill=skill;
+      }
     }
   }
   performAttack(fighter){
@@ -149,6 +166,9 @@ export class FightWindowComponent implements OnInit, OnDestroy {
         this.fightService.saveAction(action).subscribe(res=>{
           console.log(res);
           this.currentSkill=undefined;
+          if(this.opponent.login.substring(0,9)==='BOT_LEVEL' && this.opponent.allFighterList.includes(this.currentFighter)){
+            this.actionInterval = this.initActionInterval();
+          }
         });
       }
     }
@@ -161,13 +181,22 @@ export class FightWindowComponent implements OnInit, OnDestroy {
       return false;
     }
     let targetTypes=[].concat.apply([],skill.skillEffectBundles.map(bundle=>bundle.skillEffectDtos.map(dto=>dto.targetType)));
+    let enemyTargets;
+    let alliedTargets;
+    if(this.opponent.allFighterList.includes(this.currentFighter)){
+      enemyTargets=this.you.allFighterList;
+      alliedTargets=this.opponent.allFighterList;
+    } else{
+      alliedTargets=this.you.allFighterList;
+      enemyTargets=this.opponent.allFighterList;
+    }
     if(targetTypes.some(type => ['TARGET_ENEMY', 'RANDOM_ENEMY', 'ALL_ENEMY_UNITS', 'ALL_UNITS'].includes(type))){
-      return this.opponent.allFighterList.includes(fighter);
+      return enemyTargets.includes(fighter);
     } else{
       if (targetTypes.some(type => ['TARGET_ALLY', 'RANDOM_ALLY', 'ALL_ALLIED_UNITS', 'ALL_UNITS'].includes(type))
-        && this.you.allFighterList.includes(fighter)) {
+        && alliedTargets.includes(fighter)) {
         return true;
-      } else if(targetTypes.includes('THIS_UNIT' && fighter===this.currentFighter)){
+      } else if(targetTypes.includes('THIS_UNIT' && fighter===this.currentFighter) && !(targetTypes.includes('TARGET_ENEMY') && targetTypes.includes('TARGET_ALLY'))){
         return true;
       }
       return false;
@@ -186,10 +215,10 @@ export class FightWindowComponent implements OnInit, OnDestroy {
   }
   attemptFinalizeFight(){
     if(this.you.allFighterList.map(fighter=>fighter.currentHp).reduce((a,b)=>a+b)==0){
-      this.winner=this.you;
+      this.winner=this.opponent;
     }
     if(this.opponent.allFighterList.map(fighter=>fighter.currentHp).reduce((a,b)=>a+b)==0){
-      this.winner=this.opponent;
+      this.winner=this.you;
     }
     if(Boolean(this.winner) && this.currentFightStatus=='IN_PROGRESS'){
       let fightStatus:string='';
@@ -235,6 +264,12 @@ export class FightWindowComponent implements OnInit, OnDestroy {
         .filter(action=>action.id>this.lastActionId)
         .forEach(action=>{
         let caster=this.allFighters.find(fighter=>fighter.id==action.activeFighterId);
+        if(Boolean(action.skillId)){
+          console.log(caster.skillSet);
+          console.log(action.skillId);
+          console.log(caster.skillSet.find(skill=>skill.id==action.skillId));
+          caster.currentMana-=caster.skillSet.find(skill=>skill.id==action.skillId).cost;
+        }
         caster.statusEffects.armorBonus.bonuses.forEach(bonus=>{
             bonus.duration--;
             if(bonus.duration==0){
@@ -327,5 +362,31 @@ export class FightWindowComponent implements OnInit, OnDestroy {
       });
     }
   }
-
+  styleImages(skill){
+    let styles:any={};
+    if(skill===this.currentSkill){
+      styles.border='2px solid green';
+    }
+    if(skill.cost>this.currentFighter.currentMana){
+      styles['webkit-filter']='grayscale(100%)';
+      styles.filter='grayscale(100%)';
+    }
+    return styles;
+  }
+  executeBotAttack(){
+    let validSkillSet=this.currentFighter.skillSet.filter(skill=>skill.cost<=this.currentFighter.currentMana);
+    let randomlySelectedSkill = validSkillSet[Math.floor(Math.random()*validSkillSet.length)];
+    let validTargets=this.allFighters.filter(fighter=>this.checkIfValid(randomlySelectedSkill,fighter));
+    while(validTargets.length==0){
+      randomlySelectedSkill = validSkillSet[Math.floor(Math.random()*validSkillSet.length)];
+      validTargets=this.allFighters.filter(fighter=>this.checkIfValid(randomlySelectedSkill,fighter));
+    }
+    let randomTarget=validTargets[Math.floor(Math.random()*validTargets.length)];
+    setTimeout(()=>{
+      this.currentSkill=randomlySelectedSkill;
+      setTimeout(()=>{
+        this.performAttack(randomTarget);
+      },1500);
+    },1500);
+  }
 }

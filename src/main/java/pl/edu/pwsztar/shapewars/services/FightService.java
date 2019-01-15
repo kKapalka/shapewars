@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.edu.pwsztar.shapewars.entities.Fight;
 import pl.edu.pwsztar.shapewars.entities.TurnOrder;
+import pl.edu.pwsztar.shapewars.entities.User;
 import pl.edu.pwsztar.shapewars.entities.dto.FightCombatDto;
 import pl.edu.pwsztar.shapewars.entities.dto.FightDto;
 import pl.edu.pwsztar.shapewars.entities.dto.FighterSpeedDto;
@@ -39,10 +40,14 @@ public class FightService {
         if((challenges.size()!=0)  && dto.getId()==null){
             throw new Exception("You cannot challenge the same player twice!");
         }
+        FightStatus storedStatus=FightStatus.INVITE_PENDING;
+        if(dto.getId()!=null){
+            storedStatus=fightRepository.getOne(dto.getId()).getFightStatus();
+        }
         Fight fight = updateFight(dto);
         FightDto newDto = FightDto.fromEntity(fightRepository.save(fight));
         if(Arrays.asList(FightStatus.VICTORY_PLAYER_ONE,FightStatus.VICTORY_PLAYER_TWO)
-                .contains(fight.getFightStatus())){
+                .contains(fight.getFightStatus()) && storedStatus==FightStatus.IN_PROGRESS){
             userService.processFightFinalization(fight);
         }
         return newDto;
@@ -112,5 +117,18 @@ public class FightService {
             return turnOrder;
         }).collect(Collectors.toList());
         return turnOrderRepository.saveAll(turnOrders);
+    }
+
+    public Fight generateBotFightForUser(String login) throws Exception {
+        User user = userService.getUserByLogin(login);
+        if(fightRepository.findFightInProgressForUser(user,PageRequest.of(0,1)).size()==0){
+            Fight fight = new Fight();
+            fight.setPlayerOne(user);
+            fight.setPlayerTwo(userService.generateOpponentWithLevel(user.getLevel()));
+            fight.setFightStatus(FightStatus.IN_PROGRESS);
+            return fightRepository.save(fight);
+        } else{
+            throw new Exception("Cannot initiate fight against bots for user: "+login);
+        }
     }
 }

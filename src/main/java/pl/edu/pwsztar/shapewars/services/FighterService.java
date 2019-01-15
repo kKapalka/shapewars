@@ -16,7 +16,7 @@ import pl.edu.pwsztar.shapewars.services.ColorMapService;
 import pl.edu.pwsztar.shapewars.utilities.FighterImageGenerator;
 
 import java.util.List;
-
+import java.util.Random;
 
 @Service
 public class FighterService {
@@ -64,7 +64,7 @@ public class FighterService {
         return fighterRepository.save(fighter);
     }
 
-    public Fighter generateFighter(User user){
+    public Fighter generateFighter(User user, FighterSlot slot){
         Fighter fighter = new Fighter();
         fighter.setFighterModelReferrence(fighterModelService.getRandomReference());
         fighter.setOwner(user);
@@ -73,7 +73,19 @@ public class FighterService {
         fighter.setArmorModifier(0L);
         fighter.setHitPointsModifier(0L);
         fighter.setStrengthModifier(0L);
-        fighter.setSlot(FighterSlot.INVENTORY);
+        Shape shape = fighter.getFighterModelReferrence().getShape();
+        for(int i=1;i<fighter.getLevel();i++){
+            fighter.setStrengthModifier(fighter.getStrengthModifier()+
+                                        (long)(new Random().nextInt((shape.getSTRMaxGrowth().intValue() - shape.getSTRMinGrowth().intValue())
+                                                                    + shape.getSTRMinGrowth().intValue())));
+            fighter.setHitPointsModifier(fighter.getHitPointsModifier()+
+                                         (long)(new Random().nextInt((shape.getHPMaxGrowth().intValue()-shape.getHPMinGrowth().intValue())
+                                                                     +shape.getHPMinGrowth().intValue())));
+            fighter.setArmorModifier(fighter.getArmorModifier()+
+                                     (long)(new Random().nextInt((shape.getARMMaxGrowth().intValue()-shape.getARMMinGrowth().intValue())
+                                                                 +shape.getARMMinGrowth().intValue())));
+        }
+        fighter.setSlot(slot);
         return fighterRepository.save(fighter);
     }
     public void resetFighterList(User user){
