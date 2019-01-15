@@ -1,9 +1,7 @@
 Lista zadañ:
 - dopracowaæ system walki - mid(3.5) - numery tur, sprawdziæ szybkoœæ jednostek, panel koñcowy walki
+- dodaæ ikonki - szybkoœæ, si³a, pancerz, og³uszenie
 
-- ¿eby admin nie móg³ resetowaæ jednostek gracza który w³aœnie walczy - low(1.4)
-
-- napisaæ AI - mid(bot po prostu bêdzie rzuca³ losowe umiejêtnoœci w losowe jednostki)(4.4)
 2 zmiany
 (opcjonalne):
 - zablokowaæ wielokrotne logowanie
