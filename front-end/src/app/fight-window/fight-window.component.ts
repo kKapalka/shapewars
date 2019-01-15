@@ -3,6 +3,8 @@ import {UserService} from "../services/user.service";
 import {TokenStorageService} from "../auth/token-storage.service";
 import {FightService} from "../services/fight.service";
 import {Router} from "@angular/router";
+import {ShapeService} from "../services/shape.service";
+import {ColormapService} from "../services/colormap.service";
 
 @Component({
   selector: 'app-fight-window',
@@ -25,6 +27,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
   lastActionId:number=0;
   winner:any;
   currentFightStatus:string="";
+  colorSet:any=[]
   currentFighter:any={
     fighterModelReferenceDto: {
       skillSet:[
@@ -45,7 +48,22 @@ export class FightWindowComponent implements OnInit, OnDestroy {
     }
   };
   constructor(private service:UserService, private token:TokenStorageService,
-              private fightService:FightService, private router:Router) { }
+              private fightService:FightService, private router:Router,
+              private colorMapService:ColormapService) {
+    this.colorMapService.getAllColors().subscribe(res=>{
+      this.colorSet=res.map(color=>{
+        let colorDamages={};
+        color.colorDamageDtoList.forEach(dto=>{
+          colorDamages[dto.enemyColorName]=dto.damagePercentage;
+        })
+        let colorDamageSet={
+          colorName:color.colorName,
+          colorDamages:colorDamages
+        }
+        return colorDamageSet;
+      });
+    })
+  }
 
   ngOnInit() {
     this.turn = 0;
@@ -164,7 +182,6 @@ export class FightWindowComponent implements OnInit, OnDestroy {
           skillId:this.currentSkill.id
         };
         this.fightService.saveAction(action).subscribe(res=>{
-          console.log(res);
           this.currentSkill=undefined;
           if(this.opponent.login.substring(0,9)==='BOT_LEVEL' && this.opponent.allFighterList.includes(this.currentFighter)){
             this.actionInterval = this.initActionInterval();
@@ -265,9 +282,6 @@ export class FightWindowComponent implements OnInit, OnDestroy {
         .forEach(action=>{
         let caster=this.allFighters.find(fighter=>fighter.id==action.activeFighterId);
         if(Boolean(action.skillId)){
-          console.log(caster.skillSet);
-          console.log(action.skillId);
-          console.log(caster.skillSet.find(skill=>skill.id==action.skillId));
           caster.currentMana-=caster.skillSet.find(skill=>skill.id==action.skillId).cost;
         }
         caster.statusEffects.armorBonus.bonuses.forEach(bonus=>{
@@ -299,7 +313,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
         });
         action.skillEffectResultDtoList.forEach(effectDto=> {
           let target =  this.allFighters.find(fighter=>fighter.id==effectDto.targetId)
-          if(effectDto.statusEffect=='DEAL_DAMAGE' || effectDto.statusEffect=='RESTORE_HEALTH'){
+          if(!target.statusEffects.dead && (effectDto.statusEffect=='DEAL_DAMAGE' || effectDto.statusEffect=='RESTORE_HEALTH')){
             let HPDifference:number;
             if(effectDto.modifierType=='SELF_CURRENT_HP_BASED'){
               HPDifference=Math.floor((effectDto.result*caster.storedHp)/100);
@@ -314,9 +328,13 @@ export class FightWindowComponent implements OnInit, OnDestroy {
               HPDifference=Math.floor(effectDto.result);
             }
             if(effectDto.statusEffect=='DEAL_DAMAGE'){
-              HPDifference*=-1;
+              let colorDependentDamageAmplifier=this.colorSet.find(set=>set.colorName===caster.fighterModelReferenceDto.colorName).colorDamages[target.fighterModelReferenceDto.colorName];
+              if(!Boolean(colorDependentDamageAmplifier)){
+                colorDependentDamageAmplifier=100;
+              }
+              HPDifference=Math.floor(HPDifference*(colorDependentDamageAmplifier/100)
+                *(-100/(100+target.armor+target.statusEffects.armorBonus.value)));
             }
-            HPDifference=Math.floor(HPDifference*(100/(100+target.armor+target.statusEffects.armorBonus.value)));
             target.currentHp=Math.min(Math.max(target.currentHp+HPDifference, 0), target.maximumHp);
             if(HPDifference!=0) {
               this.fightLog.push(
