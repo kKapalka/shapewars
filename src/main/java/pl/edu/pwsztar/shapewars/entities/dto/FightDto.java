@@ -18,7 +18,7 @@ public class FightDto {
             return FightDto.builder()
                     .id(fight.getID())
                     .playerOne(fight.getPlayerOne().getLogin())
-                    .playerTwo(fight.getPlayerTwo().getLogin())
+                    .playerTwo(fight.getPlayerTwo()!=null?fight.getPlayerTwo().getLogin():null)
                     .fightStatus(fight.getFightStatus().name())
                     .build();
         } else{

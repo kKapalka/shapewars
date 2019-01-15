@@ -17,6 +17,7 @@ import pl.edu.pwsztar.shapewars.utilities.FighterImageGenerator;
 
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 public class FighterService {
@@ -29,6 +30,9 @@ public class FighterService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ExperienceThresholdService experienceThresholdService;
 
     //for fighter generation is totally different method
     public FighterDto save(FighterDto dto){
@@ -90,5 +94,73 @@ public class FighterService {
     }
     public void resetFighterList(User user){
         fighterRepository.deleteAllByOwner(user);
+    }
+
+    public void applyLevelChangesToFighters(User winner, User loser){
+        winner.getFighterList().forEach(fighter -> {
+            if(fighter.getSlot() != FighterSlot.INVENTORY) {
+                fighter.setExperiencePoints(Math.round(fighter.getExperiencePoints() + (loser.getLevel() * 70) *
+                                                                                       Math.pow(1.15, (winner.getLevel() -
+                                                                                                       fighter.getLevel()))));
+                Long fighterThreshold = experienceThresholdService.getByLevel(fighter.getLevel()).getThreshold();
+                if(fighter.getExperiencePoints() > fighterThreshold) {
+                    fighter = levelUp(fighter, fighterThreshold);
+                }
+                fighterRepository.save(fighter);
+            }
+        });
+        loser.getFighterList().forEach(fighter -> {
+            if(fighter.getSlot() != FighterSlot.INVENTORY) {
+                fighter.setExperiencePoints(Math.round(fighter.getExperiencePoints() + (winner.getLevel() * 35) *
+                                                                                       Math.pow(1.15,
+                                                                                             (loser.getLevel() -
+                                                                                                       fighter.getLevel()))));
+                Long fighterThreshold = experienceThresholdService.getByLevel(fighter.getLevel()).getThreshold();
+                if(fighter.getExperiencePoints() > fighterThreshold) {
+                    fighter = levelUp(fighter, fighterThreshold);
+                }
+                fighterRepository.save(fighter);
+            }
+        });
+    }
+    public void tryApplyingLoot(User winner, User loser){
+        List<Fighter> loot;
+        if(loser.getEmail()==null){
+            //AI loser can lose shapes from its party - it will be deleted afterwards, so no worry
+            loot = loser.getFighterList();
+            loot.stream().peek(fighter->fighter.setOwner(null));
+        } else{
+            loot = loser.getFighterList().stream().filter(fighter->fighter.getSlot()==FighterSlot.INVENTORY).collect(
+                  Collectors.toList());
+        }
+        //if loser has shapes to lose
+        //at least one
+        if(loot.size()!=0){
+            Fighter fighterToTransfer = loot.get(new Random().nextInt(loot.size()));
+            fighterToTransfer.setSlot(FighterSlot.INVENTORY);
+            fighterToTransfer.setOwner(winner);
+            //at most 2 will be transferred to winner
+            if(loot.size()>2){
+                fighterToTransfer = loot.get(new Random().nextInt(loot.size()));
+                fighterToTransfer.setSlot(FighterSlot.INVENTORY);
+                fighterToTransfer.setOwner(winner);
+            }
+        }
+        fighterRepository.saveAll(loot);
+    }
+    private Fighter levelUp(Fighter fighter, Long fighterThreshold){
+        fighter.setExperiencePoints(fighter.getExperiencePoints()-fighterThreshold);
+        fighter.setLevel(fighter.getLevel()+1);
+        Shape shape = fighter.getFighterModelReferrence().getShape();
+        fighter.setStrengthModifier(fighter.getStrengthModifier()+
+                                    (long)(new Random().nextInt((shape.getSTRMaxGrowth().intValue()-shape.getSTRMinGrowth().intValue())
+                                                                +shape.getSTRMinGrowth().intValue())));
+        fighter.setHitPointsModifier(fighter.getHitPointsModifier()+
+                                     (long)(new Random().nextInt((shape.getHPMaxGrowth().intValue()-shape.getHPMinGrowth().intValue())
+                                                                 +shape.getHPMinGrowth().intValue())));
+        fighter.setArmorModifier(fighter.getArmorModifier()+
+                                 (long)(new Random().nextInt((shape.getARMMaxGrowth().intValue()-shape.getARMMinGrowth().intValue())
+                                                             +shape.getARMMinGrowth().intValue())));
+        return fighter;
     }
 }

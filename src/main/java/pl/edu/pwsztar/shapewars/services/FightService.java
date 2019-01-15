@@ -40,16 +40,9 @@ public class FightService {
         if((challenges.size()!=0)  && dto.getId()==null){
             throw new Exception("You cannot challenge the same player twice!");
         }
-        FightStatus storedStatus=FightStatus.INVITE_PENDING;
-        if(dto.getId()!=null){
-            storedStatus=fightRepository.getOne(dto.getId()).getFightStatus();
-        }
         Fight fight = updateFight(dto);
         FightDto newDto = FightDto.fromEntity(fightRepository.save(fight));
-        if(Arrays.asList(FightStatus.VICTORY_PLAYER_ONE,FightStatus.VICTORY_PLAYER_TWO)
-                .contains(fight.getFightStatus()) && storedStatus==FightStatus.IN_PROGRESS){
-            userService.processFightFinalization(fight);
-        }
+        deleteAllIdleBots();
         return newDto;
     }
 
@@ -62,6 +55,21 @@ public class FightService {
             fight.setPlayerOne(userService.getUserByLogin(dto.getPlayerOne()));
             fight.setPlayerTwo(userService.getUserByLogin(dto.getPlayerTwo()));
         }
+        if(fight.getFightStatus()==FightStatus.IN_PROGRESS && Arrays.asList("VICTORY_PLAYER_ONE",
+              "VICTORY_PLAYER_TWO").contains(dto.getFightStatus())){
+            User winner, loser;
+            if(dto.getFightStatus().equals(FightStatus.VICTORY_PLAYER_ONE.name())){
+                winner=fight.getPlayerOne();
+                loser=fight.getPlayerTwo();
+            } else{
+                winner=fight.getPlayerTwo();
+                loser=fight.getPlayerOne();
+            }
+            userService.applyLevelChangesToUsers(winner,loser);
+            fighterService.applyLevelChangesToFighters(winner,loser);
+            fighterService.tryApplyingLoot(winner,loser);
+            fight.setPlayerTwo(fight.getPlayerTwo().getEmail()!=null?fight.getPlayerTwo():null);
+        }
         if(fight.getFightStatus()==FightStatus.INVITE_PENDING && dto.getFightStatus().equals("IN_PROGRESS")) {
             List<Fight> challengesToReject = fightRepository.findAllPendingInvitesForPlayers(Arrays.asList(fight.getPlayerOne(), fight.getPlayerTwo()));
             challengesToReject.remove(fight);
@@ -72,6 +80,7 @@ public class FightService {
         if(fight.getFightStatus()!=FightStatus.INVITE_REJECTED) {
             fight.setFightStatus(FightStatus.valueOf(dto.getFightStatus()));
         }
+
         return fight;
     }
     public Fight findFightById(Long id){
@@ -130,5 +139,14 @@ public class FightService {
         } else{
             throw new Exception("Cannot initiate fight against bots for user: "+login);
         }
+    }
+    private void deleteAllIdleBots(){
+        List<User> bots = userService.findAllBots();
+        bots.forEach(bot->{
+            List<Fight> activeFights = fightRepository.findFightInProgressForUser(bot,PageRequest.of(0,1));
+            if(activeFights.size()==0){
+                userService.delete(bot);
+            }
+        });
     }
 }
