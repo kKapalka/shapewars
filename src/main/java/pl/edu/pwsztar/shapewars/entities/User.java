@@ -53,12 +53,4 @@ public class User {
     @OneToMany (mappedBy = "receiver",cascade = CascadeType.ALL,orphanRemoval = true)
     @ToString.Exclude
     private List<Message> messagesReceived;
-
-    @OneToMany (mappedBy = "playerOne",cascade = CascadeType.ALL,orphanRemoval = true)
-    @ToString.Exclude
-    private List<Fight> fightsAsPlayerOne;
-
-    @OneToMany (mappedBy = "playerTwo",cascade = CascadeType.ALL,orphanRemoval = true)
-    @ToString.Exclude
-    private List<Fight> fightsAsPlayerTwo;
 }

@@ -69,13 +69,8 @@ export class FightWindowComponent implements OnInit, OnDestroy {
     this.turn = 0;
     this.fightService.findFightInProgressForUser(this.token.getUsername()).subscribe(res => {
       this.currentFight = res;
-      if (this.currentFight.playerOne.login === this.token.getUsername()) {
-        this.you = this.currentFight.playerOne;
-        this.opponent = this.currentFight.playerTwo;
-      } else {
-        this.you = this.currentFight.playerTwo;
-        this.opponent = this.currentFight.playerOne;
-      }
+      this.you=this.currentFight.players.find(player=>player.login===this.token.getUsername());
+      this.opponent=this.currentFight.players.filter(player=>player!=this.you)[0];
       this.allFighters = this.you.allFighterList;
       this.allFighters = this.allFighters.concat(this.opponent.allFighterList);
       this.allFighters.forEach(fighter => fighter.statusEffects = {
@@ -98,7 +93,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
         this.fightService.getFightById(this.currentFight.id).subscribe(res => {
           this.currentFightStatus = res.fightStatus;
           this.attemptFinalizeFight();
-          if (this.currentFightStatus !== 'IN_PROGRESS') {
+          if (this.currentFightStatus === 'FINISHED') {
             clearInterval(this.fightInterval);
             clearInterval(this.actionInterval);
             if (this.winner === this.you) {
@@ -222,8 +217,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
   abandonFight(){
     let fightBase={
       id:this.currentFight.id,
-      playerOne:this.currentFight.playerOne.login,
-      playerTwo:this.currentFight.playerTwo.login,
+      playerNames:this.currentFight.playerNames,
       fightStatus:'ABANDONED'
     };
     this.service.challenge(fightBase).subscribe(res=>{
@@ -238,17 +232,11 @@ export class FightWindowComponent implements OnInit, OnDestroy {
       this.winner=this.you;
     }
     if(Boolean(this.winner) && this.currentFightStatus=='IN_PROGRESS'){
-      let fightStatus:string='';
-      if(this.winner.login==this.currentFight.playerOne.login){
-        fightStatus='VICTORY_PLAYER_ONE';
-      } else{
-        fightStatus='VICTORY_PLAYER_TWO'
-      }
       let fightBase={
         id:this.currentFight.id,
-        playerOne:this.currentFight.playerOne.login,
-        playerTwo:this.currentFight.playerTwo.login,
-        fightStatus:fightStatus
+        playerNames:this.currentFight.playerNames,
+        fightStatus:'FINISHED',
+        winnerName:this.winner.login
       };
       this.service.challenge(fightBase).subscribe(res=>{
         console.log(res);

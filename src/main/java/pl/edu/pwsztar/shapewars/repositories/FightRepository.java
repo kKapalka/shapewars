@@ -16,25 +16,16 @@ import javax.transaction.Transactional;
 @Repository
 public interface FightRepository extends JpaRepository<Fight,Long> {
 
-    @Query("select f from Fight f where f.playerOne.login=?1 or f.playerTwo.login=?1")
+    @Query("select f from Fight f where (select u from User u where u.login = ?1) member of f.fightingPlayers")
     List<Fight> findByUser(String userName);
 
-    @Query("select f from Fight f where f.playerOne.login=?1")
-    List<Fight> findBotFightsByUser(String userName);
-
-    @Query("select f from Fight f where (f.playerTwo.login=?1 and f.fightStatus='INVITE_PENDING')")
+    @Query("select f from Fight f where (select u from User u where u.login = ?1) member of f.fightingPlayers and f.fightStatus='INVITE_PENDING'")
     List<Fight> findChallengesForUser(String userName);
 
-    @Query("select f from Fight f where (f.playerOne.login=?1 and f.fightStatus='INVITE_PENDING')")
-    List<Fight> findByChallenger(String userName);
+    @Query("select f from Fight f where (select u from User u where u.login in ?1) member of f.fightingPlayers and f.fightStatus='INVITE_PENDING'")
+    List<Fight> findChallengeByFightingSides(List<String> playerNames);
 
-    @Query("select f from Fight f where (f.playerOne.login=?1 and f.playerTwo.login=?2 and f.fightStatus='INVITE_PENDING')")
-    List<Fight> findChallengeByFightingSides(String playerOneName, String playerTwoName);
-
-    @Query("select f from Fight f where (f.playerOne.login in ?1 or f.playerTwo.login in ?1 and f.fightStatus='INVITE_PENDING')")
-    List<Fight> findAllPendingInvitesForPlayers(List<String> userNames);
-
-    @Query("select f from Fight f where (f.playerOne.login=?1 or f.playerTwo.login=?1) and f.fightStatus='IN_PROGRESS'")
+    @Query("select f from Fight f where (select u from User u where u.login = ?1) member of f.fightingPlayers and f.fightStatus='IN_PROGRESS'")
     List<Fight> findFightInProgressForUser(String userName, Pageable pageable);
 
     @Modifying

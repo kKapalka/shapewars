@@ -5,6 +5,5 @@ public enum FightStatus {
     INVITE_REJECTED,
     IN_PROGRESS,
     ABANDONED,
-    VICTORY_PLAYER_ONE,
-    VICTORY_PLAYER_TWO
+    FINISHED
 }

@@ -125,7 +125,7 @@ public class FighterService {
     public void clearUnusedBotFighters(User bot){
         List<Fighter> botFighters = bot.getFighterList();
         botFighters.forEach(fighter->fighter.setOwner(null));
-        fighterRepository.deleteAll(botFighters);
+        fighterRepository.saveAll(botFighters);
     }
 
     public void tryApplyingLoot(User winner, User loser){

@@ -13,7 +13,7 @@ export class MainMenuComponent implements OnInit {
   searchUsername:string;
   friends:any;
   changelog:any;
-  challenges:any;
+  challengerNames:any;
   constructor(private service:UserService, private router:Router) { }
 
   ngOnInit() {
@@ -24,7 +24,8 @@ export class MainMenuComponent implements OnInit {
       this.changelog=res;
     }));
     this.service.getChallengesForUser(this.info.username).subscribe(res=>{
-      this.challenges=res;
+      this.challengerNames=[].concat.apply([],
+        res.map(challenge=>challenge.playerNames));
     })
   }
   search(event){
@@ -34,8 +35,8 @@ export class MainMenuComponent implements OnInit {
     },console.log);
   }
   checkForChallenge(login:string):string{
-    if(this.challenges.map(challenge=>challenge.playerOne).includes(login)){
-      return "[CHALLENGER]";
+    if(this.challengerNames.includes(login)){
+      return "[CHALLENGE]";
     }
     return "";
   }

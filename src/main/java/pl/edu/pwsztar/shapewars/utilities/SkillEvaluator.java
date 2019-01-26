@@ -15,14 +15,15 @@ public class SkillEvaluator {
     public static List<SkillEffectResult> perform(FightAction fightAction){
         currentAction= fightAction;
         resultSet = new ArrayList<>();
-        if(getFighterList(fightAction.getFight().getPlayerOne()).contains(fightAction.getActiveFighter())){
-            allies=getFighterList(fightAction.getFight().getPlayerOne());
-            enemies=getFighterList(fightAction.getFight().getPlayerTwo());
+
+        if(getFighterList(fightAction.getFight().getFightingPlayers().get(0)).contains(fightAction.getActiveFighter())){
+            allies=getFighterList(fightAction.getFight().getFightingPlayers().get(0));
+            enemies=getFighterList(fightAction.getFight().getFightingPlayers().get(1));
         } else{
-            enemies=getFighterList(fightAction.getFight().getPlayerOne());
-            allies=getFighterList(fightAction.getFight().getPlayerTwo());
+            enemies=getFighterList(fightAction.getFight().getFightingPlayers().get(0));
+            allies=getFighterList(fightAction.getFight().getFightingPlayers().get(1));
         }
-        fightAction.getSkill().getSkillEffectBundles().stream().forEach(SkillEvaluator::processBundle);
+        fightAction.getSkill().getSkillEffectBundles().forEach(SkillEvaluator::processBundle);
         return resultSet;
     }
 

@@ -35,7 +35,7 @@ public class FightService {
     private FighterService fighterService;
 
     public FightDto save(FightDto dto) throws Exception {
-        List<Fight> challenges = fightRepository.findChallengeByFightingSides(dto.getPlayerOne(),dto.getPlayerTwo());
+        List<Fight> challenges = fightRepository.findChallengeByFightingSides(dto.getPlayerNames());
         if((challenges.size()!=0)  && dto.getId()==null){
             throw new Exception("You cannot challenge the same player twice!");
         }
@@ -51,29 +51,19 @@ public class FightService {
             fight=fightRepository.getOne(dto.getId());
         } else{
             //only new fights can get their player set, because why would other option make sense?
-            fight.setPlayerOne(userService.getUserByLogin(dto.getPlayerOne()));
-            fight.setPlayerTwo(userService.getUserByLogin(dto.getPlayerTwo()));
+            fight.setFightingPlayers(userService.findPlayersByLogins(dto.getPlayerNames()));
         }
-        if(fight.getFightStatus()==FightStatus.IN_PROGRESS && Arrays.asList("VICTORY_PLAYER_ONE",
-              "VICTORY_PLAYER_TWO").contains(dto.getFightStatus())){
-            User winner, loser;
-            if(dto.getFightStatus().equals(FightStatus.VICTORY_PLAYER_ONE.name())){
-                winner=fight.getPlayerOne();
-                loser=fight.getPlayerTwo();
-            } else{
-                winner=fight.getPlayerTwo();
-                loser=fight.getPlayerOne();
-            }
+        if(fight.getFightStatus()==FightStatus.IN_PROGRESS && dto.getWinnerName()!=null){
+            User winner = fight.getFightingPlayers().stream()
+                    .filter(player->player.getLogin().equals(dto.getWinnerName())).findFirst().get();
+            User loser = fight.getFightingPlayers().stream()
+                    .filter(player->!player.equals(winner)).findFirst().get();
             userService.applyLevelChangesToUsers(winner,loser);
             fighterService.applyLevelChangesToFighters(winner,loser);
             fighterService.tryApplyingLoot(winner,loser);
-            fight.setPlayerTwo(fight.getPlayerTwo().getEmail()!=null?fight.getPlayerTwo():null);
-        }
-        if(dto.getFightStatus().equals("ABANDONED") && fight.getPlayerTwo().getEmail()==null){
-            fighterService.clearUnusedBotFighters(fight.getPlayerTwo());
         }
         if(fight.getFightStatus()==FightStatus.INVITE_PENDING && dto.getFightStatus().equals("IN_PROGRESS")) {
-            List<Fight> challengesToReject = fightRepository.findAllPendingInvitesForPlayers(Arrays.asList(dto.getPlayerOne(),dto.getPlayerTwo()));
+            List<Fight> challengesToReject = fightRepository.findChallengeByFightingSides(dto.getPlayerNames());
             challengesToReject.remove(fight);
             if(challengesToReject.size()>0) {
                 fightRepository.updateFightsSetAsAbandoned(challengesToReject.stream().map(Fight::getID).collect(Collectors.toList()));
@@ -91,7 +81,6 @@ public class FightService {
 
     public List<Fight> findByUser(String login){
         List<Fight> fights = fightRepository.findByUser(login);
-        fights.addAll(fightRepository.findBotFightsByUser(login));
         return fights.stream().distinct().collect(Collectors.toList());
     }
 
@@ -102,8 +91,9 @@ public class FightService {
     public List<Fight> getChallengesForUser(String login){
         return fightRepository.findChallengesForUser(login);
     }
+
     public Fight findByChallenger(String login){
-        List<Fight> list = fightRepository.findByChallenger(login);
+        List<Fight> list = fightRepository.findChallengesForUser(login);
         return list.size()>0?list.get(0):null;
     }
 
@@ -135,21 +125,27 @@ public class FightService {
         User user = userService.getUserByLogin(login);
         if(fightRepository.findFightInProgressForUser(login,PageRequest.of(0,1)).size()==0){
             Fight fight = new Fight();
-            fight.setPlayerOne(user);
-            fight.setPlayerTwo(userService.generateOpponentWithLevel(user.getLevel()));
+            fight.setFightingPlayers(Arrays.asList(user,userService.generateOpponentWithLevel(user.getLevel())));
             fight.setFightStatus(FightStatus.IN_PROGRESS);
             return fightRepository.save(fight);
         } else{
             throw new Exception("Cannot initiate fight against bots for user: "+login);
         }
     }
+
+    /**
+     * Metoda automatycznie usuwa
+     */
     private void deleteAllIdleBots(){
         List<User> bots = userService.findAllBots();
         bots.forEach(bot->{
-            List<Fight> activeFights = fightRepository.findFightInProgressForUser(bot.getLogin(),PageRequest.of(0,1));
-            if(activeFights.size()==0){
+            List<Fight> fights = fightRepository.findByUser(bot.getLogin());
+            if(fights.stream().filter(fight->fight.getFightStatus()==FightStatus.IN_PROGRESS).collect(Collectors.toList()).size()==0){
+                fights.forEach(fight->fight.setFightingPlayers(fight.getFightingPlayers()
+                        .stream().filter(player->player!=bot).collect(Collectors.toList())));
+                fightRepository.saveAll(fights);
                 fighterService.clearUnusedBotFighters(bot);
-                userService.delete(bot);
+                userService.deleteBot(bot);
             }
         });
     }

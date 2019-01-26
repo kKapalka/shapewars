@@ -125,4 +125,12 @@ public class UserService implements IUserService {
         return userRepository.findAllByEmail(null);
     }
 
+    public List<User> findPlayersByLogins(List<String> logins){
+        return userRepository.findAllByLoginIn(logins);
+    }
+    public void deleteBot(User bot){
+        bot.setFighterList(null);
+        User savedBot = userRepository.save(bot);
+        userRepository.delete(savedBot);
+    }
 }

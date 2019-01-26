@@ -42,12 +42,9 @@ export class UserComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.service.getFightsByUser(this.profileUsername).subscribe(res=>{
       this.fights={
-        won: res.filter(fight=>((fight.playerOne==this.profileUsername && fight.fightStatus==='VICTORY_PLAYER_ONE')
-                              || (fight.playerTwo==this.profileUsername && fight.fightStatus==='VICTORY_PLAYER_TWO'))).length,
-        lost: res.filter(fight=>((fight.playerOne==this.profileUsername && fight.fightStatus==='VICTORY_PLAYER_TWO')
-          || (fight.playerTwo==this.profileUsername && fight.fightStatus==='VICTORY_PLAYER_ONE'))).length,
-        abandoned: res.filter(fight=>((fight.playerOne==this.profileUsername || fight.playerTwo==this.profileUsername)
-          && fight.fightStatus==='ABANDONED')).length
+        won:res.filter(fight=>fight.winnerName===this.profileUsername).length,
+        lost:res.filter(fight=>fight.fightStatus==='FINISHED' && fight.winnerName!==this.profileUsername).length,
+        abandoned:(fight=>fight.fightStatus==='ABANDONED').length
       };
     })
     if(!this.checkIfThisPlayerProfile()) {
@@ -108,8 +105,7 @@ export class UserComponent implements OnInit, OnDestroy {
         console.log("You must have complete party before challenging another player!");
       } else{
         let challenge={
-          playerOne:this.token.getUsername(),
-          playerTwo:this.profileUsername,
+          playerNames:[this.token.getUsername(),this.profileUsername],
           fightStatus:"INVITE_PENDING"
         };
         this.service.challenge(challenge).subscribe(res=>{

@@ -37,16 +37,4 @@ public class SkillEffectService {
         skillEffect.setValueModifierType(ValueModifierType.valueOf(dto.getValueModifierType()));
         return skillEffect;
     }
-
-    public List<String> getAllTargetTypes(){
-        return Arrays.stream(TargetType.values()).map(Enum::name).collect(Collectors.toList());
-    }
-
-    public List<String> getAllStatusEffects(){
-        return Arrays.stream(SkillStatusEffect.values()).map(Enum::name).collect(Collectors.toList());
-    }
-
-    public List<String> getAllModifierTypes(){
-        return Arrays.stream(ValueModifierType.values()).map(Enum::name).collect(Collectors.toList());
-    }
 }

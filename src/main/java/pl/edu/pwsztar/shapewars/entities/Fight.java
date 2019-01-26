@@ -1,13 +1,12 @@
 package pl.edu.pwsztar.shapewars.entities;
 
 
-import lombok.Builder;
 import lombok.Data;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
 import pl.edu.pwsztar.shapewars.entities.enums.FightStatus;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -20,25 +19,19 @@ public class Fight {
     @Column(name="FIGHT_ID")
     private Long ID;
 
-    @ManyToOne
-    @JoinColumn(name="PLAYER_ONE_ID")
-    private User playerOne;
-
-    @ManyToOne
-    @JoinColumn(name="PLAYER_TWO_ID")
-    private User playerTwo;
+    @ManyToMany(cascade = CascadeType.DETACH)
+    @JoinTable
+    (
+    name="FIGHT_PLAYERS",
+    joinColumns={ @JoinColumn(name="FIGHT_ID", referencedColumnName="FIGHT_ID") },
+    inverseJoinColumns={ @JoinColumn(name="USER_ID", referencedColumnName="USER_ID") }
+    )
+    private List<User> fightingPlayers;
 
     @Enumerated(EnumType.STRING)
     @Column(name="FIGHT_STATUS")
     private FightStatus fightStatus;
 
-    @Override
-    public String toString() {
-        return "Fight{" +
-                "ID=" + ID +
-                ", playerOne=" + playerOne.getLogin() +
-                ", playerTwo=" + (playerTwo!=null?playerTwo.getLogin():null) +
-                ", fightStatus=" + fightStatus +
-                '}';
-    }
+    @Column(name="WINNER_NAME")
+    private String winnerName;
 }
