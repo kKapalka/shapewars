@@ -70,6 +70,9 @@ public class FightService {
             fighterService.tryApplyingLoot(winner,loser);
             fight.setPlayerTwo(fight.getPlayerTwo().getEmail()!=null?fight.getPlayerTwo():null);
         }
+        if(dto.getFightStatus().equals("ABANDONED") && fight.getPlayerTwo().getEmail()==null){
+            fighterService.clearUnusedBotFighters(fight.getPlayerTwo());
+        }
         if(fight.getFightStatus()==FightStatus.INVITE_PENDING && dto.getFightStatus().equals("IN_PROGRESS")) {
             List<Fight> challengesToReject = fightRepository.findAllPendingInvitesForPlayers(Arrays.asList(fight.getPlayerOne(), fight.getPlayerTwo()));
             challengesToReject.remove(fight);

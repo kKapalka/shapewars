@@ -123,12 +123,19 @@ public class FighterService {
             }
         });
     }
+
+    public void clearUnusedBotFighters(User bot){
+        List<Fighter> botFighters = bot.getFighterList();
+        botFighters.forEach(fighter->fighter.setOwner(null));
+        fighterRepository.deleteAll(botFighters);
+    }
+
     public void tryApplyingLoot(User winner, User loser){
         List<Fighter> loot;
         if(loser.getEmail()==null){
             //AI loser can lose shapes from its party - it will be deleted afterwards, so no worry
             loot = loser.getFighterList();
-            loot.stream().peek(fighter->fighter.setOwner(null));
+            loot.forEach(fighter->fighter.setOwner(null));
         } else{
             loot = loser.getFighterList().stream().filter(fighter->fighter.getSlot()==FighterSlot.INVENTORY).collect(
                   Collectors.toList());
@@ -139,14 +146,18 @@ public class FighterService {
             Fighter fighterToTransfer = loot.get(new Random().nextInt(loot.size()));
             fighterToTransfer.setSlot(FighterSlot.INVENTORY);
             fighterToTransfer.setOwner(winner);
+            fighterRepository.save(fighterToTransfer);
             //at most 2 will be transferred to winner
             if(loot.size()>2){
                 fighterToTransfer = loot.get(new Random().nextInt(loot.size()));
                 fighterToTransfer.setSlot(FighterSlot.INVENTORY);
                 fighterToTransfer.setOwner(winner);
+                fighterRepository.save(fighterToTransfer);
             }
         }
-        fighterRepository.saveAll(loot);
+        loot.stream().filter(fighter->fighter.getOwner()==null).forEach(fighter->{
+            fighterRepository.delete(fighter);
+        });
     }
     private Fighter levelUp(Fighter fighter, Long fighterThreshold){
         fighter.setExperiencePoints(fighter.getExperiencePoints()-fighterThreshold);
