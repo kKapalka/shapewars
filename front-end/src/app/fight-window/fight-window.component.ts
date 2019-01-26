@@ -313,65 +313,67 @@ export class FightWindowComponent implements OnInit, OnDestroy {
         });
         action.skillEffectResultDtoList.forEach(effectDto=> {
           let target =  this.allFighters.find(fighter=>fighter.id==effectDto.targetId)
-          if(!target.statusEffects.dead && (effectDto.statusEffect=='DEAL_DAMAGE' || effectDto.statusEffect=='RESTORE_HEALTH')){
-            let HPDifference:number;
-            if(effectDto.modifierType=='SELF_CURRENT_HP_BASED'){
-              HPDifference=Math.floor((effectDto.result*caster.storedHp)/100);
-            }
-            if(effectDto.modifierType=='TARGET_CURRENT_HP_BASED'){
-              HPDifference=Math.floor((effectDto.result*target.storedHp)/100);
-            }
-            if(effectDto.modifierType=='STR_BASED'){
-              HPDifference=Math.floor((effectDto.result*(caster.strength+caster.statusEffects.strengthBonus.value)/100));
-            }
-            if(effectDto.modifierType=='FLAT_VALUE'){
-              HPDifference=Math.floor(effectDto.result);
-            }
-            if(effectDto.statusEffect=='DEAL_DAMAGE'){
-              let colorDependentDamageAmplifier=this.colorSet.find(set=>set.colorName===caster.fighterModelReferenceDto.colorName).colorDamages[target.fighterModelReferenceDto.colorName];
-              if(!Boolean(colorDependentDamageAmplifier)){
-                colorDependentDamageAmplifier=100;
+          if(!target.statusEffects.dead){
+            if((effectDto.statusEffect=='DEAL_DAMAGE' || effectDto.statusEffect=='RESTORE_HEALTH')){
+              let HPDifference:number;
+              if(effectDto.modifierType=='SELF_CURRENT_HP_BASED'){
+                HPDifference=Math.floor((effectDto.result*caster.storedHp)/100);
               }
-              HPDifference=Math.floor(HPDifference*(colorDependentDamageAmplifier/100)
-                *(-100/(100+target.armor+target.statusEffects.armorBonus.value)));
-            }
-            target.currentHp=Math.min(Math.max(target.currentHp+HPDifference, 0), target.maximumHp);
-            if(HPDifference!=0) {
-              this.fightLog.push(
-                (this.you.allFighterList.includes(target) ? "Your " : "Enemy's ") + target.fighterModelReferenceDto.colorName + " " + target.fighterModelReferenceDto.shapeName +
-                (effectDto.statusEffect == 'DEAL_DAMAGE' ? " has taken " + (HPDifference * -1) + " damage!" : " has restored " + HPDifference + " health!"));
-            }
-            if(target.currentHp==0){
-              target.statusEffects.dead=true;
-              this.fightLog.push((this.you.allFighterList.includes(target) ? "Your " : "Enemy's ") + target.fighterModelReferenceDto.colorName + " " + target.fighterModelReferenceDto.shapeName +
-                " has died!");
-            }
-          } else if(effectDto.result!=0){
-            if (effectDto.statusEffect!=='STUN'){
+              if(effectDto.modifierType=='TARGET_CURRENT_HP_BASED'){
+                HPDifference=Math.floor((effectDto.result*target.storedHp)/100);
+              }
+              if(effectDto.modifierType=='STR_BASED'){
+                HPDifference=Math.floor((effectDto.result*(caster.strength+caster.statusEffects.strengthBonus.value)/100));
+              }
+              if(effectDto.modifierType=='FLAT_VALUE'){
+                HPDifference=Math.floor(effectDto.result);
+              }
+              if(effectDto.statusEffect=='DEAL_DAMAGE'){
+                let colorDependentDamageAmplifier=this.colorSet.find(set=>set.colorName===caster.fighterModelReferenceDto.colorName).colorDamages[target.fighterModelReferenceDto.colorName];
+                if(!Boolean(colorDependentDamageAmplifier)){
+                  colorDependentDamageAmplifier=100;
+                }
+                HPDifference=Math.floor(HPDifference*(colorDependentDamageAmplifier/100)
+                  *(-100/(100+target.armor+target.statusEffects.armorBonus.value)));
+              }
+              target.currentHp=Math.min(Math.max(target.currentHp+HPDifference, 0), target.maximumHp);
+              if(HPDifference!=0) {
+                this.fightLog.push(
+                  (this.you.allFighterList.includes(target) ? "Your " : "Enemy's ") + target.fighterModelReferenceDto.colorName + " " + target.fighterModelReferenceDto.shapeName +
+                  (effectDto.statusEffect == 'DEAL_DAMAGE' ? " has taken " + (HPDifference * -1) + " damage!" : " has restored " + HPDifference + " health!"));
+              }
+              if(target.currentHp==0){
+                target.statusEffects.dead=true;
+                this.fightLog.push((this.you.allFighterList.includes(target) ? "Your " : "Enemy's ") + target.fighterModelReferenceDto.colorName + " " + target.fighterModelReferenceDto.shapeName +
+                  " has died!");
+              }
+            } else if(effectDto.result!=0){
+              if (effectDto.statusEffect!=='STUN'){
 
-              let value=Math.floor(effectDto.result);
-              let parameterName=effectDto.statusEffect.substring(effectDto.statusEffect.indexOf("_")+1).toLowerCase();
-              let direction = effectDto.statusEffect.substring(0,effectDto.statusEffect.indexOf("_")).toLowerCase();
-              let dto={
-                value:direction=='increase'?value:(value*-1),
-                duration:3
-              };
-              if(parameterName=="armor"){
-                target.statusEffects.armorBonus.bonuses.push(dto);
-                target.statusEffects.armorBonus.value=this.calculateFromBonuses(target.statusEffects.armorBonus.bonuses);
-              } else if(parameterName=='speed'){
-                target.statusEffects.speedBonus.bonuses.push(dto);
-                target.statusEffects.speedBonus.value=this.calculateFromBonuses(target.statusEffects.speedBonus.bonuses);
-              } else if(parameterName=='strength'){
-                target.statusEffects.strengthBonus.bonuses.push(dto);
-                target.statusEffects.strengthBonus.value=this.calculateFromBonuses(target.statusEffects.strengthBonus.bonuses);
+                let value=Math.floor(effectDto.result);
+                let parameterName=effectDto.statusEffect.substring(effectDto.statusEffect.indexOf("_")+1).toLowerCase();
+                let direction = effectDto.statusEffect.substring(0,effectDto.statusEffect.indexOf("_")).toLowerCase();
+                let dto={
+                  value:direction=='increase'?value:(value*-1),
+                  duration:3
+                };
+                if(parameterName=="armor"){
+                  target.statusEffects.armorBonus.bonuses.push(dto);
+                  target.statusEffects.armorBonus.value=this.calculateFromBonuses(target.statusEffects.armorBonus.bonuses);
+                } else if(parameterName=='speed'){
+                  target.statusEffects.speedBonus.bonuses.push(dto);
+                  target.statusEffects.speedBonus.value=this.calculateFromBonuses(target.statusEffects.speedBonus.bonuses);
+                } else if(parameterName=='strength'){
+                  target.statusEffects.strengthBonus.bonuses.push(dto);
+                  target.statusEffects.strengthBonus.value=this.calculateFromBonuses(target.statusEffects.strengthBonus.bonuses);
+                }
+                this.fightLog.push((this.you.allFighterList.includes(target) ? "Your " : "Enemy's ") + target.fighterModelReferenceDto.colorName + " " + target.fighterModelReferenceDto.shapeName +
+                  "'s "+parameterName+" has been "+direction +"d by "+value+"!");
+              } else{
+                target.statusEffects.stunnedForTurns+=Math.floor(effectDto.result);
+                this.fightLog.push((this.you.allFighterList.includes(target) ? "Your " : "Enemy's ") + target.fighterModelReferenceDto.colorName + " " + target.fighterModelReferenceDto.shapeName +
+                  " has been stunned for "+effectDto.result+" turns!");
               }
-              this.fightLog.push((this.you.allFighterList.includes(target) ? "Your " : "Enemy's ") + target.fighterModelReferenceDto.colorName + " " + target.fighterModelReferenceDto.shapeName +
-                "'s "+parameterName+" has been "+direction +"d by "+value+"!");
-            } else{
-              target.statusEffects.stunnedForTurns+=Math.floor(effectDto.result);
-              this.fightLog.push((this.you.allFighterList.includes(target) ? "Your " : "Enemy's ") + target.fighterModelReferenceDto.colorName + " " + target.fighterModelReferenceDto.shapeName +
-                " has been stunned for "+effectDto.result+" turns!");
             }
           }
         }

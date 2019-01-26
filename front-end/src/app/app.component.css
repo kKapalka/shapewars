@@ -24,3 +24,6 @@
 .modal-dialog{
   top:100px;
 }
+.mat-tooltip {
+  font-size: 14px!important;
+}

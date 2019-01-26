@@ -14,11 +14,13 @@ import javax.transaction.Transactional;
 @Repository
 public interface FighterRepository extends JpaRepository<Fighter,Long> {
 
-    List<Fighter> findAllByOwner(User owner);
+    @Query("select f from Fighter f where f.owner.login=?1")
+    List<Fighter> findAllByOwnerName(String ownerName);
 
     @Transactional
-    List<Fighter> deleteAllByOwner(User owner);
+    @Query("delete from Fighter f where f.owner.login=?1")
+    List<Fighter> deleteAllByOwnerName(String ownerName);
 
-    @Query("select f from Fighter f where f.slot<>'INVENTORY' and f.owner=?1")
-    List<Fighter> findCombatantsForUser(User user);
+    @Query("select f from Fighter f where f.slot<>'INVENTORY' and f.owner.login=?1")
+    List<Fighter> findCombatantsForUserName(String ownerName);
 }

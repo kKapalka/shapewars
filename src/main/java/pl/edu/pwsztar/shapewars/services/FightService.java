@@ -35,8 +35,7 @@ public class FightService {
     private FighterService fighterService;
 
     public FightDto save(FightDto dto) throws Exception {
-        List<Fight> challenges = fightRepository.findChallengeByFightingSides(userService.getUserByLogin(dto.getPlayerOne()),
-                userService.getUserByLogin(dto.getPlayerTwo()));
+        List<Fight> challenges = fightRepository.findChallengeByFightingSides(dto.getPlayerOne(),dto.getPlayerTwo());
         if((challenges.size()!=0)  && dto.getId()==null){
             throw new Exception("You cannot challenge the same player twice!");
         }
@@ -74,7 +73,7 @@ public class FightService {
             fighterService.clearUnusedBotFighters(fight.getPlayerTwo());
         }
         if(fight.getFightStatus()==FightStatus.INVITE_PENDING && dto.getFightStatus().equals("IN_PROGRESS")) {
-            List<Fight> challengesToReject = fightRepository.findAllPendingInvitesForPlayers(Arrays.asList(fight.getPlayerOne(), fight.getPlayerTwo()));
+            List<Fight> challengesToReject = fightRepository.findAllPendingInvitesForPlayers(Arrays.asList(dto.getPlayerOne(),dto.getPlayerTwo()));
             challengesToReject.remove(fight);
             if(challengesToReject.size()>0) {
                 fightRepository.updateFightsSetAsAbandoned(challengesToReject.stream().map(Fight::getID).collect(Collectors.toList()));
@@ -91,25 +90,26 @@ public class FightService {
     }
 
     public List<Fight> findByUser(String login){
-        return fightRepository.findByUser(userService.getUserByLogin(login));
+        List<Fight> fights = fightRepository.findByUser(login);
+        fights.addAll(fightRepository.findBotFightsByUser(login));
+        return fights.stream().distinct().collect(Collectors.toList());
     }
 
     public Fight findFightInProgressForUser(String login){
-        return fightRepository.findFightInProgressForUser(userService.getUserByLogin(login), PageRequest.of(0,1)).get(0);
+        return fightRepository.findFightInProgressForUser(login, PageRequest.of(0,1)).get(0);
     }
 
     public List<Fight> getChallengesForUser(String login){
-        return fightRepository.findChallengesForUser(userService.getUserByLogin(login));
+        return fightRepository.findChallengesForUser(login);
     }
     public Fight findByChallenger(String login){
-        List<Fight> list = fightRepository.findByChallenger(userService.getUserByLogin(login));
+        List<Fight> list = fightRepository.findByChallenger(login);
         return list.size()>0?list.get(0):null;
     }
 
     public List<TurnOrder> getTurnOrderForFight(FightCombatDto dto, Long turn){
-        List<TurnOrder> turnOrders = turnOrderRepository.getTurnOrderForFightByTurnNumber(
-                fightRepository.findById(dto.getFightId()).orElseThrow(EntityNotFoundException::new),
-                turn);
+        List<TurnOrder> turnOrders = turnOrderRepository.getTurnOrderForFightByFightIdAndTurnNumber(
+                dto.getFightId(), turn);
         if(turnOrders.size()!=8){
             turnOrders = createTurnOrders(dto,turn);
         }
@@ -133,7 +133,7 @@ public class FightService {
 
     public Fight generateBotFightForUser(String login) throws Exception {
         User user = userService.getUserByLogin(login);
-        if(fightRepository.findFightInProgressForUser(user,PageRequest.of(0,1)).size()==0){
+        if(fightRepository.findFightInProgressForUser(login,PageRequest.of(0,1)).size()==0){
             Fight fight = new Fight();
             fight.setPlayerOne(user);
             fight.setPlayerTwo(userService.generateOpponentWithLevel(user.getLevel()));
@@ -146,8 +146,9 @@ public class FightService {
     private void deleteAllIdleBots(){
         List<User> bots = userService.findAllBots();
         bots.forEach(bot->{
-            List<Fight> activeFights = fightRepository.findFightInProgressForUser(bot,PageRequest.of(0,1));
+            List<Fight> activeFights = fightRepository.findFightInProgressForUser(bot.getLogin(),PageRequest.of(0,1));
             if(activeFights.size()==0){
+                fighterService.clearUnusedBotFighters(bot);
                 userService.delete(bot);
             }
         });

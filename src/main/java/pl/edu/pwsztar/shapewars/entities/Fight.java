@@ -37,7 +37,7 @@ public class Fight {
         return "Fight{" +
                 "ID=" + ID +
                 ", playerOne=" + playerOne.getLogin() +
-                ", playerTwo=" + playerTwo.getLogin() +
+                ", playerTwo=" + (playerTwo!=null?playerTwo.getLogin():null) +
                 ", fightStatus=" + fightStatus +
                 '}';
     }

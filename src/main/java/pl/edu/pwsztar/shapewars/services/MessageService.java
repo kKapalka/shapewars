@@ -40,13 +40,11 @@ public class MessageService {
     }
 
     public List<MessageDto> getAllMessagesByCallers(CommunicationDto dto){
-        List<User> callers = dto.getCallers().stream().map(caller->userService.getUserByLogin(caller)).collect(Collectors.toList());
-        List<MessageDto> list = messageRepository.getAllByCallers(callers.get(0),callers.get(1))
+        List<MessageDto> list = messageRepository.getAllByCallers(dto.getCallers())
                 .stream().map(MessageDto::fromEntity).collect(Collectors.toList());
         return list;
     }
-    public List<MessageDto> getAllMessagesByUserId(Long userId){
-        User user = userService.getUserById(userId);
-        return messageRepository.getAllBySenderOrReceiver(user).stream().map(MessageDto::fromEntity).collect(Collectors.toList());
+    public List<MessageDto> getAllMessagesByUserName(String login){
+        return messageRepository.getAllBySenderOrReceiver(login).stream().map(MessageDto::fromEntity).collect(Collectors.toList());
     }
 }

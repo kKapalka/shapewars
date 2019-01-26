@@ -48,12 +48,10 @@ public class FighterService {
         return fighterRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
     public List<Fighter> getCombatantsByLogin(String login){
-        User owner = userRepository.findByLoginEquals(login).orElseThrow(EntityNotFoundException::new);
-        return fighterRepository.findCombatantsForUser(owner);
+        return fighterRepository.findCombatantsForUserName(login);
     }
     public List<Fighter> getFightersByLogin(String login){
-        User owner = userRepository.findByLoginEquals(login).orElseThrow(EntityNotFoundException::new);
-        return fighterRepository.findAllByOwner(owner);
+        return fighterRepository.findAllByOwnerName(login);
     }
     //Instancje jednostek - edycja następuje w tych przypadkach:
     // otrzymują level-upy na podstawie odbytej walki
@@ -92,8 +90,8 @@ public class FighterService {
         fighter.setSlot(slot);
         return fighterRepository.save(fighter);
     }
-    public void resetFighterList(User user){
-        fighterRepository.deleteAllByOwner(user);
+    public void resetFighterList(String userName){
+        fighterRepository.deleteAllByOwnerName(userName);
     }
 
     public void applyLevelChangesToFighters(User winner, User loser){

@@ -15,7 +15,7 @@ import pl.edu.pwsztar.shapewars.utilities.SkillEvaluator;
 import javax.persistence.EntityNotFoundException;
 
 @Service
-public class ActionService {
+public class FightActionService {
 
     @Autowired
     private FightActionRepository fightActionRepository;
@@ -34,9 +34,8 @@ public class ActionService {
         FightAction newFightAction = fightActionRepository.save(fightAction);
         return ActionDto.fromEntity(newFightAction);
     }
-    public List<FightAction> getActionsForFight(Long id){
-        //żeby było po kolei
-        List<FightAction> fightActions = fightActionRepository.findAllByFight(fightService.findFightById(id));
+    public List<FightAction> getActionsForFight(Long fightId){
+        List<FightAction> fightActions = fightActionRepository.findAllByFight(fightId);
         fightActions.sort((a,b)->(int)(a.getId()-b.getId()));
         return fightActions;
     }

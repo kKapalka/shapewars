@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface TurnOrderRepository extends JpaRepository<TurnOrder,Long> {
 
-    @Query("select t from TurnOrder t where t.fight=?1 and t.turn=?2")
-    List<TurnOrder> getTurnOrderForFightByTurnNumber(Fight fight, Long turn);
+    @Query("select t from TurnOrder t where t.fight.id=?1 and t.turn=?2")
+    List<TurnOrder> getTurnOrderForFightByFightIdAndTurnNumber(Long fightId, Long turn);
 }

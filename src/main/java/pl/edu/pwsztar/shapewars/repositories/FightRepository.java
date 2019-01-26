@@ -16,23 +16,26 @@ import javax.transaction.Transactional;
 @Repository
 public interface FightRepository extends JpaRepository<Fight,Long> {
 
-    @Query("select f from Fight f where (f.playerOne=?1 or f.playerTwo=?1)")
-    List<Fight> findByUser(User user);
+    @Query("select f from Fight f where f.playerOne.login=?1 or f.playerTwo.login=?1")
+    List<Fight> findByUser(String userName);
 
-    @Query("select f from Fight f where (f.playerTwo=?1 and f.fightStatus='INVITE_PENDING')")
-    List<Fight> findChallengesForUser(User user);
+    @Query("select f from Fight f where f.playerOne.login=?1")
+    List<Fight> findBotFightsByUser(String userName);
 
-    @Query("select f from Fight f where (f.playerOne=?1 and f.fightStatus='INVITE_PENDING')")
-    List<Fight> findByChallenger(User user);
+    @Query("select f from Fight f where (f.playerTwo.login=?1 and f.fightStatus='INVITE_PENDING')")
+    List<Fight> findChallengesForUser(String userName);
 
-    @Query("select f from Fight f where (f.playerOne=?1 and f.playerTwo=?2 and f.fightStatus='INVITE_PENDING')")
-    List<Fight> findChallengeByFightingSides(User playerOne, User playerTwo);
+    @Query("select f from Fight f where (f.playerOne.login=?1 and f.fightStatus='INVITE_PENDING')")
+    List<Fight> findByChallenger(String userName);
 
-    @Query("select f from Fight f where (f.playerOne in ?1 or f.playerTwo in ?1 and f.fightStatus='INVITE_PENDING')")
-    List<Fight> findAllPendingInvitesForPlayers(List<User> users);
+    @Query("select f from Fight f where (f.playerOne.login=?1 and f.playerTwo.login=?2 and f.fightStatus='INVITE_PENDING')")
+    List<Fight> findChallengeByFightingSides(String playerOneName, String playerTwoName);
 
-    @Query("select f from Fight f where (f.playerOne=?1 or f.playerTwo=?1) and f.fightStatus='IN_PROGRESS'")
-    List<Fight> findFightInProgressForUser(User user, Pageable pageable);
+    @Query("select f from Fight f where (f.playerOne.login in ?1 or f.playerTwo.login in ?1 and f.fightStatus='INVITE_PENDING')")
+    List<Fight> findAllPendingInvitesForPlayers(List<String> userNames);
+
+    @Query("select f from Fight f where (f.playerOne.login=?1 or f.playerTwo.login=?1) and f.fightStatus='IN_PROGRESS'")
+    List<Fight> findFightInProgressForUser(String userName, Pageable pageable);
 
     @Modifying
     @Transactional
