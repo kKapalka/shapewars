@@ -34,8 +34,8 @@ public class MessageService {
         }
         message.setMessage(dto.getMessage());
         message.setMessageTime(LocalDateTime.now());
-        message.setSender(userService.getUserByLogin(dto.getSender()));
-        message.setReceiver(userService.getUserByLogin(dto.getReceiver()));
+        message.setMessagePlayers(userService.findPlayersByLogins(dto.getMessagePlayers()));
+        message.setSenderName(dto.getSenderName());
         return message;
     }
 

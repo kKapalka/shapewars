@@ -45,12 +45,4 @@ public class User {
     @OneToMany (mappedBy = "informer",cascade = CascadeType.ALL,orphanRemoval = true)
     @ToString.Exclude
     private List<MaintenanceLog> maintenanceLogList;
-
-    @OneToMany (mappedBy = "sender",cascade = CascadeType.ALL,orphanRemoval = true)
-    @ToString.Exclude
-    private List<Message> messagesSent;
-
-    @OneToMany (mappedBy = "receiver",cascade = CascadeType.ALL,orphanRemoval = true)
-    @ToString.Exclude
-    private List<Message> messagesReceived;
 }

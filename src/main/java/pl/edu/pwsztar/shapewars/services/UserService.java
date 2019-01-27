@@ -96,11 +96,14 @@ public class UserService implements IUserService {
     }
 
     public List<User> getFriendsByLogin(String login){
-        List<String> friends= messageService.getAllMessagesByUserName(login)
-                .stream().map(MessageDto::getReceiver).filter(frLogin-> !frLogin.equals(login)).collect(Collectors.toList());
-        friends.addAll(messageService.getAllMessagesByUserName(login)
-                .stream().map(MessageDto::getSender).filter(frLogin-> !frLogin.equals(login)).collect(Collectors.toList()));
-        return userRepository.findAllByLoginIn(friends);
+
+        List<String> friends=new ArrayList<>();
+        messageService.getAllMessagesByUserName(login).stream().map(MessageDto::getMessagePlayers)
+                .forEach(friends::addAll);
+        friends=friends.stream().distinct().collect(Collectors.toList());
+        friends.remove(login);
+        System.out.println(friends);
+         return userRepository.findAllByLoginIn(friends);
     }
     public List<User> getAll(){
         return userRepository.findAll();

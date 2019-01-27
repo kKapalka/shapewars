@@ -1,13 +1,8 @@
 package pl.edu.pwsztar.shapewars.entities;
 
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.util.List;
+import javax.persistence.*;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,13 +18,14 @@ public class Message {
     @Column(name="MESSAGE_ID")
     private Long ID;
 
-    @ManyToOne
-    @JoinColumn(name="USER_ID")
-    private User sender;
-
-    @ManyToOne
-    @JoinColumn(name="RECEIVER_ID")
-    private User receiver;
+    @ManyToMany(cascade = CascadeType.DETACH)
+    @JoinTable
+            (
+                    name="MESSAGE_PLAYERS",
+                    joinColumns={ @JoinColumn(name="MESSAGE_ID", referencedColumnName="MESSAGE_ID") },
+                    inverseJoinColumns={ @JoinColumn(name="USER_ID", referencedColumnName="USER_ID") }
+            )
+    private List<User> messagePlayers;
 
     @Column(name="MESSAGE_TIME")
     private LocalDateTime messageTime;
@@ -37,15 +33,6 @@ public class Message {
     @Column(name="MESSAGE")
     private String message;
 
-
-    @Override
-    public String toString() {
-        return "Message{" +
-                "ID=" + ID +
-                ", sender=" + sender.getLogin() +
-                ", receiver=" + receiver.getLogin() +
-                ", messageTime=" + messageTime +
-                ", message='" + message + '\'' +
-                '}';
-    }
+    @Column(name="SENDER_NAME")
+    private String senderName;
 }

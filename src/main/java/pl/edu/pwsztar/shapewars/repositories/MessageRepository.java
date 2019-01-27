@@ -11,10 +11,10 @@ import java.util.List;
 @Repository
 public interface MessageRepository extends JpaRepository<Message,Long> {
 
-    @Query("Select m from Message m where m.receiver.login=?1 or m.sender.login=?1")
+    @Query("Select m from Message m where (select u from User u where u.login = ?1) member of m.messagePlayers")
     List<Message> getAllBySenderOrReceiver(String login);
 
-    @Query("Select m from Message m where m.receiver.login in ?1 and m.sender.login in ?1")
+    @Query("Select m from Message m where (select u from User u where u.login in ?1) member of m.messagePlayers")
     List<Message> getAllByCallers(List<String> callerNames);
 
 }

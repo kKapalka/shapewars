@@ -26,6 +26,7 @@ export class MainMenuComponent implements OnInit {
     this.service.getChallengesForUser(this.info.username).subscribe(res=>{
       this.challengerNames=[].concat.apply([],
         res.map(challenge=>challenge.playerNames));
+      this.friends.concat(this.challengerNames);
     })
   }
   search(event){

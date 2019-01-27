@@ -87,9 +87,9 @@ export class UserComponent implements OnInit, OnDestroy {
     event.preventDefault();
     if(this.messageToSend.length>0) {
       let message: Message = {
-        sender: this.token.getUsername(),
-        receiver: this.profileUsername,
-        message: this.messageToSend
+        messagePlayers:[this.token.getUsername(),this.profileUsername],
+        message: this.messageToSend,
+        senderName:this.token.getUsername()
       };
       this.messageService.sendMessage(message).subscribe((res) => {
         this.messageToSend = "";

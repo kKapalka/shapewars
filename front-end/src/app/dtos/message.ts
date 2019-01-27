@@ -1,7 +1,7 @@
 export default class Message{
   id?:number;
-  sender:string;
-  receiver:string;
+  messagePlayers:string[];
   messageTime?:string;
   message:string;
+  senderName:string;
 }
