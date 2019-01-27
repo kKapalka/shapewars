@@ -72,21 +72,27 @@ public class FighterService {
         fighter.setOwner(user);
         fighter.setExperiencePoints(0L);
         fighter.setLevel(user.getLevel());
-        fighter.setArmorModifier(0L);
-        fighter.setHitPointsModifier(0L);
-        fighter.setStrengthModifier(0L);
         Shape shape = fighter.getFighterModelReferrence().getShape();
+        long storedStr = 0L;
+        long storedHP = 0L;
+        long storedARM = 0L;
         for(int i=1;i<fighter.getLevel();i++){
-            fighter.setStrengthModifier(fighter.getStrengthModifier()+
-                                        (long)(new Random().nextInt((shape.getSTRMaxGrowth().intValue() - shape.getSTRMinGrowth().intValue())
-                                                                    + shape.getSTRMinGrowth().intValue())));
-            fighter.setHitPointsModifier(fighter.getHitPointsModifier()+
-                                         (long)(new Random().nextInt((shape.getHPMaxGrowth().intValue()-shape.getHPMinGrowth().intValue())
-                                                                     +shape.getHPMinGrowth().intValue())));
-            fighter.setArmorModifier(fighter.getArmorModifier()+
-                                     (long)(new Random().nextInt((shape.getARMMaxGrowth().intValue()-shape.getARMMinGrowth().intValue())
-                                                                 +shape.getARMMinGrowth().intValue())));
+            storedStr+=(long)(new Random().nextInt(shape.getSTRMaxGrowth().intValue() - shape.getSTRMinGrowth().intValue())
+                                                                    + shape.getSTRMinGrowth().intValue());
+            storedHP+=(long)(new Random().nextInt(shape.getHPMaxGrowth().intValue()-shape.getHPMinGrowth().intValue())
+                                                                     +shape.getHPMinGrowth().intValue());
+            storedARM+=(long)(new Random().nextInt(shape.getARMMaxGrowth().intValue()-shape.getARMMinGrowth().intValue())
+                                                                 +shape.getARMMinGrowth().intValue());
+
+            System.out.println(storedARM);
+            System.out.println(storedHP);
+            System.out.println(storedStr);
+            System.out.println("NEXT");
+            System.out.println(i);
         }
+        fighter.setArmorModifier(storedARM);
+        fighter.setHitPointsModifier(storedHP);
+        fighter.setStrengthModifier(storedStr);
         fighter.setSlot(slot);
         return fighterRepository.save(fighter);
     }
@@ -162,14 +168,14 @@ public class FighterService {
         fighter.setLevel(fighter.getLevel()+1);
         Shape shape = fighter.getFighterModelReferrence().getShape();
         fighter.setStrengthModifier(fighter.getStrengthModifier()+
-                                    (long)(new Random().nextInt((shape.getSTRMaxGrowth().intValue()-shape.getSTRMinGrowth().intValue())
-                                                                +shape.getSTRMinGrowth().intValue())));
+                                    (long)(new Random().nextInt(shape.getSTRMaxGrowth().intValue()-shape.getSTRMinGrowth().intValue())
+                                                                +shape.getSTRMinGrowth().intValue()));
         fighter.setHitPointsModifier(fighter.getHitPointsModifier()+
-                                     (long)(new Random().nextInt((shape.getHPMaxGrowth().intValue()-shape.getHPMinGrowth().intValue())
-                                                                 +shape.getHPMinGrowth().intValue())));
+                                     (long)(new Random().nextInt(shape.getHPMaxGrowth().intValue()-shape.getHPMinGrowth().intValue())
+                                                                 +shape.getHPMinGrowth().intValue()));
         fighter.setArmorModifier(fighter.getArmorModifier()+
-                                 (long)(new Random().nextInt((shape.getARMMaxGrowth().intValue()-shape.getARMMinGrowth().intValue())
-                                                             +shape.getARMMinGrowth().intValue())));
+                                 (long)(new Random().nextInt(shape.getARMMaxGrowth().intValue()-shape.getARMMinGrowth().intValue())
+                                                             +shape.getARMMinGrowth().intValue()));
         return fighter;
     }
 }
