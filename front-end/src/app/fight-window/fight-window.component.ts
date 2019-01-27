@@ -217,7 +217,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
   abandonFight(){
     let fightBase={
       id:this.currentFight.id,
-      playerNames:this.currentFight.playerNames,
+      playerNames:this.currentFight.players.map(player=>player.login),
       fightStatus:'ABANDONED'
     };
     this.service.challenge(fightBase).subscribe(res=>{

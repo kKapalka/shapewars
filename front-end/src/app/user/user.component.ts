@@ -41,10 +41,11 @@ export class UserComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.service.getFightsByUser(this.profileUsername).subscribe(res=>{
+      console.log(res);
       this.fights={
         won:res.filter(fight=>fight.winnerName===this.profileUsername).length,
         lost:res.filter(fight=>fight.fightStatus==='FINISHED' && fight.winnerName!==this.profileUsername).length,
-        abandoned:(fight=>fight.fightStatus==='ABANDONED').length
+        abandoned:res.filter(fight=>fight.fightStatus==='ABANDONED').length
       };
     })
     if(!this.checkIfThisPlayerProfile()) {
