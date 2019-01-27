@@ -110,8 +110,8 @@ public class UserService implements IUserService {
 
     public void applyLevelChangesToUsers(User winner, User loser){
 
-        winner.setExperiencePoints(winner.getExperiencePoints() + (loser.getLevel() * 70));
-        loser.setExperiencePoints(loser.getExperiencePoints() + (winner.getLevel() * 35));
+        winner.setExperiencePoints(winner.getExperiencePoints() + (35 + (loser.getLevel() * 35)));
+        loser.setExperiencePoints(loser.getExperiencePoints() + (18 + (winner.getLevel() * 18)));
         Long threshold = experienceThresholdService.getByLevel(winner.getLevel()).getThreshold();
         if(winner.getExperiencePoints()>threshold){
             winner.setExperiencePoints(loser.getExperiencePoints()-threshold);

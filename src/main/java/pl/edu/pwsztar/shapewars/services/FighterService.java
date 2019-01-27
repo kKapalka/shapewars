@@ -84,11 +84,6 @@ public class FighterService {
             storedARM+=(long)(new Random().nextInt(shape.getARMMaxGrowth().intValue()-shape.getARMMinGrowth().intValue())
                                                                  +shape.getARMMinGrowth().intValue());
 
-            System.out.println(storedARM);
-            System.out.println(storedHP);
-            System.out.println(storedStr);
-            System.out.println("NEXT");
-            System.out.println(i);
         }
         fighter.setArmorModifier(storedARM);
         fighter.setHitPointsModifier(storedHP);
@@ -103,9 +98,9 @@ public class FighterService {
     public void applyLevelChangesToFighters(User winner, User loser){
         winner.getFighterList().forEach(fighter -> {
             if(fighter.getSlot() != FighterSlot.INVENTORY) {
-                fighter.setExperiencePoints(Math.round(fighter.getExperiencePoints() + (loser.getLevel() * 70) *
+                fighter.setExperiencePoints(Math.round(fighter.getExperiencePoints() + (35 + (loser.getLevel() * 35) *
                                                                                        Math.pow(1.15, (winner.getLevel() -
-                                                                                                       fighter.getLevel()))));
+                                                                                                       fighter.getLevel())))));
                 Long fighterThreshold = experienceThresholdService.getByLevel(fighter.getLevel()).getThreshold();
                 if(fighter.getExperiencePoints() > fighterThreshold) {
                     fighter = levelUp(fighter, fighterThreshold);
@@ -115,10 +110,10 @@ public class FighterService {
         });
         loser.getFighterList().forEach(fighter -> {
             if(fighter.getSlot() != FighterSlot.INVENTORY) {
-                fighter.setExperiencePoints(Math.round(fighter.getExperiencePoints() + (winner.getLevel() * 35) *
+                fighter.setExperiencePoints(Math.round(fighter.getExperiencePoints() + (18 + (winner.getLevel() * 18) *
                                                                                        Math.pow(1.15,
                                                                                              (loser.getLevel() -
-                                                                                                       fighter.getLevel()))));
+                                                                                                       fighter.getLevel())))));
                 Long fighterThreshold = experienceThresholdService.getByLevel(fighter.getLevel()).getThreshold();
                 if(fighter.getExperiencePoints() > fighterThreshold) {
                     fighter = levelUp(fighter, fighterThreshold);
@@ -159,9 +154,7 @@ public class FighterService {
                 fighterRepository.save(fighterToTransfer);
             }
         }
-        loot.stream().filter(fighter->fighter.getOwner()==null).forEach(fighter->{
-            fighterRepository.delete(fighter);
-        });
+        loot.stream().filter(fighter->fighter.getOwner()==null).forEach(fighter-> fighterRepository.delete(fighter));
     }
     private Fighter levelUp(Fighter fighter, Long fighterThreshold){
         fighter.setExperiencePoints(fighter.getExperiencePoints()-fighterThreshold);
