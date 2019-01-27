@@ -37,6 +37,7 @@ public class User {
     private Long experiencePoints;
 
     @OneToMany (mappedBy = "owner",cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
     private List<Fighter> fighterList;
 
     @Column(name="ADMIN")

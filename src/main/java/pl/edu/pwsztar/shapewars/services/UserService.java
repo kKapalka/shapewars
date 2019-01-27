@@ -102,7 +102,6 @@ public class UserService implements IUserService {
                 .forEach(friends::addAll);
         friends=friends.stream().distinct().collect(Collectors.toList());
         friends.remove(login);
-        System.out.println(friends);
          return userRepository.findAllByLoginIn(friends);
     }
     public List<User> getAll(){

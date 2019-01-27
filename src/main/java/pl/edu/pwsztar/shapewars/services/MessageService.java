@@ -40,7 +40,7 @@ public class MessageService {
     }
 
     public List<MessageDto> getAllMessagesByCallers(CommunicationDto dto){
-        List<MessageDto> list = messageRepository.getAllByCallers(dto.getCallers())
+        List<MessageDto> list = messageRepository.getAllByCallers(dto.getCallers().get(0),dto.getCallers().get(1))
                 .stream().map(MessageDto::fromEntity).collect(Collectors.toList());
         return list;
     }

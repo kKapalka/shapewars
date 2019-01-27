@@ -35,7 +35,7 @@ public class FightService {
     private FighterService fighterService;
 
     public FightDto save(FightDto dto) throws Exception {
-        List<Fight> challenges = fightRepository.findChallengeByFightingSides(dto.getPlayerNames());
+        List<Fight> challenges = fightRepository.findChallengeByFightingSides(dto.getPlayerNames().get(0),dto.getPlayerNames().get(1));
         if((challenges.size()!=0)  && dto.getId()==null){
             throw new Exception("You cannot challenge the same player twice!");
         }
@@ -63,7 +63,7 @@ public class FightService {
             fighterService.tryApplyingLoot(winner,loser);
         }
         if(fight.getFightStatus()==FightStatus.INVITE_PENDING && dto.getFightStatus().equals("IN_PROGRESS")) {
-            List<Fight> challengesToReject = fightRepository.findChallengeByFightingSides(dto.getPlayerNames());
+            List<Fight> challengesToReject = fightRepository.findChallengeByFightingSides(dto.getPlayerNames().get(0),dto.getPlayerNames().get(1));
             challengesToReject.remove(fight);
             if(challengesToReject.size()>0) {
                 fightRepository.updateFightsSetAsAbandoned(challengesToReject.stream().map(Fight::getID).collect(Collectors.toList()));

@@ -14,7 +14,7 @@ public interface MessageRepository extends JpaRepository<Message,Long> {
     @Query("Select m from Message m where (select u from User u where u.login = ?1) member of m.messagePlayers")
     List<Message> getAllBySenderOrReceiver(String login);
 
-    @Query("Select m from Message m where (select u from User u where u.login in ?1) member of m.messagePlayers")
-    List<Message> getAllByCallers(List<String> callerNames);
+    @Query("Select m from Message m where (select u from User u where u.login = ?1) member of m.messagePlayers and (select u from User u where u.login = ?2) member of m.messagePlayers")
+    List<Message> getAllByCallers(String caller1, String caller2);
 
 }
