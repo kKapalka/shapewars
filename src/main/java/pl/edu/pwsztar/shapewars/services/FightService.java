@@ -35,7 +35,6 @@ public class FightService {
     private FighterService fighterService;
 
     public FightDto save(FightDto dto) throws Exception {
-        System.out.println(dto);
         List<Fight> challenges = fightRepository.findChallengeByFightingSides(dto.getPlayerNames().get(0),dto.getPlayerNames().get(1));
         if((challenges.size()!=0)  && dto.getId()==null){
             throw new Exception("You cannot challenge the same player twice!");

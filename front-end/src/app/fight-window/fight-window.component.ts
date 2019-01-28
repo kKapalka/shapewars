@@ -140,8 +140,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
                 }
               }
             }
-            if ((this.turnOrder.length == 0) ||
-              (this.actionList.length != 0 && this.actionList[this.actionList.length - 1].nextActiveFighterId === 0 && this.turn === Math.floor(this.actionList.length / 8))) {
+            if (this.turnOrder.filter(turn=>turn.turn===(Math.floor(this.actionList.length/8)+1)).length==0) {
               let fighterSpeeds = this.allFighters.map(fighter => ({
                 fighterId: fighter.id,
                 speed: fighter.speed + fighter.statusEffects.speedBonus.value
@@ -268,6 +267,10 @@ export class FightWindowComponent implements OnInit, OnDestroy {
       this.actionList
         .filter(action=>action.id>this.lastActionId)
         .forEach(action=>{
+          console.log(this.turnOrder.length);
+          console.log(this.actionList.length);
+          console.log(this.actionList[this.actionList.length-1]);
+          console.log(this.turn);
         let caster=this.allFighters.find(fighter=>fighter.id==action.activeFighterId);
         if(Boolean(action.skillId)){
           caster.currentMana-=caster.skillSet.find(skill=>skill.id==action.skillId).cost;
