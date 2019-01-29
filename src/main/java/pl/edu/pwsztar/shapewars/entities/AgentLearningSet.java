@@ -25,6 +25,9 @@ public class AgentLearningSet {
     @JoinColumn(name="FIGHT_ID")
     private Fight fight;
 
+    @Column(name="AGENT_VERSION")
+    private Long agentVersion;
+
     @Column(name="LEGACY_OVERALL_BALANCE_PRIORITY")
     private Double overallBalancePriority;
 

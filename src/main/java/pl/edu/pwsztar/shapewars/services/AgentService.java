@@ -1,6 +1,7 @@
 package pl.edu.pwsztar.shapewars.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import pl.edu.pwsztar.shapewars.entities.Agent;
 import pl.edu.pwsztar.shapewars.entities.AgentLearningSet;
@@ -8,14 +9,15 @@ import pl.edu.pwsztar.shapewars.entities.LearningSetTurnLog;
 import pl.edu.pwsztar.shapewars.entities.User;
 import pl.edu.pwsztar.shapewars.entities.dto.AgentDto;
 import pl.edu.pwsztar.shapewars.entities.dto.CompleteFightDataDto;
+import pl.edu.pwsztar.shapewars.entities.dto.FightDto;
 import pl.edu.pwsztar.shapewars.entities.dto.FighterCombatDto;
 import pl.edu.pwsztar.shapewars.repositories.AgentLearningSetRepository;
 import pl.edu.pwsztar.shapewars.repositories.AgentRepository;
+import pl.edu.pwsztar.shapewars.utilities.GeneticAgentGenerator;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.Instant;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class AgentService {
@@ -55,6 +57,7 @@ public class AgentService {
         AgentLearningSet learningSet = new AgentLearningSet();
         Agent agent = agentRepository.findByUsername(extractPlayerFromDto(completeFightDataDto).getLogin()).get();
         learningSet.setAgent(agent);
+        learningSet.setAgentVersion(agent.getVersion());
         learningSet.setFight(fightService.findFightById(completeFightDataDto.getId()));
         learningSet.setOverallBalancePriority(agent.getOverallBalancePriority());
         learningSet.setEnemyInternalBalancePriority(agent.getEnemyInternalBalancePriority());
@@ -74,8 +77,13 @@ public class AgentService {
         agentLearningSetRepository.save(learningSet);
     }
 
-    public void onBattleFinishForUser(String username){
-
+    public void onBattleFinish(FightDto fightDto){
+        User player = extractPlayerFromDto(fightDto);
+        Agent agent = agentRepository.findByUsername(player.getLogin())
+                .orElseThrow(EntityNotFoundException::new);
+        createFinalLearningSetTurnLog(fightDto,player);
+        List<AgentLearningSet> agentLearningSets = agentLearningSetRepository.findByAgentOrderByIDAsc(agent, PageRequest.of(0,5));
+        agentRepository.save(GeneticAgentGenerator.replaceAgentWithOffspring(agent,agentLearningSets));
     }
     private LearningSetTurnLog createTurnLog(CompleteFightDataDto completeFightDataDto,AgentLearningSet parent){
         LearningSetTurnLog turnLog = new LearningSetTurnLog();
@@ -89,9 +97,12 @@ public class AgentService {
                         .filter(playerCombatDto -> playerCombatDto.getLogin()
                                 .equals(extractPlayerFromDto(completeFightDataDto).getLogin())).findFirst().get().getAllFighterList()));
 
+        return turnLog;
     }
     private Long computeScoresForFighterDtoList(List<FighterCombatDto> fighterCombatDtoList){
-        return 0L;
+        return Math.round(fighterCombatDtoList.stream()
+                .map(fighter->(((double)fighter.getCurrentHp()/(double)fighter.getMaximumHp())*0.2f
+                        +((double)fighter.getCurrentMana()/(double)fighter.getMaximumMana())*0.05f)).reduce((a,b)->a+b).get());
     }
 
     private User extractPlayerFromDto(CompleteFightDataDto dto){
@@ -99,9 +110,33 @@ public class AgentService {
                 .stream().map(playerCombatDto -> userService.getUserByLogin(playerCombatDto.getLogin()))
                 .filter(user->user.getEmail()!=null).findFirst().get();
     }
+    private User extractPlayerFromDto(FightDto dto){
+        return dto.getPlayerNames()
+                .stream().map(name -> userService.getUserByLogin(name))
+                .filter(user->user.getEmail()!=null).findFirst().get();
+    }
     private User extractBotFromDto(CompleteFightDataDto dto){
         return dto.getPlayers()
                 .stream().map(playerCombatDto -> userService.getUserByLogin(playerCombatDto.getLogin()))
                 .filter(user->user.getEmail()==null).findFirst().get();
+    }
+
+    private void createFinalLearningSetTurnLog(FightDto dto, User dedicatedPlayer){
+        AgentLearningSet finalAgentLearningSet = agentLearningSetRepository.findByFightId(dto.getId())
+                .orElseThrow(EntityNotFoundException::new);
+        List<LearningSetTurnLog> turnLog = finalAgentLearningSet.getLearningSetTurnLogList();
+        LearningSetTurnLog newTurnLog = new LearningSetTurnLog();
+        newTurnLog.setAgentLearningSet(finalAgentLearningSet);
+        if(!dto.getWinnerName().equals(dedicatedPlayer.getLogin())){
+            newTurnLog.setAllyScore(100L);
+            newTurnLog.setEnemyScore(-100L);
+        } else{
+            newTurnLog.setAllyScore(-100L);
+            newTurnLog.setEnemyScore(100L);
+        }
+        turnLog.add(newTurnLog);
+        finalAgentLearningSet.setLearningSetTurnLogList(turnLog);
+        agentLearningSetRepository.save(finalAgentLearningSet);
+        agentLearningSetRepository.flush();
     }
 }
