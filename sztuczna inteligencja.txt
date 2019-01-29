@@ -1,0 +1,53 @@
+Sztuczna inteligencja w grze ShapeWars zosta³a wykonana na bazie sieci neuronowej.
+
+Na wejœciu sieci neuronowej znajduj¹ siê dwa neurony, reprezentuj¹ce stan walki - listy wojowników gracza oraz agenta. G³ówne wartoœci pobierane z list to: punkty zdrowia i energii wojowników, ich atrybuty, kolory, oraz efekty, które zosta³y na nich na³o¿one podczas walki.
+
+Na podstawie tych dwóch obliczane s¹ wartoœci cyfrowe, reprzentuj¹ce kolejno:
+
+- Ogólny balans pola walki - decyduje o tym, która strona posiada przewagê w punktach zdrowia oraz energii. Wartoœæ pozytywna oznacza, ¿e agent ma przewagê. Wartoœæ negatywna - gracz ma przewagê
+- Ogólna si³a grupy przeciwnika - decyduje o tym, czy wojownicy przeciwnika zosta³y znacznie wzmocnione podczas walki.
+- Ogólna si³a grupy agenta - decyduje o tym, czy wojownicy agentazosta³y znacznie wzmocnione podczas walki.
+- Indywidualna si³a grupy przeciwnika - decyduje o tym, czy w grupie przeciwnika znajduje siê wojownik wzmocniony bardziej ni¿ reszta
+- Indywidualna si³a grupy agenta- decyduje o tym, czy w grupie agenta znajduje siê wojownik wzmocniony bardziej ni¿ reszta
+- Zdolnoœæ zadania obra¿eñ - decyduje o tym, czy obecny wojownik jest w stanie szybko zadaæ du¿¹ iloœæ obra¿eñ dowolnemu przeciwnikowi
+
+Na podstawie tych parametrów, ka¿dy przemna¿any przez skalar zdefiniowany osobno dla ka¿dego agenta, jest nastêpnie podejmowana decyzja, które umiejêtnoœci maj¹ priorytet podczas tury wojownika agenta. Wojownik sterowany przez agenta zawsze u¿yje umiejêtnoœci, która ma najwy¿szy priorytet, z wszystkich dostêpnych mo¿liwych do u¿ycia
+
+
+Ogólny balans - lista wojowników agenta.map(currentHp/maxHp * 0.2 + currentMana/maxMana*0.05).reduce(a,b=>a+b) - lista wojownikó przeciwnika.map(...). Przedzia³: <-100,100>
+Ogólna si³a grupy przeciwnika - lista wojowników przeciwnika.map(armor+speed*2+strength*4-stun*20).reduce(a,b=>a+b)
+Ogólna si³a grupy agenta - lista wojowników agenta.map(armor+speed*2+strength*4-stun*20).reduce(a,b=>a+b)
+Indywidualna si³a grupy przeciwnika -Math.max(lista wojowników przeciwnika.map(armor+speed*2+strength*4-stun*20))*3
+Indywidualna si³a grupy agenta-Math.max(lista wojowników agenta.map(armor+speed*2+strength*4-stun*20))*3
+
+- Zdolnoœæ zadania obra¿eñ - obecny wojownik.si³a * (Math.max(lista wojowników przeciwnika.map(obecny wojownik.kolor.colorDamage[przeciwnik.kolor])) * 0.48 + lista wojowników przeciwnika.map(obecny wojownik.kolor.colorDamage[przeciwnik.kolor].reduce(a,b=>a+b)*0.13)
+
+Ka¿dy agent jest definiowany w bazie danych specyficznie dla danego gracza. Na pocz¹tku ka¿dy skalar jest losow¹ wartoœci¹ od 0 do 1, typu zmiennoprzecinkowego. Agent ma za zadanie nauczyæ siê dobrze priorytetowaæ wykonywane przez siebie ruchy, aby siê dostosowaæ do stylu gry gracza.
+Celem agenta jest pokonanie gracza - sprowadzenie punktów zdrowia wszystkich jego wojowników do 0. Aby agent móg³ siê uczyæ na podstawie ubieg³ych gier przeciwko graczowi, na podstawie ka¿dej walki jest tworzony Zestaw Ucz¹cy. Zestaw zawiera - oprócz ówczesnych mno¿ników agenta - podsumowanie stanu pola bitwy - sumaryczne punkty zdrowia osobno gracza, osobno agenta. Zachowania po¿¹dane od agenta:
+- jak najwiêksza liczba tur
+- jak najmniejszy spadek sumarycznych punktów zdrowia wojowników agenta
+- jak najwiêkszy spadek sumarycznych punktów zdrowia wojowników gracza
+W miarê roœniêcia listy Zestawów Ucz¹cych oczekuje siê od agenta, ¿e bêdzie podejmowa³ coraz lepsze decyzje podczas walki.
+
+Decyzje, które mo¿e podj¹æ agent:
+- Ogólny balans - (agent ma przewagê? og³uszaæ przeciwników: leczyæ sojuszników)
+- Ogólna si³a przeciwnika - Zmniejszaæ atrybuty/og³uszaæ przeciwników
+- Ogólna si³a sojuszników - Zwiêkszaæ atrybuty sojusznika/Zmniejszaæ pancerz przeciwnika
+- Indywidualna si³a przeciwnika - U¿ywaæ umiejêtnoœci celuj¹cych w najmocniejszego
+- Indywidualna si³a agenta - Zwiêkszaæ atrybuty najmocniejszego
+- Zdoloœæ zadania obra¿eñ - u¿ywaæ umiejêtnoœci zadaj¹cych obra¿enia
+
+Decyzje do podjêcia s¹ dodatkowo wa¿one na podstawie listy efektów, które dana umiejêtnoœæ mo¿e wystosowaæ.
+Zarówno parametry dotycz¹ce mo¿liwych celi, jak i efekty, które mog¹ ich dotkn¹æ, s¹ ewaluowane.
+
+Wartoœæ, na podstawie której bêdzie ustalany priorytet, mo¿na zaprezentowaæ w taki sposób:
+Parametr * (ogólny mno¿nik umiejêtoœci(Parametr)) * mno¿nik agenta(Parametr)
+
+gdzie ogólny mno¿nik umiejêtnoœci mo¿e wynieœæ <0,1>, a wynosi (avg(mno¿nik od celu(Parametr)*mno¿nik od Efektu(Parametr))
+
+Przyk³adowo, Zdolnoœæ nadania obra¿eñ nak³ada mno¿niki (zadanie obra¿eñ: 1, reszta: 0)(przeciwnicy: 1, sprzymierzeñcy:0)
+
+
+
+
+
