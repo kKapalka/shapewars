@@ -78,6 +78,10 @@ public class AgentService {
     }
 
     public void onBattleFinish(FightDto fightDto){
+        AgentLearningSet agentLearningSet = agentLearningSetRepository.findByFightId(fightDto.getId()).orElseThrow(EntityNotFoundException::new);
+        agentLearningSetRepository.save(agentLearningSet);
+        agentLearningSetRepository.flush();
+
         User player = extractPlayerFromDto(fightDto);
         Agent agent = agentRepository.findByUsername(player.getLogin())
                 .orElseThrow(EntityNotFoundException::new);

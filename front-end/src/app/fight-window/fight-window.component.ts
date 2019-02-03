@@ -5,6 +5,7 @@ import {FightService} from "../services/fight.service";
 import {Router} from "@angular/router";
 import {ShapeService} from "../services/shape.service";
 import {ColormapService} from "../services/colormap.service";
+import {AgentService} from "../services/agent.service";
 
 @Component({
   selector: 'app-fight-window',
@@ -15,6 +16,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
 
   you:any;
   opponent:any;
+  agent:any;
   allFighters:any=[];
   currentFight:any;
   actionList:any=[];
@@ -49,7 +51,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
   };
   constructor(private service:UserService, private token:TokenStorageService,
               private fightService:FightService, private router:Router,
-              private colorMapService:ColormapService) {
+              private colorMapService:ColormapService, private agentService:AgentService) {
     this.colorMapService.getAllColors().subscribe(res=>{
       this.colorSet=res.map(color=>{
         let colorDamages={};
@@ -62,15 +64,19 @@ export class FightWindowComponent implements OnInit, OnDestroy {
         }
         return colorDamageSet;
       });
-    })
-  }
-
-  ngOnInit() {
+    });
     this.turn = 0;
     this.fightService.findFightInProgressForUser(this.token.getUsername()).subscribe(res => {
       this.currentFight = res;
       this.you=this.currentFight.players.find(player=>player.login===this.token.getUsername());
       this.opponent=this.currentFight.players.filter(player=>player!=this.you)[0];
+      if(this.opponent.login.substring(0,9)==='BOT_LEVEL'){
+        this.service.getAgentForUsername(this.token.getUsername()).subscribe(res=>{
+          console.log(res);
+          this.agent=res;
+          this.agentService.init(this.opponent.allFighters,this.you.allFighters,this.agent,this.colorSet);
+        })
+      }
       this.allFighters = this.you.allFighterList;
       this.allFighters = this.allFighters.concat(this.opponent.allFighterList);
       this.allFighters.forEach(fighter => fighter.statusEffects = {
@@ -101,6 +107,14 @@ export class FightWindowComponent implements OnInit, OnDestroy {
             } else {
               alert('You have lost the fight!')
             }
+            if(this.opponent.login.substring(0,9)==='BOT_LEVEL'){
+              this.service.onBattleFinish({
+                id:this.currentFight.id,
+                playerNames:this.currentFight.players.map(player=>player.login),
+                fightStatus:this.currentFightStatus,
+                winnerName:this.winner.login,
+              });
+            }
             sessionStorage.setItem("fightStatus", "");
           }
           if (this.currentFightStatus == 'ABANDONED') {
@@ -111,6 +125,9 @@ export class FightWindowComponent implements OnInit, OnDestroy {
       }, 1500);
       this.actionInterval = this.initActionInterval();
     });
+  }
+
+  ngOnInit() {
   }
   initActionInterval(){
        return  setInterval(() => {
@@ -153,6 +170,9 @@ export class FightWindowComponent implements OnInit, OnDestroy {
               this.fightService.getTurnOrderForFightAndTurn(fightCombatDto, this.turn).subscribe(res => {
                 this.turnOrder = res;
               })
+              if(this.turn>1 && this.opponent.login.substring(0,9)==='BOT_LEVEL'){
+                this.service.updateAgentLearningSet(this.currentFight);
+              }
             }
           })
         }, 1500);
@@ -267,10 +287,6 @@ export class FightWindowComponent implements OnInit, OnDestroy {
       this.actionList
         .filter(action=>action.id>this.lastActionId)
         .forEach(action=>{
-          console.log(this.turnOrder.length);
-          console.log(this.actionList.length);
-          console.log(this.actionList[this.actionList.length-1]);
-          console.log(this.turn);
         let caster=this.allFighters.find(fighter=>fighter.id==action.activeFighterId);
         if(Boolean(action.skillId)){
           caster.currentMana-=caster.skillSet.find(skill=>skill.id==action.skillId).cost;
@@ -385,6 +401,13 @@ export class FightWindowComponent implements OnInit, OnDestroy {
     return styles;
   }
   executeBotAttack(){
+    // setTimeout(()=>{
+    //   this.currentSkill = this.agentService.selectSkill(this.currentFighter);
+    //   setTimeout(()=>{
+    //     this.performAttack(this.agentService.getSelectedTarget());
+    //   },1500);
+    // },1500);
+
     let validSkillSet=this.currentFighter.skillSet.filter(skill=>skill.cost<=this.currentFighter.currentMana);
     let randomlySelectedSkill = validSkillSet[Math.floor(Math.random()*validSkillSet.length)];
     let validTargets=this.allFighters.filter(fighter=>this.checkIfValid(randomlySelectedSkill,fighter));

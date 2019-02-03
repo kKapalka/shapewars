@@ -53,4 +53,13 @@ export class UserService {
   generateBotFight(login:string):Observable<any>{
     return this.http.get(this.urls.botFight+login,{responseType:'json'});
   }
+  getAgentForUsername(login:string):Observable<any>{
+    return this.http.get(this.urls.agentForUsername+login,{responseType:'json'});
+  }
+  updateAgentLearningSet(completeFightDto:any):Observable<any>{
+    return this.http.post(this.urls.updateAgentLearningSet,completeFightDto,{responseType:'json'});
+  }
+  onBattleFinish(fightDto:any):Observable<any>{
+    return this.http.post(this.urls.onBattleFinish,fightDto,{responseType:'json'});
+  }
 }
