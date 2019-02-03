@@ -65,6 +65,9 @@ export class FightWindowComponent implements OnInit, OnDestroy {
         return colorDamageSet;
       });
     });
+  }
+
+  ngOnInit() {
     this.turn = 0;
     this.fightService.findFightInProgressForUser(this.token.getUsername()).subscribe(res => {
       this.currentFight = res;
@@ -72,9 +75,10 @@ export class FightWindowComponent implements OnInit, OnDestroy {
       this.opponent=this.currentFight.players.filter(player=>player!=this.you)[0];
       if(this.opponent.login.substring(0,9)==='BOT_LEVEL'){
         this.service.getAgentForUsername(this.token.getUsername()).subscribe(res=>{
-          console.log(res);
           this.agent=res;
-          this.agentService.init(this.opponent.allFighters,this.you.allFighters,this.agent,this.colorSet);
+          console.log(this.you);
+          console.log(this.opponent);
+          this.agentService.init(this.opponent.allFighterList,this.you.allFighterList,this.agent,this.colorSet);
         })
       }
       this.allFighters = this.you.allFighterList;
@@ -125,9 +129,6 @@ export class FightWindowComponent implements OnInit, OnDestroy {
       }, 1500);
       this.actionInterval = this.initActionInterval();
     });
-  }
-
-  ngOnInit() {
   }
   initActionInterval(){
        return  setInterval(() => {
@@ -401,6 +402,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
     return styles;
   }
   executeBotAttack(){
+    this.currentSkill=this.agentService.selectSkill(this.currentFighter);
     // setTimeout(()=>{
     //   this.currentSkill = this.agentService.selectSkill(this.currentFighter);
     //   setTimeout(()=>{
@@ -420,7 +422,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
       this.currentSkill=randomlySelectedSkill;
       setTimeout(()=>{
         this.performAttack(randomTarget);
-      },1500);
+      },15000000);
     },1500);
   }
 }
