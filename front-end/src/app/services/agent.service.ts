@@ -51,26 +51,48 @@ export class AgentService {
     let playerScore = playerFighters.filter(fighter=>!fighter.statusEffects.dead)
       .map(fighter=>(fighter.currentHp/fighter.maximumHp)*20+(fighter.currentMana/fighter.maximumMana)*5)
       .reduce((a,b)=>a+b);
-    return agentScore-playerScore;
+    console.log("OverallBalance");
+    console.log(agentScore,playerScore);
+    return (agentScore-playerScore)*20;
   }
   calculateInternalBalance(fighters:any):number{
-    return fighters.filter(fighter=>!fighter.statusEffects.dead)
-      .map(fighter=>(100+(fighter.statusEffects.strengthBonus.value*3)+(fighter.statusEffects.armorBonus.value)+(fighter.statusEffects.speedBonus.value*2)-(fighter.statusEffects.stunnedForTurns*20))
-        *((fighter.currentHp/fighter.maximumHp)*20+(fighter.currentMana/fighter.maximumMana)*5)/10000)
-      .reduce((a,b)=>a+b)
+    let balanceScore = fighters.filter(fighter=>!fighter.statusEffects.dead)
+      .map(fighter=>(50+(fighter.statusEffects.strengthBonus.value*3)+(fighter.statusEffects.armorBonus.value)+(fighter.statusEffects.speedBonus.value*2)-(fighter.statusEffects.stunnedForTurns*20))
+        *((fighter.currentHp/fighter.maximumHp)*20+(fighter.currentMana/fighter.maximumMana)*5)/50)
+      .reduce((a,b)=>a+b);
+
+    if(fighters===this.agentFighters){
+      balanceScore=110-balanceScore;
+    }
+    console.log("internalBalance");
+    console.log(balanceScore);
+    return balanceScore;
   }
   calculateIndividualScore(fighters:any):number{
-    return Math.max(fighters.filter(fighter=>!fighter.statusEffects.dead)
-      .map(fighter=>(100+(fighter.statusEffects.strengthBonus.value*3)+(fighter.statusEffects.armorBonus.value)+(fighter.statusEffects.speedBonus.value*2)-(fighter.statusEffects.stunnedForTurns*20))
-        *((fighter.currentHp/fighter.maximumHp)*20+(fighter.currentMana/fighter.maximumMana)*5))
-      .reduce((a,b)=>a+b))/2500
+    let fighterScores = fighters.filter(fighter=>!fighter.statusEffects.dead)
+      .map(fighter=>(50+(fighter.statusEffects.strengthBonus.value*3)+(fighter.statusEffects.armorBonus.value)+(fighter.statusEffects.speedBonus.value*2)-(fighter.statusEffects.stunnedForTurns*20))
+        *((fighter.currentHp/fighter.maximumHp)*20+(fighter.currentMana/fighter.maximumMana)*5)/12.5)
+    let individualScore =0;
+
+    if(fighters==this.agentFighters){
+      individualScore= 110-Math.min(...fighterScores);
+    } else{
+      individualScore = Math.max(...fighterScores);
+    }
+    console.log("individualScore");
+    console.log(individualScore);
+    return individualScore;
   }
   calculateDamageOutputScore(playerFighters:any,currentFighter:any):number{
     let colorDamages = this.colorMaps.find(color=>color.colorName==currentFighter.fighterModelReferenceDto.colorName).colorDamages;
     let multipliers = playerFighters.map(fighter=>(colorDamages[fighter.fighterModelReferenceDto.colorName]===undefined?100:colorDamages[fighter.fighterModelReferenceDto.colorName]))
     let maximumMultiplier = Math.max(...multipliers);
     let damagePotency = (15+(currentFighter.strength+currentFighter.statusEffects.strengthBonus.value))/30;
-    return maximumMultiplier*damagePotency/100;
+    let damageScore = maximumMultiplier*damagePotency;
+
+    console.log("damageScore");
+    console.log(damageScore);
+    return damageScore;
   }
 
   calculateSkillPriorities(currentFighter:any,scores:any):any[]{
