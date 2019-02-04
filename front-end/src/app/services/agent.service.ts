@@ -8,6 +8,7 @@ export class AgentService {
   agentFighters:any;
   playerFighters:any;
   selectedTarget:any;
+  currentFighter:any;
   agent:any;
   colorMaps:any;
   constructor() { }
@@ -19,24 +20,7 @@ export class AgentService {
     this.colorMaps=colorMaps;
   }
   selectSkill(currentFighter:any){
-    let agentScores=[];
-    console.log(this.agent);
-    agentScores.push(
-      this.calculateOverallBalance(this.agentFighters,this.playerFighters)
-      * this.agent.overallBalancePriority);
-    agentScores.push(this.calculateInternalBalance(this.playerFighters)
-      * this.agent.enemyInternalBalancePriority);
-    agentScores.push(this.calculateInternalBalance(this.agentFighters)
-      * this.agent.allyInternalBalancePriority);
-    agentScores.push(this.calculateIndividualScore(this.playerFighters)
-      * this.agent.individualEnemyPriority);
-    agentScores.push(this.calculateIndividualScore(this.agentFighters)
-      * this.agent.individualAllyPriority);
-    agentScores.push(this.calculateDamageOutputScore(this.playerFighters,currentFighter)
-      * this.agent.damageOutputPriority);
-    console.log(agentScores);
-    let skillsInPriority = this.calculateSkillPriorities(currentFighter,agentScores);
-
+    return this.lookAheadAndDecideOnBestMove(currentFighter);
   }
   getSelectedTarget(){
     return this.selectedTarget;
@@ -51,36 +35,29 @@ export class AgentService {
     let playerScore = playerFighters.filter(fighter=>!fighter.statusEffects.dead)
       .map(fighter=>(fighter.currentHp/fighter.maximumHp)*20+(fighter.currentMana/fighter.maximumMana)*5)
       .reduce((a,b)=>a+b);
-    console.log("OverallBalance");
-    console.log(agentScore,playerScore);
-    return (agentScore-playerScore)*20;
+    let overallScore = (agentScore-playerScore)*20;
+    return overallScore;
   }
-  calculateInternalBalance(fighters:any):number{
+  calculateInternalBalance(fighters:any,isAgent:boolean):number{
     let balanceScore = fighters.filter(fighter=>!fighter.statusEffects.dead)
       .map(fighter=>(50+(fighter.statusEffects.strengthBonus.value*3)+(fighter.statusEffects.armorBonus.value)+(fighter.statusEffects.speedBonus.value*2)-(fighter.statusEffects.stunnedForTurns*20))
         *((fighter.currentHp/fighter.maximumHp)*20+(fighter.currentMana/fighter.maximumMana)*5)/50)
       .reduce((a,b)=>a+b);
-
-    if(fighters===this.agentFighters){
-      balanceScore=110-balanceScore;
+    if(!isAgent){
+      return 110-balanceScore;
     }
-    console.log("internalBalance");
-    console.log(balanceScore);
     return balanceScore;
   }
-  calculateIndividualScore(fighters:any):number{
+  calculateIndividualScore(fighters:any,isAgent:boolean):number{
     let fighterScores = fighters.filter(fighter=>!fighter.statusEffects.dead)
       .map(fighter=>(50+(fighter.statusEffects.strengthBonus.value*3)+(fighter.statusEffects.armorBonus.value)+(fighter.statusEffects.speedBonus.value*2)-(fighter.statusEffects.stunnedForTurns*20))
-        *((fighter.currentHp/fighter.maximumHp)*20+(fighter.currentMana/fighter.maximumMana)*5)/12.5)
-    let individualScore =0;
-
-    if(fighters==this.agentFighters){
-      individualScore= 110-Math.min(...fighterScores);
+        *((((fighter.currentHp/fighter.maximumHp)*20)+((fighter.currentMana/fighter.maximumMana)*5)))/12.5)
+    let individualScore = 0;
+    if(!isAgent){
+      return 110-Math.min(...fighterScores)
     } else{
       individualScore = Math.max(...fighterScores);
     }
-    console.log("individualScore");
-    console.log(individualScore);
     return individualScore;
   }
   calculateDamageOutputScore(playerFighters:any,currentFighter:any):number{
@@ -89,14 +66,161 @@ export class AgentService {
     let maximumMultiplier = Math.max(...multipliers);
     let damagePotency = (15+(currentFighter.strength+currentFighter.statusEffects.strengthBonus.value))/30;
     let damageScore = maximumMultiplier*damagePotency;
-
-    console.log("damageScore");
-    console.log(damageScore);
     return damageScore;
   }
 
-  calculateSkillPriorities(currentFighter:any,scores:any):any[]{
+  lookAheadAndDecideOnBestMove(currentFighter:any):any[]{
+    this.currentFighter=currentFighter;
+    console.log(this.agentFighters.map(fighter=>({
+      currentHp:fighter.currentHp,
+        maxHp:fighter.maximumHp
+    })));
+    console.log(this.playerFighters.map(fighter=>({
+      currentHp:fighter.currentHp,
+      maxHp:fighter.maximumHp
+    })))
+    let scoreTargetMap = [];
+    currentFighter.skillSet
+      .filter(skill=>skill.cost<=currentFighter.currentMana)
+      .forEach(skill=>scoreTargetMap.push(this.simulateSkillsImpact(skill)));
+    for(let i=0;i<scoreTargetMap.length;i++){
+      console.log(scoreTargetMap[i]);
+      console.log(currentFighter.skillSet[i].name);
+    }
+    this.selectedTarget = scoreTargetMap.find(scoreTarget=>scoreTarget.value===Math.max(...scoreTargetMap.map(st=>st.value))).target;
+    return currentFighter.skillSet[scoreTargetMap.indexOf(scoreTargetMap.find(scoreTarget=>scoreTarget.value===Math.max(...scoreTargetMap.map(st=>st.value))))];
+  }
+  simulateSkillsImpact(skill:any):any{
+    let storedPlayerFightersCopy = JSON.stringify(this.playerFighters);
+    let storedAgentFightersCopy =  JSON.stringify(this.agentFighters);
+    let targetScores = [];
+    let effects=[].concat.apply([],skill.skillEffectBundles.map(bundle=>bundle.skillEffectDtos.map(dto=>dto.skillStatusEffect)));
+    let validTargets=this.getValidTargets(skill);
+    if(effects.includes('DEAL_DAMAGE')){
+      for(let target of validTargets){
+        targetScores.push({
+          target:target.id,
+          value:this.performSkillWithTarget(skill,target,storedPlayerFightersCopy,storedAgentFightersCopy)
+        });
+      }
+    }
+    else{
+      let target=validTargets[0];
+      targetScores.push({
+        target:target.id,
+        value:this.performSkillWithTarget(skill,target,storedPlayerFightersCopy,storedAgentFightersCopy)
+      });
+    }
+    return targetScores.find(targetScore=>targetScore.value===Math.max(...targetScores.map(targetScore=>targetScore.value)));
+  }
+  getValidTargets(skill:any):any[]{
+    let targetTypes=[].concat.apply([],skill.skillEffectBundles.map(bundle=>bundle.skillEffectDtos.map(dto=>dto.targetType)));
+    if(targetTypes.some(type => ['TARGET_ENEMY', 'RANDOM_ENEMY', 'ALL_ENEMY_UNITS', 'ALL_UNITS'].includes(type))){
+      return this.playerFighters.filter(fighter=>!fighter.statusEffects.dead);
+    } else{
+      return this.agentFighters.filter(fighter=>!fighter.statusEffects.dead);
+    }
     return [];
   }
 
+  performSkillWithTarget(skill:any,target:any,playerFightersCopy:any,agentFightersCopy:any):number{
+    let playerFighters = JSON.parse(playerFightersCopy);
+    let agentFighters = JSON.parse(agentFightersCopy);
+    let caster = agentFighters.find(fighter=>fighter.id===this.currentFighter.id);
+    caster.storedHp=caster.currentHp;
+    caster.currentMana-=skill.cost;
+    skill.skillEffectBundles.forEach(bundle=>{
+      bundle.skillEffectDtos.forEach(effect=>{
+        let effectTargets = [];
+        if(['TARGET_ENEMY','RANDOM_ENEMY','TARGET_ALLY','RANDOM_ALLY'].includes(effect.targetType)){
+          effectTargets.push(target);
+        } else if(effect.targetType=='THIS_UNIT'){
+          effectTargets.push(caster);
+        } else if(effect.targetType==='ALL_ALLIED_UNITS'){
+          effectTargets = agentFighters;
+        } else if(effect.targetType==='ALL_ENEMY_UNITS'){
+          effectTargets = playerFighters;
+        } else{
+          effectTargets = agentFighters;
+          effectTargets.concat(...playerFighters);
+        }
+        let averageValue = (effect.minValue + effect.maxValue)*bundle.accuracy/200;
+        effectTargets.forEach(target=>{
+          let storedHp = target.storedHp;
+          if((effect.skillStatusEffect=='DEAL_DAMAGE' || effect.skillStatusEffect=='RESTORE_HEALTH')) {
+            let HPDifference: number;
+            if (effect.valueModifierType == 'SELF_CURRENT_HP_BASED') {
+              HPDifference = Math.floor((averageValue * caster.storedHp) / 100);
+            }
+            if (effect.valueModifierType == 'TARGET_CURRENT_HP_BASED') {
+              HPDifference = Math.floor((averageValue * storedHp) / 100);
+            }
+            if (effect.valueModifierType == 'STR_BASED') {
+              HPDifference = Math.floor((averageValue * (caster.strength + caster.statusEffects.strengthBonus.value) / 100));
+            }
+            if (effect.valueModifierType == 'FLAT_VALUE') {
+              HPDifference = Math.floor(averageValue);
+            }
+            if (effect.valueModifierType == 'DEAL_DAMAGE') {
+              let colorDependentDamageAmplifier = this.colorMaps.find(set => set.colorName === caster.fighterModelReferenceDto.colorName).colorDamages[target.fighterModelReferenceDto.colorName];
+              if (!Boolean(colorDependentDamageAmplifier)) {
+                colorDependentDamageAmplifier = 100;
+              }
+              HPDifference = Math.floor(HPDifference * (colorDependentDamageAmplifier / 100)
+                * (-100 / (100 + target.armor + target.statusEffects.armorBonus.value)));
+            }
+            target.currentHp = Math.min(Math.max(target.currentHp + HPDifference, 0), target.maximumHp);
+          } else if(effect.result!=0) {
+            if (effect.skillStatusEffect !== 'STUN') {
+              let value = Math.floor(averageValue);
+              let parameterName = effect.skillStatusEffect.substring(effect.skillStatusEffect.indexOf("_") + 1).toLowerCase();
+              let direction = effect.skillStatusEffect.substring(0, effect.skillStatusEffect.indexOf("_")).toLowerCase();
+              let dto = {
+                value: direction == 'increase' ? value : (value * -1),
+                duration: 3
+              };
+              if (parameterName == "armor") {
+                target.statusEffects.armorBonus.bonuses.push(dto);
+                target.statusEffects.armorBonus.value = this.calculateFromBonuses(target.statusEffects.armorBonus.bonuses);
+              } else if (parameterName == 'speed') {
+                target.statusEffects.speedBonus.bonuses.push(dto);
+                target.statusEffects.speedBonus.value = this.calculateFromBonuses(target.statusEffects.speedBonus.bonuses);
+              } else if (parameterName == 'strength') {
+                target.statusEffects.strengthBonus.bonuses.push(dto);
+                target.statusEffects.strengthBonus.value = this.calculateFromBonuses(target.statusEffects.strengthBonus.bonuses);
+              }
+            } else {
+              target.statusEffects.stunnedForTurns += Math.floor(averageValue);
+            }
+          }
+
+          })
+      })
+    })
+
+    let scores=[];
+    scores.push(
+      this.calculateOverallBalance(agentFighters,playerFighters)
+      * this.agent.overallBalancePriority);
+    scores.push(this.calculateInternalBalance(playerFighters,false)
+      * this.agent.enemyInternalBalancePriority);
+    scores.push(this.calculateInternalBalance(agentFighters,true)
+      * this.agent.allyInternalBalancePriority);
+    scores.push(this.calculateIndividualScore(playerFighters,false)
+      * this.agent.individualEnemyPriority);
+    scores.push(this.calculateIndividualScore(agentFighters,true)
+      * this.agent.individualAllyPriority);
+    scores.push(this.calculateDamageOutputScore(playerFighters,agentFighters.find(fighter=>fighter.id===this.currentFighter.id))
+      * this.agent.damageOutputPriority);
+    return scores.reduce((a,b)=>a+b);
+  }
+  calculateFromBonuses(dtoList){
+    if(dtoList.length>0) {
+      return dtoList.map(dto => dto.value).reduce((a, b) => {
+        return a + b;
+      });
+    } else{
+      return 0;
+    }
+  }
 }

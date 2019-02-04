@@ -402,27 +402,23 @@ export class FightWindowComponent implements OnInit, OnDestroy {
     return styles;
   }
   executeBotAttack(){
-    this.currentSkill=this.agentService.selectSkill(this.currentFighter);
-    // setTimeout(()=>{
-    //   this.currentSkill = this.agentService.selectSkill(this.currentFighter);
-    //   setTimeout(()=>{
-    //     this.performAttack(this.agentService.getSelectedTarget());
-    //   },1500);
-    // },1500);
 
-    let validSkillSet=this.currentFighter.skillSet.filter(skill=>skill.cost<=this.currentFighter.currentMana);
-    let randomlySelectedSkill = validSkillSet[Math.floor(Math.random()*validSkillSet.length)];
-    let validTargets=this.allFighters.filter(fighter=>this.checkIfValid(randomlySelectedSkill,fighter));
-    while(validTargets.length==0){
-      randomlySelectedSkill = validSkillSet[Math.floor(Math.random()*validSkillSet.length)];
-      validTargets=this.allFighters.filter(fighter=>this.checkIfValid(randomlySelectedSkill,fighter));
-    }
-    let randomTarget=validTargets[Math.floor(Math.random()*validTargets.length)];
     setTimeout(()=>{
-      this.currentSkill=randomlySelectedSkill;
+      let selectedSkill =this.agentService.selectSkill(this.currentFighter);
       setTimeout(()=>{
-        this.performAttack(randomTarget);
-      },15000000);
-    },1500);
+        this.currentSkill = this.currentFighter.skillSet.find(skill=>skill===selectedSkill);
+        console.log(this.you.allFighterList.map(fighter=>({
+          currentHp:fighter.currentHp,
+          maxHp:fighter.maximumHp
+        })));
+        console.log(this.opponent.allFighterList.map(fighter=>({
+          currentHp:fighter.currentHp,
+          maxHp:fighter.maximumHp
+        })))
+        setTimeout(()=>{
+          this.performAttack(this.allFighters.find(fighter=>fighter.id===this.agentService.getSelectedTarget()));
+        },2000000);
+      },2000)
+    },2000);
   }
 }
