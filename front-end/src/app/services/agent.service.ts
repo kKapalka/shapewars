@@ -7,6 +7,8 @@ export class AgentService {
 
   agentFighters:any;
   playerFighters:any;
+  agentFightersCopy:any;
+  playerFightersCopy:any;
   selectedTarget:any;
   currentFighter:any;
   agent:any;
@@ -19,7 +21,9 @@ export class AgentService {
     this.agent=agent;
     this.colorMaps=colorMaps;
   }
-  selectSkill(currentFighter:any){
+  selectSkill(agentFighters,playerFighters,currentFighter:any){
+    this.agentFightersCopy=JSON.stringify(agentFighters);
+    this.playerFightersCopy=JSON.stringify(playerFighters);
     return this.lookAheadAndDecideOnBestMove(currentFighter);
   }
   getSelectedTarget(){
@@ -40,7 +44,7 @@ export class AgentService {
   }
   calculateInternalBalance(fighters:any,isAgent:boolean):number{
     let balanceScore = fighters.filter(fighter=>!fighter.statusEffects.dead)
-      .map(fighter=>(50+(fighter.statusEffects.strengthBonus.value*3)+(fighter.statusEffects.armorBonus.value)+(fighter.statusEffects.speedBonus.value*2)-(fighter.statusEffects.stunnedForTurns*20))
+      .map(fighter=>(50+(fighter.statusEffects.strengthBonus.value*3)+(fighter.statusEffects.armorBonus.value)+(Math.min(Math.max(-15,fighter.statusEffects.speedBonus.value),10))-(fighter.statusEffects.stunnedForTurns*20))
         *((fighter.currentHp/fighter.maximumHp)*20+(fighter.currentMana/fighter.maximumMana)*5)/50)
       .reduce((a,b)=>a+b);
     if(!isAgent){
@@ -50,7 +54,7 @@ export class AgentService {
   }
   calculateIndividualScore(fighters:any,isAgent:boolean):number{
     let fighterScores = fighters.filter(fighter=>!fighter.statusEffects.dead)
-      .map(fighter=>(50+(fighter.statusEffects.strengthBonus.value*3)+(fighter.statusEffects.armorBonus.value)+(fighter.statusEffects.speedBonus.value*2)-(fighter.statusEffects.stunnedForTurns*20))
+      .map(fighter=>(50+(fighter.statusEffects.strengthBonus.value*3)+(fighter.statusEffects.armorBonus.value)+(Math.min(Math.max(-15,fighter.statusEffects.speedBonus.value),10)*2)-(fighter.statusEffects.stunnedForTurns*20))
         *((((fighter.currentHp/fighter.maximumHp)*20)+((fighter.currentMana/fighter.maximumMana)*5)))/12.5)
     let individualScore = 0;
     if(!isAgent){
@@ -71,28 +75,14 @@ export class AgentService {
 
   lookAheadAndDecideOnBestMove(currentFighter:any):any[]{
     this.currentFighter=currentFighter;
-    console.log(this.agentFighters.map(fighter=>({
-      currentHp:fighter.currentHp,
-        maxHp:fighter.maximumHp
-    })));
-    console.log(this.playerFighters.map(fighter=>({
-      currentHp:fighter.currentHp,
-      maxHp:fighter.maximumHp
-    })))
     let scoreTargetMap = [];
-    currentFighter.skillSet
-      .filter(skill=>skill.cost<=currentFighter.currentMana)
-      .forEach(skill=>scoreTargetMap.push(this.simulateSkillsImpact(skill)));
-    for(let i=0;i<scoreTargetMap.length;i++){
-      console.log(scoreTargetMap[i]);
-      console.log(currentFighter.skillSet[i].name);
-    }
+    let validSkillset = currentFighter.skillSet
+      .filter(skill=>skill.cost<=currentFighter.currentMana);
+    validSkillset.forEach(skill=>scoreTargetMap.push(this.simulateSkillsImpact(skill)));
     this.selectedTarget = scoreTargetMap.find(scoreTarget=>scoreTarget.value===Math.max(...scoreTargetMap.map(st=>st.value))).target;
-    return currentFighter.skillSet[scoreTargetMap.indexOf(scoreTargetMap.find(scoreTarget=>scoreTarget.value===Math.max(...scoreTargetMap.map(st=>st.value))))];
+    return validSkillset[scoreTargetMap.indexOf(scoreTargetMap.find(scoreTarget=>scoreTarget.value===Math.max(...scoreTargetMap.map(st=>st.value))))];
   }
   simulateSkillsImpact(skill:any):any{
-    let storedPlayerFightersCopy = JSON.stringify(this.playerFighters);
-    let storedAgentFightersCopy =  JSON.stringify(this.agentFighters);
     let targetScores = [];
     let effects=[].concat.apply([],skill.skillEffectBundles.map(bundle=>bundle.skillEffectDtos.map(dto=>dto.skillStatusEffect)));
     let validTargets=this.getValidTargets(skill);
@@ -100,7 +90,7 @@ export class AgentService {
       for(let target of validTargets){
         targetScores.push({
           target:target.id,
-          value:this.performSkillWithTarget(skill,target,storedPlayerFightersCopy,storedAgentFightersCopy)
+          value:this.performSkillWithTarget(skill,target,this.playerFightersCopy,this.agentFightersCopy)
         });
       }
     }
@@ -108,17 +98,21 @@ export class AgentService {
       let target=validTargets[0];
       targetScores.push({
         target:target.id,
-        value:this.performSkillWithTarget(skill,target,storedPlayerFightersCopy,storedAgentFightersCopy)
+        value:this.performSkillWithTarget(skill,target,this.playerFightersCopy,this.agentFightersCopy)
       });
     }
     return targetScores.find(targetScore=>targetScore.value===Math.max(...targetScores.map(targetScore=>targetScore.value)));
   }
   getValidTargets(skill:any):any[]{
+    let playerFighters=JSON.parse(this.playerFightersCopy);
+    let agentFighters=JSON.parse(this.agentFightersCopy);
+
     let targetTypes=[].concat.apply([],skill.skillEffectBundles.map(bundle=>bundle.skillEffectDtos.map(dto=>dto.targetType)));
     if(targetTypes.some(type => ['TARGET_ENEMY', 'RANDOM_ENEMY', 'ALL_ENEMY_UNITS', 'ALL_UNITS'].includes(type))){
-      return this.playerFighters.filter(fighter=>!fighter.statusEffects.dead);
+      console.log(playerFighters.filter(fighter=>!fighter.statusEffects.dead));
+      return playerFighters.filter(fighter=>!fighter.statusEffects.dead);
     } else{
-      return this.agentFighters.filter(fighter=>!fighter.statusEffects.dead);
+      return agentFighters.filter(fighter=>!fighter.statusEffects.dead);
     }
     return [];
   }
@@ -212,6 +206,9 @@ export class AgentService {
       * this.agent.individualAllyPriority);
     scores.push(this.calculateDamageOutputScore(playerFighters,agentFighters.find(fighter=>fighter.id===this.currentFighter.id))
       * this.agent.damageOutputPriority);
+    this.agentFighters=JSON.parse(agentFightersCopy);
+    this.playerFighters=JSON.parse(playerFightersCopy);
+
     return scores.reduce((a,b)=>a+b);
   }
   calculateFromBonuses(dtoList){

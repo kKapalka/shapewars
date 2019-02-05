@@ -46,7 +46,7 @@ export class UrlsService {
   fightInProgressForUser=this.host+"/fight/active/";
   botFight=this.host+"/fight/bot-fight/";
   agentForUsername=this.host+"/agent/";
-  updateAgentLearningSet=this.host+"/agent/update";
+  updateAgentLearningSet=this.host+"/agent/update/";
   onBattleFinish=this.host+"/agent/finish";
   constructor() { }
 }

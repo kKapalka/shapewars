@@ -68,11 +68,16 @@ public class AgentService {
         return agentLearningSetRepository.save(learningSet);
     }
 
-    public void updateAgentLearningSet(CompleteFightDataDto completeFightDataDto){
+    public void updateAgentLearningSet(CompleteFightDataDto completeFightDataDto, int turn){
         Optional<AgentLearningSet> optionalAgentLearningSet = agentLearningSetRepository.findByFightId(completeFightDataDto.getId());
         AgentLearningSet learningSet = optionalAgentLearningSet.orElseGet(() -> saveAgentLearningSet(completeFightDataDto));
         List<LearningSetTurnLog> turnLogs = learningSet.getLearningSetTurnLogList();
-        turnLogs.add(createTurnLog(completeFightDataDto,learningSet));
+        if(turnLogs==null){
+            turnLogs = new ArrayList<>();
+        }
+        if(turn>turnLogs.size()){
+            turnLogs.add(createTurnLog(completeFightDataDto,learningSet));
+        }
         learningSet.setLearningSetTurnLogList(turnLogs);
         agentLearningSetRepository.save(learningSet);
     }
@@ -105,8 +110,8 @@ public class AgentService {
     }
     private Long computeScoresForFighterDtoList(List<FighterCombatDto> fighterCombatDtoList){
         return Math.round(fighterCombatDtoList.stream()
-                .map(fighter->(((double)fighter.getCurrentHp()/(double)fighter.getMaximumHp())*0.2f
-                        +((double)fighter.getCurrentMana()/(double)fighter.getMaximumMana())*0.05f)).reduce((a,b)->a+b).get());
+                .map(fighter->(((double)fighter.getCurrentHp()/(double)fighter.getMaximumHp())*20
+                        +((double)fighter.getCurrentMana()/(double)fighter.getMaximumMana())*5)).reduce((a,b)->a+b).get());
     }
 
     private User extractPlayerFromDto(CompleteFightDataDto dto){

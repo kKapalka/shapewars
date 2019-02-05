@@ -46,6 +46,6 @@ public class AgentLearningSet {
     @Column(name="LEGACY_DAMAGE_OUTPUT_PRIORITY")
     private Double damageOutputPriority;
 
-    @OneToMany(mappedBy = "agentLearningSet")
+    @OneToMany(mappedBy = "agentLearningSet", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<LearningSetTurnLog> learningSetTurnLogList;
 }

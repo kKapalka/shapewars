@@ -117,6 +117,8 @@ export class FightWindowComponent implements OnInit, OnDestroy {
                 playerNames:this.currentFight.players.map(player=>player.login),
                 fightStatus:this.currentFightStatus,
                 winnerName:this.winner.login,
+              }).subscribe(res=>{
+                console.log(res)
               });
             }
             sessionStorage.setItem("fightStatus", "");
@@ -172,7 +174,10 @@ export class FightWindowComponent implements OnInit, OnDestroy {
                 this.turnOrder = res;
               })
               if(this.turn>1 && this.opponent.login.substring(0,9)==='BOT_LEVEL'){
-                this.service.updateAgentLearningSet(this.currentFight);
+                console.log("learning set update triggered!");
+                this.service.updateAgentLearningSet(this.currentFight,this.turn).subscribe(res=>{
+                  console.log(res)
+                });
               }
             }
           })
@@ -254,7 +259,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
     if(Boolean(this.winner) && this.currentFightStatus=='IN_PROGRESS'){
       let fightBase={
         id:this.currentFight.id,
-        playerNames:this.currentFight.playerNames,
+        playerNames:this.currentFight.players.map(player=>player.login),
         fightStatus:'FINISHED',
         winnerName:this.winner.login
       };
@@ -404,21 +409,13 @@ export class FightWindowComponent implements OnInit, OnDestroy {
   executeBotAttack(){
 
     setTimeout(()=>{
-      let selectedSkill =this.agentService.selectSkill(this.currentFighter);
+      let selectedSkill =this.agentService.selectSkill(this.opponent.allFighterList,this.you.allFighterList,this.currentFighter);
       setTimeout(()=>{
         this.currentSkill = this.currentFighter.skillSet.find(skill=>skill===selectedSkill);
-        console.log(this.you.allFighterList.map(fighter=>({
-          currentHp:fighter.currentHp,
-          maxHp:fighter.maximumHp
-        })));
-        console.log(this.opponent.allFighterList.map(fighter=>({
-          currentHp:fighter.currentHp,
-          maxHp:fighter.maximumHp
-        })))
         setTimeout(()=>{
           this.performAttack(this.allFighters.find(fighter=>fighter.id===this.agentService.getSelectedTarget()));
-        },2000000);
-      },2000)
-    },2000);
+        },15000000);
+      },1500)
+    },1500);
   }
 }

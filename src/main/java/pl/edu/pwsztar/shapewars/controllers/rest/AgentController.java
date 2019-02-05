@@ -20,9 +20,9 @@ public class AgentController {
         return agentService.getAgentByPlayerName(username);
     }
 
-    @PostMapping("update")
-    public void updateAgentLearningSet(@RequestBody CompleteFightDataDto dto){
-        agentService.updateAgentLearningSet(dto);
+    @PostMapping("update/{turn}")
+    public void updateAgentLearningSet(@RequestBody CompleteFightDataDto dto,@PathVariable int turn){
+        agentService.updateAgentLearningSet(dto,turn);
     }
 
     @PostMapping("finish")
