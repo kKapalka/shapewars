@@ -116,11 +116,17 @@ public class UserService implements IUserService {
         loser.setExperiencePoints(loser.getExperiencePoints() + (18 + (winner.getLevel() * 18)));
         Long threshold = experienceThresholdService.getByLevel(winner.getLevel()).getThreshold();
         if(winner.getExperiencePoints()>threshold){
+            System.out.println("trigger");
+            System.out.println(winner.getExperiencePoints());
+            System.out.println(threshold);
             winner.setExperiencePoints(loser.getExperiencePoints()-threshold);
             winner.setLevel(winner.getLevel()+1L);
         }
         threshold = experienceThresholdService.getByLevel(loser.getLevel()).getThreshold();
         if(loser.getExperiencePoints()>threshold){
+            System.out.println("trigger");
+            System.out.println(loser.getExperiencePoints());
+            System.out.println(threshold);
             loser.setExperiencePoints(loser.getExperiencePoints()-threshold);
             loser.setLevel(loser.getLevel()+1L);
         }
