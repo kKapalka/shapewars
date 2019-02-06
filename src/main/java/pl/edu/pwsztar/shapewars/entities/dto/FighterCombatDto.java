@@ -32,8 +32,8 @@ public class FighterCombatDto {
                 .skillSet(fighter.getFighterModelReferrence().getShape().getSkillSet().stream().map(SkillDto::fromEntity).collect(Collectors.toList()))
                 .maximumHp(currentHp)
                 .currentHp(currentHp)
-                .maximumMana(50+(50*fighter.getLevel().intValue()))
-                .currentMana(50+(50*fighter.getLevel().intValue()))
+                .maximumMana(100)
+                .currentMana(100)
                 .strength(fighter.getFighterModelReferrence().getShape().getBaselineStrength().intValue()+
                         fighter.getStrengthModifier().intValue())
                 .armor(fighter.getFighterModelReferrence().getShape().getBaselineArmor().intValue()+

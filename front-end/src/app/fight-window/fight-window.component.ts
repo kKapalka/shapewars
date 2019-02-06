@@ -186,7 +186,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
         }, 1500);
       }
   selectSkill(skill){
-    if(this.you.allFighterList.includes(this.currentFighter)){
+    if(this.you.allFighterList.includes(this.currentFighter) && !this.currentFighter.statusEffects.dead && this.currentFighter.statusEffects.stunnedForTurns===0){
       if(this.currentFighter.currentMana>=skill.cost){
         this.currentSkill=skill;
       }
@@ -265,6 +265,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
         fightStatus:'FINISHED',
         winnerName:this.winner.login
       };
+      console.log(fightBase.winnerName);
       this.service.challenge(fightBase).subscribe(res=>{
         console.log(res);
       })
@@ -297,7 +298,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
         .forEach(action=>{
         let caster=this.allFighters.find(fighter=>fighter.id==action.activeFighterId);
         if(Boolean(action.skillId)){
-          caster.currentMana-=caster.skillSet.find(skill=>skill.id==action.skillId).cost;
+          caster.currentMana=Math.max(Math.min(caster.skillSet.find(skill=>skill.id==action.skillId).cost,caster.maximumMana),0);
         }
         caster.statusEffects.armorBonus.bonuses.forEach(bonus=>{
             bonus.duration--;

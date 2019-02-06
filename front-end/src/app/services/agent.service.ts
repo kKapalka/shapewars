@@ -78,6 +78,7 @@ export class AgentService {
       .filter(skill=>skill.cost<=currentFighter.currentMana);
     validSkillset.forEach(skill=>scoreTargetMap.push(this.simulateSkillsImpact(skill)));
     this.selectedTarget = scoreTargetMap.find(scoreTarget=>scoreTarget.value===Math.max(...scoreTargetMap.map(st=>st.value))).target;
+    console.log(scoreTargetMap);
     return validSkillset[scoreTargetMap.indexOf(scoreTargetMap.find(scoreTarget=>scoreTarget.value===Math.max(...scoreTargetMap.map(st=>st.value))))];
   }
   simulateSkillsImpact(skill:any):any{
@@ -137,10 +138,13 @@ export class AgentService {
           effectTargets = agentFighters;
           effectTargets.concat(...playerFighters);
         }
+        effectTargets = effectTargets.filter(fighter=>!fighter.statusEffects.dead);
+
         let averageValue = (effect.minValue + effect.maxValue)*bundle.accuracy/200;
         effectTargets.forEach(target=>{
           let storedHp = target.storedHp;
           if((effect.skillStatusEffect=='DEAL_DAMAGE' || effect.skillStatusEffect=='RESTORE_HEALTH')) {
+            console.log("triggered damage dealing?")
             let HPDifference: number;
             if (effect.valueModifierType == 'SELF_CURRENT_HP_BASED') {
               HPDifference = Math.floor((averageValue * caster.storedHp) / 100);
@@ -154,7 +158,7 @@ export class AgentService {
             if (effect.valueModifierType == 'FLAT_VALUE') {
               HPDifference = Math.floor(averageValue);
             }
-            if (effect.valueModifierType == 'DEAL_DAMAGE') {
+            if (effect.skillStatusEffect == 'DEAL_DAMAGE') {
               let colorDependentDamageAmplifier = this.colorMaps.find(set => set.colorName === caster.fighterModelReferenceDto.colorName).colorDamages[target.fighterModelReferenceDto.colorName];
               if (!Boolean(colorDependentDamageAmplifier)) {
                 colorDependentDamageAmplifier = 100;
@@ -162,7 +166,10 @@ export class AgentService {
               HPDifference = Math.floor(HPDifference * (colorDependentDamageAmplifier / 100)
                 * (-100 / (100 + target.armor + target.statusEffects.armorBonus.value)));
             }
+            console.log(HPDifference);
             target.currentHp = Math.min(Math.max(target.currentHp + HPDifference, 0), target.maximumHp);
+            console.log(target.currentHp);
+            console.log(target.maximumHp);
           } else if(effect.result!=0) {
             if (effect.skillStatusEffect !== 'STUN') {
               let value = Math.floor(averageValue);
@@ -186,11 +193,17 @@ export class AgentService {
               target.statusEffects.stunnedForTurns += Math.floor(averageValue);
             }
           }
-
+          effectTargets.forEach(target=>{
+            if(playerFighters.filter(fighter=>fighter.id===target.id).length>0){
+             playerFighters[playerFighters.indexOf(playerFighters.find(fighter=>fighter.id===target.id))]=target;
+            }
+            if(agentFighters.filter(fighter=>fighter.id===target.id).length>0){
+              agentFighters[agentFighters.indexOf(agentFighters.find(fighter=>fighter.id===target.id))]=target;
+            }
           })
+          });
       })
     })
-
     let scores=[];
     scores.push(
       this.calculateOverallBalance(agentFighters,playerFighters)
@@ -203,11 +216,12 @@ export class AgentService {
       * this.agent.individualEnemyPriority);
     scores.push(this.calculateIndividualScore(agentFighters,true)
       * this.agent.individualAllyPriority);
-    scores.push(this.calculateDamageOutputScore(playerFighters,agentFighters.find(fighter=>fighter.id===this.currentFighter.id))
-      * this.agent.damageOutputPriority);
+
+    console.log(scores);
+    // scores.push(this.calculateDamageOutputScore(playerFighters,agentFighters.find(fighter=>fighter.id===this.currentFighter.id))
+    //   * this.agent.damageOutputPriority);
     this.agentFighters=JSON.parse(agentFightersCopy);
     this.playerFighters=JSON.parse(playerFightersCopy);
-    console.log(scores);
     return scores.reduce((a,b)=>a+b);
   }
   calculateFromBonuses(dtoList){

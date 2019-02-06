@@ -54,7 +54,9 @@ public class FightService {
             //only new fights can get their player set, because why would other option make sense?
             fight.setFightingPlayers(userService.findPlayersByLogins(dto.getPlayerNames()));
         }
+        System.out.println(dto.getWinnerName());
         if(fight.getFightStatus()==FightStatus.IN_PROGRESS && dto.getWinnerName()!=null){
+            fight.setWinnerName(dto.getWinnerName());
             User winner = fight.getFightingPlayers().stream()
                     .filter(player->player.getLogin().equals(dto.getWinnerName())).findFirst().get();
             User loser = fight.getFightingPlayers().stream()
