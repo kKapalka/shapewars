@@ -72,7 +72,9 @@ export class FightWindowComponent implements OnInit, OnDestroy {
     this.fightService.findFightInProgressForUser(this.token.getUsername()).subscribe(res => {
       this.currentFight = res;
       this.you=this.currentFight.players.find(player=>player.login===this.token.getUsername());
+      this.you.allFighterList=this.you.allFighterList.sort((a,b)=>a.slot-b.slot);
       this.opponent=this.currentFight.players.filter(player=>player!=this.you)[0];
+      this.opponent.allFighterList=this.opponent.allFighterList.sort((a,b)=>a.slot-b.slot);
       if(this.opponent.login.substring(0,9)==='BOT_LEVEL'){
         this.service.getAgentForUsername(this.token.getUsername()).subscribe(res=>{
           this.agent=res;
@@ -407,15 +409,12 @@ export class FightWindowComponent implements OnInit, OnDestroy {
     return styles;
   }
   executeBotAttack(){
-
     setTimeout(()=>{
       let selectedSkill =this.agentService.selectSkill(this.opponent.allFighterList,this.you.allFighterList,this.currentFighter);
+      this.currentSkill = this.currentFighter.skillSet.find(skill=>skill===selectedSkill);
       setTimeout(()=>{
-        this.currentSkill = this.currentFighter.skillSet.find(skill=>skill===selectedSkill);
-        setTimeout(()=>{
-          this.performAttack(this.allFighters.find(fighter=>fighter.id===this.agentService.getSelectedTarget()));
-        },15000000);
-      },1500)
+        this.performAttack(this.allFighters.find(fighter=>fighter.id===this.agentService.getSelectedTarget()));
+      },1500);
     },1500);
   }
 }

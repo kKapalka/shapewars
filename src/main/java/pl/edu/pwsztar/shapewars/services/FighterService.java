@@ -91,9 +91,6 @@ public class FighterService {
         fighter.setSlot(slot);
         return fighterRepository.save(fighter);
     }
-    public void resetFighterList(String userName){
-        fighterRepository.deleteAllByOwnerName(userName);
-    }
 
     public void applyLevelChangesToFighters(User winner, User loser){
         winner.getFighterList().forEach(fighter -> {
@@ -123,10 +120,10 @@ public class FighterService {
         });
     }
 
-    public void clearUnusedBotFighters(User bot){
-        List<Fighter> botFighters = bot.getFighterList();
-        botFighters.forEach(fighter->fighter.setOwner(null));
-        fighterRepository.saveAll(botFighters);
+    public void clearUnusedFighters(User user){
+        List<Fighter> fighters = user.getFighterList();
+        fighters.forEach(fighter->fighter.setOwner(null));
+        fighterRepository.saveAll(fighters);
     }
 
     public void tryApplyingLoot(User winner, User loser){

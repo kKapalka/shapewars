@@ -30,8 +30,6 @@ export class AgentService {
     return this.selectedTarget;
   }
 
-
-
   calculateOverallBalance(agentFighters:any,playerFighters:any):number{
     let agentScore = agentFighters.filter(fighter=>!fighter.statusEffects.dead)
       .map(fighter=>(fighter.currentHp/fighter.maximumHp)*20+(fighter.currentMana/fighter.maximumMana)*5)
@@ -39,7 +37,7 @@ export class AgentService {
     let playerScore = playerFighters.filter(fighter=>!fighter.statusEffects.dead)
       .map(fighter=>(fighter.currentHp/fighter.maximumHp)*20+(fighter.currentMana/fighter.maximumMana)*5)
       .reduce((a,b)=>a+b);
-    let overallScore = (agentScore-playerScore)*20;
+    let overallScore = (agentScore-playerScore)*2;
     return overallScore;
   }
   calculateInternalBalance(fighters:any,isAgent:boolean):number{
@@ -83,6 +81,7 @@ export class AgentService {
     return validSkillset[scoreTargetMap.indexOf(scoreTargetMap.find(scoreTarget=>scoreTarget.value===Math.max(...scoreTargetMap.map(st=>st.value))))];
   }
   simulateSkillsImpact(skill:any):any{
+    console.log(skill.name);
     let targetScores = [];
     let effects=[].concat.apply([],skill.skillEffectBundles.map(bundle=>bundle.skillEffectDtos.map(dto=>dto.skillStatusEffect)));
     let validTargets=this.getValidTargets(skill);
@@ -101,6 +100,7 @@ export class AgentService {
         value:this.performSkillWithTarget(skill,target,this.playerFightersCopy,this.agentFightersCopy)
       });
     }
+    console.log(targetScores);
     return targetScores.find(targetScore=>targetScore.value===Math.max(...targetScores.map(targetScore=>targetScore.value)));
   }
   getValidTargets(skill:any):any[]{
@@ -109,7 +109,6 @@ export class AgentService {
 
     let targetTypes=[].concat.apply([],skill.skillEffectBundles.map(bundle=>bundle.skillEffectDtos.map(dto=>dto.targetType)));
     if(targetTypes.some(type => ['TARGET_ENEMY', 'RANDOM_ENEMY', 'ALL_ENEMY_UNITS', 'ALL_UNITS'].includes(type))){
-      console.log(playerFighters.filter(fighter=>!fighter.statusEffects.dead));
       return playerFighters.filter(fighter=>!fighter.statusEffects.dead);
     } else{
       return agentFighters.filter(fighter=>!fighter.statusEffects.dead);
@@ -208,7 +207,7 @@ export class AgentService {
       * this.agent.damageOutputPriority);
     this.agentFighters=JSON.parse(agentFightersCopy);
     this.playerFighters=JSON.parse(playerFightersCopy);
-
+    console.log(scores);
     return scores.reduce((a,b)=>a+b);
   }
   calculateFromBonuses(dtoList){

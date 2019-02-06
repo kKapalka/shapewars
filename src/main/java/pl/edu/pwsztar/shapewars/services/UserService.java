@@ -91,7 +91,9 @@ public class UserService implements IUserService {
                     FighterSlot.SLOT_4)));
         return bot;
     }
-    public void delete(User user){
+    public void delete(User user)
+    {
+
         userRepository.delete(user);
     }
 

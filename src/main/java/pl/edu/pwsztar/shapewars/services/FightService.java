@@ -133,21 +133,27 @@ public class FightService {
             throw new Exception("Cannot initiate fight against bots for user: "+login);
         }
     }
-
+    public void deletePlayer(User user) {
+        List<Fight> fights = fightRepository.findByUser(user.getLogin());
+        System.out.println(fights);
+        if(fights
+                 .stream()
+                 .filter(fight -> fight.getFightStatus() == FightStatus.IN_PROGRESS)
+                 .collect(Collectors.toList())
+                 .size() == 0) {
+            fights.forEach(fight -> fight.setFightingPlayers(
+                  fight.getFightingPlayers().stream().filter(player -> player != user).collect(Collectors.toList())));
+            System.out.println(fights.stream().map(Fight::getID).collect(Collectors.toList()));
+            fightRepository.saveAll(fights);
+            fighterService.clearUnusedFighters(user);
+            userService.deleteBot(user);
+        }
+    }
     /**
      * Metoda automatycznie usuwa
      */
     private void deleteAllIdleBots(){
         List<User> bots = userService.findAllBots();
-        bots.forEach(bot->{
-            List<Fight> fights = fightRepository.findByUser(bot.getLogin());
-            if(fights.stream().filter(fight->fight.getFightStatus()==FightStatus.IN_PROGRESS).collect(Collectors.toList()).size()==0){
-                fights.forEach(fight->fight.setFightingPlayers(fight.getFightingPlayers()
-                        .stream().filter(player->player!=bot).collect(Collectors.toList())));
-                fightRepository.saveAll(fights);
-                fighterService.clearUnusedBotFighters(bot);
-                userService.deleteBot(bot);
-            }
-        });
+        bots.forEach(this::deletePlayer);
     }
 }

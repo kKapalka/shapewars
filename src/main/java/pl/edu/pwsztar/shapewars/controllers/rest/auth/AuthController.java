@@ -21,8 +21,10 @@ import pl.edu.pwsztar.shapewars.messages.JwtResponse;
 import pl.edu.pwsztar.shapewars.messages.ResponseMessage;
 import pl.edu.pwsztar.shapewars.repositories.UserRepository;
 import pl.edu.pwsztar.shapewars.security.jwt.JwtProvider;
+import pl.edu.pwsztar.shapewars.services.FightService;
 import pl.edu.pwsztar.shapewars.services.FighterService;
 import pl.edu.pwsztar.shapewars.services.MaintenanceLogService;
+import pl.edu.pwsztar.shapewars.services.UserService;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
@@ -48,6 +50,9 @@ public class AuthController {
 
     @Autowired
     private FighterService fighterService;
+
+    @Autowired
+    private FightService fightService;
 
     @PostMapping("/privileges")
     public ResponseEntity<?> grantPrivileges(@RequestBody PrivilegesDto dto){
@@ -122,7 +127,6 @@ public class AuthController {
     }
     @PostMapping("/reset-fighters/{login}")
     public ResponseEntity<?> resetFighters(@PathVariable String login){
-        fighterService.resetFighterList(login);
         User user = userRepository.findByLoginEquals(login).orElseThrow(EntityNotFoundException::new);
         user.setFighterList(Arrays.asList(fighterService.generateFighter(user, FighterSlot.SLOT_1),
               fighterService.generateFighter(user,FighterSlot.SLOT_2),
@@ -142,7 +146,7 @@ public class AuthController {
                   HttpStatus.UNAUTHORIZED);
         } else {
             User user = userRepository.findByLoginEquals(login).orElseThrow(EntityNotFoundException::new);
-            userRepository.delete(user);
+            fightService.deletePlayer(user);
             return new ResponseEntity<>(new ResponseMessage("Success! " + login + " has been banned!"), HttpStatus.OK);
         }
     }
