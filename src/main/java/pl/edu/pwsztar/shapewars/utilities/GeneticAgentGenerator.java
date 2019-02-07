@@ -1,5 +1,9 @@
 package pl.edu.pwsztar.shapewars.utilities;
 
+import static pl.edu.pwsztar.shapewars.utilities.StaticValues.LEARNING_SCORE_WEIGHT;
+import static pl.edu.pwsztar.shapewars.utilities.StaticValues.LEARNING_TURN_COUNT_WEIGHT;
+import static pl.edu.pwsztar.shapewars.utilities.StaticValues.LEARNING_VICTORY_WEIGHT;
+
 import pl.edu.pwsztar.shapewars.entities.Agent;
 import pl.edu.pwsztar.shapewars.entities.AgentLearningSet;
 
@@ -39,11 +43,12 @@ public class GeneticAgentGenerator {
         Map<AgentLearningSet,Long> learningSetScore = new HashMap<>();
         learningSets.forEach(learningSet -> {
             AtomicReference<Double> bonus= new AtomicReference<>(0d);
-            learningSet.getLearningSetTurnLogList().forEach(turnLog -> bonus.updateAndGet(v -> v + (double) (turnLog.getAllyScore() - turnLog.getEnemyScore()) / 30f));
+            learningSet.getLearningSetTurnLogList().forEach(turnLog -> bonus.updateAndGet(v -> v + (double) (turnLog.getAllyScore() - turnLog.getEnemyScore()) *LEARNING_SCORE_WEIGHT));
             int size = learningSet.getLearningSetTurnLogList().size();
             learningSetScore.put(learningSet, Math.round(bonus.get())+
-                    (long) (size*2) + ((learningSet.getLearningSetTurnLogList().get(size-1).getAllyScore()==50L &&
-                    learningSet.getLearningSetTurnLogList().get(size-1).getEnemyScore()==-50L)?20L:0L));
+                    (long) (size*LEARNING_TURN_COUNT_WEIGHT) + ((learningSet.getLearningSetTurnLogList().get(size-1).getAllyScore()==50L &&
+                    learningSet.getLearningSetTurnLogList().get(size-1).getEnemyScore()==-50L)?LEARNING_VICTORY_WEIGHT:
+                                                                0L));
 
         });
         return learningSetScore;

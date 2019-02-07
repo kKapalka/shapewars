@@ -298,7 +298,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
         .forEach(action=>{
         let caster=this.allFighters.find(fighter=>fighter.id==action.activeFighterId);
         if(Boolean(action.skillId)){
-          caster.currentMana=Math.max(Math.min(caster.skillSet.find(skill=>skill.id==action.skillId).cost,caster.maximumMana),0);
+          caster.currentMana=Math.max(Math.min(caster.currentMana - caster.skillSet.find(skill=>skill.id==action.skillId).cost,caster.maximumMana),0);
         }
         caster.statusEffects.armorBonus.bonuses.forEach(bonus=>{
             bonus.duration--;

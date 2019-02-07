@@ -42,8 +42,8 @@ export class AgentService {
   }
   calculateInternalBalance(fighters:any,isAgent:boolean):number{
     let balanceScore = fighters.filter(fighter=>!fighter.statusEffects.dead)
-      .map(fighter=>(50+(fighter.statusEffects.strengthBonus.value*3)+(fighter.statusEffects.armorBonus.value)+(Math.min(Math.max(-15,fighter.statusEffects.speedBonus.value),10))-(fighter.statusEffects.stunnedForTurns*20))
-        *((fighter.currentHp/fighter.maximumHp)*20+(fighter.currentMana/fighter.maximumMana)*5)/50)
+      .map(fighter=>(100+(fighter.statusEffects.strengthBonus.value*3)+(fighter.statusEffects.armorBonus.value)+(Math.min(Math.max(-15,fighter.statusEffects.speedBonus.value),10)*2)-(fighter.statusEffects.stunnedForTurns*20))
+        *((fighter.currentHp/fighter.maximumHp)*20+(fighter.currentMana/fighter.maximumMana)*5)/100)
       .reduce((a,b)=>a+b);
     if(!isAgent){
       return 110-balanceScore;
@@ -52,8 +52,8 @@ export class AgentService {
   }
   calculateIndividualScore(fighters:any,isAgent:boolean):number{
     let fighterScores = fighters.filter(fighter=>!fighter.statusEffects.dead)
-      .map(fighter=>(50+(fighter.statusEffects.strengthBonus.value*3)+(fighter.statusEffects.armorBonus.value)+(Math.min(Math.max(-15,fighter.statusEffects.speedBonus.value),10)*2)-(fighter.statusEffects.stunnedForTurns*20))
-        *((((fighter.currentHp/fighter.maximumHp)*20)+((fighter.currentMana/fighter.maximumMana)*5)))/12.5)
+      .map(fighter=>(100+(fighter.statusEffects.strengthBonus.value*3)+(fighter.statusEffects.armorBonus.value)+(Math.min(Math.max(-15,fighter.statusEffects.speedBonus.value),10)*2)-(fighter.statusEffects.stunnedForTurns*20))
+        *((((fighter.currentHp/fighter.maximumHp)*20)+((fighter.currentMana/fighter.maximumMana)*5)))/25)
     let individualScore = 0;
     if(!isAgent){
       return 110-Math.min(...fighterScores)
@@ -190,7 +190,7 @@ export class AgentService {
                 target.statusEffects.strengthBonus.value = this.calculateFromBonuses(target.statusEffects.strengthBonus.bonuses);
               }
             } else {
-              target.statusEffects.stunnedForTurns += Math.floor(averageValue);
+              target.statusEffects.stunnedForTurns += 1;
             }
           }
           effectTargets.forEach(target=>{

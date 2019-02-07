@@ -128,10 +128,12 @@ public class AuthController {
     @PostMapping("/reset-fighters/{login}")
     public ResponseEntity<?> resetFighters(@PathVariable String login){
         User user = userRepository.findByLoginEquals(login).orElseThrow(EntityNotFoundException::new);
+        user.getFighterList().forEach(fighter->fighter.setOwner(null));
         user.setFighterList(Arrays.asList(fighterService.generateFighter(user, FighterSlot.SLOT_1),
               fighterService.generateFighter(user,FighterSlot.SLOT_2),
               fighterService.generateFighter(user,FighterSlot.SLOT_3),fighterService.generateFighter(user,
                     FighterSlot.SLOT_4)));
+        //userRepository.save(user);
         return new ResponseEntity<>(new ResponseMessage("Fighter list reset successfully!"), HttpStatus.OK);
     }
 

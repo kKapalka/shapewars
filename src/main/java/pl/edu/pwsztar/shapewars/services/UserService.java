@@ -1,5 +1,7 @@
 package pl.edu.pwsztar.shapewars.services;
 
+import static pl.edu.pwsztar.shapewars.utilities.StaticValues.BASIC_EXPERIENCE_VALUE;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pwsztar.shapewars.entities.Fight;
@@ -112,14 +114,14 @@ public class UserService implements IUserService {
 
     public void applyLevelChangesToUsers(User winner, User loser){
 
-        winner.setExperiencePoints(winner.getExperiencePoints() + (35 + (loser.getLevel() * 35)));
-        loser.setExperiencePoints(loser.getExperiencePoints() + (18 + (winner.getLevel() * 18)));
+        winner.setExperiencePoints(winner.getExperiencePoints() + (BASIC_EXPERIENCE_VALUE + (loser.getLevel() * BASIC_EXPERIENCE_VALUE)));
+        loser.setExperiencePoints(loser.getExperiencePoints() + Math.round((float)(BASIC_EXPERIENCE_VALUE + (winner.getLevel() * BASIC_EXPERIENCE_VALUE))/2f));
         Long threshold = experienceThresholdService.getByLevel(winner.getLevel()).getThreshold();
         if(winner.getExperiencePoints()>threshold){
             System.out.println("trigger");
             System.out.println(winner.getExperiencePoints());
             System.out.println(threshold);
-            winner.setExperiencePoints(loser.getExperiencePoints()-threshold);
+            winner.setExperiencePoints(winner.getExperiencePoints()-threshold);
             winner.setLevel(winner.getLevel()+1L);
         }
         threshold = experienceThresholdService.getByLevel(loser.getLevel()).getThreshold();
