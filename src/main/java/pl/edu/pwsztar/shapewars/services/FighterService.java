@@ -158,7 +158,7 @@ public class FighterService {
             }
         }
         System.out.println(loot.stream().map(fighter->fighter.getFighterModelReferrence().getColor().getColorName()+
-                                                      " "+fighter.getFighterModelReferrence().getShape().getName()+" "+fighter.getOwner().getLogin()).collect(
+                                                      " "+fighter.getFighterModelReferrence().getShape().getName()+" "+(fighter.getOwner()!=null?fighter.getOwner().getLogin():"null")).collect(
               Collectors.toList()));
         fighterRepository.saveAll(loot);
         //loot.stream().filter(fighter->fighter.getOwner()==null).forEach(fighter-> fighterRepository.delete(fighter));

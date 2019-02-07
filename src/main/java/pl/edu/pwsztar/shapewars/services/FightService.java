@@ -143,9 +143,15 @@ public class FightService {
                  .filter(fight -> fight.getFightStatus() == FightStatus.IN_PROGRESS)
                  .collect(Collectors.toList())
                  .size() == 0) {
-            fights.forEach(fight -> fight.setFightingPlayers(
-                  fight.getFightingPlayers().stream().filter(player -> player != user).collect(Collectors.toList())));
-            System.out.println(fights.stream().map(Fight::getID).collect(Collectors.toList()));
+
+            fights.forEach(fight -> {
+                List<User> players = fight.getFightingPlayers();
+                players.forEach(player-> System.out.println(player.getLogin()));
+                players.remove(user);
+                fight.setFightingPlayers(players);
+                players.forEach(player-> System.out.println(player.getLogin()));
+            });
+            System.out.println(fights);
             fightRepository.saveAll(fights);
             fighterService.clearUnusedFighters(user);
             userService.deleteBot(user);
