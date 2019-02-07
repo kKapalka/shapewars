@@ -145,4 +145,7 @@ public class UserService implements IUserService {
         User savedBot = userRepository.save(bot);
         userRepository.delete(savedBot);
     }
+    public void saveUser(User user){
+        userRepository.save(user);
+    }
 }

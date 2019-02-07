@@ -64,6 +64,8 @@ public class FightService {
             userService.applyLevelChangesToUsers(winner,loser);
             fighterService.applyLevelChangesToFighters(winner,loser);
             fighterService.tryApplyingLoot(winner,loser);
+            userService.saveUser(winner);
+            userService.saveUser(loser);
         }
         if(fight.getFightStatus()==FightStatus.INVITE_PENDING && dto.getFightStatus().equals("IN_PROGRESS")) {
             List<Fight> challengesToReject = fightRepository.findChallengeByFightingSides(dto.getPlayerNames().get(0),dto.getPlayerNames().get(1));

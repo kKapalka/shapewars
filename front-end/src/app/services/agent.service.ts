@@ -142,9 +142,11 @@ export class AgentService {
 
         let averageValue = (effect.minValue + effect.maxValue)*bundle.accuracy/200;
         effectTargets.forEach(target=>{
-          let storedHp = target.storedHp;
+          let storedHp = target.currentHp;
           if((effect.skillStatusEffect=='DEAL_DAMAGE' || effect.skillStatusEffect=='RESTORE_HEALTH')) {
-            console.log("triggered damage dealing?")
+            console.log(target);
+            console.log(effect);
+            caster.storedHp=caster.currentHp;
             let HPDifference: number;
             if (effect.valueModifierType == 'SELF_CURRENT_HP_BASED') {
               HPDifference = Math.floor((averageValue * caster.storedHp) / 100);
@@ -158,6 +160,8 @@ export class AgentService {
             if (effect.valueModifierType == 'FLAT_VALUE') {
               HPDifference = Math.floor(averageValue);
             }
+            console.log(HPDifference);
+            console.log(caster)
             if (effect.skillStatusEffect == 'DEAL_DAMAGE') {
               let colorDependentDamageAmplifier = this.colorMaps.find(set => set.colorName === caster.fighterModelReferenceDto.colorName).colorDamages[target.fighterModelReferenceDto.colorName];
               if (!Boolean(colorDependentDamageAmplifier)) {

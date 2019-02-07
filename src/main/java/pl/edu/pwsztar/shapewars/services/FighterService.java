@@ -130,8 +130,6 @@ public class FighterService {
     }
 
     public void tryApplyingLoot(User winner, User loser){
-        System.out.println(winner.getLogin());
-        System.out.println(loser.getLogin());
         List<Fighter> loot;
         if(loser.getEmail()==null){
             //AI loser can lose shapes from its party - it will be deleted afterwards, so no worry
@@ -141,9 +139,6 @@ public class FighterService {
             loot = loser.getFighterList().stream().filter(fighter->fighter.getSlot()==FighterSlot.INVENTORY).collect(
                   Collectors.toList());
         }
-        System.out.println(loot.stream().map(fighter->fighter.getFighterModelReferrence().getColor().getColorName()+
-                                                      " "+fighter.getFighterModelReferrence().getShape().getName()).collect(
-              Collectors.toList()));
         //if loser has shapes to lose
         //at least one
         if(loot.size()!=0){
@@ -157,11 +152,7 @@ public class FighterService {
                 fighterToTransfer.setOwner(winner);
             }
         }
-        System.out.println(loot.stream().map(fighter->fighter.getFighterModelReferrence().getColor().getColorName()+
-                                                      " "+fighter.getFighterModelReferrence().getShape().getName()+" "+(fighter.getOwner()!=null?fighter.getOwner().getLogin():"null")).collect(
-              Collectors.toList()));
         fighterRepository.saveAll(loot);
-        //loot.stream().filter(fighter->fighter.getOwner()==null).forEach(fighter-> fighterRepository.delete(fighter));
     }
     private Fighter levelUp(Fighter fighter, Long fighterThreshold){
         fighter.setExperiencePoints(fighter.getExperiencePoints()-fighterThreshold);
