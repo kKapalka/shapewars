@@ -22,7 +22,6 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.signupInfo = new SignUpInfo(
-      this.form.name,
       this.form.login,
       this.form.email,
       this.form.password,
@@ -30,7 +29,6 @@ export class RegisterComponent implements OnInit {
 
     this.authService.signUp(this.signupInfo).subscribe(
       data => {
-        console.log(data);
         this.isSignedUp = true;
         this.isSignUpFailed = false;
       },

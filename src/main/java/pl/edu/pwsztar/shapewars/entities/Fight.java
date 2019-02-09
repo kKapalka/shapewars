@@ -32,6 +32,6 @@ public class Fight {
     @Column(name="FIGHT_STATUS")
     private FightStatus fightStatus;
 
-    @Column(name="WINNER_NAME")
-    private String winnerName;
+    @Column(name="RELEVANT_USERNAME")
+    private String relevantUsername;
 }

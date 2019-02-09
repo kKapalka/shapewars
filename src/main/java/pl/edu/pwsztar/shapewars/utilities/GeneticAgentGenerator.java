@@ -72,7 +72,6 @@ public class GeneticAgentGenerator {
         Double newAllyInternalBalancePriority=0d;
         Double newIndividualEnemyPriority=0d;
         Double newIndividualAllyPriority=0d;
-        Double newDamageOutputPriority=0d;
         Random random = new Random();
         random.setSeed(Instant.now().toEpochMilli());
        for(int i=0;i<size;i++){
@@ -81,20 +80,17 @@ public class GeneticAgentGenerator {
            newAllyInternalBalancePriority+=learningSets.get(i).getAllyInternalBalancePriority()*(size+1-i);
            newIndividualEnemyPriority+=learningSets.get(i).getIndividualEnemyPriority()*(size+1-i);
            newIndividualAllyPriority+=learningSets.get(i).getIndividualAllyPriority()*(size+1-i);
-           newDamageOutputPriority+=learningSets.get(i).getDamageOutputPriority()*(size+1-i);
        }
         newOverallBalancePriority+=random.nextDouble();
         newEnemyInternalBalancePriority+=random.nextDouble();
         newAllyInternalBalancePriority+=random.nextDouble();
         newIndividualEnemyPriority+=random.nextDouble();
         newIndividualAllyPriority+=random.nextDouble();
-        newDamageOutputPriority+=random.nextDouble();
 
         agent.setEnemyInternalBalancePriority(newEnemyInternalBalancePriority/(double)weightedAverageDenominator);
         agent.setAllyInternalBalancePriority(newAllyInternalBalancePriority/(double)weightedAverageDenominator);
         agent.setIndividualAllyPriority(newIndividualEnemyPriority/(double)weightedAverageDenominator);
         agent.setIndividualEnemyPriority(newIndividualAllyPriority/(double)weightedAverageDenominator);
-        agent.setDamageOutputPriority(newDamageOutputPriority/(double)weightedAverageDenominator);
         agent.setOverallBalancePriority(newOverallBalancePriority/(double)weightedAverageDenominator);
         return agent;
     }

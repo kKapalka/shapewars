@@ -20,6 +20,9 @@ export class SkillsService {
   saveSkill(skill:Skill):Observable<any>{
     return this.http.post(this.urls.saveSkill,skill,{responseType:'json'})
   }
+  deleteSkillById(id:number):Observable<any>{
+    return this.http.delete(this.urls.skillById+id,{responseType:'json'})
+  }
   getAllSkillStatusEffects():Observable<any>{
     return this.http.get(this.urls.allSkillStatusEffects,{responseType:'json'})
   }

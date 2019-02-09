@@ -15,7 +15,6 @@ public class AgentDto {
     private Double allyInternalBalancePriority;
     private Double individualEnemyPriority;
     private Double individualAllyPriority;
-    private Double damageOutputPriority;
 
     public static AgentDto fromEntity(Agent entity){
         return AgentDto.builder()
@@ -26,7 +25,6 @@ public class AgentDto {
                 .allyInternalBalancePriority(entity.getAllyInternalBalancePriority())
                 .individualEnemyPriority(entity.getIndividualEnemyPriority())
                 .individualAllyPriority(entity.getIndividualAllyPriority())
-                .damageOutputPriority(entity.getDamageOutputPriority())
                 .build();
     }
 }

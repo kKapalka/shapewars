@@ -18,4 +18,11 @@ export class SkillPanelComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  deleteSkill(id){
+    this.service.deleteSkillById(id).subscribe(res=>{
+      window.location.reload();
+    })
+  }
+
 }

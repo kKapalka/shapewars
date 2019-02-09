@@ -72,14 +72,25 @@ export class FightWindowComponent implements OnInit, OnDestroy {
     this.fightService.findFightInProgressForUser(this.token.getUsername()).subscribe(res => {
       this.currentFight = res;
       this.you=this.currentFight.players.find(player=>player.login===this.token.getUsername());
-      this.you.allFighterList=this.you.allFighterList.sort((a,b)=>a.slot-b.slot);
+      this.you.allFighterList=this.you.allFighterList.sort((a,b)=>{
+        if (a.slot < b.slot)
+          return -1;
+        if (a.slot > b.slot)
+          return 1;
+        return 0;
+      });
+      console.log(this.you.allFighterList);
       this.opponent=this.currentFight.players.filter(player=>player!=this.you)[0];
-      this.opponent.allFighterList=this.opponent.allFighterList.sort((a,b)=>a.slot-b.slot);
+      this.opponent.allFighterList=this.opponent.allFighterList.sort((a,b)=>{
+        if (a.slot < b.slot)
+          return -1;
+        if (a.slot > b.slot)
+          return 1;
+        return 0;
+      });
       if(this.opponent.login.substring(0,9)==='BOT_LEVEL'){
         this.service.getAgentForUsername(this.token.getUsername()).subscribe(res=>{
           this.agent=res;
-          console.log(this.you);
-          console.log(this.opponent);
           this.agentService.init(this.opponent.allFighterList,this.you.allFighterList,this.agent,this.colorSet);
         })
       }
@@ -118,7 +129,7 @@ export class FightWindowComponent implements OnInit, OnDestroy {
                 id:this.currentFight.id,
                 playerNames:this.currentFight.players.map(player=>player.login),
                 fightStatus:this.currentFightStatus,
-                winnerName:this.winner.login,
+                relevantUsername:this.winner.login,
               }).subscribe(res=>{
                 console.log(res)
               });
@@ -245,7 +256,8 @@ export class FightWindowComponent implements OnInit, OnDestroy {
     let fightBase={
       id:this.currentFight.id,
       playerNames:this.currentFight.players.map(player=>player.login),
-      fightStatus:'ABANDONED'
+      fightStatus:'ABANDONED',
+      relevantUsername:this.token.getUsername()
     };
     this.service.challenge(fightBase).subscribe(res=>{
       console.log(res);
@@ -263,9 +275,8 @@ export class FightWindowComponent implements OnInit, OnDestroy {
         id:this.currentFight.id,
         playerNames:this.currentFight.players.map(player=>player.login),
         fightStatus:'FINISHED',
-        winnerName:this.winner.login
+        relevantUsername:this.winner.login
       };
-      console.log(fightBase.winnerName);
       this.service.challenge(fightBase).subscribe(res=>{
         console.log(res);
       })

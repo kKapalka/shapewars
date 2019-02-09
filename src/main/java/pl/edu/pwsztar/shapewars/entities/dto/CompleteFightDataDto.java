@@ -13,14 +13,14 @@ public class CompleteFightDataDto {
     public Long id;
     public List<PlayerCombatDto> players;
     public String fightStatus;
-    public String winnerName;
+    public String relevantUsername;
 
     public static CompleteFightDataDto fromEntity(Fight fight){
         return CompleteFightDataDto.builder()
                 .id(fight.getID())
                 .players(fight.getFightingPlayers().stream().map(PlayerCombatDto::fromEntity).collect(Collectors.toList()))
                 .fightStatus(fight.getFightStatus().name())
-                .winnerName(fight.getWinnerName())
+                .relevantUsername(fight.getRelevantUsername())
                 .build();
     }
 

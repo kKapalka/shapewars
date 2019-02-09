@@ -15,7 +15,7 @@ public class FightDto {
     private Long id;
     private List<String> playerNames;
     private String fightStatus;
-    private String winnerName;
+    private String relevantUsername;
 
     public static FightDto fromEntity(Fight fight){
         if(fight!=null) {
@@ -23,7 +23,7 @@ public class FightDto {
                     .id(fight.getID())
                     .playerNames(fight.getFightingPlayers().stream().map(User::getLogin).collect(Collectors.toList()))
                     .fightStatus(fight.getFightStatus().name())
-                    .winnerName(fight.getWinnerName())
+                    .relevantUsername(fight.getRelevantUsername())
                     .build();
         } else{
             return null;

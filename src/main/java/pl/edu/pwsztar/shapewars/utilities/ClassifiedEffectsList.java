@@ -13,7 +13,7 @@ public class ClassifiedEffectsList {
             SkillStatusEffect.INCREASE_SPEED,
             SkillStatusEffect.REDUCE_SPEED,
             SkillStatusEffect.INCREASE_STRENGTH,
-            SkillStatusEffect.REDUCE_SPEED
+            SkillStatusEffect.REDUCE_STRENGTH
     );
     public static final List<SkillStatusEffect> HITPOINT_EFFECTS=Arrays.asList(
             SkillStatusEffect.DEAL_DAMAGE,

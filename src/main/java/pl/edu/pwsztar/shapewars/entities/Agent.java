@@ -61,13 +61,6 @@ public class Agent{
     @Column(name="INDIVIDUAL_ALLY_PRIORITY")
     private Double individualAllyPriority;
 
-    /**
-     * Kolumna odpowiada za decyzje podejmowane na podstawie
-     * zdolności jednostki do zadania obrażeń
-     */
-    @Column(name="DAMAGE_OUTPUT_PRIORITY")
-    private Double damageOutputPriority;
-
     @PrePersist
     public void prePersist(){
         this.version=1L;

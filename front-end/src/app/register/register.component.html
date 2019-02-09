@@ -6,14 +6,7 @@
   <div class="row col-sm-6" style="max-width:350px;">
     <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
       <div class="form-group">
-        <label for="name">Your name</label>
-        <input type="text" class="form-control" name="name" [(ngModel)]="form.name" #name="ngModel" required />
-        <div *ngIf="f.submitted && name.invalid">
-          <div *ngIf="name.errors.required">Name is required</div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="login">login</label>
+        <label for="login">Your username</label>
         <input type="text" class="form-control" name="login" [(ngModel)]="form.login" #login="ngModel"
           required />
         <div *ngIf="f.submitted && login.invalid">
@@ -21,7 +14,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email">Your email</label>
         <input type="text" class="form-control" name="email" [(ngModel)]="form.email" #email="ngModel" required email />
         <div *ngIf="f.submitted && email.invalid">
           <div *ngIf="email.errors.required">Email is required</div>
@@ -38,7 +31,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="matchingPassword">Password</label>
+        <label for="matchingPassword">Enter password again</label>
         <input type="password" class="form-control" name="matchingPassword" [(ngModel)]="form.matchingPassword" #matchingPassword="ngModel"
                required minlength="6" />
         <div *ngIf="password.toString()!=matchingPassword.toString()">

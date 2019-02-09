@@ -34,6 +34,7 @@ public class FightService {
     @Autowired
     private FighterService fighterService;
 
+
     public FightDto save(FightDto dto) throws Exception {
         System.out.println(dto);
         List<Fight> challenges = fightRepository.findChallengeByFightingSides(dto.getPlayerNames().get(0),dto.getPlayerNames().get(1));
@@ -53,17 +54,19 @@ public class FightService {
         } else{
             //only new fights can get their player set, because why would other option make sense?
             fight.setFightingPlayers(userService.findPlayersByLogins(dto.getPlayerNames()));
+            fight.setRelevantUsername(dto.getRelevantUsername());
         }
-        System.out.println(dto.getWinnerName());
-        if(fight.getFightStatus()==FightStatus.IN_PROGRESS && dto.getWinnerName()!=null){
-            fight.setWinnerName(dto.getWinnerName());
+        System.out.println(dto.getRelevantUsername());
+        if(fight.getFightStatus()==FightStatus.IN_PROGRESS && dto.getRelevantUsername()!=null){
+            fight.setRelevantUsername(dto.getRelevantUsername());
             User winner = fight.getFightingPlayers().stream()
-                    .filter(player->player.getLogin().equals(dto.getWinnerName())).findFirst().get();
+                    .filter(player->player.getLogin().equals(dto.getRelevantUsername())).findFirst().get();
             User loser = fight.getFightingPlayers().stream()
                     .filter(player->!player.equals(winner)).findFirst().get();
             userService.applyLevelChangesToUsers(winner,loser);
             fighterService.applyLevelChangesToFighters(winner,loser);
             fighterService.tryApplyingLoot(winner,loser);
+            System.out.println(winner.getFighterList().stream().map(fighter->fighter.getOwner().getLogin()).collect(Collectors.joining()));
             userService.saveUser(winner);
             userService.saveUser(loser);
         }
@@ -98,7 +101,7 @@ public class FightService {
     }
 
     public Fight findByChallenger(String login){
-        List<Fight> list = fightRepository.findChallengesForUser(login);
+        List<Fight> list = fightRepository.findChallengesForUser(login).stream().filter(fight->(fight.getRelevantUsername()!=null)).collect(Collectors.toList());
         return list.size()>0?list.get(0):null;
     }
 

@@ -31,6 +31,9 @@ public class Skill {
     @Column(name="COST")
     private Long cost;
 
+    @Column(name="ACTIVE", columnDefinition="boolean default true")
+    private boolean active = true;
+
     @OneToMany (mappedBy = "skill", cascade = CascadeType.ALL)
     private List<SkillEffectBundle> skillEffectBundles;
 

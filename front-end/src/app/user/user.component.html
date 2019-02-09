@@ -55,7 +55,7 @@
     </div>
 
     <div class="col-sm-6" *ngIf="currentUser">
-      <button>Edit user profile</button>
+
       <div class="col-sm-8">
         Your party:
         <div class="row" style="width:100%; height:140px">
@@ -107,7 +107,7 @@
       <div *ngIf="!challengeIssued">
         <button (click)="challenge()">Challenge</button>
       </div>
-      <div *ngIf="challengeIssued">
+      <div *ngIf="challengeIssued && challengeIssued.relevantUsername==this.profileUsername">
         <button (click)="acceptChallenge()">Accept Challenge</button>
         <button (click)="rejectChallenge()">Reject Challenge</button>
       </div>

@@ -73,5 +73,9 @@ public class SkillService {
     public SkillDto getSkillById(Long id){
         return SkillDto.fromEntity(skillRepository.findById(id).orElseThrow(EntityNotFoundException::new));
     }
-
+    public void deleteSkillById(Long id){
+        Skill skill = skillRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        skill.setActive(false);
+        skillRepository.save(skill);
+    }
 }

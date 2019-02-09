@@ -48,7 +48,6 @@ public class AgentService {
             newAgent.setAllyInternalBalancePriority(random.nextDouble());
             newAgent.setIndividualEnemyPriority(random.nextDouble());
             newAgent.setIndividualAllyPriority(random.nextDouble());
-            newAgent.setDamageOutputPriority(random.nextDouble());
             return AgentDto.fromEntity(agentRepository.save(newAgent));
         }
     }
@@ -64,7 +63,6 @@ public class AgentService {
         learningSet.setAllyInternalBalancePriority(agent.getAllyInternalBalancePriority());
         learningSet.setIndividualEnemyPriority(agent.getIndividualEnemyPriority());
         learningSet.setIndividualAllyPriority(agent.getIndividualAllyPriority());
-        learningSet.setDamageOutputPriority(agent.getDamageOutputPriority());
         return agentLearningSetRepository.save(learningSet);
     }
 
@@ -136,7 +134,7 @@ public class AgentService {
         List<LearningSetTurnLog> turnLog = finalAgentLearningSet.getLearningSetTurnLogList();
         LearningSetTurnLog newTurnLog = new LearningSetTurnLog();
         newTurnLog.setAgentLearningSet(finalAgentLearningSet);
-        if(!dto.getWinnerName().equals(dedicatedPlayer.getLogin())){
+        if(!dto.getRelevantUsername().equals(dedicatedPlayer.getLogin())){
             newTurnLog.setAllyScore(100L);
             newTurnLog.setEnemyScore(-100L);
         } else{
@@ -147,5 +145,11 @@ public class AgentService {
         finalAgentLearningSet.setLearningSetTurnLogList(turnLog);
         agentLearningSetRepository.save(finalAgentLearningSet);
         agentLearningSetRepository.flush();
+    }
+
+    public void detachAgentForUser(User user){
+        Agent agent = agentRepository.findByUsername(user.getLogin()).orElseThrow(EntityNotFoundException::new);
+        agent.setDedicatedPlayer(null);
+        agentRepository.save(agent);
     }
 }

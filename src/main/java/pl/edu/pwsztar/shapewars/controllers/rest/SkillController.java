@@ -37,6 +37,11 @@ public class SkillController {
         return skillService.getSkillById(id);
     }
 
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable Long id){
+        skillService.deleteSkillById(id);
+    }
+
     @GetMapping("effects")
     public List<SkillStatusEffect> getAllSkillStatusEffects(){
         return Arrays.asList(SkillStatusEffect.values());

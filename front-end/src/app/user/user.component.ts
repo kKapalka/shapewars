@@ -43,9 +43,9 @@ export class UserComponent implements OnInit, OnDestroy {
     this.service.getFightsByUser(this.profileUsername).subscribe(res=>{
       console.log(res);
       this.fights={
-        won:res.filter(fight=>fight.winnerName===this.profileUsername).length,
-        lost:res.filter(fight=>fight.fightStatus==='FINISHED' && fight.winnerName!==this.profileUsername).length,
-        abandoned:res.filter(fight=>fight.fightStatus==='ABANDONED').length
+        won:res.filter(fight=>fight.relevantUsername===this.profileUsername).length,
+        lost:res.filter(fight=>fight.fightStatus==='FINISHED' && fight.relevantUsername!==this.profileUsername).length,
+        abandoned:res.filter(fight=>fight.fightStatus==='ABANDONED' && fight.relevantUsername!==this.profileUsername).length
       };
     })
     if(!this.checkIfThisPlayerProfile()) {
@@ -107,7 +107,8 @@ export class UserComponent implements OnInit, OnDestroy {
       } else{
         let challenge={
           playerNames:[this.token.getUsername(),this.profileUsername],
-          fightStatus:"INVITE_PENDING"
+          fightStatus:"INVITE_PENDING",
+          relevantUsername:this.token.getUsername()
         };
         this.service.challenge(challenge).subscribe(res=>{
           console.log(res);
@@ -156,6 +157,7 @@ export class UserComponent implements OnInit, OnDestroy {
         console.log("You must have complete party before accepting a challenge from another player!");
       } else {
         this.challengeIssued.fightStatus = "IN_PROGRESS";
+        this.challengeIssued.relevantUsername=null;
         this.service.challenge(this.challengeIssued).subscribe(res => {
           console.log(res);
           this.challengeIssued = null;
@@ -165,6 +167,7 @@ export class UserComponent implements OnInit, OnDestroy {
   }
   rejectChallenge(){
     this.challengeIssued.fightStatus="INVITE_REJECTED";
+    this.challengeIssued.relevantUsername=this.token.getUsername;
     this.service.challenge(this.challengeIssued).subscribe(res=>{
       console.log(res);
       this.challengeIssued=null;
