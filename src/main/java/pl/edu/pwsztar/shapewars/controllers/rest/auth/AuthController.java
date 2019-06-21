@@ -148,9 +148,8 @@ public class AuthController {
                   HttpStatus.UNAUTHORIZED);
         } else {
             User user = userRepository.findByLoginEquals(login).orElseThrow(EntityNotFoundException::new);
-
-            agentService.detachAgentForUser(user);
-            fightService.deletePlayer(user);
+            user.setActive(false);
+            userRepository.save(user);
             return new ResponseEntity<>(new ResponseMessage("Success! " + login + " has been banned!"), HttpStatus.OK);
         }
     }

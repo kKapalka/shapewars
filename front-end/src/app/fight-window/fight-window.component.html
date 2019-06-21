@@ -46,7 +46,12 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-5 offset-sm-2">
+      <div class="col-sm-2">
+        <p style="color:cyan; text-align: center; top:-40px; font-weight: bolder; font-size: 32px; text-shadow: 2px 2px 4px black;">
+          Turn {{turn}}
+        </p>
+      </div>
+      <div class="col-sm-5">
         <div class="row" style="flex-direction: row-reverse;">
           <div class="col-sm-3" *ngFor="let enemyfighter of opponent.allFighterList"
                [ngStyle]="enemyfighter==currentFighter && {'border': '2px solid red'}">

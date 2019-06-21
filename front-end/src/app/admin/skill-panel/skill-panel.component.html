@@ -17,8 +17,8 @@
       <span style="white-space:pre-line">{{skill.tooltip}}</span>
     </div>
     <div class="col-sm-2">
-      <button class="btn btn-block" [routerLink]="[skill.id]">EDIT</button>
-      <button class="btn btn-block" (click)="deleteSkill(skill.id)">DELETE</button>
+      <button class="btn btn-block btn-info" [routerLink]="[skill.id]">EDIT</button>
+      <button class="btn btn-block btn-danger" (click)="deleteSkill(skill.id)">DELETE</button>
     </div>
   </div>
 </div>

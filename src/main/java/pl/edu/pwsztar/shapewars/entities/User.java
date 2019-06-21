@@ -27,8 +27,8 @@ public class User {
     @Column(name="EMAIL")
     private String email;
 
-    @Column(name="VERIFIED")
-    private boolean verified;
+    @Column(name="ACTIVE", columnDefinition="boolean default true")
+    private boolean active = true;
 
     @Column(name="LEVEL")
     private Long level;

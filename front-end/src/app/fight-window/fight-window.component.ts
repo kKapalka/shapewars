@@ -115,14 +115,23 @@ export class FightWindowComponent implements OnInit, OnDestroy {
       this.fightInterval = setInterval(() => {
         this.fightService.getFightById(this.currentFight.id).subscribe(res => {
           this.currentFightStatus = res.fightStatus;
+          let relevantUsername = res.relevantUsername;
           this.attemptFinalizeFight();
           if (this.currentFightStatus === 'FINISHED') {
             clearInterval(this.fightInterval);
             clearInterval(this.actionInterval);
-            if (this.winner === this.you) {
-              alert('You have won the fight!')
+            if (relevantUsername === this.token.getUsername()) {
+              alert('You have won the fight! Look at your profile to see what you received!');
+
+              console.log(relevantUsername);
+              console.log(this.token.getUsername())
+              this.router.navigate(['home']);
             } else {
-              alert('You have lost the fight!')
+              alert('You have lost the fight! Look at your profile to see the changes!');
+
+              console.log(relevantUsername);
+              console.log(this.token.getUsername())
+              this.router.navigate(['home']);
             }
             if(this.opponent.login.substring(0,9)==='BOT_LEVEL'){
               this.service.onBattleFinish({
@@ -137,6 +146,11 @@ export class FightWindowComponent implements OnInit, OnDestroy {
             sessionStorage.setItem("fightStatus", "");
           }
           if (this.currentFightStatus == 'ABANDONED') {
+            if(relevantUsername===this.you.login){
+              alert('You have abandoned the fight!');
+            } else{
+              alert('Your opponent has abandoned the fight!');
+            }
             sessionStorage.setItem("fightStatus", "");
             this.router.navigate(['home']);
           }

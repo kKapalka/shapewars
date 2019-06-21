@@ -131,6 +131,7 @@ public class FighterService {
 
     public void tryApplyingLoot(User winner, User loser){
         List<Fighter> loot;
+        List<Fighter> winnerFighterList = winner.getFighterList();
         if(loser.getEmail()==null){
             //AI loser can lose shapes from its party - it will be deleted afterwards, so no worry
             loot = loser.getFighterList();
@@ -145,13 +146,16 @@ public class FighterService {
             Fighter fighterToTransfer = loot.get(new Random().nextInt(loot.size()));
             fighterToTransfer.setSlot(FighterSlot.INVENTORY);
             fighterToTransfer.setOwner(winner);
+            winnerFighterList.add(fighterToTransfer);
             //at most 2 will be transferred to winner
             if(loot.size()>2){
                 fighterToTransfer = loot.get(new Random().nextInt(loot.size()));
                 fighterToTransfer.setSlot(FighterSlot.INVENTORY);
                 fighterToTransfer.setOwner(winner);
+                winnerFighterList.add(fighterToTransfer);
             }
         }
+
         fighterRepository.saveAll(loot);
     }
     private Fighter levelUp(Fighter fighter, Long fighterThreshold){

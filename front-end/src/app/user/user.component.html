@@ -105,11 +105,11 @@
     </div>
     <div class="col-sm-6" *ngIf="!currentUser">
       <div *ngIf="!challengeIssued">
-        <button (click)="challenge()">Challenge</button>
+        <button (click)="challenge()" class="btn btn-outline-info">Challenge</button>
       </div>
       <div *ngIf="challengeIssued && challengeIssued.relevantUsername==this.profileUsername">
-        <button (click)="acceptChallenge()">Accept Challenge</button>
-        <button (click)="rejectChallenge()">Reject Challenge</button>
+        <button (click)="acceptChallenge()" class="btn btn-outline-info">Accept Challenge</button>
+        <button (click)="rejectChallenge()" class="btn btn-outline-info">Reject Challenge</button>
       </div>
         <ul style="min-height:60vh; max-height: 60vh; overflow-y: scroll">
           <li *ngFor="let message of messages">

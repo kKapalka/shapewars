@@ -14,6 +14,11 @@ import java.util.stream.Collectors;
 
 public class TooltipCreator {
 
+    /**
+     * Generuje opis umiejętności na jej podstawie
+     * @param skill umiejętność
+     * @return opis
+     */
     public static String createTooltip(Skill skill){
         String tooltip = String.join("\n",skill.getSkillEffectBundles().stream()
                 .map(TooltipCreator::processBundle).toArray(String[]::new))
@@ -21,6 +26,11 @@ public class TooltipCreator {
         return tooltip;
     }
 
+    /**
+     * Generuje akapit opisujący pojedynczy zestaw efektów
+     * @param bundle zestaw efektów
+     * @return akapit
+     */
     private static String processBundle(SkillEffectBundle bundle){
         Map<SkillStatusEffect, List<SkillEffect>> stringSkillEffectMap = bundle.getSkillEffects().
                 stream().collect(Collectors.groupingBy(SkillEffect::getSkillStatusEffect));
@@ -28,6 +38,14 @@ public class TooltipCreator {
         stringSkillEffectMap.forEach((key,value)->processedBundleTooltip.add(processGroup(key,value)));
         return String.join(". ",processedBundleTooltip) + " ("+bundle.getAccuracy()+"% chance to hit).";
     }
+
+    /**
+     * Generuje pojedyncze zdanie opisujące grupę efektów wewnątrz ich zestawu,
+     * które łączy ten sam parametr SkillStatusEffect
+     * @param effect rodzaj efektu
+     * @param skillEffects grupa efektów efektów
+     * @return pojedyncze zdanie
+     */
     private static String processGroup(SkillStatusEffect effect, List<SkillEffect> skillEffects){
         String prefixAddition="",delimiter="",suffix="";
         if(ClassifiedEffectsList.THREE_TURN_EFFECTS.contains(effect)) {
@@ -49,6 +67,15 @@ public class TooltipCreator {
         targetSkillEffectMap.forEach((key,value)->processedBundleTooltip.add(sortByTargets(key,value,effect)));
         return prefix+ String.join(delimiter,processedBundleTooltip) + suffix;
     }
+
+    /**
+     * Łączy ze sobą efekty dotykające ten sam rodzaj celu,
+     * aby zwrócić bardziej zwięzłe zdanie
+     * @param type rodzaj celu
+     * @param effects grupa efektów
+     * @param status rodzaj efektu
+     * @return niekompletne zdanie
+     */
     private static String sortByTargets(TargetType type, List<SkillEffect> effects, SkillStatusEffect status){
         List<String> values = new ArrayList<>();
         if(ClassifiedEffectsList.THREE_TURN_EFFECTS.contains(status)) {

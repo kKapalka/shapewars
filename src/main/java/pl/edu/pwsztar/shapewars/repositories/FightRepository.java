@@ -22,7 +22,7 @@ public interface FightRepository extends JpaRepository<Fight,Long> {
     @Query("select f from Fight f where (select u from User u where u.login = ?1) member of f.fightingPlayers and f.fightStatus='INVITE_PENDING'")
     List<Fight> findChallengesForUser(String userName);
 
-    @Query("select f from Fight f where (select u from User u where u.login = ?1) member of f.fightingPlayers and (select u from User u where u.login = ?2) member of f.fightingPlayers and f.fightStatus='INVITE_PENDING'")
+    @Query("select f from Fight f where (select u from User u where u.login = ?1) member of f.fightingPlayers or (select u from User u where u.login = ?2) member of f.fightingPlayers and f.fightStatus='INVITE_PENDING'")
     List<Fight> findChallengeByFightingSides(String playerName1, String playerName2);
 
     @Query("select f from Fight f where (select u from User u where u.login = ?1) member of f.fightingPlayers and f.fightStatus='IN_PROGRESS'")

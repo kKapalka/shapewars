@@ -1,0 +1,12 @@
+Do projektu zosta³a do³¹czona baza z przyk³adowymi danymi - plik "baza danych z danymi.tar". W celach testowania aplikacji zalecane jest zainstalowanie tej bazy danych do PostGreSQL'a.
+
+Mo¿na to zrobiæ, tworz¹c bazê danych na lokalnym serwerze, i nastêpnie w opcjach bazy danych wybieraj¹c opcjê Restore/Przywróæ - tam z kolei nale¿y wybraæ plik do³¹czony z projektem, aby baza danych mog³a byæ pomyœlnie przywrócona.
+
+Je¿eli ta opcja z jakiegoœ powodu nie zadzia³a, dodatkowo zosta³y do³¹czone pliki "baza.sql", oraz "dane.sql"
+
+Baza danych miêdzy innymi:
+- 3 obiekty klasy Shape
+- 13 obiektów klasy Skill
+- 8 obiektów klasy ColorMap
+- 4 obiekty klasy ExperienceThreshold
+- 1 nowego u¿ytkownika o prawach administratorskich. Dane logowania: login - administrator, has³o - administrator.

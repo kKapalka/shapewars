@@ -16,7 +16,9 @@ import pl.edu.pwsztar.shapewars.repositories.TurnOrderRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,7 +38,6 @@ public class FightService {
 
 
     public FightDto save(FightDto dto) throws Exception {
-        System.out.println(dto);
         List<Fight> challenges = fightRepository.findChallengeByFightingSides(dto.getPlayerNames().get(0),dto.getPlayerNames().get(1));
         if((challenges.size()!=0)  && dto.getId()==null){
             throw new Exception("You cannot challenge the same player twice!");
@@ -56,8 +57,7 @@ public class FightService {
             fight.setFightingPlayers(userService.findPlayersByLogins(dto.getPlayerNames()));
             fight.setRelevantUsername(dto.getRelevantUsername());
         }
-        System.out.println(dto.getRelevantUsername());
-        if(fight.getFightStatus()==FightStatus.IN_PROGRESS && dto.getRelevantUsername()!=null){
+        if(fight.getFightStatus()==FightStatus.IN_PROGRESS && dto.getFightStatus().equals("FINISHED") && dto.getRelevantUsername()!=null){
             fight.setRelevantUsername(dto.getRelevantUsername());
             User winner = fight.getFightingPlayers().stream()
                     .filter(player->player.getLogin().equals(dto.getRelevantUsername())).findFirst().get();
@@ -66,7 +66,6 @@ public class FightService {
             userService.applyLevelChangesToUsers(winner,loser);
             fighterService.applyLevelChangesToFighters(winner,loser);
             fighterService.tryApplyingLoot(winner,loser);
-            System.out.println(winner.getFighterList().stream().map(fighter->fighter.getOwner().getLogin()).collect(Collectors.joining()));
             userService.saveUser(winner);
             userService.saveUser(loser);
         }
@@ -79,6 +78,9 @@ public class FightService {
         }
         if(fight.getFightStatus()!=FightStatus.INVITE_REJECTED) {
             fight.setFightStatus(FightStatus.valueOf(dto.getFightStatus()));
+        }
+        if(dto.getFightStatus().equals("ABANDONED")){
+            fight.setRelevantUsername(dto.getRelevantUsername());
         }
 
         return fight;
@@ -116,7 +118,14 @@ public class FightService {
 
     private List<TurnOrder> createTurnOrders(FightCombatDto dto, Long turn){
         List<FighterSpeedDto> speeds = dto.getFighterSpeedDtos();
+        Random random = new Random();
+        List<Long> speedModArray = new LinkedList<Long>(Arrays.asList(1L,2L,3L,4L,5L,6L,7L,8L));
         Fight fight = fightRepository.findById(dto.getFightId()).orElseThrow(EntityNotFoundException::new);
+        speeds.forEach(speedDto->{
+            int index = random.nextInt(speedModArray.size());
+            speedDto.setSpeed(speedDto.getSpeed()+speedModArray.get(index));
+            speedModArray.remove(speedModArray.get(index));
+        });
         speeds.sort((a, b)->(int)(b.getSpeed()-a.getSpeed()));
         List<TurnOrder> turnOrders = speeds.stream().map(speed->{
             TurnOrder turnOrder = new TurnOrder();
@@ -135,6 +144,11 @@ public class FightService {
             Fight fight = new Fight();
             fight.setFightingPlayers(Arrays.asList(user,userService.generateOpponentWithLevel(user.getLevel())));
             fight.setFightStatus(FightStatus.IN_PROGRESS);
+            List<Fight> challengesToReject = fightRepository.findChallengeByFightingSides(fight.getFightingPlayers().get(0).getLogin(),fight.getFightingPlayers().get(1).getLogin());
+            challengesToReject.remove(fight);
+            if(challengesToReject.size()>0) {
+                fightRepository.updateFightsSetAsAbandoned(challengesToReject.stream().map(Fight::getID).collect(Collectors.toList()));
+            }
             return fightRepository.save(fight);
         } else{
             throw new Exception("Cannot initiate fight against bots for user: "+login);
@@ -142,7 +156,6 @@ public class FightService {
     }
     public void deletePlayer(User user) {
         List<Fight> fights = fightRepository.findByUser(user.getLogin());
-        System.out.println(fights);
         if(fights
                  .stream()
                  .filter(fight -> fight.getFightStatus() == FightStatus.IN_PROGRESS)
@@ -151,12 +164,9 @@ public class FightService {
 
             fights.forEach(fight -> {
                 List<User> players = fight.getFightingPlayers();
-                players.forEach(player-> System.out.println(player.getLogin()));
                 players.remove(user);
                 fight.setFightingPlayers(players);
-                players.forEach(player-> System.out.println(player.getLogin()));
             });
-            System.out.println(fights);
             fightRepository.saveAll(fights);
             fighterService.clearUnusedFighters(user);
             userService.deleteBot(user);

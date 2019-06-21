@@ -1,8 +1,6 @@
 package pl.edu.pwsztar.shapewars.entities;
 
-import lombok.Builder;
 import lombok.Data;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;

@@ -1,9 +1,0 @@
-Lista zadañ:
-- dopracowaæ system walki - mid(3.5) - numery tur, sprawdziæ szybkoœæ jednostek, panel koñcowy walki
-- dodaæ ikonki - szybkoœæ, si³a, pancerz, og³uszenie
-
-2 zmiany
-(opcjonalne):
-- zablokowaæ wielokrotne logowanie
-- zablokowaæ wstawianie innych kszta³tów ni¿ 500x500px
-- system komunikatów - high(6.0)

@@ -23,6 +23,7 @@ export class AddEditSkillComponent implements OnInit {
     this.retrieveSkillData();
     this.retrieveSkillEnums();
   }
+
   filterValueModTypes(statusEffect){
     if(['DEAL_DAMAGE','RESTORE_HEALTH'].includes(statusEffect)){
       return this.valueModTypes;

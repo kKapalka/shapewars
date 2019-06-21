@@ -62,14 +62,6 @@ export class AgentService {
     }
     return individualScore;
   }
-  calculateDamageOutputScore(playerFighters:any,currentFighter:any):number{
-    let colorDamages = this.colorMaps.find(color=>color.colorName==currentFighter.fighterModelReferenceDto.colorName).colorDamages;
-    let multipliers = playerFighters.map(fighter=>(colorDamages[fighter.fighterModelReferenceDto.colorName]===undefined?100:colorDamages[fighter.fighterModelReferenceDto.colorName]))
-    let maximumMultiplier = Math.max(...multipliers);
-    let damagePotency = (15+(currentFighter.strength+currentFighter.statusEffects.strengthBonus.value))/30;
-    let damageScore = maximumMultiplier*damagePotency;
-    return damageScore;
-  }
 
   lookAheadAndDecideOnBestMove(currentFighter:any):any[]{
     this.currentFighter=currentFighter;
@@ -78,11 +70,9 @@ export class AgentService {
       .filter(skill=>skill.cost<=currentFighter.currentMana);
     validSkillset.forEach(skill=>scoreTargetMap.push(this.simulateSkillsImpact(skill)));
     this.selectedTarget = scoreTargetMap.find(scoreTarget=>scoreTarget.value===Math.max(...scoreTargetMap.map(st=>st.value))).target;
-    console.log(scoreTargetMap);
     return validSkillset[scoreTargetMap.indexOf(scoreTargetMap.find(scoreTarget=>scoreTarget.value===Math.max(...scoreTargetMap.map(st=>st.value))))];
   }
   simulateSkillsImpact(skill:any):any{
-    console.log(skill.name);
     let targetScores = [];
     let effects=[].concat.apply([],skill.skillEffectBundles.map(bundle=>bundle.skillEffectDtos.map(dto=>dto.skillStatusEffect)));
     let validTargets=this.getValidTargets(skill);
@@ -101,7 +91,6 @@ export class AgentService {
         value:this.performSkillWithTarget(skill,target,this.playerFightersCopy,this.agentFightersCopy)
       });
     }
-    console.log(targetScores);
     return targetScores.find(targetScore=>targetScore.value===Math.max(...targetScores.map(targetScore=>targetScore.value)));
   }
   getValidTargets(skill:any):any[]{
@@ -144,8 +133,6 @@ export class AgentService {
         effectTargets.forEach(target=>{
           let storedHp = target.currentHp;
           if((effect.skillStatusEffect=='DEAL_DAMAGE' || effect.skillStatusEffect=='RESTORE_HEALTH')) {
-            console.log(target);
-            console.log(effect);
             caster.storedHp=caster.currentHp;
             let HPDifference: number;
             if (effect.valueModifierType == 'SELF_CURRENT_HP_BASED') {
@@ -160,8 +147,7 @@ export class AgentService {
             if (effect.valueModifierType == 'FLAT_VALUE') {
               HPDifference = Math.floor(averageValue);
             }
-            console.log(HPDifference);
-            console.log(caster)
+
             if (effect.skillStatusEffect == 'DEAL_DAMAGE') {
               let colorDependentDamageAmplifier = this.colorMaps.find(set => set.colorName === caster.fighterModelReferenceDto.colorName).colorDamages[target.fighterModelReferenceDto.colorName];
               if (!Boolean(colorDependentDamageAmplifier)) {
@@ -170,10 +156,9 @@ export class AgentService {
               HPDifference = Math.floor(HPDifference * (colorDependentDamageAmplifier / 100)
                 * (-100 / (100 + target.armor + target.statusEffects.armorBonus.value)));
             }
-            console.log(HPDifference);
+
             target.currentHp = Math.min(Math.max(target.currentHp + HPDifference, 0), target.maximumHp);
-            console.log(target.currentHp);
-            console.log(target.maximumHp);
+
           } else if(effect.result!=0) {
             if (effect.skillStatusEffect !== 'STUN') {
               let value = Math.floor(averageValue);
@@ -221,9 +206,6 @@ export class AgentService {
     scores.push(this.calculateIndividualScore(agentFighters,true)
       * this.agent.individualAllyPriority);
 
-    console.log(scores);
-    // scores.push(this.calculateDamageOutputScore(playerFighters,agentFighters.find(fighter=>fighter.id===this.currentFighter.id))
-    //   * this.agent.damageOutputPriority);
     this.agentFighters=JSON.parse(agentFightersCopy);
     this.playerFighters=JSON.parse(playerFightersCopy);
     return scores.reduce((a,b)=>a+b);
